@@ -18,6 +18,7 @@ class UserManager extends AbstractManager
         $user->setId($result["id"]);
         return $user;
     }
+
     public function findAll() : array
     {
         $query = $this->db->prepare('SELECT * FROM users');

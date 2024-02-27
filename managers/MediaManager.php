@@ -16,6 +16,7 @@ class MediaManager extends AbstractManager
         $media->setId($result["id"]);
         return $media;
     }
+    
     public function findAll() : array
     {
         $query = $this->db->prepare('SELECT * FROM media');

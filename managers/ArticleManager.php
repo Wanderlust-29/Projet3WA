@@ -14,12 +14,12 @@ class ArticleManager extends AbstractManager
 
         $mm = new MediaManager();
         $media = $mm->findOne($result["image_id"]);
-        $newMedia = new Media($media->getUrl(), $media->getAlt());
+        // $newMedia = new Media($media->getUrl(), $media->getAlt());
 
         $cm = new CategoryManager();
         $category = $cm->findOne($result["category_id"]);
 
-        $media = new Article($result["name"], $result["price"],$result["stock"], $category, $newMedia, $result["description"], $result["price"] );
+        $media = new Article($result["name"], $result["price"],$result["stock"], $category, $media, $result["description"], $result["price"] );
         $media->setId($result["id"]);
         return $media;
     }
@@ -35,12 +35,12 @@ class ArticleManager extends AbstractManager
 
             $mm = new MediaManager();
             $media = $mm->findOne($item["image_id"]);
-            $newMedia = new Media($media->getUrl(), $media->getAlt());
+            // $newMedia = new Media($media->getUrl(), $media->getAlt());
     
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $media = new Article($item["name"], $item["price"],$item["stock"], $category, $newMedia, $item["description"], $item["price"] );
+            $media = new Article($item["name"], $item["price"],$item["stock"], $category, $media, $item["description"], $item["price"] );
             $media->setId($item["id"]);
             $medias[]= $media;
         }
