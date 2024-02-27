@@ -1,0 +1,10 @@
+{% extends "layout.html.twig" %}
+
+{% block header %}
+    {% for user in users %}                       
+        <h2>{{ user.firstName }}</h2>             
+    {% endfor %}
+    {% for media in medias %}                       
+        <img src="{{ media.getUrl()}}" alt= "{{ media.getAlt()}}"/>             
+    {% endfor %}
+{% endblock %}

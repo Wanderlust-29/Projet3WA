@@ -1,5 +1,5 @@
 <?php
-class Player
+class User
 {
     private ?int $id = null;
     private string $firstName;
