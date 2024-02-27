@@ -20,10 +20,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 50em;
-}
-.header .logo img {
-  width: 100%;
+  max-width: 20em;
   height: auto;
 }
 .header .logo figcaption {
@@ -31,17 +28,55 @@
   color: white;
   font-size: 2rem;
 }
-.header menu {
-  display: flex;
+.header .search .input-searchbar {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.8rem 0 0 0.8rem;
 }
-.header menu li {
+.header .search .button-searchbar {
+  border: none;
+  background-color: #626567;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0 0.8rem 0.8rem 0;
+}
+.header .menu-desktop {
+  display: none;
+}
+.header .menu-desktop li {
   list-style: none;
 }
-.header menu li a {
+.header .menu-desktop li a {
   color: white;
   text-decoration: none;
   font-size: 1.8rem;
   padding-right: 1rem;
+}
+.header .menu-phone {
+  display: flex;
+}
+.header .menu-phone li {
+  list-style: none;
+}
+.header .menu-phone li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.8rem;
+  padding-right: 1rem;
+}
+
+/****************************************
+                MAIN
+****************************************/
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100rem;
+  background-image: url(../../img/white-siberian-husky-puppy.jpg);
+  background-position: left;
+  background-size: cover;
 }
 
 /*# sourceMappingURL=style.css.map */

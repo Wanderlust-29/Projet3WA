@@ -1,9 +1,14 @@
 {% extends "layout.html.twig" %}
 
 {% block main %}
-    {% for user in users %}                       
+
+    <section class="banner">
+        <h1>TimberWolf<h1>
+        <button>Nos produits</button>
+    </section>
+    {# {% for user in users %}                       
         <h2>{{ user.firstName }}</h2>             
-    {% endfor %}
+    {% endfor %} #}
     {% for media in medias %}                       
         <img src="{{ media.getUrl()}}" alt= "{{ media.getAlt()}}"/>             
     {% endfor %}
