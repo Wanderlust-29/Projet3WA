@@ -2,17 +2,8 @@
 class User
 {
     private ?int $id = null;
-    private string $firstName;
-    private string $lastName;
-    private string $email;
-    private string $password;
-    private string $address;
-    private string $city;
-    private int $postalCode;
-    private string $country;
-    private string $role;
 
-    public function __construct(string $firstName, string $lastName, string $email, string $password, string $address, string $city, int $postalCode, string $country, string $role)
+    public function __construct(private string $firstName, private string $lastName, private string $email, private string $password, private string $address, private string $city, private int $postalCode, private string $country, private string $role)
     {
         $this->firstName = $firstName;
         $this->lastName = $lastName;

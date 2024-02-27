@@ -1,6 +1,6 @@
 <?php
 
-class PageController extends AbstractController
+class DefaultController extends AbstractController
 {
     public function home() : void
     {

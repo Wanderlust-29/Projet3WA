@@ -2,11 +2,13 @@
 
 class Router
 {
-    public function handleRequest($route)
+    public function handleRequest(array $get) : void
     {
-        if (empty($route)) {
-            $pageController = new PageController();
-            $pageController->home();
+        $dc = new DefaultController();
+
+        if(!isset($get["route"]))
+        {
+            $dc->home();
         }
     }
 }
