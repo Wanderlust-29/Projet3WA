@@ -6,12 +6,18 @@ class DefaultController extends AbstractController
     {
         $nm = new UserManager();
         $mm = new MediaManager();
+        $am = new ArticleManager();
+        $cm = new CategoryManager();
 
         $users = $nm->findAll();
         $medias = $mm->findAll();
+        $articles = $am->findAll();
+        $categories = $cm->findAll();
 
         dump($users);
         dump($medias);
+        dump($articles);
+        dump($categories);
 
         $this->render("home.html.twig", [
             "users"=>$users,
