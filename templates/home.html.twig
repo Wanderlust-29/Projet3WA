@@ -5,19 +5,21 @@
     <section class="banner">
         <img class="husky-banner" src="assets/img/white-siberian-husky-puppy.jpg"/>
         <h1>TimberWolf</h1>
-        <button>Nos Produits</button>
+        <button><a href="index.php?route=product">Nos Produits</a></button>
     </section>
     <section class="top-sales">
         <h2>Nos meilleurs ventes</h2>
         {% for article in articles %}
-        <article>
-            <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
-            <h3>{{article.name}}</h3>
+        <article class="products">
+            <figure class="img-product">
+                <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
+                <figcaption>{{article.name}}</figcaption>
+            </figure> 
             <p>{{article.price}} €</p>
             <form class="add-to-cart" method="GET">
                 <input class="button-cart" type="submit" value="Ajouter au pannier" />
             </form>
-        </article>  
+        </article>
         {% endfor %}
     </section>
 

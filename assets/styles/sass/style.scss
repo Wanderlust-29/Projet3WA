@@ -7,6 +7,28 @@
   font-size: 62.5%;
 }
 
+body {
+  font-size: 1.8rem;
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2.5rem;
+}
+h3 {
+  font-size: 2rem;
+}
+p,
+a,
+figcaption,
+input,
+i,
+select,
+option {
+  font-size: 1.8rem;
+}
+
 /****************************************
                 HEADER
 ****************************************/
@@ -50,24 +72,36 @@
       a {
         color: #ffff;
         text-decoration: none;
-        font-size: 1.8rem;
         padding-right: 1rem;
       }
     }
   }
   .menu-phone {
     display: flex;
+    position: relative;
     li {
       list-style: none;
       a {
         color: #ffff;
         text-decoration: none;
-        font-size: 1.8rem;
         padding-right: 1rem;
+      }
+      .burger-menu {
+        // display: none;
+        background-color: #626567;
+        position: absolute;
+        top: 15rem;
+        right: 5rem;
+        li {
+          a {
+            color: #18534f;
+          }
+        }
       }
     }
   }
 }
+
 /****************************************
               MAIN MENU
 ****************************************/
@@ -77,6 +111,7 @@
 .banner {
   display: grid;
   grid-template-rows: 10vh 10vh 3vh;
+  padding-bottom: 2rem;
   .husky-banner {
     grid-row: 1;
     width: 10vh;
@@ -86,17 +121,19 @@
   h1 {
     grid-row: 2;
     font-family: "Dancing Script", cursive;
-    font-size: 3rem;
     justify-self: center;
     align-self: center;
   }
   button {
     grid-row: 3;
-    width: 5rem;
     justify-self: center;
     border: none;
     background-color: #18534f;
-    color: #ffff;
+    a {
+      padding: 2rem;
+      text-decoration: none;
+      color: #ffff;
+    }
   }
   button:hover {
     background-color: #626567;
@@ -106,36 +143,42 @@
 
 /****TOP-SALES*****/
 
-.top-sales {
+.top-sales,
+.all-products {
   display: flex;
   flex-direction: column;
-  h2 {
+  h2,
+  h1 {
     text-align: center;
   }
-  article {
+  .products {
     padding: 1.5rem;
     grid-row: 2;
     display: grid;
-    grid-template-rows: 5fr 1fr 1fr 1fr;
-    img {
+    grid-template-rows: 5fr 1fr 1fr;
+    .img-product {
       grid-row: 1;
-      width: 10rem;
       justify-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 25rem;
+      img {
+        width: 10rem;
+      }
     }
-    h3 {
+
+    p {
       grid-row: 2;
       justify-self: center;
     }
-    p {
-      grid-row: 3;
-      justify-self: center;
-    }
     form {
-      grid-row: 4;
+      grid-row: 3;
       justify-self: center;
     }
   }
 }
+
 /****************************************
                 FOOTER
 ****************************************/

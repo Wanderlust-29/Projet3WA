@@ -6,6 +6,32 @@
   font-size: 62.5%;
 }
 
+body {
+  font-size: 1.8rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+p,
+a,
+figcaption,
+input,
+i,
+select,
+option {
+  font-size: 1.8rem;
+}
+
 /****************************************
                 HEADER
 ****************************************/
@@ -49,11 +75,11 @@
 .header .menu-desktop li a {
   color: white;
   text-decoration: none;
-  font-size: 1.8rem;
   padding-right: 1rem;
 }
 .header .menu-phone {
   display: flex;
+  position: relative;
 }
 .header .menu-phone li {
   list-style: none;
@@ -61,8 +87,16 @@
 .header .menu-phone li a {
   color: white;
   text-decoration: none;
-  font-size: 1.8rem;
   padding-right: 1rem;
+}
+.header .menu-phone li .burger-menu {
+  background-color: #626567;
+  position: absolute;
+  top: 15rem;
+  right: 5rem;
+}
+.header .menu-phone li .burger-menu li a {
+  color: #18534f;
 }
 
 /****************************************
@@ -72,6 +106,7 @@
 .banner {
   display: grid;
   grid-template-rows: 10vh 10vh 3vh;
+  padding-bottom: 2rem;
 }
 .banner .husky-banner {
   grid-row: 1;
@@ -82,16 +117,18 @@
 .banner h1 {
   grid-row: 2;
   font-family: "Dancing Script", cursive;
-  font-size: 3rem;
   justify-self: center;
   align-self: center;
 }
 .banner button {
   grid-row: 3;
-  width: 5rem;
   justify-self: center;
   border: none;
   background-color: #18534f;
+}
+.banner button a {
+  padding: 2rem;
+  text-decoration: none;
   color: white;
 }
 .banner button:hover {
@@ -100,34 +137,45 @@
 }
 
 /****TOP-SALES*****/
-.top-sales {
+.top-sales,
+.all-products {
   display: flex;
   flex-direction: column;
 }
-.top-sales h2 {
+.top-sales h2,
+.top-sales h1,
+.all-products h2,
+.all-products h1 {
   text-align: center;
 }
-.top-sales article {
+.top-sales .products,
+.all-products .products {
   padding: 1.5rem;
   grid-row: 2;
   display: grid;
-  grid-template-rows: 5fr 1fr 1fr 1fr;
+  grid-template-rows: 5fr 1fr 1fr;
 }
-.top-sales article img {
+.top-sales .products .img-product,
+.all-products .products .img-product {
   grid-row: 1;
-  width: 10rem;
   justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25rem;
 }
-.top-sales article h3 {
+.top-sales .products .img-product img,
+.all-products .products .img-product img {
+  width: 10rem;
+}
+.top-sales .products p,
+.all-products .products p {
   grid-row: 2;
   justify-self: center;
 }
-.top-sales article p {
+.top-sales .products form,
+.all-products .products form {
   grid-row: 3;
-  justify-self: center;
-}
-.top-sales article form {
-  grid-row: 4;
   justify-self: center;
 }
 
