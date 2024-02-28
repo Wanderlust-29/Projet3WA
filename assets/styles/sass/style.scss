@@ -69,15 +69,67 @@
   }
 }
 /****************************************
-                MAIN
+              MAIN MENU
 ****************************************/
+
+/****BANNER*****/
+
 .banner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100rem;
-  background-image: url(../../img/white-siberian-husky-puppy.jpg);
-  background-position: left;
-  background-size: cover;
+  display: grid;
+  grid-template-rows: 10vh 10vh 3vh;
+  .husky-banner {
+    grid-row: 1;
+    width: 10vh;
+    height: auto;
+    justify-self: center;
+  }
+  h1 {
+    grid-row: 2;
+    font-family: "Dancing Script", cursive;
+    font-size: 3rem;
+    justify-self: center;
+    align-self: center;
+  }
+  button {
+    grid-row: 3;
+    width: 5rem;
+    justify-self: center;
+    border: none;
+    background-color: #18534f;
+    color: #ffff;
+  }
+  button:hover {
+    background-color: #626567;
+    color: #ffff;
+  }
+}
+
+/****TOP-SALES*****/
+
+.top-sales {
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+  justify-content: space-around;
+  article {
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: 5fr 1fr 1fr 1fr;
+    img {
+      grid-row: 1;
+      width: 10rem;
+      justify-self: center;
+    }
+    h3 {
+      grid-row: 2;
+      justify-self: center;
+    }
+    p {
+      grid-row: 3;
+      justify-self: center;
+    }
+    form {
+      grid-row: 4;
+      justify-self: center;
+    }
+  }
 }

@@ -3,13 +3,22 @@
 {% block main %}
 
     <section class="banner">
-        <h1>TimberWolf<h1>
-        <button>Nos produits</button>
+        <img class="husky-banner" src="assets/img/white-siberian-husky-puppy.jpg"/>
+        <h1>TimberWolf</h1>
+        <button>Nos Produits</button>
     </section>
-    {# {% for user in users %}                       
-        <h2>{{ user.firstName }}</h2>             
-    {% endfor %} #}
-    {% for media in medias %}                       
-        <img src="{{ media.getUrl()}}" alt= "{{ media.getAlt()}}"/>             
-    {% endfor %}
+    <section class="top-sales">
+        <h2>Nos meilleurs ventes</h2>
+        {% for article in articles %}
+        <article>
+            <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
+            <h3>{{article.name}}</h3>
+            <p>{{article.price}} €</p>
+            <form class="add-to-cart" method="GET">
+                <input class="button-cart" type="submit" value="Ajouter au pannier" />
+            </form>
+        </article>  
+        {% endfor %}
+    </section>
+
 {% endblock %}

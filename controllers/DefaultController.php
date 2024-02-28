@@ -27,7 +27,8 @@ class DefaultController extends AbstractController
 
         $this->render("home.html.twig", [
             "users"=>$users,
-            "medias"=>$medias
+            "medias"=>$medias,
+            "articles"=>$articles
         ]);
     }
 }
