@@ -107,10 +107,13 @@
 /****TOP-SALES*****/
 
 .top-sales {
-  display: grid;
-  grid-template-rows: 1fr 5fr;
-  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    text-align: center;
+  }
   article {
+    padding: 1.5rem;
     grid-row: 2;
     display: grid;
     grid-template-rows: 5fr 1fr 1fr 1fr;
@@ -131,5 +134,43 @@
       grid-row: 4;
       justify-self: center;
     }
+  }
+}
+/****************************************
+                FOOTER
+****************************************/
+
+.footer {
+  padding: 1rem 2rem;
+  background-color: #18534f;
+  color: #ffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  section {
+    padding-bottom: 2rem;
+    li {
+      list-style: none;
+      a {
+        text-decoration: none;
+        color: #ffff;
+      }
+    }
+  }
+  .social-networks {
+    justify-self: center;
+    align-self: center;
+    ul {
+      display: flex;
+      justify-content: center;
+      li {
+        padding: 0 0.1rem;
+      }
+    }
+  }
+
+  .footer-bar {
+    width: 100%;
+    border-bottom: 1px solid #ffff;
   }
 }
