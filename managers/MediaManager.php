@@ -11,10 +11,13 @@ class MediaManager extends AbstractManager
         ];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
-
-        $media = new Media($result["url"], $result["alt"]);
-        $media->setId($result["id"]);
-        return $media;
+        if($result)
+        {
+            $media = new Media($result["url"], $result["alt"]);
+            $media->setId($result["id"]);
+            return $media;
+        }
+        return null;
     }
     
     public function findAll() : array

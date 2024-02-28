@@ -12,9 +12,13 @@ class CategoryManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        $category = new Category($result["name"], $result["description"]);
-        $category->setId($result["id"]);
-        return $category;
+        if($result)
+        {
+            $category = new Category($result["name"], $result["description"]);
+            $category->setId($result["id"]);
+            return $category;
+        }
+        return null;
     }
 
     public function findAll() : array

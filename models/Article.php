@@ -5,13 +5,7 @@ class Article
 
     public function __construct(private string $name, private float $price, private int $stock, private Category $category, private Media $image, private string $description, private string $size)
     {
-        $this->name = $name;
-        $this->price = $price;
-        $this->stock = $stock;
-        $this->category = $category;
-        $this->image = $image;
-        $this->description = $description;
-        $this->size = $size;
+
     }
 
     // Getter and Setter for ID

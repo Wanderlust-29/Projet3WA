@@ -13,10 +13,13 @@ class OrderManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-
-        $user = new Order($result["user_id"], $result["created_at"]);
-        $user->setId($result["id"]);
-        return $user;
+        if($result)
+        {
+            $user = new Order($result["user_id"], $result["created_at"]);
+            $user->setId($result["id"]);
+            return $user;
+        }
+        return null;
     }
 
     public function findAll() : array

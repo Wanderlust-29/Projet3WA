@@ -6,8 +6,7 @@ class Media
     
     public function __construct(private string $url, private string $alt)
     {
-        $this->url = $url;
-        $this->alt = $alt;
+
     }
 
     /**

@@ -7,8 +7,7 @@ class OrderArticle
     
     public function __construct(private Order $orderId, private Article $articleId)
     {
-        $this->orderId = $orderId;
-        $this->articleId = $articleId;
+
     }
 
     /**

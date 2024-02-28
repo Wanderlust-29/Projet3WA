@@ -57,6 +57,7 @@ option {
       color: #ffff;
     }
   }
+  /*****SEARCH-BAR******/
   .search {
     display: flex;
     flex-wrap: nowrap;
@@ -64,16 +65,17 @@ option {
       width: 15rem;
       border: none;
       padding: 0.5rem;
-      border-radius: 0.8rem 0 0 0.8rem;
     }
     .button-searchbar {
       border: none;
-      background-color: #626567;
+      background-color: #ffff;
       color: #ffff;
       padding: 0.5rem;
-      border-radius: 0 0.8rem 0.8rem 0;
     }
   }
+
+  /*****MENU-DESKTOP******/
+
   .menu-desktop {
     display: none;
     li {
@@ -85,6 +87,9 @@ option {
       }
     }
   }
+
+  /*****MENU-PHONE******/
+
   .menu-phone {
     display: flex;
 
@@ -96,20 +101,28 @@ option {
       }
     }
   }
+
+  /********MENU-BURGER*********/
+
   .burger-menu {
     position: absolute;
     display: inline-block;
     background-color: #18534f;
     top: 12rem;
     left: -50rem;
-    li {
+    li:not(:first-of-type) {
+      padding: 1rem 0;
       a {
+        padding-left: 0.5rem;
         text-decoration: none;
         color: #ffff;
       }
     }
     li:hover {
       background-color: #ffff;
+      a {
+        color: #18534f;
+      }
     }
 
     &.open {
@@ -118,6 +131,7 @@ option {
     }
   }
 }
+
 /****************************************
               MAIN MENU
 ****************************************/
@@ -125,10 +139,10 @@ option {
 /****BANNER*****/
 
 .banner {
+  padding: 2rem 0;
   background-color: #ffff;
   display: grid;
-  grid-template-rows: 10vh 10vh 3vh;
-  padding-bottom: 2rem;
+  grid-template-rows: 10vh 10vh 10vh;
   .husky-banner {
     grid-row: 1;
     width: 10vh;
@@ -148,7 +162,7 @@ option {
     border: none;
     background-color: #18534f;
     a {
-      padding: 2rem;
+      padding: 0.5rem;
       text-decoration: none;
       color: #ffff;
     }
@@ -167,7 +181,10 @@ option {
   align-items: center;
   h2,
   h1 {
+    padding: 2rem;
     text-align: center;
+    text-transform: uppercase;
+    color: #18534f;
   }
   .products {
     border-radius: 0.8rem;

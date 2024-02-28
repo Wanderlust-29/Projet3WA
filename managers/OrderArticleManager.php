@@ -13,9 +13,10 @@ class OrderArticleManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
+        if($result)
+        {
         $om = new OrderManager();
         $order = $om->findOne($result["order_id"]);
-        // $newOrder = new Order()
 
         $am = new ArticleManager();
         $article = $am->findOne($result["article_id"]);
@@ -23,6 +24,8 @@ class OrderArticleManager extends AbstractManager
         $orderArticle = new OrderArticle($order, $article);
         $orderArticle->setId($result["id"]);
         return $orderArticle;
+        }
+        return null;
     }
 
     public function findAll() : array

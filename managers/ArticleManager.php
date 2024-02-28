@@ -12,16 +12,20 @@ class ArticleManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        $mm = new MediaManager();
-        $media = $mm->findOne($result["image_id"]);
-        // $newMedia = new Media($media->getUrl(), $media->getAlt());
+        if($result)
+        {
+            $mm = new MediaManager();
+            $media = $mm->findOne($result["image_id"]);
 
-        $cm = new CategoryManager();
-        $category = $cm->findOne($result["category_id"]);
+            $cm = new CategoryManager();
+            $category = $cm->findOne($result["category_id"]);
 
-        $media = new Article($result["name"], $result["price"],$result["stock"], $category, $media, $result["description"], $result["price"] );
-        $media->setId($result["id"]);
-        return $media;
+            $media = new Article($result["name"], $result["price"],$result["stock"], $category, $media, $result["description"], $result["price"] );
+            $media->setId($result["id"]);
+            return $media;
+        }
+
+        return null;
     }
 
     public function findAll() : array
@@ -35,7 +39,6 @@ class ArticleManager extends AbstractManager
 
             $mm = new MediaManager();
             $media = $mm->findOne($item["image_id"]);
-            // $newMedia = new Media($media->getUrl(), $media->getAlt());
     
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);

@@ -16,10 +16,6 @@
                     <img src="assets/img/logo.svg" alt="logo" />
                     <figcaption>TimberWolf</figcaption>
                 </figure>
-                <form class="search" method="GET">
-                    <input class="input-searchbar" type="search" name="q" placeholder="Rechercher..." />
-                    <input class="button-searchbar" type="submit" value="Valider" />
-                </form>
                 <menu class="menu-desktop">
                     <li>
                         <a href="index.php?route=">Acceuil</a>
@@ -46,7 +42,13 @@
                     </li>
                         <ul class="burger-menu">
                             <li>
-                                <a href="index.php">Acceuil</a>
+                                <form class="search" method="GET">
+                                    <input class="input-searchbar" type="search" name="q" placeholder="Rechercher..." />
+                                    <input class="button-searchbar" type="submit" value="&#128269" />
+                                </form>
+                            </li>
+                            <li>
+                                <a href="index.php">Accueil</a>
                             </li>
                             <li>
                                 <a href="index.php?route=">Croquettes</a>

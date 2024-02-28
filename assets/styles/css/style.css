@@ -47,6 +47,10 @@ option {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /*****SEARCH-BAR******/
+  /*****MENU-DESKTOP******/
+  /*****MENU-PHONE******/
+  /********MENU-BURGER*********/
 }
 .header .logo {
   display: flex;
@@ -69,14 +73,12 @@ option {
   width: 15rem;
   border: none;
   padding: 0.5rem;
-  border-radius: 0.8rem 0 0 0.8rem;
 }
 .header .search .button-searchbar {
   border: none;
-  background-color: #626567;
+  background-color: white;
   color: white;
   padding: 0.5rem;
-  border-radius: 0 0.8rem 0.8rem 0;
 }
 .header .menu-desktop {
   display: none;
@@ -106,12 +108,19 @@ option {
   top: 12rem;
   left: -50rem;
 }
-.header .burger-menu li a {
+.header .burger-menu li:not(:first-of-type) {
+  padding: 1rem 0;
+}
+.header .burger-menu li:not(:first-of-type) a {
+  padding-left: 0.5rem;
   text-decoration: none;
   color: white;
 }
 .header .burger-menu li:hover {
   background-color: white;
+}
+.header .burger-menu li:hover a {
+  color: #18534f;
 }
 .header .burger-menu.open {
   left: 0;
@@ -123,10 +132,10 @@ option {
 ****************************************/
 /****BANNER*****/
 .banner {
+  padding: 2rem 0;
   background-color: white;
   display: grid;
-  grid-template-rows: 10vh 10vh 3vh;
-  padding-bottom: 2rem;
+  grid-template-rows: 10vh 10vh 10vh;
 }
 .banner .husky-banner {
   grid-row: 1;
@@ -148,7 +157,7 @@ option {
   background-color: #18534f;
 }
 .banner button a {
-  padding: 2rem;
+  padding: 0.5rem;
   text-decoration: none;
   color: white;
 }
@@ -167,7 +176,10 @@ option {
 .top-sales h1,
 .all-products h2,
 .all-products h1 {
+  padding: 2rem;
   text-align: center;
+  text-transform: uppercase;
+  color: #18534f;
 }
 .top-sales .products,
 .all-products .products {

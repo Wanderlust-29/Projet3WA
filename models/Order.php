@@ -6,8 +6,7 @@ class Order
     
     public function __construct(private int $userId, private string $createdAt)
     {
-        $this->userId = $userId;
-        $this->createdAt = $createdAt;
+
     }
 
     /**

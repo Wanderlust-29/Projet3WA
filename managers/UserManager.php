@@ -13,10 +13,13 @@ class UserManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-
-        $user = new User($result["first_name"], $result["last_name"], $result["email"], $result["password"], $result["adress"], $result["city"], $result["postal_code"], $result["country"], $result["role"]);
-        $user->setId($result["id"]);
-        return $user;
+        if($result)
+        {
+            $user = new User($result["first_name"], $result["last_name"], $result["email"], $result["password"], $result["adress"], $result["city"], $result["postal_code"], $result["country"], $result["role"]);
+            $user->setId($result["id"]);
+            return $user;
+        }
+        return null;
     }
 
     public function findAll() : array

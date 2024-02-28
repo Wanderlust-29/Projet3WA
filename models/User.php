@@ -5,15 +5,7 @@ class User
 
     public function __construct(private string $firstName, private string $lastName, private string $email, private string $password, private string $address, private string $city, private int $postalCode, private string $country, private string $role)
     {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->email = $email;
-        $this->password = $password;
-        $this->address = $address;
-        $this->city = $city;
-        $this->postalCode = $postalCode;
-        $this->country = $country;
-        $this->role = $role;
+
     }
 
     // Getter and Setter for ID
