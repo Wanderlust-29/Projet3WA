@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Advent+Pro|Dancing+Script&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,7 +8,11 @@
 }
 
 body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: 1.8rem;
+  background-color: #f1f1f1;
 }
 h1 {
   font-size: 3rem;
@@ -34,6 +38,7 @@ option {
 ****************************************/
 
 .header {
+  position: relative;
   padding: 1rem 2rem;
   background-color: #18534f;
   display: flex;
@@ -43,16 +48,20 @@ option {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 20em;
-    height: auto;
+    img {
+      max-width: 15rem;
+      height: auto;
+    }
     figcaption {
       font-family: "Dancing Script", cursive;
       color: #ffff;
-      font-size: 2rem;
     }
   }
   .search {
+    display: flex;
+    flex-wrap: nowrap;
     .input-searchbar {
+      width: 15rem;
       border: none;
       padding: 0.5rem;
       border-radius: 0.8rem 0 0 0.8rem;
@@ -78,30 +87,37 @@ option {
   }
   .menu-phone {
     display: flex;
-    position: relative;
+
     li {
       list-style: none;
-      a {
+      i {
         color: #ffff;
-        text-decoration: none;
         padding-right: 1rem;
-      }
-      .burger-menu {
-        // display: none;
-        background-color: #626567;
-        position: absolute;
-        top: 15rem;
-        right: 5rem;
-        li {
-          a {
-            color: #18534f;
-          }
-        }
       }
     }
   }
-}
+  .burger-menu {
+    position: absolute;
+    display: inline-block;
+    background-color: #18534f;
+    top: 12rem;
+    left: -50rem;
+    li {
+      a {
+        text-decoration: none;
+        color: #ffff;
+      }
+    }
+    li:hover {
+      background-color: #ffff;
+    }
 
+    &.open {
+      left: 0;
+      transition: ease 0.3s;
+    }
+  }
+}
 /****************************************
               MAIN MENU
 ****************************************/
@@ -109,6 +125,7 @@ option {
 /****BANNER*****/
 
 .banner {
+  background-color: #ffff;
   display: grid;
   grid-template-rows: 10vh 10vh 3vh;
   padding-bottom: 2rem;
@@ -126,6 +143,7 @@ option {
   }
   button {
     grid-row: 3;
+    border-radius: 0.8rem;
     justify-self: center;
     border: none;
     background-color: #18534f;
@@ -137,7 +155,6 @@ option {
   }
   button:hover {
     background-color: #626567;
-    color: #ffff;
   }
 }
 
@@ -147,15 +164,20 @@ option {
 .all-products {
   display: flex;
   flex-direction: column;
+  align-items: center;
   h2,
   h1 {
     text-align: center;
   }
   .products {
+    border-radius: 0.8rem;
+    background-color: #ffff;
+    width: 30rem;
     padding: 1.5rem;
     grid-row: 2;
     display: grid;
     grid-template-rows: 5fr 1fr 1fr;
+    margin-bottom: 2rem;
     .img-product {
       grid-row: 1;
       justify-self: center;
@@ -175,6 +197,14 @@ option {
     form {
       grid-row: 3;
       justify-self: center;
+      .button-cart {
+        border: none;
+        background: #18534f;
+        color: #ffff;
+        cursor: pointer;
+        padding: 1rem;
+        border-radius: 0.8rem;
+      }
     }
   }
 }
