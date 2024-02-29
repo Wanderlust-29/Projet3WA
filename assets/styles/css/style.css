@@ -13,6 +13,8 @@ body {
   font-style: normal;
   font-size: 1.8rem;
   background-color: #f1f1f1;
+  width: 100vw;
+  height: 100vh;
 }
 
 h1 {
@@ -31,10 +33,13 @@ p,
 a,
 figcaption,
 input,
-i,
 select,
 option {
   font-size: 1.8rem;
+}
+
+i {
+  font-size: 2.3rem;
 }
 
 /****************************************
@@ -48,7 +53,6 @@ option {
   justify-content: space-between;
   align-items: center;
   /*****SEARCH-BAR******/
-  /*****MENU-DESKTOP******/
   /*****MENU-PHONE******/
   /********MENU-BURGER*********/
 }
@@ -67,10 +71,11 @@ option {
 }
 .header .search {
   display: flex;
-  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+  background-color: white;
 }
 .header .search .input-searchbar {
-  width: 15rem;
   border: none;
   padding: 0.5rem;
 }
@@ -80,24 +85,13 @@ option {
   color: white;
   padding: 0.5rem;
 }
-.header .menu-desktop {
-  display: none;
-}
-.header .menu-desktop li {
-  list-style: none;
-}
-.header .menu-desktop li a {
-  color: white;
-  text-decoration: none;
-  padding-right: 1rem;
-}
-.header .menu-phone {
+.header .menu {
   display: flex;
 }
-.header .menu-phone li {
+.header .menu li {
   list-style: none;
 }
-.header .menu-phone li i {
+.header .menu li i {
   color: white;
   padding-right: 1rem;
 }
@@ -106,25 +100,25 @@ option {
   display: inline-block;
   background-color: #18534f;
   top: 12rem;
-  left: -50rem;
+  left: -999rem;
 }
 .header .burger-menu li:not(:first-of-type) {
-  padding: 1rem 0;
+  padding: 1rem 15rem 1rem 1rem;
 }
 .header .burger-menu li:not(:first-of-type) a {
-  padding-left: 0.5rem;
   text-decoration: none;
   color: white;
 }
-.header .burger-menu li:hover {
+.header .burger-menu li:hover:not(:first-of-type) {
   background-color: white;
 }
-.header .burger-menu li:hover a {
+.header .burger-menu li:hover:not(:first-of-type) a {
   color: #18534f;
 }
 .header .burger-menu.open {
+  width: 100vw;
   left: 0;
-  transition: ease 0.3s;
+  transition: ease 0.5s;
 }
 
 /****************************************
@@ -134,49 +128,82 @@ option {
 .banner {
   padding: 2rem 0;
   background-color: white;
-  display: grid;
-  grid-template-rows: 10vh 10vh 10vh;
+  display: flex;
+  justify-content: center;
 }
 .banner .husky-banner {
-  grid-row: 1;
-  width: 10vh;
+  width: 30%;
   height: auto;
-  justify-self: center;
 }
-.banner h1 {
-  grid-row: 2;
+.banner article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.banner article h1 {
+  font-size: 5rem;
   font-family: "Dancing Script", cursive;
-  justify-self: center;
-  align-self: center;
+  padding-bottom: 1rem;
 }
-.banner button {
-  grid-row: 3;
+.banner article button {
+  display: inline-block;
   border-radius: 0.8rem;
-  justify-self: center;
   border: none;
   background-color: #18534f;
 }
-.banner button a {
+.banner article button a {
   padding: 0.5rem;
   text-decoration: none;
   color: white;
 }
-.banner button:hover {
+.banner article button:hover {
   background-color: #626567;
 }
 
-/****TOP-SALES*****/
+/********SECTIONS-LINKS***********/
+.sections-links {
+  display: grid;
+  grid-template-columns: 50vw 50vw;
+  grid-template-rows: 3fr 10fr 10fr;
+}
+.sections-links article img {
+  width: 50%;
+  height: auto;
+}
+.sections-links h2 {
+  grid-row: 1;
+  grid-column: 1/3;
+}
+.sections-links .croquettes {
+  grid-column: 1;
+  grid-row: 2/3;
+}
+.sections-links .treats {
+  grid-column: 2;
+  grid-row: 2;
+}
+.sections-links .toys {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+/****PRODUCTS*****/
+.order {
+  padding: 1rem 0;
+}
+
 .top-sales,
 .all-products {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2rem 0;
 }
 .top-sales h2,
 .top-sales h1,
 .all-products h2,
 .all-products h1 {
-  padding: 2rem;
+  padding-bottom: 1rem;
   text-align: center;
   text-transform: uppercase;
   color: #18534f;
@@ -185,25 +212,30 @@ option {
 .all-products .products {
   border-radius: 0.8rem;
   background-color: white;
-  width: 30rem;
-  padding: 1.5rem;
   grid-row: 2;
   display: grid;
   grid-template-rows: 5fr 1fr 1fr;
-  margin-bottom: 2rem;
+  max-width: 50%;
+  padding-bottom: 1.5rem;
+  margin-top: 1rem;
 }
-.top-sales .products .img-product,
-.all-products .products .img-product {
+.top-sales .products .fig-product,
+.all-products .products .fig-product {
   grid-row: 1;
   justify-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 25rem;
 }
-.top-sales .products .img-product img,
-.all-products .products .img-product img {
-  width: 10rem;
+.top-sales .products .fig-product img,
+.all-products .products .fig-product img {
+  width: 50%;
+  height: auto;
+  padding: 1.5rem 0;
+}
+.top-sales .products .fig-product figcaption,
+.all-products .products .fig-product figcaption {
+  text-align: center;
 }
 .top-sales .products p,
 .all-products .products p {
@@ -255,7 +287,10 @@ option {
   justify-content: center;
 }
 .footer .social-networks ul li {
-  padding: 0 0.1rem;
+  padding: 0 0.5rem;
+}
+.footer .social-networks ul li i {
+  font-size: 4rem;
 }
 .footer .footer-bar {
   width: 100%;

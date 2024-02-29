@@ -20,7 +20,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($result["category_id"]);
 
-            $media = new Article($result["name"], $result["price"],$result["stock"], $category, $media, $result["description"], $result["price"] );
+            $media = new Article($result["name"], $result["price"],$result["stock"], $category, $media, $result["description"], $result["age"] );
             $media->setId($result["id"]);
             return $media;
         }
@@ -43,7 +43,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $media = new Article($item["name"], $item["price"],$item["stock"], $category, $media, $item["description"], $item["price"] );
+            $media = new Article($item["name"], $item["price"],$item["stock"], $category, $media, $item["description"], $item["age"] );
             $media->setId($item["id"]);
             $medias[]= $media;
         }
