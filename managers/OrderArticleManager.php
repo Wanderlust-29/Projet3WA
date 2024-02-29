@@ -2,32 +2,6 @@
 
 class OrderArticleManager extends AbstractManager
 {   
-
-    public function findOne(int $id) : ?OrderArticle
-    {
-        $query = $this->db->prepare('SELECT * FROM orders_articles
-                                    WHERE id=:id');
-        $parameters = [
-            "id" => $id
-        ];
-        $query->execute($parameters);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-
-        if($result)
-        {
-        $om = new OrderManager();
-        $order = $om->findOne($result["order_id"]);
-
-        $am = new ArticleManager();
-        $article = $am->findOne($result["article_id"]);
-
-        $orderArticle = new OrderArticle($order, $article);
-        $orderArticle->setId($result["id"]);
-        return $orderArticle;
-        }
-        return null;
-    }
-
     public function findAll() : array
     {
         $query = $this->db->prepare('SELECT * FROM orders_articles');

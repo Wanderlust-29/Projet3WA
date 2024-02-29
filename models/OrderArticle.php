@@ -3,27 +3,9 @@
 class OrderArticle
 
 {
-    private ? int $id = null;
-    
     public function __construct(private Order $orderId, private Article $articleId)
     {
 
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int|null $id
-     */
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
     }
 
     /**

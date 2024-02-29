@@ -4,7 +4,7 @@ class Order
 {
     private ? int $id = null;
     
-    public function __construct(private int $userId, private string $createdAt)
+    public function __construct(private User $userId, private string $createdAt)
     {
 
     }
@@ -26,17 +26,17 @@ class Order
     }
 
     /**
-     * @return int
+     * @return User
      */
-    public function getUserId(): int
+    public function getUserId(): User
     {
         return $this->userId;
     }
 
     /**
-     * @param string $userId
+     * @param User $userId
      */
-    public function setUserId(string $userId): void
+    public function setUserId(User $userId): void
     {
         $this->userId = $userId;
     }

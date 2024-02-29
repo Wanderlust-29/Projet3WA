@@ -15,9 +15,12 @@ class OrderManager extends AbstractManager
 
         if($result)
         {
-            $user = new Order($result["user_id"], $result["created_at"]);
-            $user->setId($result["id"]);
-            return $user;
+            $um = new UserManager;
+            $user = $um->findOne($result["user_id"]);
+
+            $order = new Order($user, $result["created_at"]);
+            $order->setId($result["id"]);
+            return $order;
         }
         return null;
     }
@@ -31,7 +34,11 @@ class OrderManager extends AbstractManager
         $orders =[];
 
         foreach ($result as $item){
-            $order = new Order($item["user_id"], $item["created_at"]);
+
+            $um = new UserManager;
+            $user = $um->findOne($item["user_id"]);
+
+            $order = new Order($user, $item["created_at"]);
             $order->setId($item["id"]);
             $orders[]= $order;
         }

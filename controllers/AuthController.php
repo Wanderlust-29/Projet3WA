@@ -1,8 +1,8 @@
 <?php
 
-class DefaultController extends AbstractController
+class AuthController extends AbstractController
 {
-    public function home() : void
+    public function login() : void
     {
         $nm = new UserManager();
         $mm = new MediaManager();
@@ -22,10 +22,8 @@ class DefaultController extends AbstractController
         dump($categories);
         dump($orders);
 
-        $this->render("home.html.twig", [
+        $this->render("login.html.twig", [
             "users"=>$users,
-            "medias"=>$medias,
-            "articles"=>$articles
         ]);
     }
 }
