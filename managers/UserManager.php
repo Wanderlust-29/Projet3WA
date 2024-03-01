@@ -77,4 +77,32 @@ class UserManager extends AbstractManager
         $user->setId($this->db->lastInsertId());
 
     }
+    public function update(User $user) : void
+    {
+        $query = $this->db->prepare('UPDATE users 
+        SET first_name = :first_name, 
+            last_name = :last_name, 
+            email = :email, 
+            password = :password, 
+            address = :address, 
+            city = :city, 
+            postal_code = :postal_code, 
+            country = :country, 
+            role = :role 
+        WHERE id = :id');
+
+        $parameters = [
+        "id" => $user->getId(),
+        "first_name" => $user->getFirstName(),
+        "last_name" => $user->getLastName(),
+        "email" => $user->getEmail(),
+        "password" => $user->getPassword(),
+        "address" => $user->getAddress(),
+        "city" => $user->getCity(),
+        "postal_code" => $user->getPostalCode(),
+        "country" => $user->getCountry(),
+        "role" => $user->getRole(),
+        ];
+        $query->execute($parameters);
+    }
 }

@@ -12,10 +12,11 @@
 </head>
 <body>
         <header class="header">
+                <a href="index.php">
                 <figure class="logo">
                     <img src="assets/img/logo.svg" alt="logo" />
                     <figcaption>TimberWolf</figcaption>
-                </figure>
+                </figure></a>
                 <menu class="menu">
                     <li>
                         <i class="fa-solid fa-cart-shopping"></i>
@@ -45,9 +46,15 @@
                             <li>
                                 <a href="index.php?route=account">Mon compte</a>
                             </li>
-                            <li>
-                                <a href="index.php?route=login">Se connecter</a>
-                            </li>
+                            {% if user is defined and user is not null %}
+                                <li>
+                                    <a href="index.php?route=logout">Se déconnecter</a>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="index.php?route=login">Se connecter</a>
+                                </li>
+                            {% endif %}
                             <li>
                                 <a href="index.php?route=">Contact</a>
                             </li>

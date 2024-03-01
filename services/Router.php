@@ -41,6 +41,10 @@ class Router
         {
             $acc->account();
         }
+        else if(isset($get["route"]) && $get["route"] === "update")
+        {
+            $acc->updateUserProfile();
+        }
         else
         {
             $dc->home();

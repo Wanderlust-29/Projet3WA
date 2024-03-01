@@ -1,9 +1,74 @@
 {% extends "layout.html.twig" %}
 
 {% block main %}
-    {% if user is defined %}
+    {% if user is defined and user is not null %}
         <h1>Bienvenue {{ user.firstName }} {{ user.lastName }}!</h1>
+        <h2>Modifier</h2>
+            <form action="index.php?route=update" method="post">
+        <fieldset>
+            <label for="firstName">
+                Prénom
+            </label>
+            <input type="text" name="firstName" id="firstName" value="{{ user.firstName }}"/>
+        </fieldset>
+        <fieldset>
+            <label for="lastName">
+                Nom
+            </label>
+            <input type="text" name="lastName" id="lastName" value="{{ user.lastName }}"/>
+        </fieldset>
+        <fieldset>
+            <label for="email">
+                E-mail
+            </label>
+            <input type="email" name="email" id="email" value="{{ user.email }}"/>
+        </fieldset>
+        <fieldset >
+            <label for="password">
+                mot de passe
+            </label>
+            <input type="password" name="password" id="password" placeholder="nouveau mot de passe"/>
+        </fieldset>
+        <fieldset >
+            <label for="confirm-password" >
+                Confirmer le mot de passe
+            </label>
+            <input type="password" name="confirm-password" id="confirm-password" placeholder="confirmer le nouveau mot de passe"/>
+        </fieldset>
+        <fieldset>
+            <label for="address">
+                Adresse
+            </label>
+            <input type="text" name="address" id="address" value="{{ user.address }}"/>
+        </fieldset>
+        <fieldset>
+            <label for="city">
+                Ville
+            </label>
+            <input type="text" name="city" id="city" value="{{ user.city }}"/>
+        </fieldset>
+        <fieldset>
+            <label for="postalCode">
+                Code postal
+            </label>
+            <input type="number" name="postalCode" id="postalCode" value="{{ user.postalCode }}"/>
+        </fieldset>
+        <fieldset>
+            <label for="country">
+                Pays
+            </label>
+            <input type="text" name="country" id="country" value="{{ user.country }}"/>
+        </fieldset>
+        <fieldset>
+            <button type="submit">Modifier</button>
+        </fieldset>
+        <fieldset>
+            <button type="button"><a href="index.php?route=logout">Se déconnecter</a></button>
+        </fieldset>
+    </form>
     {% else %}
-        {# {% redirect "index.php?route=login" %} #}
+        <h1>Pour continuer, vous devez être connecté</h1>
+        <button type="button"><a href="index.php?route=login">Se connecter</a></button>
+        <button type="button"><a href="index.php?route=register">S'inscrire</a></button>
     {% endif %}
 {% endblock %}
