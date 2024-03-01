@@ -1,0 +1,9 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+    {% if user is defined %}
+        <h1>Bienvenue {{ user.firstName }} {{ user.lastName }}!</h1>
+    {% else %}
+        {# {% redirect "index.php?route=login" %} #}
+    {% endif %}
+{% endblock %}

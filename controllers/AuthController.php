@@ -5,18 +5,12 @@ class AuthController extends AbstractController
     public function login() : void
     {   
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-        $user = null;
-
-        if (isset($_SESSION["user_id"])) {
-            $um = new UserManager();
-            $user_id = $_SESSION["user_id"];
-            $user = $um->findOne($user_id);
-        }
+        $user = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         $this->render('login.html.twig', [
             'error' => $error,
             'csrf_token' => $_SESSION["csrf-token"],
-            'user' => $user,
+            'user' => $user
         ]);
     }
 
@@ -36,9 +30,7 @@ class AuthController extends AbstractController
                     if(password_verify($_POST["password"], $user->getPassword()))
                     {
                         $_SESSION["user"] = $user;
-
                         unset($_SESSION["error-message"]);
-
                         $this->redirect("index.php");
                     }
                     else
@@ -69,18 +61,11 @@ class AuthController extends AbstractController
     public function register() : void
     {   
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-        $user = null;
-
-        if (isset($_SESSION["user_id"])) {
-            $um = new UserManager();
-            $user_id = $_SESSION["user_id"];
-            $user = $um->findOne($user_id);
-        }
 
         $this->render('register.html.twig', [
             'error' => $error,
             'csrf_token' => $_SESSION["csrf-token"],
-            'user' => $user,
+            'user' => $_SESSION["user"]
         ]);
     }
 
@@ -117,37 +102,35 @@ class AuthController extends AbstractController
                             $um->create($user);
 
                             $_SESSION["user"] = $user;
-
                             unset($_SESSION["error-message"]);
-
                             $this->redirect("index.php");
                         }
                         else
                         {
-                            $_SESSION["error-message"] = "User already exists";
+                            $_SESSION["error-message"] = "L'utilisateur existe déjà";
                             $this->redirect("index.php?route=register");
                         }
                     }
                     else {
-                        $_SESSION["error-message"] = "Password is not strong enough";
+                        $_SESSION["error-message"] = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
                         $this->redirect("index.php?route=register");
                     }
                 }
                 else
                 {
-                    $_SESSION["error-message"] = "The passwords do not match";
+                    $_SESSION["error-message"] = "Les mots de passes ne correspondent pas";
                     $this->redirect("index.php?route=register");
                 }
             }
             else
             {
-                $_SESSION["error-message"] = "Invalid CSRF token";
+                $_SESSION["error-message"] = "token CSRF invalide";
                 $this->redirect("index.php?route=register");
             }
         }
         else
         {
-            $_SESSION["error-message"] = "Missing fields";
+            $_SESSION["error-message"] = "Champs manquants";
             $this->redirect("index.php?route=register");
         }
     }

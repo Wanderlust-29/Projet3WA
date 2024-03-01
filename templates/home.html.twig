@@ -1,13 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block main %}
-    {% if user is defined %}
-        {% if user %}
-            <p>Bienvenue, {{ user.firstName }} {{ user.lastName }}!</p>
-        {% endif %}
-    {% else %}
-        <p>Bienvenue, visiteur!</p>
-    {% endif %}
+    {{dump(user)}}
     <section class="banner">
         <img class="husky-banner" src="assets/img/white-siberian-husky-puppy.jpg"/>
         <article>

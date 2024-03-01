@@ -7,6 +7,7 @@ class Router
         $dc = new DefaultController();
         $pc = new ProductController();
         $ac = new AuthController();
+        $acc = new AccountController();
 
         if(!isset($get["route"]))
         {
@@ -35,6 +36,14 @@ class Router
         else if(isset($get["route"]) && $get["route"] === "logout")
         {
             $ac->logout();
+        }
+        else if(isset($get["route"]) && $get["route"] === "account")
+        {
+            $acc->account();
+        }
+        else
+        {
+            $dc->home();
         }
     }
 }
