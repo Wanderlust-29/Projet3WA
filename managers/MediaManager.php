@@ -11,6 +11,7 @@ class MediaManager extends AbstractManager
         ];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
+        
         if($result)
         {
             $media = new Media($result["url"], $result["alt"]);
