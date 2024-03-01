@@ -1,0 +1,54 @@
+{% extends "layout.html.twig" %}
+
+{% block main %}
+    <h1>S'inscrire</h1>
+
+    <form action="index.php?route=check-register" method="post">
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{csrf_token}}" />
+        <fieldset>
+            <label for="firstName">
+                Prénom
+            </label>
+            <input type="text" name="firstName" id="firstName"/>
+        </fieldset>
+        <fieldset>
+            <label for="lastName">
+                Nom
+            </label>
+            <input type="text" name="lastName" id="lastName"/>
+        </fieldset>
+        <fieldset >
+            <label for="password">
+                mot de passe
+            </label>
+            <input type="password" name="password" id="password"/>
+        </fieldset>
+        <fieldset >
+            <label for="confirm-password" >
+                Confirmer le mot de passe
+            </label>
+            <input type="password" name="confirm-password" id="confirm-password"/>
+        </fieldset>
+        <fieldset>
+            <label for="email">
+                E-mail
+            </label>
+            <input type="email" name="email" id="email"/>
+        </fieldset>
+        <fieldset>
+            <label for="adress">
+                Adresse
+            </label>
+            <input type="text" name="adress" id="adress"/>
+        </fieldset>
+        <fieldset>
+            <button type="submit">S'inscrire</button>
+        </fieldset>
+        <fieldset>
+            <button type="button"><a href="index.php?route=login">Se connecter</a></button>
+        </fieldset>
+    </form>
+    {% if error is defined %}
+            {{ error }}
+    {% endif %}
+{% endblock %}

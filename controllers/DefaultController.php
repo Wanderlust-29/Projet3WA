@@ -4,13 +4,13 @@ class DefaultController extends AbstractController
 {
     public function home() : void
     {
-        $nm = new UserManager();
+        $um = new UserManager();
         $mm = new MediaManager();
         $am = new ArticleManager();
         $cm = new CategoryManager();
         $om = new OrderManager();
 
-        $users = $nm->findAll();
+        $users = $um->findAll();
         $medias = $mm->findAll();
         $articles = $am->findAll();
         $categories = $cm->findAll();

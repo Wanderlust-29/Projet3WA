@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const btnBurger = document.querySelector(".btn-burger-menu");
 
     btnBurger.addEventListener("click", () => {
+      burgerMenu.classList.toggle("close");
       burgerMenu.classList.toggle("open");
     });
   }

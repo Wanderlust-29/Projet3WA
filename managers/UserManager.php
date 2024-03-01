@@ -3,7 +3,7 @@
 class UserManager extends AbstractManager
 {   
 
-    public function findOne(int $id) : ?User
+    public function findOne(int $id) : ? User
     {
         $query = $this->db->prepare('SELECT * FROM users
                                     WHERE id=:id');
@@ -36,5 +36,25 @@ class UserManager extends AbstractManager
             $users[]= $user;
         }
         return $users;
+    }
+
+    public function findByEmail(string $email) : ? User
+    {
+        $query = $this->db->prepare('SELECT * FROM users WHERE email=:email');
+
+        $parameters = [
+            "email" => $email
+        ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if($result)
+        {
+            $user = new User($result["first_name"], $result["last_name"], $result["email"], $result["password"], $result["adress"], $result["city"], $result["postal_code"], $result["country"], $result["role"]);
+            $user->setId($result["id"]);
+            
+            return $user;
+        }
+        return null;
     }
 }

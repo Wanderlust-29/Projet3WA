@@ -1,9 +1,12 @@
 {% extends "layout.html.twig" %}
 
 {% block main %}
+    <h3>{{user.firstName}}<h3>
+    
+    <button><a href="index.php?route=logout">Logout</a></button>
     <h1>Se connecter</h1>
     <form action="index.php?route=check-login" method="post">
-        <input type="hidden" name="csrf-token" id="csrf-token" value="<?= $_SESSION['csrf-token'] ?>" />
+        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}" />
         <fieldset>
             <label for="email">
                 Email
@@ -17,7 +20,13 @@
             <input type="password" name="password" id="password"/>
         </fieldset>
         <fieldset>
-            <button type="submit" class="btn btn-primary">Se connecter</button>
+            <button type="submit">Se connecter</button>
+        </fieldset>
+        <fieldset>
+            <button type="button"><a href="index.php?route=register">S'inscrire</a></button>
         </fieldset>
     </form>
+    {% if error is defined %}
+            {{ error }}
+    {% endif %}
 {% endblock %}

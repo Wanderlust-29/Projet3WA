@@ -4,6 +4,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+html {
   font-size: 62.5%;
 }
 
@@ -25,19 +27,17 @@ h2 {
 h3 {
   font-size: 2rem;
 }
-p,
-a,
-figcaption,
 input,
-select,
-option {
+button {
   font-size: 1.8rem;
 }
 
 i {
   font-size: 2.3rem;
 }
-
+section {
+  padding: 2rem 0;
+}
 /****************************************
                 HEADER
 ****************************************/
@@ -70,17 +70,15 @@ i {
     background-color: #ffff;
     .input-searchbar {
       border: none;
-      padding: 0.5rem;
     }
     .button-searchbar {
       border: none;
       background-color: #ffff;
       color: #ffff;
-      padding: 0.5rem;
     }
   }
 
-  /*****MENU-PHONE******/
+  /*****MENU******/
 
   .menu {
     display: flex;
@@ -101,9 +99,11 @@ i {
     display: inline-block;
     background-color: #18534f;
     top: 12rem;
-    left: -999rem;
+    a,
+    form {
+      padding: 0 2rem;
+    }
     li:not(:first-of-type) {
-      padding: 1rem 15rem 1rem 1rem;
       a {
         text-decoration: none;
         color: #ffff;
@@ -118,7 +118,12 @@ i {
     &.open {
       width: 100vw;
       left: 0;
-      transition: ease 0.5s;
+      transition: ease-in 0.4s;
+    }
+    &.close {
+      width: 100vw;
+      left: -999rem;
+      transition: ease-out 0.5s;
     }
   }
 }
@@ -152,8 +157,8 @@ i {
       border-radius: 0.8rem;
       border: none;
       background-color: #18534f;
+      padding: 1rem 0;
       a {
-        padding: 0.5rem;
         text-decoration: none;
         color: #ffff;
       }
@@ -167,30 +172,34 @@ i {
 /********SECTIONS-LINKS***********/
 
 .sections-links {
-  display: grid;
-  grid-template-columns: 50vw 50vw;
-  grid-template-rows: 3fr 10fr 10fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   article {
+    border-radius: 1rem;
+    box-shadow: 10px 10px 7px -5px rgba(0, 0, 0, 0.1);
+    margin: 1rem 0;
+    a {
+      text-decoration: none;
+      color: #ffff;
+    }
+    h3 {
+      padding: 1rem 0;
+      border-radius: 1rem 1rem 0 0;
+      text-transform: uppercase;
+      text-align: center;
+      background-color: #18534f;
+    }
+    width: 50vw;
     img {
-      width: 50%;
+      border-radius: 0 0 1rem 1rem;
+      width: 100%;
       height: auto;
     }
   }
-  h2 {
-    grid-row: 1;
-    grid-column: 1/3;
-  }
-  .croquettes {
-    grid-column: 1;
-    grid-row: 2/3;
-  }
-  .treats {
-    grid-column: 1/3;
-    grid-row: 3;
-  }
-  .toys {
-    grid-column: 2;
-    grid-row: 2;
+  article:hover {
+    opacity: 0.5;
+    transition: ease 0.5s;
   }
 }
 
@@ -205,21 +214,20 @@ i {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 0;
   h2,
   h1 {
-    padding-bottom: 1rem;
+    padding: 2rem 0;
     text-align: center;
     text-transform: uppercase;
     color: #18534f;
   }
   .products {
-    border-radius: 0.8rem;
+    border-radius: 1rem;
     background-color: #ffff;
     grid-row: 2;
     display: grid;
     grid-template-rows: 5fr 1fr 1fr;
-    max-width: 50%;
+    width: 50vw;
     padding-bottom: 1.5rem;
     margin-top: 1rem;
     .fig-product {
@@ -287,7 +295,7 @@ i {
       li {
         padding: 0 0.5rem;
         i {
-          font-size: 4rem;
+          font-size: 3rem;
         }
       }
     }
