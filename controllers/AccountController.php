@@ -4,10 +4,12 @@ class AccountController extends AbstractController
 {
     public function account() : void
     {
-        $user = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         $this->render("account.html.twig", [
-            'user' => $user
+            'error' => $error,
+            'session' => $session
         ]);
     }
 
@@ -15,15 +17,21 @@ class AccountController extends AbstractController
     {
         if(isset($_SESSION['user']))
         {
-            $currentUser = $_SESSION['user']; // Récupérer l'utilisateur actuel depuis la session
-    
-            if($_POST["password"] === $_POST["confirm-password"])
+            $currentUser = $_SESSION['user'];
+            
+            if(password_verify($_POST["password"], $currentUser->getPassword())) 
             {
+                $_SESSION["error-message"] = "Le mot de passe ne peut pas etre le meme que l'ancien";
+            }
+            else
+            {
+                if($_POST["password"] === $_POST["confirm-password"])
+            {  
                 $password_pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
     
                 if (preg_match($password_pattern, $_POST["password"]))
                 {
-                    // Mise à jour des propriétés de l'utilisateur actuel
+       
                     $currentUser->setFirstName(htmlspecialchars($_POST["firstName"]));
                     $currentUser->setLastName(htmlspecialchars($_POST["lastName"]));
                     $currentUser->setEmail(htmlspecialchars($_POST["email"]));
@@ -33,7 +41,6 @@ class AccountController extends AbstractController
                     $currentUser->setPostalCode(htmlspecialchars($_POST["postalCode"]));
                     $currentUser->setCountry(htmlspecialchars($_POST["country"]));
     
-                    // Appel de la fonction update du gestionnaire UserManager
                     $um = new UserManager();
                     $um->update($currentUser);
     
@@ -41,13 +48,15 @@ class AccountController extends AbstractController
                     unset($_SESSION["error-message"]);
                     $this->redirect("index.php");
                 }
-                else {
+                else 
+                {
                     $_SESSION["error-message"] = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
                 }
             }
             else
             {
                 $_SESSION["error-message"] = "Les mots de passe ne correspondent pas";
+            }
             }
         }
         else
