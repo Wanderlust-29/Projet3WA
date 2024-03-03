@@ -11,16 +11,13 @@
             </select>
         </form>
         {% for article in articles %}
+        <a href="index.php?route=article{{article.id}}">
             <article class="products">
-                <figure class="fig-product">
-                    <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
-                    <figcaption>{{article.name}}</figcaption>
-                </figure> 
+                <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
+                <p>{{article.name}}</p>
                 <p>{{article.price}} €</p>
-                <form class="add-to-cart" method="GET">
-                    <input class="button-cart" type="submit" value="Ajouter au pannier" />
-                </form>
             </article>
+        </a>
         {% endfor %}
     </section>
 {% endblock %}

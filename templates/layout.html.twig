@@ -13,13 +13,17 @@
 <body>
         <header class="header">
                 <a href="index.php">
-                <figure class="logo">
-                    <img src="assets/img/logo.svg" alt="logo" />
-                    <figcaption>TimberWolf</figcaption>
-                </figure></a>
+                    <figure class="logo">
+                        <img src="assets/img/logo.svg" alt="logo" />
+                        <figcaption>TimberWolf</figcaption>
+                    </figure>
+                </a>
                 <menu class="menu">
                     <li>
-                        <i class="fa-solid fa-cart-shopping"></i>
+                        <a>
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="cart-count">0</span>
+                        </a>
                     </li>
                     <li class="btn-burger-menu">
                         <i class="fa fa-bars"></i>
@@ -67,7 +71,7 @@
 
         <footer class="footer">
            <section>
-                <h2>TimberWolf</h2>
+                <h2 class='title'>TimberWolf</h2>
                 <ul>
                     <li><a href="">Acceuil</a></li>
                     <li><a href="index.php?route=product">Nos Produits</a></li>

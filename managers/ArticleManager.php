@@ -49,4 +49,29 @@ class ArticleManager extends AbstractManager
         }
         return $medias;
     }
+    public function TopFour() : array
+    {
+        $query = $this->db->prepare('SELECT articles.*, COUNT(orders_articles.article_id) AS total_sales
+                                    FROM articles
+                                    JOIN orders_articles ON articles.id = orders_articles.article_id
+                                    GROUP BY articles.id
+                                    ORDER BY total_sales DESC LIMIT 4;');
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $medias = [];
+        
+        foreach($result as $item){
+
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+    
+            $cm = new CategoryManager();
+            $category = $cm->findOne($item["category_id"]);
+
+            $media = new Article($item["name"], $item["price"],$item["stock"], $category, $media, $item["description"], $item["age"] );
+            $media->setId($item["id"]);
+            $medias[]= $media;
+        }
+        return $medias;
+    }
 }

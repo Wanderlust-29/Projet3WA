@@ -3,55 +3,20 @@
 {% block main %}
     {# {{dump(user)}} #}
     <section class="banner">
-        <img class="husky-banner" src="assets/img/white-siberian-husky-puppy.jpg"/>
-        <article>
             <h1>TimberWolf</h1>
-            <button type="button"><a href="index.php?route=product">Nos Produits</a></button>
-        </article>
-    </section>
-
-
-    <section class="sections-links">
-        <h2>Accessoires et nourriture pour chien</h2>
-        
-        <article class="croquettes">
-            <a href="index.php?route=product" >
-                <h3>Croquettes</h3>
-                <img src="assets/img/croquettes.jpg">
-            </a>
-        </article>
-        
-        
-        <article class="treats">
-            <a href="index.php?route=product" >
-                <h3>Friandises</h3>
-                <img src="assets/img/friandises.jpg">
-            </a>
-        </article>
-        
-        
-        <article class="toys">
-            <a href="index.php?route=product" >
-                <h3>Jouets</h3>
-                <img src="assets/img/jouets.jpg">
-            </a>
-        </article>
-        
+            <button  class="btn-1" type="button"><a href="index.php?route=product">Nos Produits</a></button>
     </section>
 
     <section class="top-sales">
         <h2>Nos meilleurs ventes</h2>
         {% for article in articles %}
-        <article class="products">
-            <figure class="fig-product">
+        <a href="index.php?route=article{{article.id}}">
+            <article class="products">
                 <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
-                <figcaption>{{article.name}}</figcaption>
-            </figure> 
-            <p>{{article.price}} €</p>
-            <form class="add-to-cart" method="GET">
-                <input class="button-cart" type="submit" value="Ajouter au pannier" />
-            </form>
-        </article>
+                <p>{{article.name}}</p>
+                <p>{{article.price}} €</p>
+            </article>
+        </a>
         {% endfor %}
     </section>
 

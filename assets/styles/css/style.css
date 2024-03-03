@@ -18,6 +18,7 @@ body {
   background-color: #f1f1f1;
   width: 100vw;
   height: 100vh;
+  line-height: 1.8;
 }
 
 h1 {
@@ -50,36 +51,43 @@ section {
 ****************************************/
 .header {
   position: relative;
-  padding: 1rem 2rem;
-  background-color: #18534f;
+  background-color: #009a87;
   display: flex;
+  padding: 0.5rem 1rem;
   justify-content: space-between;
   align-items: center;
   /*****SEARCH-BAR******/
   /*****MENU******/
   /********MENU-BURGER*********/
 }
-.header .logo {
+.header a {
+  text-decoration: none;
+}
+.header a .logo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.header .logo img {
-  max-width: 15rem;
+.header a .logo img {
+  max-width: 100%;
+  width: 3em;
   height: auto;
 }
-.header .logo figcaption {
+.header a .logo figcaption {
+  font-size: 2rem;
   font-family: "Dancing Script", cursive;
   color: white;
 }
 .header .search {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
   background-color: white;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 .header .search .input-searchbar {
+  width: 80%;
   border: none;
+  background-color: white;
 }
 .header .search .button-searchbar {
   border: none;
@@ -89,22 +97,41 @@ section {
 .header .menu {
   display: flex;
 }
+.header .menu a {
+  position: relative;
+}
+.header .menu a .cart-count {
+  font-size: 1rem;
+  position: absolute;
+  border-radius: 50%;
+  background-color: black;
+  opacity: 0.9;
+  color: white;
+  z-index: 2;
+  top: -1.6rem;
+  left: 1.3rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .header .menu li {
   list-style: none;
 }
 .header .menu li i {
   color: white;
-  padding-right: 1rem;
+  padding-right: 1.2rem;
 }
 .header .burger-menu {
   position: absolute;
   display: inline-block;
-  background-color: #18534f;
-  top: 12rem;
+  background-color: #009a87;
+  top: 0;
 }
 .header .burger-menu a,
 .header .burger-menu form {
-  padding: 0 2rem;
+  padding: 0 0 0 2rem;
 }
 .header .burger-menu li:not(:first-of-type) a {
   text-decoration: none;
@@ -114,15 +141,17 @@ section {
   background-color: white;
 }
 .header .burger-menu li:hover:not(:first-of-type) a {
-  color: #18534f;
+  color: #009a87;
 }
 .header .burger-menu.open {
-  width: 100vw;
+  width: 50vw;
+  height: 100vh;
   left: 0;
-  transition: ease-in 0.4s;
+  transition: ease-in 0.6;
 }
 .header .burger-menu.close {
-  width: 100vw;
+  width: 50vw;
+  height: 100vh;
   left: -999rem;
   transition: ease-out 0.5s;
 }
@@ -132,73 +161,27 @@ section {
 ****************************************/
 /****BANNER*****/
 .banner {
-  padding: 2rem 0;
   background-color: white;
-  display: flex;
-  justify-content: center;
-}
-.banner .husky-banner {
-  width: 30%;
-  height: auto;
-}
-.banner article {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.banner article h1 {
-  font-size: 5rem;
-  font-family: "Dancing Script", cursive;
-  padding-bottom: 1rem;
-}
-.banner article button {
-  display: inline-block;
-  border-radius: 0.8rem;
-  border: none;
-  background-color: #18534f;
-  padding: 1rem 0;
-}
-.banner article button a {
-  text-decoration: none;
-  color: white;
-}
-.banner article button:hover {
-  background-color: #626567;
-}
-
-/********SECTIONS-LINKS***********/
-.sections-links {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.sections-links article {
-  border-radius: 1rem;
-  box-shadow: 10px 10px 7px -5px rgba(0, 0, 0, 0.1);
-  margin: 1rem 0;
-  width: 50vw;
+.banner h1 {
+  font-size: 4rem;
+  font-family: "Dancing Script", cursive;
 }
-.sections-links article a {
+.banner .btn-1 {
+  display: inline-block;
+  border-radius: 0.8rem;
+  background-color: white;
+  border: 3px solid #009a87;
+  padding: 1.2rem 1rem;
+}
+.banner .btn-1 a {
   text-decoration: none;
-  color: white;
-}
-.sections-links article h3 {
-  padding: 1rem 0;
-  border-radius: 1rem 1rem 0 0;
+  color: #009a87;
   text-transform: uppercase;
-  text-align: center;
-  background-color: #18534f;
 }
-.sections-links article img {
-  border-radius: 0 0 1rem 1rem;
-  width: 100%;
-  height: auto;
-}
-.sections-links article:hover {
-  opacity: 0.5;
-  transition: ease 0.5s;
-}
-
 /****PRODUCTS*****/
 .order {
   padding: 1rem 0;
@@ -217,55 +200,35 @@ section {
   padding: 2rem 0;
   text-align: center;
   text-transform: uppercase;
-  color: #18534f;
+  color: #009a87;
 }
-.top-sales .products,
-.all-products .products {
+.top-sales a,
+.all-products a {
+  text-decoration: none;
+  color: black;
+}
+.top-sales a .products,
+.all-products a .products {
   border-radius: 1rem;
   background-color: white;
   grid-row: 2;
-  display: grid;
-  grid-template-rows: 5fr 1fr 1fr;
-  width: 50vw;
-  padding-bottom: 1.5rem;
-  margin-top: 1rem;
-}
-.top-sales .products .fig-product,
-.all-products .products .fig-product {
-  grid-row: 1;
-  justify-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80vw;
+  padding-bottom: 1.5rem;
+  margin-top: 1rem;
 }
-.top-sales .products .fig-product img,
-.all-products .products .fig-product img {
-  width: 50%;
+.top-sales a .products img,
+.all-products a .products img {
+  width: 80%;
   height: auto;
   padding: 1.5rem 0;
 }
-.top-sales .products .fig-product figcaption,
-.all-products .products .fig-product figcaption {
+.top-sales a .products p,
+.all-products a .products p {
   text-align: center;
-}
-.top-sales .products p,
-.all-products .products p {
-  grid-row: 2;
-  justify-self: center;
-}
-.top-sales .products form,
-.all-products .products form {
-  grid-row: 3;
-  justify-self: center;
-}
-.top-sales .products form .button-cart,
-.all-products .products form .button-cart {
-  border: none;
-  background: #18534f;
-  color: white;
-  cursor: pointer;
-  padding: 1rem;
-  border-radius: 0.8rem;
+  padding: 0.5rem 4rem;
 }
 
 /****************************************
@@ -273,11 +236,14 @@ section {
 ****************************************/
 .footer {
   padding: 1rem 2rem;
-  background-color: #18534f;
+  background-color: #009a87;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.footer .title {
+  font-family: "Dancing Script", cursive;
 }
 .footer section {
   padding-bottom: 2rem;

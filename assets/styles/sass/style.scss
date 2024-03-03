@@ -17,6 +17,7 @@ body {
   background-color: #f1f1f1;
   width: 100vw;
   height: 100vh;
+  line-height: 1.8;
 }
 h1 {
   font-size: 3rem;
@@ -44,32 +45,39 @@ section {
 
 .header {
   position: relative;
-  padding: 1rem 2rem;
-  background-color: #18534f;
+  background-color: #009a87;
   display: flex;
+  padding: 0.5rem 1rem;
   justify-content: space-between;
   align-items: center;
-  .logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    img {
-      max-width: 15rem;
-      height: auto;
-    }
-    figcaption {
-      font-family: "Dancing Script", cursive;
-      color: #ffff;
+  a {
+    text-decoration: none;
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        max-width: 100%;
+        width: 3em;
+        height: auto;
+      }
+      figcaption {
+        font-size: 2rem;
+        font-family: "Dancing Script", cursive;
+        color: #ffff;
+      }
     }
   }
   /*****SEARCH-BAR******/
   .search {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
     background-color: #ffff;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
     .input-searchbar {
+      width: 80%;
       border: none;
+      background-color: #ffff;
     }
     .button-searchbar {
       border: none;
@@ -82,12 +90,31 @@ section {
 
   .menu {
     display: flex;
+    a {
+      position: relative;
+      .cart-count {
+        font-size: 1rem;
+        position: absolute;
+        border-radius: 50%;
+        background-color: black;
+        opacity: 0.9;
+        color: #ffff;
+        z-index: 2;
+        top: -1.6rem;
+        left: 1.3rem;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
 
     li {
       list-style: none;
       i {
         color: #ffff;
-        padding-right: 1rem;
+        padding-right: 1.2rem;
       }
     }
   }
@@ -97,11 +124,11 @@ section {
   .burger-menu {
     position: absolute;
     display: inline-block;
-    background-color: #18534f;
-    top: 12rem;
+    background-color: #009a87;
+    top: 0;
     a,
     form {
-      padding: 0 2rem;
+      padding: 0 0 0 2rem;
     }
     li:not(:first-of-type) {
       a {
@@ -112,16 +139,18 @@ section {
     li:hover:not(:first-of-type) {
       background-color: #ffff;
       a {
-        color: #18534f;
+        color: #009a87;
       }
     }
     &.open {
-      width: 100vw;
+      width: 50vw;
+      height: 100vh;
       left: 0;
-      transition: ease-in 0.4s;
+      transition: ease-in 0.6;
     }
     &.close {
-      width: 100vw;
+      width: 50vw;
+      height: 100vh;
       left: -999rem;
       transition: ease-out 0.5s;
     }
@@ -135,71 +164,27 @@ section {
 /****BANNER*****/
 
 .banner {
-  padding: 2rem 0;
   background-color: #ffff;
-  display: flex;
-  justify-content: center;
-  .husky-banner {
-    width: 30%;
-    height: auto;
-  }
-  article {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    h1 {
-      font-size: 5rem;
-      font-family: "Dancing Script", cursive;
-      padding-bottom: 1rem;
-    }
-    button {
-      display: inline-block;
-      border-radius: 0.8rem;
-      border: none;
-      background-color: #18534f;
-      padding: 1rem 0;
-      a {
-        text-decoration: none;
-        color: #ffff;
-      }
-    }
-    button:hover {
-      background-color: #626567;
-    }
-  }
-}
-
-/********SECTIONS-LINKS***********/
-
-.sections-links {
   display: flex;
   flex-direction: column;
   align-items: center;
-  article {
-    border-radius: 1rem;
-    box-shadow: 10px 10px 7px -5px rgba(0, 0, 0, 0.1);
-    margin: 1rem 0;
+  h1 {
+    font-size: 4rem;
+    font-family: "Dancing Script", cursive;
+  }
+  .btn-1 {
+    display: inline-block;
+    border-radius: 0.8rem;
+    background-color: #ffff;
+    border: 3px solid #009a87;
+    padding: 1.2rem 1rem;
     a {
       text-decoration: none;
-      color: #ffff;
-    }
-    h3 {
-      padding: 1rem 0;
-      border-radius: 1rem 1rem 0 0;
+      color: #009a87;
       text-transform: uppercase;
-      text-align: center;
-      background-color: #18534f;
-    }
-    width: 50vw;
-    img {
-      border-radius: 0 0 1rem 1rem;
-      width: 100%;
-      height: auto;
     }
   }
-  article:hover {
-    opacity: 0.5;
-    transition: ease 0.5s;
+  .btn-1:hover {
   }
 }
 
@@ -219,47 +204,29 @@ section {
     padding: 2rem 0;
     text-align: center;
     text-transform: uppercase;
-    color: #18534f;
+    color: #009a87;
   }
-  .products {
-    border-radius: 1rem;
-    background-color: #ffff;
-    grid-row: 2;
-    display: grid;
-    grid-template-rows: 5fr 1fr 1fr;
-    width: 50vw;
-    padding-bottom: 1.5rem;
-    margin-top: 1rem;
-    .fig-product {
-      grid-row: 1;
-      justify-self: center;
+  a {
+    text-decoration: none;
+    color: black;
+    .products {
+      border-radius: 1rem;
+      background-color: #ffff;
+      grid-row: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 80vw;
+      padding-bottom: 1.5rem;
+      margin-top: 1rem;
       img {
-        width: 50%;
+        width: 80%;
         height: auto;
         padding: 1.5rem 0;
       }
-      figcaption {
+      p {
         text-align: center;
-      }
-    }
-
-    p {
-      grid-row: 2;
-      justify-self: center;
-    }
-    form {
-      grid-row: 3;
-      justify-self: center;
-      .button-cart {
-        border: none;
-        background: #18534f;
-        color: #ffff;
-        cursor: pointer;
-        padding: 1rem;
-        border-radius: 0.8rem;
+        padding: 0.5rem 4rem;
       }
     }
   }
@@ -271,11 +238,14 @@ section {
 
 .footer {
   padding: 1rem 2rem;
-  background-color: #18534f;
+  background-color: #009a87;
   color: #ffff;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  .title {
+    font-family: "Dancing Script", cursive;
+  }
   section {
     padding-bottom: 2rem;
     li {

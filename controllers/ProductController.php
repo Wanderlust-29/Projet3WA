@@ -8,6 +8,7 @@ class ProductController extends AbstractController
 
         $articles = $am->findAll();
         // dump($articles);
+        
         $this->render("product.html.twig", [
             "articles"=>$articles
         ]);
