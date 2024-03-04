@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROJET</title>
+    <title>TimberWolf</title>
     <link href="./assets/font/css/fontawesome.css" rel="stylesheet">
     <link href="./assets/font/css/brands.css" rel="stylesheet">
     <link href="./assets/font/css/solid.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/css/style.css">
-    <title> {% block title %}{% endblock %}| Projet</title>
+    <title> {% block title %}{% endblock %}| TimberWolf</title>
 </head>
 <body>
         <header class="header">
@@ -106,6 +106,9 @@
 
            <span class="footer-bar"></span>
         </footer>
-        <script src="assets/js/script.js" defer></script>
+        
+        {% block javascript %}
+        <script src="assets/js/layout.js" defer></script>
+        {% endblock %}
     </body>
 </html>

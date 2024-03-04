@@ -10,14 +10,7 @@ class DefaultController extends AbstractController
 
         $articles = $am->TopFour();
 
-
-        // dump($users);
-        // dump($medias);
-        // dump($articles);
-        // dump($categories);
-        // dump($orders);
-
-        $this->render("home.html.twig", [
+        $this->render("home/home.html.twig", [
             "articles"=>$articles,
             'session' => $session
         ]);

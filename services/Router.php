@@ -5,37 +5,37 @@ class Router
     public function handleRequest(array $get) : void
     {
         $dc = new DefaultController();
-        $pc = new ProductController();
-        $ac = new AuthController();
+        $athc = new AuthController();
         $acc = new AccountController();
+        $atc = new ArticleController();
 
         if(!isset($get["route"]))
         {
             $dc->home();
         }
-        else if(isset($get["route"]) && $get["route"] === "product")
+        else if(isset($get["route"]) && $get["route"] === "articles")
         {
-            $pc->product();
+            $atc->articles();
         }
         else if(isset($get["route"]) && $get["route"] === "login")
         {
-            $ac->login();
+            $athc->login();
         }
         else if(isset($get["route"]) && $get["route"] === "check-login")
         {
-            $ac->checkLogin();
+            $athc->checkLogin();
         }
         else if(isset($get["route"]) && $get["route"] === "register")
         {
-            $ac->register();
+            $athc->register();
         }
         else if(isset($get["route"]) && $get["route"] === "check-register")
         {
-            $ac->checkRegister();
+            $athc->checkRegister();
         }
         else if(isset($get["route"]) && $get["route"] === "logout")
         {
-            $ac->logout();
+            $athc->logout();
         }
         else if(isset($get["route"]) && $get["route"] === "account")
         {
@@ -44,6 +44,10 @@ class Router
         else if(isset($get["route"]) && $get["route"] === "update")
         {
             $acc->updateUserProfile();
+        }         
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "articles")
+        {
+            $atc->article($get["id"]);
         }
         else
         {

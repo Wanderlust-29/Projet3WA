@@ -9,13 +9,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   }
   burgerMenu();
-
-  function showArticles() {
-    const orderArticles = document.querySelectorAll(".order-articles");
-    const btnPlus = document.querySelectorAll(".plus");
-    btnPlus.forEach((bouton) => {});
-    btnPlus.addEventListener("click", () => {});
-  }
-
-  showArticles();
 });

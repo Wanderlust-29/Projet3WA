@@ -1,5 +1,10 @@
 {% extends "layout.html.twig" %}
 
+{% block title %}
+    Mon compte
+    {{ parent() }}
+{% endblock %}
+
 {% block main %}
     {% if session is defined and session is not null %}
         <h1>Bienvenue {{ session.firstName }} {{ session.lastName }}!</h1>
@@ -75,27 +80,32 @@
         <ul class="my-orders">
             {% if orders is not empty %}
                 {% for order in orders %}
-                    <li>Commande n°{{ order.id }} date : {{ order.createdAt }} <span class="plus">+</span></li>
-                    <ul class="order-articles">
-                        {% set orderArticles = ordersArticles[order.id] %}
-                        {% if orderArticles is not empty %}
-                            {% for article in orderArticles %}
-                                <li>
-                                    <article>
-                                        <h3>{{ article.articleId.name }}</h3>
-                                        <img src="{{ article.articleId.image.getUrl() }}" alt="{{ article.articleId.image.getAlt() }}"/>
-                                    </article>
-                                </li>
-                            {% endfor %}
-                        {% else %}
-                            <li>Aucun article trouvé pour cette commande.</li>
-                        {% endif %}
-                    </ul>
+                    <li>Commande n°{{ order.id }} date : {{ order.createdAt }}
+                        <span class="plus">+</span>
+                        <ul class="order-articles">
+                            {% set orderArticles = ordersArticles[order.id] %}
+                            {% if orderArticles is not empty %}
+                                {% for article in orderArticles %}
+                                    <li>
+                                        <a href="index.php?route=articles&id={{ article.id }}">
+                                        <article>
+                                            <h3>{{ article.articleId.name }}</h3>
+                                            <img src="{{ article.articleId.image.getUrl() }}" alt="{{ article.articleId.image.getAlt() }}"/>
+                                        </article>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li>Aucun article trouvé pour cette commande.</li>
+                            {% endif %}
+                        </ul>
+                    </li>
                 {% endfor %}
             {% else %}
                 <li>Aucune commande trouvée.</li>
             {% endif %}
         </ul>
+
 
 
 
@@ -108,4 +118,9 @@
         <button type="button"><a href="index.php?route=login">Se connecter</a></button>
         <button type="button"><a href="index.php?route=register">S'inscrire</a></button>
     {% endif %}
+{% endblock %}
+
+{% block javascript %}
+    <script src="assets/js/layout.js" defer></script>
+    <script src="assets/js/account.js" defer></script>
 {% endblock %}

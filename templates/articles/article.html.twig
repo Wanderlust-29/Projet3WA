@@ -1,0 +1,17 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+    {{article.name}}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+            <article class="products">
+                <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
+                <p>{{article.name}}</p>
+                <p>{{article.price}} €</p>
+            </article>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

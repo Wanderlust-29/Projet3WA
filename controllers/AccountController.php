@@ -8,6 +8,7 @@ class AccountController extends AbstractController
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $sessionId = null;
         $orders = [];
+        $ordersArticles = [];
     
         if(isset($_SESSION["user"]) && $_SESSION["user"] instanceof User) {
             $sessionId = $_SESSION["user"]->getId();
@@ -21,10 +22,9 @@ class AccountController extends AbstractController
                 $orderArticles = $oAm->findByOrderId($orderId);
                 $ordersArticles[$orderId] = $orderArticles;
             }
-            dump($ordersArticles);
         }
     
-        $this->render("account.html.twig", [
+        $this->render("account/account.html.twig", [
             'error' => $error,
             'session' => $session,
             'orders' => $orders,

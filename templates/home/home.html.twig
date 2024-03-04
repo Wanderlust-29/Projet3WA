@@ -1,5 +1,10 @@
 {% extends "layout.html.twig" %}
 
+{% block title %}
+    Accueil
+    {{ parent() }}
+{% endblock %}
+
 {% block main %}
     <section class="banner">
             <h1>TimberWolf</h1>
@@ -9,7 +14,7 @@
     <section class="top-sales">
         <h2>Nos meilleurs ventes</h2>
         {% for article in articles %}
-        <a href="index.php?route=article{{article.id}}">
+        <a href="index.php?route=articles&id={{ article.id }}">
             <article class="products">
                 <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
                 <p>{{article.name}}</p>
@@ -19,4 +24,7 @@
         {% endfor %}
     </section>
 
+{% endblock %}
+
+{% block javascript %}
 {% endblock %}

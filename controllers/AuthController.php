@@ -7,7 +7,7 @@ class AuthController extends AbstractController
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
-        $this->render('login.html.twig', [
+        $this->render('account/login.html.twig', [
             'error' => $error,
             'csrf_token' => $_SESSION["csrf-token"],
             'session' => $session
@@ -63,7 +63,7 @@ class AuthController extends AbstractController
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
         $user = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
-        $this->render('register.html.twig', [
+        $this->render('account/register.html.twig', [
             'error' => $error,
             'csrf_token' => $_SESSION["csrf-token"],
             'user' => $user

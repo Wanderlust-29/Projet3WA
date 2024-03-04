@@ -235,11 +235,11 @@ section {
 /****************************************
                 ACCOUNT
 ****************************************/
-.my-orders li {
+.my-orders {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
-.my-orders li .plus {
+.my-orders .plus {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -248,12 +248,6 @@ section {
   background-color: black;
   color: #fff;
   border-radius: 50%;
-}
-.my-orders .order-articles {
-  display: none;
-}
-.my-orders .order-articles.show {
-  display: block;
 }
 
 /****************************************

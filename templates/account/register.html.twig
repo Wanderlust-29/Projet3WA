@@ -1,5 +1,10 @@
 {% extends "layout.html.twig" %}
 
+{% block title %}
+    S'inscrire
+    {{ parent() }}
+{% endblock %}
+
 {% block main %}
     <h1>S'inscrire</h1>
     <form action="index.php?route=check-register" method="post">
@@ -68,4 +73,7 @@
     {% if error is defined %}
             {{ error }}
     {% endif %}
+{% endblock %}
+
+{% block javascript %}
 {% endblock %}
