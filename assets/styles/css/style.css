@@ -233,6 +233,30 @@ section {
 }
 
 /****************************************
+                ACCOUNT
+****************************************/
+.my-orders li {
+  display: flex;
+  justify-content: space-between;
+}
+.my-orders li .plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: black;
+  color: #fff;
+  border-radius: 50%;
+}
+.my-orders .order-articles {
+  display: none;
+}
+.my-orders .order-articles.show {
+  display: block;
+}
+
+/****************************************
                 FOOTER
 ****************************************/
 .footer {

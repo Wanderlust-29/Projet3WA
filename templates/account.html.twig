@@ -72,23 +72,33 @@
 
         
         <h2>Mes commandes</h2>
-        <ul>
-            {% if orders is not null %}
+        <ul class="my-orders">
+            {% if orders is not empty %}
                 {% for order in orders %}
-                    <li>Commande n°{{order.id}} date : {{ order.createdAt }} <span class="plus"><i class="fa-solid fa-plus"></i></span></li>
-                    {% for orderArticle in ordersArticles %}
-                    <pre>
-                        {{ dump(orderArticle) }}
-                    </pre>
-                        <article>
-                            <h3></h3>
-                        </article>
-                    {% endfor %}
+                    <li>Commande n°{{ order.id }} date : {{ order.createdAt }} <span class="plus">+</span></li>
+                    <ul class="order-articles">
+                        {% set orderArticles = ordersArticles[order.id] %}
+                        {% if orderArticles is not empty %}
+                            {% for article in orderArticles %}
+                                <li>
+                                    <article>
+                                        <h3>{{ article.articleId.name }}</h3>
+                                        <img src="{{ article.articleId.image.getUrl() }}" alt="{{ article.articleId.image.getAlt() }}"/>
+                                    </article>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li>Aucun article trouvé pour cette commande.</li>
+                        {% endif %}
+                    </ul>
                 {% endfor %}
             {% else %}
                 <li>Aucune commande trouvée.</li>
             {% endif %}
         </ul>
+
+
+
         
         <form action="index.php?route=logout" method="post">
             <button type="submit">Se déconnecter</button>

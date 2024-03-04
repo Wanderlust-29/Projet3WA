@@ -234,6 +234,34 @@ section {
 }
 
 /****************************************
+                ACCOUNT
+****************************************/
+.my-orders {
+  li {
+    display: flex;
+    justify-content: space-between;
+    .plus {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 3rem;
+      height: 3rem;
+      background-color: black;
+      color: #fff;
+      border-radius: 50%;
+    }
+  }
+
+  .order-articles {
+    display: none;
+  }
+
+  .order-articles.show {
+    display: block;
+  }
+}
+
+/****************************************
                 FOOTER
 ****************************************/
 

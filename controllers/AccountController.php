@@ -14,9 +14,9 @@ class AccountController extends AbstractController
             $om = new OrderManager();
             $orders = $om->findByUserId($sessionId);
             $ordersArticles = [];
-        
+    
             foreach ($orders as $order) {
-                $orderId = $order->getId();;
+                $orderId = $order->getId();
                 $oAm = new OrderArticleManager();
                 $orderArticles = $oAm->findByOrderId($orderId);
                 $ordersArticles[$orderId] = $orderArticles;
@@ -28,9 +28,10 @@ class AccountController extends AbstractController
             'error' => $error,
             'session' => $session,
             'orders' => $orders,
-            'ordersArticles' => $orderArticles
+            'ordersArticles' => $ordersArticles
         ]);
     }
+    
     
 
     public function updateUserProfile() : void
