@@ -44,4 +44,25 @@ class OrderManager extends AbstractManager
         }
         return $orders;
     }
+    public function findByUserId($userId) : array
+    {
+        $query = $this->db->prepare("SELECT * FROM orders WHERE user_id = :user_id");
+        $parameters = [
+            "user_id" => $userId
+        ];
+        $query->execute($parameters);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $orders =[];
+
+        foreach ($result as $item){
+
+            $um = new UserManager;
+            $user = $um->findOne($item["user_id"]);
+
+            $order = new Order($user, $item["created_at"]);
+            $order->setId($item["id"]);
+            $orders[]= $order;
+        }
+        return $orders;
+    }
 }

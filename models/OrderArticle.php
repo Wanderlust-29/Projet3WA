@@ -19,7 +19,7 @@ class OrderArticle
     /**
      * @param Order $orderId
      */
-    public function setUserId(Order $orderId): void
+    public function setOrderId(Order $orderId): void
     {
         $this->orderId = $orderId;
     }

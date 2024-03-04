@@ -81,7 +81,7 @@ section {
 .header .search {
   background-color: white;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
 }
 .header .search .input-searchbar {
@@ -209,6 +209,7 @@ section {
 }
 .top-sales a .products,
 .all-products a .products {
+  border: 1px solid #9c9c9c;
   border-radius: 1rem;
   background-color: white;
   grid-row: 2;

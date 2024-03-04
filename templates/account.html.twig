@@ -73,9 +73,17 @@
         
         <h2>Mes commandes</h2>
         <ul>
-            {% if articles is not empty %}
-                {% for article in articles %}
-                    <li>{{ article.title }} - {{ article.price }}</li>
+            {% if orders is not null %}
+                {% for order in orders %}
+                    <li>Commande n°{{order.id}} date : {{ order.createdAt }} <span class="plus"><i class="fa-solid fa-plus"></i></span></li>
+                    {% for orderArticle in ordersArticles %}
+                    <pre>
+                        {{ dump(orderArticle) }}
+                    </pre>
+                        <article>
+                            <h3></h3>
+                        </article>
+                    {% endfor %}
                 {% endfor %}
             {% else %}
                 <li>Aucune commande trouvée.</li>

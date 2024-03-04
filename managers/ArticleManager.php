@@ -49,6 +49,7 @@ class ArticleManager extends AbstractManager
         }
         return $medias;
     }
+    
     public function TopFour() : array
     {
         $query = $this->db->prepare('SELECT articles.*, COUNT(orders_articles.article_id) AS total_sales
