@@ -6,9 +6,10 @@
 {% endblock %}
 
 {% block main %}
-            <article class="products">
-                <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
+            <article class="product">
+                <img src="{{ article.image.getUrl() }}" alt= "{{ article.image.getAlt() }}"/>
                 <p>{{article.name}}</p>
+                <p>{{article.description}}</p>
                 <p>{{article.price}} €</p>
             </article>
 {% endblock %}

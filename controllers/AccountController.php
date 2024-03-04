@@ -6,6 +6,7 @@ class AccountController extends AbstractController
     {
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+
         $sessionId = null;
         $orders = [];
         $ordersArticles = [];
@@ -26,9 +27,9 @@ class AccountController extends AbstractController
     
         $this->render("account/account.html.twig", [
             'error' => $error,
-            'session' => $session,
             'orders' => $orders,
-            'ordersArticles' => $ordersArticles
+            'ordersArticles' => $ordersArticles,
+            'session' => $session
         ]);
     }
     

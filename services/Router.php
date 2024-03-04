@@ -13,10 +13,6 @@ class Router
         {
             $dc->home();
         }
-        else if(isset($get["route"]) && $get["route"] === "articles")
-        {
-            $atc->articles();
-        }
         else if(isset($get["route"]) && $get["route"] === "login")
         {
             $athc->login();
@@ -44,8 +40,12 @@ class Router
         else if(isset($get["route"]) && $get["route"] === "update")
         {
             $acc->updateUserProfile();
+        }
+        else if(isset($get["route"]) && $get["route"] === "articles")
+        {
+            $atc->articles();
         }         
-        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "articles")
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "article")
         {
             $atc->article($get["id"]);
         }

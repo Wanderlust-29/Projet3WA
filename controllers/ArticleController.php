@@ -3,9 +3,9 @@
 class ArticleController extends AbstractController
 {
     public function articles() : void
-    {
+    {   
         $am = new ArticleManager();
-
+        
         $articles = $am->findAll();
         
         $this->render("articles/articles.html.twig", [

@@ -61,12 +61,12 @@ class AuthController extends AbstractController
     public function register() : void
     {   
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-        $user = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         $this->render('account/register.html.twig', [
             'error' => $error,
-            'csrf_token' => $_SESSION["csrf-token"],
-            'user' => $user
+            'csrf_token' => $_SESSION["csrf-token"],  
+            'session' => $session
         ]);
     }
 

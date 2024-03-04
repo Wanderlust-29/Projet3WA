@@ -8,15 +8,15 @@
 {% block main %}
     <section class="banner">
             <h1>TimberWolf</h1>
-            <button  class="btn-1" type="button"><a href="index.php?route=product">Nos Produits</a></button>
+            <button  class="btn-1" type="button"><a href="index.php?route=articles">Nos Produits</a></button>
     </section>
 
     <section class="top-sales">
         <h2>Nos meilleurs ventes</h2>
         {% for article in articles %}
-        <a href="index.php?route=articles&id={{ article.id }}">
+        <a href="index.php?route=article&id={{ article.id }}">
             <article class="products">
-                <img src="{{ article.image.getUrl()}}" alt= "{{ article.image.getAlt()}}"/>
+                <img src="{{ article.image.getUrl() }}" alt= "{{ article.image.getAlt() }}"/>
                 <p>{{article.name}}</p>
                 <p>{{article.price}} €</p>
             </article>
@@ -27,4 +27,5 @@
 {% endblock %}
 
 {% block javascript %}
+    <script src="assets/js/layout.js" defer></script>
 {% endblock %}
