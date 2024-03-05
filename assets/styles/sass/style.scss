@@ -19,6 +19,11 @@ body {
   height: 100vh;
   line-height: 1.8;
 }
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 h1 {
   font-size: 3rem;
 }
@@ -161,34 +166,6 @@ section {
               MAIN MENU
 ****************************************/
 
-/****BANNER*****/
-
-.banner {
-  background-image: url(../../img/banner.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  h1 {
-    font-size: 4rem;
-    font-family: "Dancing Script", cursive;
-  }
-  .btn-1 {
-    display: inline-block;
-    border-radius: 0.8rem;
-    background-color: transparent;
-    border: 3px solid #009a87;
-    padding: 1.2rem 1rem;
-    a {
-      text-decoration: none;
-      color: #009a87;
-      text-transform: uppercase;
-    }
-  }
-}
-
 /****PRODUCTS*****/
 
 .order {
@@ -214,7 +191,6 @@ section {
       border-radius: 1rem;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
         rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-      grid-row: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -250,7 +226,6 @@ section {
 /****PRODUCT*****/
 
 .product {
-  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -328,9 +303,51 @@ section {
   }
 }
 
+/****************************************
+                HOME
+****************************************/
+/****BANNER*****/
+
+.banner {
+  width: 100%;
+  background-image: url(../../img/banner.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    font-size: 4rem;
+    font-family: "Dancing Script", cursive;
+  }
+  .btn-1 {
+    display: inline-block;
+    border-radius: 0.8rem;
+    background-color: transparent;
+    border: 3px solid #009a87;
+    padding: 1.2rem 1rem;
+    a {
+      text-decoration: none;
+      color: #009a87;
+      text-transform: uppercase;
+    }
+  }
+}
+
 /*********MAP*********/
-#map {
-  height: 30rem;
+#about {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  padding-bottom: 1.5rem;
+  margin-top: 2rem;
+  #map {
+    height: 400px;
+    width: 600px;
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
 
 /****************************************

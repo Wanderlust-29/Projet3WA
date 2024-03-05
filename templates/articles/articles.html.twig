@@ -6,28 +6,31 @@
 {% endblock %}
 
 {% block main %}
-    <section class="all-products">
-        <h1>Tous nos produits</h1>
-        <form class="order" method="GET">
-            <select class="order-by">
-                <option value="Trier par prix">Trier par prix croissant</option>
-                <option value="Trier par prix">Trier par prix décroissant</option>
-                <option value="Trier par prix">Trier par popularité</option>
-            </select>
-        </form>
-        {% for article in articles %}
-        <a href="index.php?route=article&id={{ article.id }}">
-            <article class="products">
-                <figure>
-                    <img src="{{ article.image.getUrl() }}" alt= "{{ article.image.getAlt() }}"/>
-                </figure>
-                <p>{{article.name}}</p>
-                <p class="price">{{article.price}} €</p>
-            </article>
-        </a>
-        {% endfor %}
-    </section>
+    <main>
+        <section class="all-products">
+            <h1>Tous nos produits</h1>
+            <form class="order" method="GET">
+                <select class="order-by">
+                    <option value="Trier par prix">Trier par prix croissant</option>
+                    <option value="Trier par prix">Trier par prix décroissant</option>
+                    <option value="Trier par prix">Trier par popularité</option>
+                </select>
+            </form>
+            {% for article in articles %}
+            <a href="index.php?route=article&id={{ article.id }}">
+                <article class="products">
+                    <figure>
+                        <img src="{{ article.image.getUrl() }}" alt= "{{ article.image.getAlt() }}"/>
+                    </figure>
+                    <p>{{article.name}}</p>
+                    <p>{{article.price}} €</p>
+                </article>
+            </a>
+            {% endfor %}
+        </section>
+    </main>
 {% endblock %}
+
 
 {% block javascript %}
 {% endblock %}

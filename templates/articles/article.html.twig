@@ -6,34 +6,36 @@
 {% endblock %}
 
 {% block main %}
+    <main>
         <section class="product">
             <h1>{{article.name}}</h1>
-                    <figure>
-                        <img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-                    </figure>
+                <figure>
+                    <img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+                </figure>
 
                    
-                    <form action="index.php?route=cart" method="get">
-                        <label>{{article.price}} €</label>
-                        <input type="number" value="1"/>
-                        <input class="add-to-cart" type="button" value="Ajouter au pannier"/>
-                    </form>
+                <form action="index.php?route=cart" method="get">
+                    <label>{{article.price}} €</label>
+                    <input type="number" value="1"/>
+                    <input class="add-to-cart" type="button" value="Ajouter au pannier"/>
+                </form>
                     
-                    <table id="table">
-                        <thead>
-                        <tr >
-                            <td><a href="#table" class="btn-description">Description<a></td>
-                            <td><a href="#table" class="btn-ingredients">Ingrédients<a></td>
+                <table id="table">
+                    <thead>
+                    <tr >
+                        <td><a href="#table" class="btn-description">Description<a></td>
+                        <td><a href="#table" class="btn-ingredients">Ingrédients<a></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="description"> {{article.description | raw}}</td>
+                            <td class="ingredients">{{article.ingredients | raw}}</td>
                         </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="description"> {{article.description | raw}}</td>
-                                <td class="ingredients">{{article.ingredients | raw}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
         </section>
+    </main>
 {% endblock %}
 
 {% block javascript %}
