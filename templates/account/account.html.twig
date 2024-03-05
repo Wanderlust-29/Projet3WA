@@ -87,10 +87,12 @@
                             {% if orderArticles is not empty %}
                                 {% for article in orderArticles %}
                                     <li>
-                                        <a href="index.php?route=article&id={{ article.id }}">
+                                        <a href="index.php?route=article&id={{ article.articleId.id }}">
                                         <article>
                                             <h3>{{ article.articleId.name }}</h3>
-                                            <img src="{{ article.articleId.image.getUrl() }}" alt="{{ article.articleId.image.getAlt() }}"/>
+                                            <figure>
+                                                <img src="{{ article.articleId.image.getUrl() }}" alt="{{ article.articleId.image.getAlt() }}"/>
+                                            </figure>
                                         </article>
                                         </a>
                                     </li>
@@ -121,6 +123,5 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="assets/js/layout.js" defer></script>
     <script src="assets/js/account.js" defer></script>
 {% endblock %}

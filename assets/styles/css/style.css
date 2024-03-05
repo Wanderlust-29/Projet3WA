@@ -15,7 +15,7 @@ body {
   font-weight: 400;
   font-style: normal;
   font-size: 1.8rem;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   width: 100vw;
   height: 100vh;
   line-height: 1.8;
@@ -161,7 +161,10 @@ section {
 ****************************************/
 /****BANNER*****/
 .banner {
-  background-color: white;
+  background-image: url(../../img/banner.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -173,7 +176,7 @@ section {
 .banner .btn-1 {
   display: inline-block;
   border-radius: 0.8rem;
-  background-color: white;
+  background-color: transparent;
   border: 3px solid #009a87;
   padding: 1.2rem 1rem;
 }
@@ -182,6 +185,7 @@ section {
   color: #009a87;
   text-transform: uppercase;
 }
+
 /****PRODUCTS*****/
 .order {
   padding: 1rem 0;
@@ -209,27 +213,116 @@ section {
 }
 .top-sales a .products,
 .all-products a .products {
-  border: 1px solid #9c9c9c;
   border-radius: 1rem;
-  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   grid-row: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 80vw;
   padding-bottom: 1.5rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
-.top-sales a .products img,
-.all-products a .products img {
+.top-sales a .products figure,
+.all-products a .products figure {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+.top-sales a .products figure img,
+.all-products a .products figure img {
   width: 80%;
   height: auto;
-  padding: 1.5rem 0;
 }
 .top-sales a .products p,
 .all-products a .products p {
   text-align: center;
   padding: 0.5rem 4rem;
+}
+.top-sales a .products .price,
+.all-products a .products .price {
+  color: #fff;
+  background: rgb(0, 154, 135);
+  background: linear-gradient(135deg, rgb(0, 154, 135), rgb(1, 54, 95));
+}
+
+/****PRODUCT*****/
+.product {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  margin-top: 1rem;
+  margin: 0;
+}
+.product h1 {
+  text-align: center;
+}
+.product figure {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+.product figure img {
+  width: 80%;
+  height: auto;
+}
+.product form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+}
+.product form .add-to-cart {
+  margin-top: 1rem;
+  border: none;
+  padding: 1rem 2rem;
+  color: #fff;
+  background: rgb(0, 154, 135);
+  background: linear-gradient(135deg, rgb(0, 154, 135), rgb(1, 54, 95));
+}
+.product table {
+  border: 1px solid #9c9c9c;
+  justify-self: center;
+  width: 50vw;
+}
+.product table thead tr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.product table thead tr td {
+  width: 100%;
+  background-color: #fff;
+  text-align: center;
+}
+.product table thead tr td a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #009a87;
+}
+.product table thead tr td:hover {
+  background-color: #009a87;
+}
+.product table thead tr td:hover a {
+  color: #fff;
+}
+.product table tbody {
+  display: flex;
+  flex-direction: column;
+}
+.product table tbody tr {
+  padding: 1rem 3rem;
+}
+.product table tbody .ingredients {
+  display: none;
+}
+
+/*********MAP*********/
+#map {
+  height: 30rem;
 }
 
 /****************************************

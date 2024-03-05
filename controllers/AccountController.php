@@ -43,7 +43,7 @@ class AccountController extends AbstractController
             
             if(password_verify($_POST["password"], $currentUser->getPassword())) 
             {
-                $_SESSION["error-message"] = "Le mot de passe ne peut pas etre le meme que l'ancien";
+                $_SESSION["error-message"] = "Le mot de passe ne peut pas être le même que l'ancien";
             }
             else
             {

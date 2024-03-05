@@ -18,9 +18,11 @@
         {% for article in articles %}
         <a href="index.php?route=article&id={{ article.id }}">
             <article class="products">
-                <img src="{{ article.image.getUrl() }}" alt= "{{ article.image.getAlt() }}"/>
+                <figure>
+                    <img src="{{ article.image.getUrl() }}" alt= "{{ article.image.getAlt() }}"/>
+                </figure>
                 <p>{{article.name}}</p>
-                <p>{{article.price}} €</p>
+                <p class="price">{{article.price}} €</p>
             </article>
         </a>
         {% endfor %}
@@ -28,5 +30,4 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="assets/js/layout.js" defer></script>
 {% endblock %}

@@ -3,7 +3,7 @@ class Article
 {
     private ?int $id = null;
 
-    public function __construct(private string $name, private float $price, private int $stock, private Category $category, private Media $image, private string $description, private string $age)
+    public function __construct(private string $name, private float $price, private int $stock, private Category $category, private Media $image, private string $description, private string $ingredients, private string $age)
     {
 
     }
@@ -125,6 +125,23 @@ class Article
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    // Getter and Setter for Description
+    /**
+     * @return string
+     */
+    public function getIngredients(): string
+    {
+        return $this->ingredients;
+    }
+
+    /**
+     * @param string $ingredients
+     */
+    public function setIngredients(string $ingredients): void
+    {
+        $this->ingredients = $ingredients;
     }
 
     // Getter and Setter for Age
