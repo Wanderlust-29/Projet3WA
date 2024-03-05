@@ -22,4 +22,22 @@ class ArticleController extends AbstractController
             "article"=>$article
         ]);
     }
+    public function dogFood() : void
+    {
+        $am = new ArticleManager();
+        $this->render("articles/dogfood.html.twig", [
+        ]);
+    }
+    public function toys() : void
+    {
+        $am = new ArticleManager();
+        $this->render("articles/toys.html.twig", [
+        ]);
+    }
+    public function treats() : void
+    {
+        $am = new ArticleManager();
+        $this->render("articles/toys.html.twig", [
+        ]);
+    }
 }

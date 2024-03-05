@@ -135,7 +135,21 @@ class AuthController extends AbstractController
             $this->redirect("index.php?route=register");
         }
     }
-    
+    public function admin() : void
+    {
+        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+
+        $this->render('account/admin.html.twig', [
+            'error' => $error,
+            'csrf_token' => $_SESSION["csrf-token"],  
+            'session' => $session
+        ]);
+    }
+    public function checkAdmin() : void
+    {
+
+    }
     public function logout() : void
     {
         session_destroy();

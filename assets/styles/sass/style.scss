@@ -42,8 +42,9 @@ i {
   font-size: 2.3rem;
 }
 section {
-  padding: 2rem 0;
+  padding-bottom: 2rem;
 }
+
 /****************************************
                 HEADER
 ****************************************/
@@ -335,18 +336,36 @@ section {
   }
 }
 
-/*********MAP*********/
+/*********ABOUT*********/
 #about {
+  border-top: 1px solid #009a87;
   display: flex;
   flex-direction: column;
   width: 80vw;
   padding-bottom: 1.5rem;
-  margin-top: 2rem;
-  #map {
-    height: 400px;
-    width: 600px;
-    max-width: 100%;
-    max-height: 100%;
+  h2 {
+    text-align: center;
+    color: #009a87;
+    text-transform: uppercase;
+  }
+  li {
+    list-style: none;
+  }
+  p {
+    a {
+      color: black;
+      text-decoration: none;
+    }
+  }
+  .container-map {
+    display: flex;
+    justify-content: center;
+    #map {
+      height: 400px;
+      width: 600px;
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 }
 

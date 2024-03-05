@@ -8,6 +8,8 @@ class Router
         $athc = new AuthController();
         $acc = new AccountController();
         $atc = new ArticleController();
+        $cc = new ContactController();
+        $ic = new InfosController();
 
         if(!isset($get["route"]))
         {
@@ -33,6 +35,14 @@ class Router
         {
             $athc->logout();
         }
+        else if(isset($get["route"]) && $get["route"] === "admin")
+        {
+            $athc->admin();
+        }
+        else if(isset($get["route"]) && $get["route"] === "check-admin")
+        {
+            $athc->checkAdmin();
+        }
         else if(isset($get["route"]) && $get["route"] === "account")
         {
             $acc->account();
@@ -48,6 +58,38 @@ class Router
         else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "article")
         {
             $atc->article($get["id"]);
+        }
+        else if(isset($get["route"]) && $get["route"] === "dogfood")
+        {
+            $atc->dogFood();
+        }
+        else if(isset($get["route"])  && $get["route"] === "treats")
+        {
+            $atc->treats();
+        }
+        else if(isset($get["route"]) && $get["route"] === "toys")
+        {
+            $atc->toys();
+        }
+        else if(isset($get["route"]) && $get["route"] === "contact")
+        {
+            $cc->contact();
+        }
+        else if(isset($get["route"]) && $get["route"] === "conditions")
+        {
+            $ic->conditions();
+        }
+        else if(isset($get["route"]) && $get["route"] === "legal")
+        {
+            $ic->legal();
+        }
+        else if(isset($get["route"]) && $get["route"] === "privacy")
+        {
+            $ic->privacy();
+        }
+        else if(isset($get["route"]) && $get["route"] === "refund")
+        {
+            $ic->refund();
         }
         else
         {
