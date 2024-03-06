@@ -34,5 +34,4 @@ class CategoryManager extends AbstractManager
         }
         return $categories;
     }
-    
 }

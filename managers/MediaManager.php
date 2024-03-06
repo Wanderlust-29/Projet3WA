@@ -35,4 +35,14 @@ class MediaManager extends AbstractManager
         }
         return $medias;
     }
+
+    public function insert(Media $media): void 
+    {
+        $query = $this->db->prepare('INSERT INTO media (url, alt) VALUES (:url, :alt)');
+        $parameters = [
+            'url' => $media->getUrl(),
+            'alt' => $media->getAlt()
+        ];
+        $query->execute($parameters);
+    }
 }

@@ -1,0 +1,159 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+    Admin
+    {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <main>
+        {% if session is defined and session.role == "ADMIN" %}
+
+            <h1>Bienvenue {{ session.firstName }} {{ session.lastName }}!</h1>
+
+            <h2>Gestion des utilisateur :</h2>
+
+            {% for user in users %}
+                <form action="index.php?route=delete" method="post">
+                    <fieldset>
+                        <label for="user{{user.id}}">
+                        {{user.firstName}} {{user.lastName}} {{user.address}} {{user.city}} {{user.postalCode}} {{user.country}}
+                        </label>
+                        <input type="checkbox" name="user{{user.id}}" id="user{{user.id}}"/>
+                    </fieldset>
+                    <fieldset>
+                        <button type="submit">Supprimer</button>
+                    </fieldset>
+                </form>
+            {% endfor %}
+
+            <h2>Toutes les commandes :</h2>
+
+            <ul class="all-orders">
+                {% if orders is not empty %}
+                    {% for order in orders %}
+                        <li>Commande n°{{ order.id }} date : {{ order.createdAt }}, {{ order.userId.firstName }} {{ order.userId.lastName }}, total : 
+                            <span class="plus">+</span>
+                            <ul class="order-articles">
+                                {% set orderArticles = ordersArticles[order.id] %}
+                                {% if orderArticles is not empty %}
+                                    {% for article in orderArticles %}
+                                        <li>
+                                            <a href="index.php?route=article&id={{ article.articleId.id }}">
+                                                {{ article.articleId.name }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <li>Aucun article trouvé pour cette commande.</li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li>Aucune commande trouvée.</li>
+                {% endif %}
+            </ul>
+
+            <h2>Gestion des Articles :</h2>
+
+            {% for article in articles %}
+                <form action="index.php?route=update-stock" method="post">
+                    <fieldset>
+                        <label for="add{{ article.id }}">
+                        {{ article.name }}
+                        </label></br>
+                        <input type="number" name="stock" id="add{{ article.id }}" value="{{ article.stock }}"/>
+                        <input type="hidden" name="article_id" value="{{ article.id }}" /> 
+                    </fieldset>
+                    <fieldset>
+                        <button type="submit">Valider</button>
+                    </fieldset>
+                </form>
+            {% endfor %}
+
+            
+            <h2>Ajouter un article :</h2>
+
+            <form action="index.php?route=add-article" method="post">
+                <fieldset>
+                    <label for="name">
+                        Nom
+                    </label>
+                    <input type="text" name="name" id="name"/>
+                </fieldset>
+                <fieldset>
+                    <label for="price">
+                        Prix
+                    </label>
+                    <input type="number" name="number" id="number"/>
+                </fieldset>
+                <fieldset>
+                    <label for="stock">
+                        Stock
+                    </label>
+                    <input type="number" name="stock" id="stock"/>
+                </fieldset>
+                <fieldset >
+                    <label for="category">
+                        Categorie
+                    </label>
+                    <select id="category">
+                        <option value="">--Choisir une categorie--</option>
+                        <option value="1">Croquettes</option>
+                        <option value="2">Friandises</option>
+                        <option value="3">Jouets</option>
+                    </select>
+                </fieldset>
+                <fieldset >
+                    <label for="image">
+                        Image
+                    </label>
+                    <input type="file" name="image" />
+                    <input type="hidden" name="formName" value="fileUpload" />
+                </fieldset>
+                <fieldset>
+                    <label for="alt">
+                        Alt
+                    </label>
+                    <input type="text" name="alt" id="alt"/>
+                </fieldset>
+                <fieldset>
+                    <label for="description">
+                        Description
+                    </label>
+                    <textarea id="description" name="description" rows="5" cols="33">Ajouter une description...</textarea>
+                </fieldset>
+                <fieldset>
+                    <label for="ingredients">
+                        Ingrédients
+                    </label>
+                    <textarea id="ingredients" name="ingredients" rows="5" cols="33">Ajouter les ingrédients...</textarea>
+                </fieldset>
+                <fieldset>
+                    <label for="age">
+                        Âge
+                    </label>
+                    <input type="text" name="age" id="age"/>
+                </fieldset>
+                <fieldset>
+                    <button type="submit">Créer</button>
+                </fieldset>
+            </form>
+
+            <form action="index.php?route=logout" method="post">
+                <button type="submit">Se déconnecter</button>
+            </form>
+        {% else %}
+            <h1>Vous n’êtes pas autorisé à accéder à cette page</h1>
+            <button type="button"><a href="index.php">Retourner à l'accueil</a></button>
+        {% endif %}
+    </main>
+    {% if error is defined %}
+            <p>{{ error }}</p>
+    {% endif %}
+
+{% endblock %}
+{% block javascript %}
+    <script src="assets/js/admin.js" defer></script>
+{% endblock %}

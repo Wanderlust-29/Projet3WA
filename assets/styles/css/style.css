@@ -130,6 +130,7 @@ section {
   padding-right: 1.2rem;
 }
 .header .burger-menu {
+  z-index: 999;
   position: absolute;
   display: inline-block;
   background-color: #009a87;
@@ -192,6 +193,7 @@ section {
 }
 .top-sales a .products,
 .all-products a .products {
+  position: relative;
   border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   display: flex;
@@ -222,6 +224,16 @@ section {
   color: #fff;
   background: rgb(0, 154, 135);
   background: linear-gradient(135deg, rgb(0, 154, 135), rgb(1, 54, 95));
+}
+
+.out-of-stock {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  color: #fff;
 }
 
 /****PRODUCT*****/
@@ -333,7 +345,8 @@ section {
   border-top: 1px solid #009a87;
   display: flex;
   flex-direction: column;
-  width: 80vw;
+  max-width: 80vh;
+  height: auto;
   padding-bottom: 1.5rem;
 }
 #about h2 {
@@ -341,20 +354,22 @@ section {
   color: #009a87;
   text-transform: uppercase;
 }
+#about h3 {
+  border: 1px solid #9c9c9c;
+  width: 100%;
+  text-align: center;
+}
 #about li {
   list-style: none;
+  text-align: start;
 }
-#about p a {
+#about li a {
   color: black;
   text-decoration: none;
 }
-#about .container-map {
-  display: flex;
-  justify-content: center;
-}
 #about .container-map #map {
-  height: 400px;
-  width: 600px;
+  min-width: 300px;
+  min-height: 200px;
   max-width: 100%;
   max-height: 100%;
 }
@@ -362,11 +377,7 @@ section {
 /****************************************
                 ACCOUNT
 ****************************************/
-.my-orders {
-  display: flex;
-  flex-direction: column;
-}
-.my-orders .plus {
+.plus {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -375,6 +386,11 @@ section {
   background-color: black;
   color: #fff;
   border-radius: 50%;
+}
+
+.my-orders {
+  display: flex;
+  flex-direction: column;
 }
 
 /****************************************

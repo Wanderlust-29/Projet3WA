@@ -10,4 +10,44 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }).addTo(map);
   }
   map();
+
+  function about() {
+    const coordinate = document.querySelector(".coordinates");
+    const coordinateBtn = document.querySelector(".coordinates-btn");
+    const schedules = document.querySelector(".schedules");
+    const schedulesBtn = document.querySelector(".schedules-btn");
+    const containerMap = document.querySelector(".container-map");
+    containerMap.style.display = "none";
+    coordinate.style.display = "none";
+    schedules.style.display = "none";
+
+    coordinateBtn.addEventListener("click", () => {
+      if (
+        coordinate.style.display === "none" ||
+        coordinate.style.display === ""
+      ) {
+        coordinate.style.display = "block";
+        coordinateBtn.innerText = "- Nos coordonnées";
+        containerMap.style.display = "block";
+      } else {
+        coordinate.style.display = "none";
+        coordinateBtn.innerText = "+ Nos coordonnées";
+        containerMap.style.display = "none";
+      }
+    });
+    schedulesBtn.addEventListener("click", () => {
+      if (
+        schedules.style.display === "none" ||
+        schedules.style.display === ""
+      ) {
+        schedules.style.display = "block";
+        schedulesBtn.innerText = "- Nos horaires";
+      } else {
+        schedules.style.display = "none";
+        schedulesBtn.innerText = "+ Nos horaire";
+      }
+    });
+  }
+
+  about();
 });

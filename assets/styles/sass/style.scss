@@ -128,6 +128,7 @@ section {
   /********MENU-BURGER*********/
 
   .burger-menu {
+    z-index: 999;
     position: absolute;
     display: inline-block;
     background-color: #009a87;
@@ -189,6 +190,7 @@ section {
     text-decoration: none;
     color: black;
     .products {
+      position: relative;
       border-radius: 1rem;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
         rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -222,6 +224,16 @@ section {
       }
     }
   }
+}
+
+.out-of-stock {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: red;
+  color: #fff;
 }
 
 /****PRODUCT*****/
@@ -341,28 +353,33 @@ section {
   border-top: 1px solid #009a87;
   display: flex;
   flex-direction: column;
-  width: 80vw;
+  max-width: 80vh;
+  height: auto;
   padding-bottom: 1.5rem;
   h2 {
     text-align: center;
     color: #009a87;
     text-transform: uppercase;
   }
+  h3 {
+    border: 1px solid #9c9c9c;
+    width: 100%;
+    text-align: center;
+  }
   li {
     list-style: none;
+    text-align: start;
   }
-  p {
+  li {
     a {
       color: black;
       text-decoration: none;
     }
   }
   .container-map {
-    display: flex;
-    justify-content: center;
     #map {
-      height: 400px;
-      width: 600px;
+      min-width: 300px;
+      min-height: 200px;
       max-width: 100%;
       max-height: 100%;
     }
@@ -372,19 +389,20 @@ section {
 /****************************************
                 ACCOUNT
 ****************************************/
+
+.plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: black;
+  color: #fff;
+  border-radius: 50%;
+}
 .my-orders {
   display: flex;
   flex-direction: column;
-  .plus {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 3rem;
-    height: 3rem;
-    background-color: black;
-    color: #fff;
-    border-radius: 50%;
-  }
 }
 
 /****************************************

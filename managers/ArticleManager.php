@@ -75,4 +75,39 @@ class ArticleManager extends AbstractManager
         }
         return $medias;
     }
+
+    public function update(Article $article) : void
+    {
+        $query = $this->db->prepare('UPDATE articles 
+        SET stock = :stock
+        WHERE id = :id');
+
+        $parameters = [
+        "id" => $article->getId(),
+        "stock" => $article->getStock()
+        ];
+        $query->execute($parameters);
+    }
+
+    public function insert(Article $article) : void
+    {
+    $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image, alt, description, ingredients, age) 
+        VALUES (:name, :price, :stock, :category_id, :media, :alt, :description, :ingredients, :age)');
+
+    $parameters = [
+        "name" => $article->getName(),
+        "price" => $article->getPrice(),
+        "stock" => $article->getStock(),
+        "category_id" => $article->getCategory()->getId(),
+        "image" => $article->getImage()->getUrl(),
+        "alt" => $article->getImage()->getAlt(),
+        "description" => $article->getDescription(),
+        "ingredients" => $article->getIngredients(),
+        "age" => $article->getAge()
+    ];
+    
+    $query->execute($parameters);
+    $article->setId($this->db->lastInsertId());
+    }
+
 }

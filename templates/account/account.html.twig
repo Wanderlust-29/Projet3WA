@@ -10,71 +10,71 @@
         {% if session is defined and session is not null %}
             <h1>Bienvenue {{ session.firstName }} {{ session.lastName }}!</h1>
             <h2>Modifier</h2>
-                <form action="index.php?route=update" method="post">
-            <fieldset>
-                <label for="firstName">
-                    Prénom
-                </label>
-                <input type="text" name="firstName" id="firstName" value="{{ session.firstName }}"/>
-            </fieldset>
-            <fieldset>
-                <label for="lastName">
-                    Nom
-                </label>
-                <input type="text" name="lastName" id="lastName" value="{{ session.lastName }}"/>
-            </fieldset>
-            <fieldset>
-                <label for="email">
-                    E-mail
-                </label>
-                <input type="email" name="email" id="email" value="{{ session.email }}"/>
-            </fieldset>
-            <fieldset >
-                <label for="password">
-                    mot de passe
-                </label>
-                <input type="password" name="password" id="password" placeholder="nouveau mot de passe"/>
-            </fieldset>
-            <fieldset >
-                <label for="confirm-password" >
-                    Confirmer le mot de passe
-                </label>
-                <input type="password" name="confirm-password" id="confirm-password" placeholder="confirmer le nouveau mot de passe"/>
-            </fieldset>
-            {% if error is defined %}
-                <p>{{ error }}</p>
-            {% endif %}
-            <fieldset>
-                <label for="address">
-                    Adresse
-                </label>
-                <input type="text" name="address" id="address" value="{{ session.address }}"/>
-            </fieldset>
-            <fieldset>
-                <label for="city">
-                    Ville
-                </label>
-                <input type="text" name="city" id="city" value="{{ session.city }}"/>
-            </fieldset>
-            <fieldset>
-                <label for="postalCode">
-                    Code postal
-                </label>
-                <input type="number" name="postalCode" id="postalCode" value="{{ session.postalCode }}"/>
-            </fieldset>
-            <fieldset>
-                <label for="country">
-                    Pays
-                </label>
-                <input type="text" name="country" id="country" value="{{ session.country }}"/>
-            </fieldset>
-            <fieldset>
-                <button type="submit">Modifier</button>
-            </fieldset>
-            <fieldset>
-                <button type="button"><a href="index.php?route=logout">Se déconnecter</a></button>
-            </fieldset>
-        </form>
+            <form action="index.php?route=update" method="post">
+                <fieldset>
+                    <label for="firstName">
+                        Prénom
+                    </label>
+                    <input type="text" name="firstName" id="firstName" value="{{ session.firstName }}"/>
+                </fieldset>
+                <fieldset>
+                    <label for="lastName">
+                        Nom
+                    </label>
+                    <input type="text" name="lastName" id="lastName" value="{{ session.lastName }}"/>
+                </fieldset>
+                <fieldset>
+                    <label for="email">
+                        E-mail
+                    </label>
+                    <input type="email" name="email" id="email" value="{{ session.email }}"/>
+                </fieldset>
+                <fieldset >
+                    <label for="password">
+                        mot de passe
+                    </label>
+                    <input type="password" name="password" id="password" placeholder="nouveau mot de passe"/>
+                </fieldset>
+                <fieldset >
+                    <label for="confirm-password" >
+                        Confirmer le mot de passe
+                    </label>
+                    <input type="password" name="confirm-password" id="confirm-password" placeholder="confirmer le nouveau mot de passe"/>
+                </fieldset>
+                {% if error is defined %}
+                    <p>{{ error }}</p>
+                {% endif %}
+                <fieldset>
+                    <label for="address">
+                        Adresse
+                    </label>
+                    <input type="text" name="address" id="address" value="{{ session.address }}"/>
+                </fieldset>
+                <fieldset>
+                    <label for="city">
+                        Ville
+                    </label>
+                    <input type="text" name="city" id="city" value="{{ session.city }}"/>
+                </fieldset>
+                <fieldset>
+                    <label for="postalCode">
+                        Code postal
+                    </label>
+                    <input type="number" name="postalCode" id="postalCode" value="{{ session.postalCode }}"/>
+                </fieldset>
+                <fieldset>
+                    <label for="country">
+                        Pays
+                    </label>
+                    <input type="text" name="country" id="country" value="{{ session.country }}"/>
+                </fieldset>
+                <fieldset>
+                    <button type="submit">Modifier</button>
+                </fieldset>
+                <fieldset>
+                    <button type="button"><a href="index.php?route=logout">Se déconnecter</a></button>
+                </fieldset>
+            </form>
 
             
             <h2>Mes commandes</h2>

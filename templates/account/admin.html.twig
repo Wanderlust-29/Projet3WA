@@ -22,6 +22,9 @@
                 </label>
                 <input type="password" name="password" id="password"/>
             </fieldset>
+            {% if error is defined %}
+                <p>{{ error }}</p>
+            {% endif %}
             <fieldset>
                 <button type="submit">Se connecter</button>
             </fieldset>

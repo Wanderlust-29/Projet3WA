@@ -135,6 +135,7 @@ class AuthController extends AbstractController
             $this->redirect("index.php?route=register");
         }
     }
+
     public function admin() : void
     {
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
@@ -146,10 +147,59 @@ class AuthController extends AbstractController
             'session' => $session
         ]);
     }
+
     public function checkAdmin() : void
     {
+        if(isset($_POST["email"]) && isset($_POST["password"]))
+        {
+            $tokenManager = new CSRFTokenManager();
 
+            if(isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"]))
+            {
+                $um = new UserManager();
+                $user = $um->findByEmail($_POST["email"]);
+
+                if($user !== null)
+                {
+                    if(password_verify($_POST["password"], $user->getPassword()))
+                    {   
+                        if ($user->getRole() === "ADMIN")
+                        {
+                            $_SESSION["user"] = $user;
+                            unset($_SESSION["error-message"]);
+                            $this->redirect("index.php?route=accountAdmin");
+                        }
+                        else
+                        {
+                            $_SESSION["error-message"] = "Vous n’êtes pas autorisé à accéder à cette page";
+                            $this->redirect("index.php?route=admin");
+                        }
+                    }
+                    else
+                    {
+                        $_SESSION["error-message"] = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
+                        $this->redirect("index.php?route=admin");
+                    }
+                }
+                else
+                {
+                    $_SESSION["error-message"] = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
+                    $this->redirect("index.php?route=admin");
+                }
+            }
+            else
+            {
+                $_SESSION["error-message"] = "token CSRF invalide";
+                $this->redirect("index.php?route=admin");
+            }
+        }
+        else
+        {
+            $_SESSION["error-message"] = "Champs manquants";
+            $this->redirect("index.php?route=admin");
+        }
     }
+    
     public function logout() : void
     {
         session_destroy();

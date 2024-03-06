@@ -47,9 +47,21 @@ class Router
         {
             $acc->account();
         }
+        else if(isset($get["route"]) && $get["route"] === "accountAdmin")
+        {
+            $acc->accountAdmin();
+        }
         else if(isset($get["route"]) && $get["route"] === "update")
         {
             $acc->updateUserProfile();
+        }
+        else if(isset($get["route"]) && $get["route"] === "update-stock")
+        {
+            $acc->updateStock();
+        }
+        else if(isset($get["route"]) && $get["route"] === "add-article")
+        {
+            $acc->createArticle();
         }
         else if(isset($get["route"]) && $get["route"] === "articles")
         {
