@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         schedulesBtn.innerText = "- Nos horaires";
       } else {
         schedules.style.display = "none";
-        schedulesBtn.innerText = "+ Nos horaire";
+        schedulesBtn.innerText = "+ Nos horaires";
       }
     });
   }

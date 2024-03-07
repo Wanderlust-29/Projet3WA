@@ -6,10 +6,12 @@
 {% endblock %}
 
 {% block main %}
-    <main>
+    <main id="content" class="account">
         {% if session is defined and session is not null %}
             <h1>Bienvenue {{ session.firstName }} {{ session.lastName }}!</h1>
-            <h2>Modifier</h2>
+
+            {# Formulaire pour modifier les données de l'utilisateur #}
+            <h2>Modifier mes coordonnées</h2>
             <form action="index.php?route=update" method="post">
                 <fieldset>
                     <label for="firstName">
@@ -75,9 +77,9 @@
                     <button type="button"><a href="index.php?route=logout">Se déconnecter</a></button>
                 </fieldset>
             </form>
-
-            
-            <h2>Mes commandes</h2>
+        
+            {# toutes les commandes de l'utilisateur #}
+            <h2>Toutes mes commandes</h2>
             <ul class="my-orders">
                 {% if orders is not empty %}
                     {% for order in orders %}
@@ -111,7 +113,9 @@
 
 
 
-
+            <form action="index.php?route=delete" method="post">
+                <button type="submit">Supprimer mon compte</button>
+            </form>
             
             <form action="index.php?route=logout" method="post">
                 <button type="submit">Se déconnecter</button>

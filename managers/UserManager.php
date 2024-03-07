@@ -2,14 +2,16 @@
 
 class UserManager extends AbstractManager
 {   
-
-    public function findOne(int $id) : ? User
+    /**
+     * Trouve un utilisateur par son identifiant.
+     *
+     * @param int $id L'identifiant de l'utilisateur à trouver.
+     * @return User|null L'objet utilisateur trouvé ou null s'il n'existe pas.
+     */
+    public function findOne(int $id) : ?User
     {
-        $query = $this->db->prepare('SELECT * FROM users
-                                    WHERE id=:id');
-        $parameters = [
-            "id" => $id
-        ];
+        $query = $this->db->prepare('SELECT * FROM users WHERE id=:id');
+        $parameters = ["id" => $id];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -22,10 +24,14 @@ class UserManager extends AbstractManager
         return null;
     }
 
+    /**
+     * Récupère tous les utilisateurs de la base de données.
+     *
+     * @return array Liste des utilisateurs.
+     */
     public function findAll() : array
     {
         $query = $this->db->prepare('SELECT * FROM users');
-
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $users =[];
@@ -38,13 +44,16 @@ class UserManager extends AbstractManager
         return $users;
     }
 
-    public function findByEmail(string $email) : ? User
+    /**
+     * Trouve un utilisateur par son adresse e-mail.
+     *
+     * @param string $email L'adresse e-mail de l'utilisateur à trouver.
+     * @return User|null L'objet utilisateur trouvé ou null s'il n'existe pas.
+     */
+    public function findByEmail(string $email) : ?User
     {
         $query = $this->db->prepare('SELECT * FROM users WHERE email=:email');
-
-        $parameters = [
-            "email" => $email
-        ];
+        $parameters = ["email" => $email];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -52,11 +61,17 @@ class UserManager extends AbstractManager
         {
             $user = new User($result["first_name"], $result["last_name"], $result["email"], $result["password"], $result["address"], $result["city"], $result["postal_code"], $result["country"], $result["role"]);
             $user->setId($result["id"]);
-
             return $user;
         }
         return null;
     }
+    
+    /**
+     * Crée un nouvel utilisateur dans la base de données.
+     *
+     * @param User $user L'utilisateur à créer.
+     * @return void
+     */
     public function create(User $user) : void
     {
         $query = $this->db->prepare('INSERT INTO users (id, first_name, last_name, email, password, address, city, postal_code, country, role) VALUES (NULL, :first_name, :last_name, :email, :password, :address, :city, :postal_code, :country, :role)');
@@ -75,8 +90,14 @@ class UserManager extends AbstractManager
         $query->execute($parameters);
 
         $user->setId($this->db->lastInsertId());
-
     }
+
+    /**
+     * Met à jour les informations d'un utilisateur dans la base de données.
+     *
+     * @param User $user L'utilisateur à mettre à jour.
+     * @return void
+     */
     public function update(User $user) : void
     {
         $query = $this->db->prepare('UPDATE users 
@@ -92,16 +113,16 @@ class UserManager extends AbstractManager
         WHERE id = :id');
 
         $parameters = [
-        "id" => $user->getId(),
-        "first_name" => $user->getFirstName(),
-        "last_name" => $user->getLastName(),
-        "email" => $user->getEmail(),
-        "password" => $user->getPassword(),
-        "address" => $user->getAddress(),
-        "city" => $user->getCity(),
-        "postal_code" => $user->getPostalCode(),
-        "country" => $user->getCountry(),
-        "role" => $user->getRole(),
+            "id" => $user->getId(),
+            "first_name" => $user->getFirstName(),
+            "last_name" => $user->getLastName(),
+            "email" => $user->getEmail(),
+            "password" => $user->getPassword(),
+            "address" => $user->getAddress(),
+            "city" => $user->getCity(),
+            "postal_code" => $user->getPostalCode(),
+            "country" => $user->getCountry(),
+            "role" => $user->getRole(),
         ];
         $query->execute($parameters);
     }

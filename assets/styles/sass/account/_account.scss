@@ -1,0 +1,16 @@
+#content.account {
+  .plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: black;
+    color: #fff;
+    border-radius: 50%;
+  }
+  .my-orders {
+    display: flex;
+    flex-direction: column;
+  }
+}

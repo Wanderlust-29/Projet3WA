@@ -8,7 +8,6 @@ class Router
         $athc = new AuthController();
         $acc = new AccountController();
         $atc = new ArticleController();
-        $cc = new ContactController();
         $ic = new InfosController();
 
         if(!isset($get["route"]))
@@ -35,7 +34,7 @@ class Router
         {
             $athc->logout();
         }
-        else if(isset($get["route"]) && $get["route"] === "admin")
+        else if(isset($get["route"]) && $get["route"] === "login-admin")
         {
             $athc->admin();
         }
@@ -47,9 +46,9 @@ class Router
         {
             $acc->account();
         }
-        else if(isset($get["route"]) && $get["route"] === "accountAdmin")
+        else if(isset($get["route"]) && $get["route"] === "admin")
         {
-            $acc->accountAdmin();
+            $acc->admin();
         }
         else if(isset($get["route"]) && $get["route"] === "update")
         {
@@ -85,7 +84,7 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "contact")
         {
-            $cc->contact();
+            $dc->contact();
         }
         else if(isset($get["route"]) && $get["route"] === "conditions")
         {

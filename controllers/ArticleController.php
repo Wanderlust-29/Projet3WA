@@ -8,7 +8,7 @@ class ArticleController extends AbstractController
         
         $articles = $am->findAll();
         
-        $this->render("articles/articles.html.twig", [
+        $this->render("pages/articles.html.twig", [
             "articles"=>$articles
         ]);
     }
@@ -18,26 +18,27 @@ class ArticleController extends AbstractController
 
         $article = $am->findOne(intval($id));
 
-        $this->render("articles/article.html.twig", [
+        $this->render("pages/article.html.twig", [
             "article"=>$article
         ]);
     }
     public function dogFood() : void
     {
         $am = new ArticleManager();
-        $this->render("articles/dogfood.html.twig", [
+        $this->render("pages/dogfood.html.twig", [
         ]);
     }
     public function toys() : void
     {
         $am = new ArticleManager();
-        $this->render("articles/toys.html.twig", [
+        $this->render("pages/toys.html.twig", [
         ]);
     }
     public function treats() : void
-    {
+    {   
+        
         $am = new ArticleManager();
-        $this->render("articles/toys.html.twig", [
+        $this->render("pages/toys.html.twig", [
         ]);
     }
 }

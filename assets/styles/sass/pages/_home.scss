@@ -1,0 +1,140 @@
+#content.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: $green;
+  }
+  a {
+    text-decoration: none;
+    color: $black;
+  }
+
+  /****BANNER*****/
+  .banner {
+    padding: 2rem 0;
+    width: 100%;
+    background-image: url(../../media/banner.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+      font-size: 4rem;
+      font-family: "Dancing Script", cursive;
+    }
+    .btn-1 {
+      background-color: transparent;
+      border: 3px solid $green;
+      padding: 1.2rem 1rem;
+      a {
+        color: $green;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  /****TOP-PRODUCTS*****/
+
+  .top-sales {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    a {
+      color: $black;
+      .products {
+        position: relative;
+        border-radius: 1rem;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+          rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80vw;
+        padding-bottom: 1.5rem;
+        margin-top: 2rem;
+        figure {
+          display: flex;
+          justify-content: center;
+          padding: 1rem 0;
+          img {
+            width: 80%;
+            height: auto;
+          }
+        }
+        p {
+          text-align: center;
+          font-size: 1.8rem;
+          padding: 0.5rem 4rem;
+        }
+        .price {
+          color: #fff;
+          background: rgba(0, 154, 135, 1);
+          background: linear-gradient(
+            135deg,
+            rgba(0, 154, 135, 1),
+            rgba(1, 54, 95, 1)
+          );
+        }
+      }
+    }
+  }
+
+  .out-of-stock {
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $red;
+    color: $white;
+  }
+
+  /*********ABOUT*********/
+
+  #about {
+    margin-top: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    max-width: 80vh;
+    height: auto;
+    padding-bottom: 1.5rem;
+    p {
+      padding: 1rem 2rem;
+    }
+    h3 {
+      text-transform: uppercase;
+      background-color: $green;
+      color: $white;
+      width: 100%;
+      text-align: center;
+    }
+    h3:first-of-type {
+      border-bottom: 1px solid $white;
+    }
+    li {
+      padding: 0 2rem;
+      list-style: none;
+      text-align: start;
+    }
+    li {
+      a {
+        color: black;
+      }
+    }
+    .container-map {
+      #map {
+        min-width: 300px;
+        min-height: 200px;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+  }
+}

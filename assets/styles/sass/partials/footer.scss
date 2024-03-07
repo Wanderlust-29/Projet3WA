@@ -1,0 +1,40 @@
+body > footer {
+  padding: 1rem 2rem;
+  background-color: #009a87;
+  color: #ffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .title {
+    font-family: "Dancing Script", cursive;
+  }
+  section {
+    padding-bottom: 2rem;
+    li {
+      list-style: none;
+      a {
+        text-decoration: none;
+        color: #ffff;
+      }
+    }
+  }
+  .social-networks {
+    justify-self: center;
+    align-self: center;
+    ul {
+      display: flex;
+      justify-content: center;
+      li {
+        padding: 0 0.5rem;
+        i {
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+
+  .footer-bar {
+    width: 100%;
+    border-bottom: 1px solid #ffff;
+  }
+}
