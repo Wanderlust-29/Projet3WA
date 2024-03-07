@@ -99,7 +99,6 @@
 
   #about {
     margin-top: 2rem;
-
     display: flex;
     flex-direction: column;
     max-width: 80vh;
@@ -109,6 +108,7 @@
       padding: 1rem 2rem;
     }
     h3 {
+      cursor: pointer;
       text-transform: uppercase;
       background-color: $green;
       color: $white;

@@ -7,31 +7,34 @@
 
 {% block main %}
     <main id="content" class="login">
-        <h1>Se connecter</h1>
         <form action="index.php?route=check-login" method="post">
-            <input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}" />
-            <fieldset>
-                <label for="email">
-                    Email
-                </label>
-                <input type="email" name="email" id="email"/>
-            </fieldset>
-            <fieldset class="my-1">
-                <label for="password">
-                    Mot de passe
-                </label>
-                <input type="password" name="password" id="password"/>
-            </fieldset>
-            <fieldset>
-                <button type="submit">Se connecter</button>
-            </fieldset>
-            <fieldset>
-                <button type="button"><a href="index.php?route=register">S'inscrire</a></button>
+            <fieldset class="container">
+                <legend>Se connecter</legend>
+                <input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}" />
+                
+                <fieldset>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Entrez votre adresse email"/>
+                </fieldset>
+                
+                <fieldset class="my-1">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe"/>
+                    {% if error is defined %}
+                        <p class="error">* {{ error }}</p>
+                    {% endif %}
+                </fieldset>
+                
+                <fieldset class="nav-buttons">
+                    <fieldset>
+                        <button type="submit">Se connecter</button>
+                    </fieldset>
+                    <fieldset>
+                        <button type="button"><a href="index.php?route=register">S'inscrire</a></button>
+                    </fieldset>
+                </fieldset>
             </fieldset>
         </form>
-        {% if error is defined %}
-                <p>{{ error }}</p>
-        {% endif %}
     </main>
 {% endblock %}
 

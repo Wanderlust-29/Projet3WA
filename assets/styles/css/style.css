@@ -35,10 +35,8 @@ body > header .search {
   background-color: white;
   display: flex;
   justify-content: space-between;
-  width: 100%;
 }
 body > header .search .input-searchbar {
-  width: 80%;
   border: none;
   background-color: white;
 }
@@ -237,7 +235,7 @@ body > footer .footer-bar {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #9c2123;
+  background-color: #c91619;
   color: #fff;
 }
 #content.home #about {
@@ -252,6 +250,7 @@ body > footer .footer-bar {
   padding: 1rem 2rem;
 }
 #content.home #about h3 {
+  cursor: pointer;
   text-transform: uppercase;
   background-color: #009a87;
   color: #fff;
@@ -279,22 +278,23 @@ body > footer .footer-bar {
 #content.articles .order {
   padding: 1rem 0;
 }
+#content.articles a {
+  text-decoration: none;
+  color: black;
+}
 #content.articles .all-products {
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 #content.articles .all-products h1 {
-  padding: 2rem 0;
+  font-size: 2.5rem;
   text-align: center;
   text-transform: uppercase;
   color: #009a87;
 }
-#content.articles .all-products a {
-  text-decoration: none;
-  color: black;
-}
-#content.articles .all-products a .products {
+#content.articles .all-products .products {
   position: relative;
   border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -305,35 +305,37 @@ body > footer .footer-bar {
   padding-bottom: 1.5rem;
   margin-top: 2rem;
 }
-#content.articles .all-products a .products figure {
+#content.articles .all-products .products figure {
   display: flex;
   justify-content: center;
   padding: 1rem 0;
 }
-#content.articles .all-products a .products figure img {
+#content.articles .all-products .products figure img {
   width: 80%;
   height: auto;
 }
-#content.articles .all-products a .products p {
+#content.articles .all-products .products p {
   text-align: center;
   padding: 0.5rem 4rem;
 }
-#content.articles .all-products a .products .price {
+#content.articles .all-products .products .price {
   color: #fff;
   background: rgb(0, 154, 135);
   background: linear-gradient(135deg, rgb(0, 154, 135), rgb(1, 54, 95));
 }
-#content.articles .out-of-stock {
+
+.out-of-stock {
   z-index: 1;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: red;
+  background-color: #c91619;
   color: #fff;
 }
 
 #content.article .product {
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -343,7 +345,9 @@ body > footer .footer-bar {
   margin: 0;
 }
 #content.article .product h1 {
+  font-size: 2.5rem;
   text-align: center;
+  color: #009a87;
 }
 #content.article .product figure {
   display: flex;
@@ -361,6 +365,7 @@ body > footer .footer-bar {
   padding: 1rem 0;
 }
 #content.article .product form .add-to-cart {
+  cursor: pointer;
   margin-top: 1rem;
   border: none;
   padding: 1rem 2rem;
@@ -371,7 +376,7 @@ body > footer .footer-bar {
 #content.article .product table {
   border: 1px solid #9c9c9c;
   justify-self: center;
-  width: 50vw;
+  width: 80vw;
 }
 #content.article .product table thead tr {
   display: flex;
@@ -383,7 +388,8 @@ body > footer .footer-bar {
   background-color: #fff;
   text-align: center;
 }
-#content.article .product table thead tr td a {
+#content.article .product table thead tr td h3 {
+  cursor: pointer;
   text-transform: uppercase;
   text-decoration: none;
   color: #009a87;
@@ -391,7 +397,7 @@ body > footer .footer-bar {
 #content.article .product table thead tr td:hover {
   background-color: #009a87;
 }
-#content.article .product table thead tr td:hover a {
+#content.article .product table thead tr td:hover h3 {
   color: #fff;
 }
 #content.article .product table tbody {
@@ -417,6 +423,55 @@ body > footer .footer-bar {
   border-radius: 50%;
 }
 
+#content.account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+#content.account .update {
+  border-radius: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+}
+#content.account .update .container {
+  padding: 1rem;
+}
+#content.account .update .container fieldset {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+#content.account .update .container fieldset label {
+  font-size: 1.8rem;
+}
+#content.account .update .container fieldset button {
+  width: 50%;
+  align-self: center;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  background-color: #fff;
+  color: #009a87;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 1rem;
+}
+#content.account .update .container fieldset button:hover {
+  background-color: #009a87;
+  color: white;
+}
+#content.account .update .container input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #9c9c9c;
+  border-radius: 1rem;
+}
+#content.account .error {
+  color: #c91619;
+}
 #content.account .plus {
   display: flex;
   justify-content: center;
@@ -429,7 +484,173 @@ body > footer .footer-bar {
 }
 #content.account .my-orders {
   display: flex;
+  align-items: center;
   flex-direction: column;
+  width: 100%;
+}
+#content.account .my-orders a {
+  text-decoration: none;
+  color: black;
+}
+#content.account .my-orders a:hover {
+  color: #009a87;
+}
+#content.account .other-btns {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#content.account .other-btns button {
+  width: 50%;
+  align-self: center;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  background-color: #fff;
+  color: #009a87;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 1rem;
+}
+
+#content.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 0;
+}
+#content.login form {
+  border-radius: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+}
+#content.login form .container {
+  padding: 1rem;
+}
+#content.login form .container legend {
+  font-size: 2.5rem;
+  text-align: center;
+  color: black;
+}
+#content.login form .container fieldset {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+#content.login form .container fieldset label {
+  font-size: 1.8rem;
+}
+#content.login form .container fieldset input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #9c9c9c;
+  border-radius: 1rem;
+}
+#content.login form .container .nav-buttons {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+#content.login form .container .nav-buttons fieldset {
+  width: 100%;
+}
+#content.login form .container .nav-buttons fieldset button {
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  background-color: #fff;
+  color: #009a87;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 1rem;
+}
+#content.login form .container .nav-buttons fieldset button a {
+  text-decoration: none;
+  color: #009a87;
+}
+#content.login form .container .nav-buttons fieldset button:hover {
+  background-color: #009a87;
+  color: white;
+}
+#content.login form .container .nav-buttons fieldset button:hover a {
+  color: #fff;
+}
+#content.login .error {
+  color: #c91619;
+}
+
+#content.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 0;
+}
+#content.register form {
+  border-radius: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+}
+#content.register form .container {
+  padding: 1rem;
+}
+#content.register form .container legend {
+  font-size: 2.5rem;
+  text-align: center;
+  color: black;
+}
+#content.register form .container fieldset {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+#content.register form .container fieldset label {
+  font-size: 1.8rem;
+}
+#content.register form .container fieldset input {
+  padding: 0.5rem 1rem;
+  border: 1px solid #9c9c9c;
+  border-radius: 1rem;
+}
+#content.register form .container .nav-buttons {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+#content.register form .container .nav-buttons fieldset {
+  width: 100%;
+}
+#content.register form .container .nav-buttons fieldset button {
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  background-color: #fff;
+  color: #009a87;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 1rem;
+}
+#content.register form .container .nav-buttons fieldset button a {
+  text-decoration: none;
+  color: #009a87;
+}
+#content.register form .container .nav-buttons fieldset button:hover {
+  background-color: #009a87;
+  color: white;
+}
+#content.register form .container .nav-buttons fieldset button:hover a {
+  color: #fff;
+}
+#content.register .error {
+  color: #c91619;
 }
 
 /* LIBS */

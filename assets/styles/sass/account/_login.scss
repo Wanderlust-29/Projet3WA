@@ -1,0 +1,70 @@
+#content.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 0;
+  form {
+    border-radius: 1rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    .container {
+      padding: 1rem;
+      legend {
+        font-size: 2.5rem;
+        text-align: center;
+        color: $black;
+      }
+      fieldset {
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        label {
+          font-size: 1.8rem;
+        }
+        input {
+          padding: 0.5rem 1rem;
+          border: 1px solid $grey;
+          border-radius: 1rem;
+        }
+      }
+      .nav-buttons {
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        fieldset {
+          width: 100%;
+          button {
+            padding: 0.5rem 1rem;
+            margin: 1rem 0;
+            background-color: $white;
+            color: $green;
+            border: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+              rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            border-radius: 1rem;
+            a {
+              text-decoration: none;
+              color: $green;
+            }
+          }
+          button:hover {
+            background-color: $green;
+            color: white;
+            a {
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+  }
+  .error {
+    color: $red;
+  }
+}

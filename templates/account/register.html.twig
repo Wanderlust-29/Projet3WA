@@ -7,74 +7,70 @@
 
 {% block main %}
     <main id="content" class="register">
-        <h1>S'inscrire</h1>
+        {# Formulaire d'inscription #}
         <form action="index.php?route=check-register" method="post">
             <input type="hidden" name="csrf-token" id="csrf-token" value="{{csrf_token}}" />
-            <fieldset>
-                <label for="firstName">
-                    Prénom
-                </label>
-                <input type="text" name="firstName" id="firstName"/>
-            </fieldset>
-            <fieldset>
-                <label for="lastName">
-                    Nom
-                </label>
-                <input type="text" name="lastName" id="lastName"/>
-            </fieldset>
-            <fieldset>
-                <label for="email">
-                    E-mail
-                </label>
-                <input type="email" name="email" id="email"/>
-            </fieldset>
-            <fieldset >
-                <label for="password">
-                    mot de passe
-                </label>
-                <input type="password" name="password" id="password"/>
-            </fieldset>
-            <fieldset >
-                <label for="confirm-password" >
-                    Confirmer le mot de passe
-                </label>
-                <input type="password" name="confirm-password" id="confirm-password"/>
-            </fieldset>
-            <fieldset>
-                <label for="address">
-                    Adresse
-                </label>
-                <input type="text" name="address" id="address"/>
-            </fieldset>
-            <fieldset>
-                <label for="city">
-                    Ville
-                </label>
-                <input type="text" name="city" id="city"/>
-            </fieldset>
-            <fieldset>
-                <label for="postalCode">
-                    Code postal
-                </label>
-                <input type="number" name="postalCode" id="postalCode"/>
-            </fieldset>
-            <fieldset>
-                <label for="country">
-                    Pays
-                </label>
-                <input type="text" name="country" id="country"/>
-            </fieldset>
-            <fieldset>
-                <button type="submit">S'inscrire</button>
-            </fieldset>
-            <fieldset>
-                <button type="button"><a href="index.php?route=login">Se connecter</a></button>
+            <fieldset class="container">
+                <legend>S'inscrire</legend>
+                
+                <fieldset>
+                    <label for="firstName">Prénom</label>
+                    <input type="text" name="firstName" id="firstName" placeholder="Entrez votre prénom"/>
+                </fieldset>
+                
+                <fieldset>
+                    <label for="lastName">Nom</label>
+                    <input type="text" name="lastName" id="lastName" placeholder="Entrez votre nom"/>
+                </fieldset>
+                
+                <fieldset>
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail"/>
+                </fieldset>
+                
+                <fieldset>
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe"/>
+                </fieldset>
+                
+                <fieldset>
+                    <label for="confirm-password">Confirmer le mot de passe</label>
+                    <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmez votre mot de passe"/>
+                        {% if error is defined %}
+                            <p class="error">* {{ error }}</p>
+                        {% endif %}
+                </fieldset>
+                
+                <fieldset>
+                    <label for="address">Adresse</label>
+                    <input type="text" name="address" id="address" placeholder="Entrez votre adresse"/>
+                </fieldset>
+                
+                <fieldset>
+                    <label for="city">Ville</label>
+                    <input type="text" name="city" id="city" placeholder="Entrez votre ville"/>
+                </fieldset>
+                
+                <fieldset>
+                    <label for="postalCode">Code postal</label>
+                    <input type="number" name="postalCode" id="postalCode" placeholder="Entrez votre code postal"/>
+                </fieldset>
+                
+                <fieldset>
+                    <label for="country">Pays</label>
+                    <input type="text" name="country" id="country" placeholder="Entrez votre pays"/>
+                </fieldset>
+                
+                <fieldset class="nav-buttons">
+                    <fieldset>
+                        <button type="submit">S'inscrire</button>
+                    </fieldset>
+                    <fieldset>
+                        <button type="button"><a href="index.php?route=login">Se connecter</a></button>
+                    </fieldset>
+                </fieldset>
             </fieldset>
         </form>
-    
-        {% if error is defined %}
-                {{ error }}
-        {% endif %}
     </main>
 {% endblock %}
 
