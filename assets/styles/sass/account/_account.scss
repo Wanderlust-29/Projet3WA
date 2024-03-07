@@ -19,24 +19,6 @@
         label {
           font-size: 1.8rem;
         }
-        button {
-          width: 50%;
-          align-self: center;
-          padding: 0.5rem 1rem;
-          margin: 1rem 0;
-          background-color: $white;
-          color: $green;
-          border: none;
-          cursor: pointer;
-          font-size: 1.8rem;
-          box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-          border-radius: 1rem;
-        }
-        button:hover {
-          background-color: $green;
-          color: white;
-        }
       }
       input {
         padding: 0.5rem 1rem;
@@ -48,47 +30,58 @@
   .error {
     color: $red;
   }
-  .plus {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 3rem;
-    height: 3rem;
-    background-color: black;
-    color: #fff;
-    border-radius: 50%;
-  }
+
   .my-orders {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 100%;
-    a {
-      text-decoration: none;
-      color: $black;
-    }
-    a:hover {
-      color: $green;
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .plus {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 3rem;
+        height: 3rem;
+        background-color: black;
+        color: #fff;
+        border-radius: 50%;
+      }
+      a {
+        text-decoration: none;
+        color: $black;
+      }
+      a:hover {
+        color: $green;
+      }
     }
   }
+
   .other-btns {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    button {
-      width: 50%;
-      align-self: center;
-      padding: 0.5rem 1rem;
-      margin: 1rem 0;
-      background-color: $white;
-      color: $green;
-      border: none;
-      cursor: pointer;
-      font-size: 1.8rem;
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-      border-radius: 1rem;
-    }
+  }
+  button {
+    width: 50%;
+    align-self: center;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    background-color: $white;
+    color: $green;
+    border: none;
+    cursor: pointer;
+    font-size: 1.8rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 1rem;
+  }
+  button:hover {
+    background-color: $green;
+    color: white;
   }
 }

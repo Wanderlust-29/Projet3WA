@@ -9,7 +9,6 @@ body > header {
   padding: 0.5rem 1rem;
   justify-content: space-between;
   align-items: center;
-  /*****SEARCH-BAR******/
   /*****MENU******/
   /********MENU-BURGER*********/
 }
@@ -29,20 +28,6 @@ body > header a .logo img {
 body > header a .logo figcaption {
   font-size: 2rem;
   font-family: "Dancing Script", cursive;
-  color: white;
-}
-body > header .search {
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-}
-body > header .search .input-searchbar {
-  border: none;
-  background-color: white;
-}
-body > header .search .button-searchbar {
-  border: none;
-  background-color: white;
   color: white;
 }
 body > header .menu {
@@ -85,6 +70,21 @@ body > header .burger-menu a,
 body > header .burger-menu form {
   padding: 0 0 0 2rem;
 }
+body > header .burger-menu li .search {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+body > header .burger-menu li .search .input-searchbar {
+  border: none;
+  background-color: white;
+  width: 50%;
+}
+body > header .burger-menu li .search .button-searchbar {
+  border: none;
+  background-color: white;
+  color: white;
+}
 body > header .burger-menu li:not(:first-of-type) a {
   text-decoration: none;
   color: white;
@@ -102,7 +102,7 @@ body > header .burger-menu.open {
   transition: ease-in 0.6;
 }
 body > header .burger-menu.close {
-  width: 50vw;
+  width: 0vw;
   height: 100vh;
   left: -999rem;
   transition: ease-out 0.5s;
@@ -238,7 +238,7 @@ body > footer .footer-bar {
   background-color: #c91619;
   color: #fff;
 }
-#content.home #about {
+#content.home .about {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -246,29 +246,28 @@ body > footer .footer-bar {
   height: auto;
   padding-bottom: 1.5rem;
 }
-#content.home #about p {
+#content.home .about p {
   padding: 1rem 2rem;
 }
-#content.home #about h3 {
+#content.home .about h3 {
   cursor: pointer;
   text-transform: uppercase;
   background-color: #009a87;
   color: #fff;
   width: 100%;
+  height: auto;
   text-align: center;
 }
-#content.home #about h3:first-of-type {
+#content.home .about h3:first-of-type {
   border-bottom: 1px solid #fff;
 }
-#content.home #about li {
-  padding: 0 2rem;
-  list-style: none;
-  text-align: start;
+#content.home .about li {
+  text-align: center;
 }
-#content.home #about li a {
+#content.home .about li a {
   color: black;
 }
-#content.home #about .container-map #map {
+#content.home .about .container-map #map {
   min-width: 300px;
   min-height: 200px;
   max-width: 100%;
@@ -347,7 +346,6 @@ body > footer .footer-bar {
 #content.article .product h1 {
   font-size: 2.5rem;
   text-align: center;
-  color: #009a87;
 }
 #content.article .product figure {
   display: flex;
@@ -447,23 +445,6 @@ body > footer .footer-bar {
 #content.account .update .container fieldset label {
   font-size: 1.8rem;
 }
-#content.account .update .container fieldset button {
-  width: 50%;
-  align-self: center;
-  padding: 0.5rem 1rem;
-  margin: 1rem 0;
-  background-color: #fff;
-  color: #009a87;
-  border: none;
-  cursor: pointer;
-  font-size: 1.8rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  border-radius: 1rem;
-}
-#content.account .update .container fieldset button:hover {
-  background-color: #009a87;
-  color: white;
-}
 #content.account .update .container input {
   padding: 0.5rem 1rem;
   border: 1px solid #9c9c9c;
@@ -472,7 +453,18 @@ body > footer .footer-bar {
 #content.account .error {
   color: #c91619;
 }
-#content.account .plus {
+#content.account .my-orders {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+#content.account .my-orders li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#content.account .my-orders li .plus {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -482,17 +474,11 @@ body > footer .footer-bar {
   color: #fff;
   border-radius: 50%;
 }
-#content.account .my-orders {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-}
-#content.account .my-orders a {
+#content.account .my-orders li a {
   text-decoration: none;
   color: black;
 }
-#content.account .my-orders a:hover {
+#content.account .my-orders li a:hover {
   color: #009a87;
 }
 #content.account .other-btns {
@@ -501,7 +487,7 @@ body > footer .footer-bar {
   flex-direction: column;
   align-items: center;
 }
-#content.account .other-btns button {
+#content.account button {
   width: 50%;
   align-self: center;
   padding: 0.5rem 1rem;
@@ -513,6 +499,10 @@ body > footer .footer-bar {
   font-size: 1.8rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 1rem;
+}
+#content.account button:hover {
+  background-color: #009a87;
+  color: white;
 }
 
 #content.login {
