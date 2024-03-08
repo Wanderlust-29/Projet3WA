@@ -410,7 +410,33 @@ body > footer .footer-bar {
 }
 
 /* ACCOUNT */
-#content.admin .plus {
+#content.admin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+#content.admin form {
+  border-radius: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  width: 80vw;
+  padding: 1rem 0.8rem;
+  margin-top: 1rem;
+}
+#content.admin .all-orders {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+#content.admin .all-orders li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+#content.admin .all-orders li .plus {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -419,6 +445,43 @@ body > footer .footer-bar {
   background-color: black;
   color: #fff;
   border-radius: 50%;
+}
+#content.admin .all-orders li a {
+  text-decoration: none;
+  color: black;
+}
+#content.admin .all-orders li a:hover {
+  color: #009a87;
+}
+#content.admin .stocks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#content.admin .stocks .name-article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+#content.admin .stocks .name-article label {
+  text-align: center;
+}
+#content.admin .stocks .btn-add {
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  background-color: #fff;
+  color: #009a87;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 1rem;
+}
+#content.admin .stocks .btn-add:hover {
+  background-color: #009a87;
+  color: #fff;
 }
 
 #content.account {
@@ -441,6 +504,21 @@ body > footer .footer-bar {
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
+}
+#content.account .update .container fieldset input {
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  background-color: #fff;
+  color: #009a87;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 1rem;
+}
+#content.account .update .container fieldset input:hover {
+  background-color: #009a87;
+  color: white;
 }
 #content.account .update .container fieldset label {
   font-size: 1.8rem;
@@ -481,15 +559,7 @@ body > footer .footer-bar {
 #content.account .my-orders li a:hover {
   color: #009a87;
 }
-#content.account .other-btns {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#content.account button {
-  width: 50%;
-  align-self: center;
+#content.account .other-btns input {
   padding: 0.5rem 1rem;
   margin: 1rem 0;
   background-color: #fff;
@@ -500,7 +570,7 @@ body > footer .footer-bar {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 1rem;
 }
-#content.account button:hover {
+#content.account .other-btns input:hover {
   background-color: #009a87;
   color: white;
 }
@@ -548,7 +618,8 @@ body > footer .footer-bar {
 #content.login form .container .nav-buttons fieldset {
   width: 100%;
 }
-#content.login form .container .nav-buttons fieldset button {
+#content.login form .container .nav-buttons fieldset button,
+#content.login form .container .nav-buttons fieldset input {
   padding: 0.5rem 1rem;
   margin: 1rem 0;
   background-color: #fff;
@@ -559,14 +630,17 @@ body > footer .footer-bar {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 1rem;
 }
-#content.login form .container .nav-buttons fieldset button a {
+#content.login form .container .nav-buttons fieldset button a,
+#content.login form .container .nav-buttons fieldset input a {
   text-decoration: none;
   color: #009a87;
 }
+#content.login form .container .nav-buttons fieldset input:hover,
 #content.login form .container .nav-buttons fieldset button:hover {
   background-color: #009a87;
-  color: white;
+  color: #fff;
 }
+#content.login form .container .nav-buttons fieldset input:hover a,
 #content.login form .container .nav-buttons fieldset button:hover a {
   color: #fff;
 }
@@ -617,6 +691,7 @@ body > footer .footer-bar {
 #content.register form .container .nav-buttons fieldset {
   width: 100%;
 }
+#content.register form .container .nav-buttons fieldset input,
 #content.register form .container .nav-buttons fieldset button {
   padding: 0.5rem 1rem;
   margin: 1rem 0;
@@ -628,14 +703,17 @@ body > footer .footer-bar {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 1rem;
 }
+#content.register form .container .nav-buttons fieldset input a,
 #content.register form .container .nav-buttons fieldset button a {
   text-decoration: none;
   color: #009a87;
 }
+#content.register form .container .nav-buttons fieldset input:hover,
 #content.register form .container .nav-buttons fieldset button:hover {
   background-color: #009a87;
-  color: white;
+  color: #fff;
 }
+#content.register form .container .nav-buttons fieldset input:hover a,
 #content.register form .container .nav-buttons fieldset button:hover a {
   color: #fff;
 }

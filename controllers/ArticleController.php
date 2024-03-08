@@ -25,7 +25,7 @@ class ArticleController extends AbstractController
     public function dogFood() : void
     {
         $am = new ArticleManager();
-        $this->render("pages/dogfood.html.twig", [
+        $this->render("pages/dog-food.html.twig", [
         ]);
     }
     public function toys() : void

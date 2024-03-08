@@ -126,4 +126,17 @@ class UserManager extends AbstractManager
         ];
         $query->execute($parameters);
     }
+
+    /**
+     * Supprime un utilisateur par son id
+     *
+     * @param int $id L'id de l'utilisateur à supprimer.
+     * @return bool Retourne true si la suppression a réussi, sinon false.
+     */
+    public function delete(int $id): bool
+    {
+        $query = $this->db->prepare('DELETE FROM users WHERE id=:id');
+        $parameters = ["id" => $id];
+        return $query->execute($parameters);
+    }
 }

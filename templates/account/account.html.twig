@@ -9,7 +9,7 @@
     <main id="content" class="account">
         {% if session is defined and session is not null %}
             <h1>Bienvenue {{ session.firstName }} {{ session.lastName }} !</h1>
-
+        <section>
             {# Formulaire pour modifier les données de l'utilisateur #}
             <h2>Modifier mes coordonnées</h2>
             <form action="index.php?route=update" method="post" class="update">
@@ -72,11 +72,12 @@
                         <input type="text" name="country" id="country" value="{{ session.country }}"/>
                     </fieldset>
                     <fieldset>
-                        <button type="submit">Modifier</button>
+                        <input type="submit" name="update" value="Modifier" />
                     </fieldset>
                 </fieldset>
             </form>
-        
+        </section>
+        <section>
             {# toutes les commandes de l'utilisateur #}
             <h2>Toutes mes commandes</h2>
             <ul class="my-orders">
@@ -104,15 +105,19 @@
                     <li>Aucune commande trouvée.</li>
                 {% endif %}
             </ul>
-
-
+        </section>
 
             <form action="index.php?route=delete" method="post" class="other-btns">
-                <button type="submit">Supprimer mon compte</button>
+                <fieldset>
+                    <input type="hidden" name="userId" value="{{ session.id }}" />
+                    <input type="submit" name="delete" value="Supprimer" />
+                </fieldset>
             </form>
             
             <form action="index.php?route=logout" method="post" class="other-btns">
-                <button type="submit">Se déconnecter</button>
+                <fieldset>
+                    <input type="submit" name="logout" value="Se déconnecter" />
+                </fieldset>
             </form>
         {% else %}
             <h1>Pour continuer, vous devez être connecté</h1>

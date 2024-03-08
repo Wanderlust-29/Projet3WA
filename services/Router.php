@@ -62,6 +62,10 @@ class Router
         {
             $acc->createArticle();
         }
+        else if(isset($get["route"])  && $get["route"] === "delete")
+        {
+            $acc->deleteUser();
+        }
         else if(isset($get["route"]) && $get["route"] === "articles")
         {
             $atc->articles();
@@ -70,7 +74,7 @@ class Router
         {
             $atc->article($get["id"]);
         }
-        else if(isset($get["route"]) && $get["route"] === "dogfood")
+        else if(isset($get["route"]) && $get["route"] === "dog-food")
         {
             $atc->dogFood();
         }

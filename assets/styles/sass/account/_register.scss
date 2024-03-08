@@ -37,6 +37,7 @@
         flex-direction: column;
         fieldset {
           width: 100%;
+          input,
           button {
             padding: 0.5rem 1rem;
             margin: 1rem 0;
@@ -53,9 +54,10 @@
               color: $green;
             }
           }
+          input:hover,
           button:hover {
             background-color: $green;
-            color: white;
+            color: $white;
             a {
               color: $white;
             }

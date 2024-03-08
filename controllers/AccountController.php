@@ -69,9 +69,11 @@ class AccountController extends AbstractController
                         $this->redirect("index.php");
                     } elseif ($_POST["password"] !== null) {
                         $_SESSION["error-message"] = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
+                        $this->redirect("index.php?route=admin");
                     }
                 } else {
                     $_SESSION["error-message"] = "Les mots de passe ne correspondent pas";
+                    $this->redirect("index.php?route=admin");
                 }
             }
         } else {
@@ -115,10 +117,38 @@ class AccountController extends AbstractController
     }
 
 
-    public function deleteUser(): void 
+    public function deleteUser()
     {
-
+        if (isset($_SESSION["user"]) && isset($_POST['delete']) && isset($_POST['userId'])) {
+            $user = $_SESSION["user"];
+            $userId = $_POST["userId"];
+            if ($userId !== null) {
+                $um = new UserManager();
+                $um->delete($userId); // Supprimer l'utilisateur
+                
+                // Vérifier si l'utilisateur supprimé n'est pas l'administrateur actuellement connecté
+                if ($user->getRole() !== "ADMIN") {
+                    session_destroy(); // Détruire la session si l'utilisateur supprimé n'est pas un administrateur
+                    $this->redirect("index.php");
+                } else {
+                    $this->redirect("index.php?route=admin");
+                }
+                unset($_SESSION["error-message"]);
+                
+            } else {
+                $_SESSION["error-message"] = "Une erreur s'est produite lors de la suppression de l'utilisateur.";
+                if($user->getRole() === "ADMIN"){
+                    $this->redirect("index.php?route=admin");
+                }else{
+                    $this->redirect("index.php?route=account");
+                }
+            }
+        } else {
+            $_SESSION["error-message"] = "Une erreur s'est produite.";
+            $this->redirect("index.php");
+        }
     }
+    
 
     public function updateStock(): void
     {
@@ -144,14 +174,17 @@ class AccountController extends AbstractController
                     $this->redirect("index.php?route=admin");
                 } else {
                     $_SESSION["error-message"] = "L'article n'existe pas.";
+                    $this->redirect("index.php?route=admin");
                 }
             } else {
                 $_SESSION["error-message"] = "Veuillez définir le nouveau stock.";
+                $this->redirect("index.php?route=admin");
             }
         } else {
             $_SESSION["error-message"] = "L'administrateur n'est pas connecté.";
+            $this->redirect("index.php?route=login-admin");
         }
-        $this->redirect("index.php?route=login-admin");
+        $this->redirect("index.php?route=admin");
     }
     
 
@@ -199,18 +232,19 @@ class AccountController extends AbstractController
                     $am->insert($article);
     
                     unset($_SESSION["error-message"]);
-                    $this->redirect("index.php?route=accountAdmin");
+                    $this->redirect("index.php?route=admin");
                 } else {
                     $_SESSION["error-message"] = "Une erreur s'est produite lors de la création de l'article";
-                    $this->redirect("index.php?route=accountAdmin");
+                    $this->redirect("index.php?route=admin");
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();
                 $_SESSION["error-message"] = "Une erreur s'est produite lors du téléchargement de l'image.";
+                $this->redirect("index.php?route=admin");
             }
         } else {
             $_SESSION["error-message"] = "Champs manquants";
-            $this->redirect("index.php?route=accountAdmin");
+            $this->redirect("index.php?route=admin");
         }
     }
     

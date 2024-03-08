@@ -46,16 +46,16 @@
             <h2>Gestion des stocks :</h2>
 
             {% for article in articles %}
-                <form action="index.php?route=update-stock" method="post">
-                    <fieldset>
+                <form action="index.php?route=update-stock" method="post" class="stocks">
+                    <fieldset class="name-article">
                         <label for="add{{ article.id }}">
                         {{ article.name }}
                         </label></br>
-                        <input type="number" name="stock" id="add{{ article.id }}" value="{{ article.stock }}"/>
+                        <input type="number" class="number-stock" name="stock" id="add{{ article.id }}" value="{{ article.stock }}"/>
                         <input type="hidden" name="article_id" value="{{ article.id }}" /> 
                     </fieldset>
                     <fieldset>
-                        <button type="submit">Valider</button>
+                        <input type="submit" name="add" class="btn-add" value="Valider"/>
                     </fieldset>
                 </form>
             {% endfor %}
@@ -134,17 +134,15 @@
             <h2>Gestion des utilisateur :</h2>
 
             {% for user in users %}
-                <form action="index.php?route=delete" method="post">
-                    <fieldset>
-                        <label for="user{{user.id}}">
-                        {{user.firstName}} {{user.lastName}} {{user.address}} {{user.city}} {{user.postalCode}} {{user.country}}
-                        </label>
-                        <input type="checkbox" name="user{{user.id}}" id="user{{user.id}}"/>
-                    </fieldset>
-                    <fieldset>
-                        <button type="submit">Supprimer</button>
-                    </fieldset>
-                </form>
+            <form action="index.php?route=delete" method="post">
+                <fieldset>
+                    <label for="user{{ user.id }}">
+                        {{ user.firstName }} {{ user.lastName }} {{ user.address }} {{ user.city }} {{ user.postalCode }} {{ user.country }}
+                    </label>
+                    <input type="hidden" name="userId" value="{{ user.id }}" />
+                    <input type="submit" name="delete" value="Supprimer" />
+                </fieldset>
+            </form>
             {% endfor %}
 
             <form action="index.php?route=logout" method="post">

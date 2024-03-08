@@ -148,27 +148,27 @@ class AuthController extends AbstractController
                         if ($user->getRole() === "ADMIN") {
                             $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
                             unset($_SESSION["error-message"]);
-                            $this->redirect("index.php?route=accountAdmin");
+                            $this->redirect("index.php?route=admin");
                         } else { 
                             // Gestion des erreurs
                             $_SESSION["error-message"] = "Vous n’êtes pas autorisé à accéder à cette page";
-                            $this->redirect("index.php?route=admin");
+                            $this->redirect("index.php?route=login-admin");
                         }
                     } else {
                         $_SESSION["error-message"] = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
-                        $this->redirect("index.php?route=admin");
+                        $this->redirect("index.php?route=login-admin");
                     }
                 } else {
                     $_SESSION["error-message"] = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
-                    $this->redirect("index.php?route=admin");
+                    $this->redirect("index.php?route=login-admin");
                 }
             } else {
                 $_SESSION["error-message"] = "Token CSRF invalide";
-                $this->redirect("index.php?route=admin");
+                $this->redirect("index.php?route=login-admin");
             }
         } else {
             $_SESSION["error-message"] = "Champs manquants";
-            $this->redirect("index.php?route=admin");
+            $this->redirect("index.php?route=login-admin");
         }
     }
     

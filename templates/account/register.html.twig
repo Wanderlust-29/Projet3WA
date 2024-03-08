@@ -37,7 +37,7 @@
                     <label for="confirm-password">Confirmer le mot de passe</label>
                     <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmez votre mot de passe"/>
                         {% if error is defined %}
-                            <p class="error">* {{ error }}</p>
+                            <p class="error">{{ error }}</p>
                         {% endif %}
                 </fieldset>
                 
@@ -63,7 +63,7 @@
                 
                 <fieldset class="nav-buttons">
                     <fieldset>
-                        <button type="submit">S'inscrire</button>
+                        <input type="submit" name="register" value="S'inscrire"/>
                     </fieldset>
                     <fieldset>
                         <button type="button"><a href="index.php?route=login">Se connecter</a></button>
