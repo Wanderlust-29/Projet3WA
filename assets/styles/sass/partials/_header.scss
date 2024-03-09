@@ -1,45 +1,59 @@
 body > header {
   position: relative;
-  background-color: #009a87;
+  background-color: $green;
   display: flex;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
   justify-content: space-between;
   align-items: center;
   a {
-    text-decoration: none;
     .logo {
+      width: 10rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       img {
-        max-width: 100%;
-        width: 3em;
+        width: 50%;
         height: auto;
       }
       figcaption {
-        font-size: 2rem;
         font-family: "Dancing Script", cursive;
-        color: #ffff;
+        color: $white;
+        font-size: 2rem;
       }
     }
   }
 
-  /*****MENU******/
+  .search {
+    display: flex;
+    padding: 0 2rem;
+    .input-searchbar {
+      border-radius:8rem 0 0 8rem;
+      padding-left: 1rem;
+    }
+    .button-searchbar {
+      border-radius:0 8rem 8rem 0;
+      padding: 0 1rem;
+      
+    }
+  }
 
-  .menu {
+/*******************
+        MENU
+*******************/
+
+  .menu-icons > ul {
     display: flex;
     a {
       position: relative;
       .cart-count {
-        font-size: 1rem;
         position: absolute;
         border-radius: 50%;
-        background-color: black;
+        background-color: $black;
         opacity: 0.9;
-        color: #ffff;
+        color: $white;
         z-index: 2;
-        top: -1.6rem;
-        left: 1.3rem;
+        top: -1.7rem;
+        left: 2rem;
         width: 2rem;
         height: 2rem;
         display: flex;
@@ -47,68 +61,90 @@ body > header {
         align-items: center;
       }
     }
-
     li {
       list-style: none;
       i {
-        color: #ffff;
+        color: $white;
         padding-right: 1.2rem;
       }
     }
   }
 
-  /********MENU-BURGER*********/
+/*******************
+    MENU-BURGER
+*******************/
 
-  .burger-menu {
+  .menu {
     z-index: 999;
     position: absolute;
     display: inline-block;
-    background-color: #009a87;
-    top: 0;
-    a,
-    form {
-      padding: 0 0 0 2rem;
-    }
+    background-color: $white;
+    top: 12vh;
     li {
-      .search {
-        background-color: #ffff;
-        display: flex;
-        justify-content: space-between;
-        .input-searchbar {
-          border: none;
-          background-color: #ffff;
-          width: 50%;
-        }
-        .button-searchbar {
-          border: none;
-          background-color: #ffff;
-          color: #ffff;
-        }
+      padding: 1rem 2rem;
+      border-bottom: 1px solid $black;
+      a {
+        color: $green;
       }
     }
-    li:not(:first-of-type) {
+    li:hover {
+      background-color: $green;
       a {
-        text-decoration: none;
-        color: #ffff;
-      }
-    }
-    li:hover:not(:first-of-type) {
-      background-color: #ffff;
-      a {
-        color: #009a87;
+        color: $white;
       }
     }
     &.open {
-      width: 50vw;
+      width: 100vw;
       height: 100vh;
       left: 0;
-      transition: ease-in 0.6;
+      transition: ease-in 0.4s;
     }
     &.close {
-      width: 0vw;
-      height: 100vh;
       left: -999rem;
-      transition: ease-out 0.5s;
+      transition: ease-out 0.3s;
+    }
+    .hiden{
+      display: none;
     }
   }
 }
+@media screen and (max-width: 450px) {
+  body > header{
+    .search{
+      display: none;
+    }
+  }
+}
+@media screen and (min-width: 800px) {
+  body > header{
+    position: static;
+    .menu-icons{
+      display: none;
+    }
+    .menu {
+      background-color: transparent;
+      position: static;
+      ul{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        li{
+          padding: 0 0.5rem;
+          border: none;
+          a{
+            color:$white;
+          }
+        }
+      }
+      .hiden{
+        display: block;
+      }
+    }
+    &.close{
+      height: auto;
+    }
+
+  }
+} 
+
+

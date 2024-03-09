@@ -1,7 +1,7 @@
 body > footer {
   padding: 1rem 2rem;
-  background-color: #009a87;
-  color: #ffff;
+  background-color: $green;
+  color: $white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -10,11 +10,13 @@ body > footer {
   }
   section {
     padding-bottom: 2rem;
+    a{
+      color: $white;
+    } 
     li {
       list-style: none;
       a {
-        text-decoration: none;
-        color: #ffff;
+        color: $white;
       }
     }
   }
@@ -26,15 +28,20 @@ body > footer {
       justify-content: center;
       li {
         padding: 0 0.5rem;
-        i {
-          font-size: 3rem;
-        }
       }
     }
   }
+}
 
-  .footer-bar {
-    width: 100%;
-    border-bottom: 1px solid #ffff;
+@media screen and (min-width: 800px) {
+
+  body > footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .social-networks {
+      justify-self: normal;
+      align-self: normal;
+    }
   }
 }

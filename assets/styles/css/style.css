@@ -6,112 +6,144 @@ body > header {
   position: relative;
   background-color: #009a87;
   display: flex;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
   justify-content: space-between;
   align-items: center;
-  /*****MENU******/
-  /********MENU-BURGER*********/
-}
-body > header a {
-  text-decoration: none;
+  /*******************
+          MENU
+  *******************/
+  /*******************
+      MENU-BURGER
+  *******************/
 }
 body > header a .logo {
+  width: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 body > header a .logo img {
-  max-width: 100%;
-  width: 3em;
+  width: 50%;
   height: auto;
 }
 body > header a .logo figcaption {
-  font-size: 2rem;
   font-family: "Dancing Script", cursive;
-  color: white;
+  color: #fff;
+  font-size: 2rem;
 }
-body > header .menu {
+body > header .search {
+  display: flex;
+  padding: 0 2rem;
+}
+body > header .search .input-searchbar {
+  border-radius: 8rem 0 0 8rem;
+  padding-left: 1rem;
+}
+body > header .search .button-searchbar {
+  border-radius: 0 8rem 8rem 0;
+  padding: 0 1rem;
+}
+body > header .menu-icons > ul {
   display: flex;
 }
-body > header .menu a {
+body > header .menu-icons > ul a {
   position: relative;
 }
-body > header .menu a .cart-count {
-  font-size: 1rem;
+body > header .menu-icons > ul a .cart-count {
   position: absolute;
   border-radius: 50%;
   background-color: black;
   opacity: 0.9;
-  color: white;
+  color: #fff;
   z-index: 2;
-  top: -1.6rem;
-  left: 1.3rem;
+  top: -1.7rem;
+  left: 2rem;
   width: 2rem;
   height: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-body > header .menu li {
+body > header .menu-icons > ul li {
   list-style: none;
 }
-body > header .menu li i {
-  color: white;
+body > header .menu-icons > ul li i {
+  color: #fff;
   padding-right: 1.2rem;
 }
-body > header .burger-menu {
+body > header .menu {
   z-index: 999;
   position: absolute;
   display: inline-block;
-  background-color: #009a87;
-  top: 0;
+  background-color: #fff;
+  top: 12vh;
 }
-body > header .burger-menu a,
-body > header .burger-menu form {
-  padding: 0 0 0 2rem;
+body > header .menu li {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid black;
 }
-body > header .burger-menu li .search {
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-}
-body > header .burger-menu li .search .input-searchbar {
-  border: none;
-  background-color: white;
-  width: 50%;
-}
-body > header .burger-menu li .search .button-searchbar {
-  border: none;
-  background-color: white;
-  color: white;
-}
-body > header .burger-menu li:not(:first-of-type) a {
-  text-decoration: none;
-  color: white;
-}
-body > header .burger-menu li:hover:not(:first-of-type) {
-  background-color: white;
-}
-body > header .burger-menu li:hover:not(:first-of-type) a {
+body > header .menu li a {
   color: #009a87;
 }
-body > header .burger-menu.open {
-  width: 50vw;
+body > header .menu li:hover {
+  background-color: #009a87;
+}
+body > header .menu li:hover a {
+  color: #fff;
+}
+body > header .menu.open {
+  width: 100vw;
   height: 100vh;
   left: 0;
-  transition: ease-in 0.6;
+  transition: ease-in 0.4s;
 }
-body > header .burger-menu.close {
-  width: 0vw;
-  height: 100vh;
+body > header .menu.close {
   left: -999rem;
-  transition: ease-out 0.5s;
+  transition: ease-out 0.3s;
+}
+body > header .menu .hiden {
+  display: none;
 }
 
+@media screen and (max-width: 450px) {
+  body > header .search {
+    display: none;
+  }
+}
+@media screen and (min-width: 800px) {
+  body > header {
+    position: static;
+  }
+  body > header .menu-icons {
+    display: none;
+  }
+  body > header .menu {
+    background-color: transparent;
+    position: static;
+  }
+  body > header .menu ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  body > header .menu ul li {
+    padding: 0 0.5rem;
+    border: none;
+  }
+  body > header .menu ul li a {
+    color: #fff;
+  }
+  body > header .menu .hiden {
+    display: block;
+  }
+  body > header.close {
+    height: auto;
+  }
+}
 body > footer {
   padding: 1rem 2rem;
   background-color: #009a87;
-  color: white;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -122,12 +154,14 @@ body > footer .title {
 body > footer section {
   padding-bottom: 2rem;
 }
+body > footer section a {
+  color: #fff;
+}
 body > footer section li {
   list-style: none;
 }
 body > footer section li a {
-  text-decoration: none;
-  color: white;
+  color: #fff;
 }
 body > footer .social-networks {
   justify-self: center;
@@ -140,34 +174,34 @@ body > footer .social-networks ul {
 body > footer .social-networks ul li {
   padding: 0 0.5rem;
 }
-body > footer .social-networks ul li i {
-  font-size: 3rem;
-}
-body > footer .footer-bar {
-  width: 100%;
-  border-bottom: 1px solid white;
-}
 
+@media screen and (min-width: 800px) {
+  body > footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  body > footer .social-networks {
+    justify-self: normal;
+    align-self: normal;
+  }
+}
 /* PAGES */
 #content.home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /****BANNER*****/
-  /****TOP-PRODUCTS*****/
-  /*********ABOUT*********/
+  display: grid;
+  grid-template-rows: 20vh minmax(60vh, max-content) minmax(20vh, max-content);
+  grid-template-columns: 10% 80% 10%;
 }
 #content.home h2 {
-  font-size: 2.5rem;
   text-align: center;
   text-transform: uppercase;
   color: #009a87;
 }
 #content.home a {
-  text-decoration: none;
   color: black;
 }
 #content.home .banner {
+  grid-column: 1/4;
   padding: 2rem 0;
   width: 100%;
   background-image: url(../../media/banner.jpg);
@@ -179,8 +213,8 @@ body > footer .footer-bar {
   align-items: center;
 }
 #content.home .banner h1 {
-  font-size: 4rem;
   font-family: "Dancing Script", cursive;
+  font-size: 4rem;
 }
 #content.home .banner .btn-1 {
   background-color: transparent;
@@ -192,39 +226,33 @@ body > footer .footer-bar {
   text-transform: uppercase;
 }
 #content.home .top-sales {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  grid-column: 2;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  gap: 1rem;
 }
-#content.home .top-sales a {
-  color: black;
-}
-#content.home .top-sales a .products {
+#content.home .top-sales .products {
   position: relative;
   border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80vw;
-  padding-bottom: 1.5rem;
-  margin-top: 2rem;
 }
-#content.home .top-sales a .products figure {
+#content.home .top-sales .products figure {
   display: flex;
   justify-content: center;
-  padding: 1rem 0;
 }
-#content.home .top-sales a .products figure img {
-  width: 80%;
-  height: auto;
+#content.home .top-sales .products figure img {
+  width: 100%;
+  height: 100%;
 }
-#content.home .top-sales a .products p {
+#content.home .top-sales .products p {
   text-align: center;
-  font-size: 1.8rem;
-  padding: 0.5rem 4rem;
 }
-#content.home .top-sales a .products .price {
+#content.home .top-sales .products .price {
+  padding: 0.5rem 1rem;
   color: #fff;
   background: rgb(0, 154, 135);
   background: linear-gradient(135deg, rgb(0, 154, 135), rgb(1, 54, 95));
@@ -239,10 +267,10 @@ body > footer .footer-bar {
   color: #fff;
 }
 #content.home .about {
+  grid-column: 2;
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  max-width: 80vh;
   height: auto;
   padding-bottom: 1.5rem;
 }
@@ -274,11 +302,57 @@ body > footer .footer-bar {
   max-height: 100%;
 }
 
+@media screen and (min-width: 800px) {
+  #content.home .top-sales {
+    padding-top: 2rem;
+    grid-column: 1/4;
+    grid-row: 2;
+    display: grid;
+    justify-content: center;
+    grid-template-rows: 10% 90%;
+    grid-template-columns: repeat(4, 20%);
+    gap: 2rem;
+  }
+  #content.home .top-sales h2 {
+    grid-row: 1;
+    grid-column: 1/5;
+  }
+  #content.home .top-sales a {
+    grid-auto-rows: auto;
+  }
+  #content.home .top-sales a .products {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  #content.home .about li {
+    text-align: start;
+    padding-left: 1rem;
+  }
+  #content.home .about .about-coordinates {
+    display: grid;
+  }
+  #content.home .about .about-coordinates h3 {
+    grid-column: 1/3;
+  }
+  #content.home .about .about-coordinates .coordinates {
+    padding-top: 1rem;
+  }
+  #content.home .about .about-coordinates .container-map {
+    padding-top: 1rem;
+  }
+  #content.home .about .about-coordinates .container-map #map {
+    min-width: 300px;
+    min-height: 200px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
 #content.articles .order {
   padding: 1rem 0;
 }
 #content.articles a {
-  text-decoration: none;
   color: black;
 }
 #content.articles .all-products {
@@ -288,7 +362,6 @@ body > footer .footer-bar {
   align-items: center;
 }
 #content.articles .all-products h1 {
-  font-size: 2.5rem;
   text-align: center;
   text-transform: uppercase;
   color: #009a87;
@@ -344,7 +417,6 @@ body > footer .footer-bar {
   margin: 0;
 }
 #content.article .product h1 {
-  font-size: 2.5rem;
   text-align: center;
 }
 #content.article .product figure {
@@ -389,7 +461,6 @@ body > footer .footer-bar {
 #content.article .product table thead tr td h3 {
   cursor: pointer;
   text-transform: uppercase;
-  text-decoration: none;
   color: #009a87;
 }
 #content.article .product table thead tr td:hover {
@@ -447,7 +518,6 @@ body > footer .footer-bar {
   border-radius: 50%;
 }
 #content.admin .all-orders li a {
-  text-decoration: none;
   color: black;
 }
 #content.admin .all-orders li a:hover {
@@ -475,7 +545,6 @@ body > footer .footer-bar {
   color: #009a87;
   border: none;
   cursor: pointer;
-  font-size: 1.8rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 1rem;
 }
@@ -512,16 +581,12 @@ body > footer .footer-bar {
   color: #009a87;
   border: none;
   cursor: pointer;
-  font-size: 1.8rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 1rem;
 }
 #content.account .update .container fieldset input:hover {
   background-color: #009a87;
   color: white;
-}
-#content.account .update .container fieldset label {
-  font-size: 1.8rem;
 }
 #content.account .update .container input {
   padding: 0.5rem 1rem;
@@ -553,7 +618,6 @@ body > footer .footer-bar {
   border-radius: 50%;
 }
 #content.account .my-orders li a {
-  text-decoration: none;
   color: black;
 }
 #content.account .my-orders li a:hover {
@@ -566,7 +630,6 @@ body > footer .footer-bar {
   color: #009a87;
   border: none;
   cursor: pointer;
-  font-size: 1.8rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 1rem;
 }
@@ -593,7 +656,6 @@ body > footer .footer-bar {
   padding: 1rem;
 }
 #content.login form .container legend {
-  font-size: 2.5rem;
   text-align: center;
   color: black;
 }
@@ -601,9 +663,6 @@ body > footer .footer-bar {
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
-}
-#content.login form .container fieldset label {
-  font-size: 1.8rem;
 }
 #content.login form .container fieldset input {
   padding: 0.5rem 1rem;
@@ -626,13 +685,11 @@ body > footer .footer-bar {
   color: #009a87;
   border: none;
   cursor: pointer;
-  font-size: 1.8rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 1rem;
 }
 #content.login form .container .nav-buttons fieldset button a,
 #content.login form .container .nav-buttons fieldset input a {
-  text-decoration: none;
   color: #009a87;
 }
 #content.login form .container .nav-buttons fieldset input:hover,
@@ -666,7 +723,6 @@ body > footer .footer-bar {
   padding: 1rem;
 }
 #content.register form .container legend {
-  font-size: 2.5rem;
   text-align: center;
   color: black;
 }
@@ -674,9 +730,6 @@ body > footer .footer-bar {
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
-}
-#content.register form .container fieldset label {
-  font-size: 1.8rem;
 }
 #content.register form .container fieldset input {
   padding: 0.5rem 1rem;
@@ -699,13 +752,11 @@ body > footer .footer-bar {
   color: #009a87;
   border: none;
   cursor: pointer;
-  font-size: 1.8rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   border-radius: 1rem;
 }
 #content.register form .container .nav-buttons fieldset input a,
 #content.register form .container .nav-buttons fieldset button a {
-  text-decoration: none;
   color: #009a87;
 }
 #content.register form .container .nav-buttons fieldset input:hover,
@@ -806,13 +857,15 @@ summary,
 time,
 mark,
 audio,
-video {
+video,
+input {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  text-decoration: none;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -868,9 +921,33 @@ body {
   font-style: normal;
   font-size: 1.8rem;
   background-color: #fff;
-  width: 100vw;
-  height: 100vh;
+  display: grid;
+  grid-template-rows: 12vh minmax(84vh, max-content) minmax(16vh, max-content);
   line-height: 1.8;
+}
+
+i {
+  font-size: 2rem;
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+
+h2, legend {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.9rem;
+}
+
+p, a, input, button, label, figcaption {
+  font-size: 1.6rem;
 }
 
 /*# sourceMappingURL=style.css.map */

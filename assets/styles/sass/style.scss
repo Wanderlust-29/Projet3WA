@@ -32,7 +32,25 @@ body {
   font-style: normal;
   font-size: 1.8rem;
   background-color: $white;
-  width: 100vw;
-  height: 100vh;
+  display: grid;
+  grid-template-rows: 12vh minmax(84vh, max-content) minmax(16vh, max-content);
   line-height: 1.8;
+}
+i {
+  font-size: 2rem;
+}
+h1{
+  font-size: 2.8rem;
+}
+h2,legend{
+  font-size: 2.5rem;
+}
+h3{
+  font-size: 2rem;
+}
+h4{
+  font-size: 1.9rem;
+}
+p,a,input,button,label,figcaption{
+  font-size: 1.6rem;
 }
