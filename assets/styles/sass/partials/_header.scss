@@ -2,30 +2,28 @@ body > header {
   position: relative;
   background-color: $green;
   display: flex;
-  padding: 1rem 1rem;
+  padding: 1rem 2rem;
   justify-content: space-between;
   align-items: center;
   a {
     .logo {
-      width: 10rem;
+      width: 5em;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       img {
         width: 50%;
-        height: auto;
       }
       figcaption {
         font-family: "Dancing Script", cursive;
         color: $white;
-        font-size: 2rem;
       }
     }
   }
 
   .search {
     display: flex;
-    padding: 0 2rem;
     .input-searchbar {
       border-radius:8rem 0 0 8rem;
       padding-left: 1rem;
@@ -63,8 +61,8 @@ body > header {
     }
     li {
       list-style: none;
-      i {
-        color: $white;
+      color: $white;
+      i:not(:last-child) {
         padding-right: 1.2rem;
       }
     }
@@ -126,7 +124,7 @@ body > header {
       position: static;
       ul{
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         flex-wrap: wrap;
         li{
           padding: 0 0.5rem;
