@@ -8,7 +8,9 @@
 {% block main %}
     <main id="content" class="account">
         {% if session is defined and session is not null %}
+        
             <h1>Bienvenue {{ session.firstName }} {{ session.lastName }} !</h1>
+
         <section>
             {# Formulaire pour modifier les données de l'utilisateur #}
             <h2>Modifier mes coordonnées</h2>
@@ -72,7 +74,7 @@
                         <input type="text" name="country" id="country" value="{{ session.country }}"/>
                     </fieldset>
                     <fieldset>
-                        <input type="submit" name="update" value="Modifier" />
+                        <button type="submit" name="update">Modifier</button>
                     </fieldset>
                 </fieldset>
             </form>
@@ -110,13 +112,13 @@
             <form action="index.php?route=delete" method="post" class="other-btns">
                 <fieldset>
                     <input type="hidden" name="userId" value="{{ session.id }}" />
-                    <input type="submit" name="delete" value="Supprimer" />
+                    <button type="submit" name="delete">Supprimer</button>
                 </fieldset>
             </form>
             
             <form action="index.php?route=logout" method="post" class="other-btns">
                 <fieldset>
-                    <input type="submit" name="logout" value="Se déconnecter" />
+                    <button type="submit" name="logout">Se déconnecter</button>
                 </fieldset>
             </form>
         {% else %}

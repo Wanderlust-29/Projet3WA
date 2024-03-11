@@ -5,14 +5,17 @@ body > footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  h2 {
+    font-size: 2.2rem;
+  }
   .title {
     font-family: "Dancing Script", cursive;
   }
   section {
     padding-bottom: 2rem;
-    a{
+    a {
       color: $white;
-    } 
+    }
     li {
       list-style: none;
       a {
@@ -34,7 +37,6 @@ body > footer {
 }
 
 @media screen and (min-width: 800px) {
-
   body > footer {
     display: flex;
     flex-direction: row;

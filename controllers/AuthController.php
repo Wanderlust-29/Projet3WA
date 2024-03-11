@@ -30,8 +30,7 @@ class AuthController extends AbstractController
                         $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
                         unset($_SESSION["error-message"]);
                         $this->redirect("index.php");
-                    } else {
-                        // Gestion des erreurs
+                    } else {// Gestion des erreurs
                         $_SESSION["error-message"] = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
                         $this->redirect("index.php?route=login");
                     }
@@ -97,8 +96,7 @@ class AuthController extends AbstractController
                             $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
                             unset($_SESSION["error-message"]);
                             $this->redirect("index.php"); 
-                        } else {
-                            // Gestion des erreurs
+                        } else { // Gestion des erreurs
                             $_SESSION["error-message"] = "L'utilisateur existe déjà";
                             $this->redirect("index.php?route=register");
                         }
@@ -149,8 +147,7 @@ class AuthController extends AbstractController
                             $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
                             unset($_SESSION["error-message"]);
                             $this->redirect("index.php?route=admin");
-                        } else { 
-                            // Gestion des erreurs
+                        } else { // Gestion des erreurs
                             $_SESSION["error-message"] = "Vous n’êtes pas autorisé à accéder à cette page";
                             $this->redirect("index.php?route=login-admin");
                         }

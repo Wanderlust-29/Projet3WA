@@ -55,7 +55,7 @@
                         <input type="hidden" name="article_id" value="{{ article.id }}" /> 
                     </fieldset>
                     <fieldset>
-                        <input type="submit" name="add" class="btn-add" value="Valider"/>
+                        <button type="submit" name="add" class="btn-add">Valider</button>
                     </fieldset>
                 </form>
             {% endfor %}
@@ -140,7 +140,7 @@
                         {{ user.firstName }} {{ user.lastName }} {{ user.address }} {{ user.city }} {{ user.postalCode }} {{ user.country }}
                     </label>
                     <input type="hidden" name="userId" value="{{ user.id }}" />
-                    <input type="submit" name="delete" value="Supprimer" />
+                    <button type="submit" name="delete" value="Supprimer">Supprimer</button>
                 </fieldset>
             </form>
             {% endfor %}

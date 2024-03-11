@@ -6,13 +6,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
     btnBurger.addEventListener("click", () => {
       burgerMenu.classList.toggle("close");
       burgerMenu.classList.toggle("open");
-    });    
-    if(burgerMenu.classList.contains('open')){
-      btnBurger.innerHTML= `<i class="fa-solid fa-xmark"></i>`;
-    } else {
-      btnBurger.innerHTML= `<i class="fa fa-bars"></i>`
-    }
+    });
 
+    // Static menu
+    let offset = burgerMenu.offsetHeight;
+    window.onscroll = function () {
+      if (window.innerWidth < 800 && burgerMenu.classList.contains("open")) {
+        if (window.scrollY > offset - 10) {
+          burgerMenu.classList.add("sticky");
+        } else if (window.scrollY < offset - 20) {
+          burgerMenu.classList.remove("sticky");
+        }
+      }
+    };
   }
 
   burgerMenu();
