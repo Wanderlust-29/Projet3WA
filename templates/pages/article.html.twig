@@ -5,6 +5,9 @@
     {{ parent() }}
 {% endblock %}
 
+{% block head %}
+{% endblock %}
+
 {% block main %}
     <main id="content" class="article">
         <section class="product">
@@ -17,7 +20,7 @@
                 <form action="index.php?route=cart" method="get">
                     <label>{{article.price}} €</label>
                     <input type="number" value="1"/>
-                    <input class="add-to-cart" type="button" value="Ajouter au pannier"/>
+                    <input class="add-to-cart" type="button" value="Ajouter au panier"/>
                 </form>
                     
                 <table>

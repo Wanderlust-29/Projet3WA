@@ -5,6 +5,9 @@
     {{ parent() }}
 {% endblock %}
 
+{% block head %}
+{% endblock %}
+
 {% block main %}
     <main id="content" class="home">
         <section class="banner">
@@ -35,7 +38,7 @@
             </a>
             {% endfor %}
         </section>
-        <section class="about">
+        <section id="about">
             <h2>A propos</h2>
             <p>Nous sommes une équipe passionnée par le bien-être animal et engagée à fournir les meilleurs produits et services pour le bonheur et la santé de vos compagnons à quatre pattes.</p>
             <article class="about-schedules"> 

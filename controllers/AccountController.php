@@ -71,7 +71,7 @@ class AccountController extends AbstractController
                         $_SESSION["error-message"] = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
                         $this->redirect("index.php?route=admin");
                     }
-                } else {
+                } else { 
                     $_SESSION["error-message"] = "Les mots de passe ne correspondent pas";
                     $this->redirect("index.php?route=admin");
                 }
@@ -130,7 +130,7 @@ class AccountController extends AbstractController
                 if ($user->getRole() !== "ADMIN") {
                     session_destroy(); // Détruire la session si l'utilisateur supprimé n'est pas un administrateur
                     $this->redirect("index.php");
-                } else {
+                } else { // Gestion des erreurs
                     $this->redirect("index.php?route=admin");
                 }
                 unset($_SESSION["error-message"]);
@@ -172,7 +172,7 @@ class AccountController extends AbstractController
     
                     unset($_SESSION["error-message"]);
                     $this->redirect("index.php?route=admin");
-                } else {
+                } else { // Gestion des erreurs
                     $_SESSION["error-message"] = "L'article n'existe pas.";
                     $this->redirect("index.php?route=admin");
                 }

@@ -160,7 +160,7 @@
   /*******************
         ABOUT
   *******************/
-  .about {
+  #about {
     grid-row: 4;
     grid-column: 2;
     padding: 2rem 0;
@@ -244,7 +244,7 @@
       }
     }
 
-    .about {
+    #about {
       li {
         text-align: start;
         padding-left: 1rem;

@@ -9,6 +9,7 @@ class Router
         $acc = new AccountController();
         $atc = new ArticleController();
         $ic = new InfosController();
+        $cc = new CartController();
 
         if(!isset($get["route"]))
         {
@@ -105,6 +106,10 @@ class Router
         else if(isset($get["route"]) && $get["route"] === "refund")
         {
             $ic->refund();
+        }
+        else if(isset($get["route"]) && $get["route"] === "cart")
+        {
+            $cc->cart();
         }
         else
         {

@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> {% block title %}{% endblock %}| TimberWolf</title>
+        {% block head %}
+        {% endblock %}
         <link href="./assets/font/css/fontawesome.css" rel="stylesheet">
         <link href="./assets/font/css/brands.css" rel="stylesheet">
         <link href="./assets/font/css/solid.css" rel="stylesheet">
@@ -11,6 +13,8 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
         crossorigin=""/>
+
+
     </head>
     <body>
         <header class="header">
@@ -55,7 +59,7 @@
                             <a href="index.php?route=toys">Jouets</a>
                         </li>
                         <li class="hiden">
-                            <a href="index.php?route=cart">Pannier</a>
+                            <a href="index.php?route=cart">Panier</a>
                         </li>
                         {% if session is defined and session is not null %}
                             <li>
