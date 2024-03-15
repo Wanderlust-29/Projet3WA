@@ -16,6 +16,9 @@
         </header>
         <main>
             <ul>
+                {% for item in cart.getItems() %}
+                    <li>{{ item }}</li>
+                {% endfor %}
             </ul>
         </main>
         <footer>
@@ -26,5 +29,5 @@
 {% endblock %}
 
 {% block javascript %}
-    <script type="module" src="assets/js/main-cart.js"></script>
+    {# <script type="module" src="assets/js/main-cart.js"></script> #}
 {% endblock %}

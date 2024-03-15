@@ -109,7 +109,11 @@ class Router
         }
         else if(isset($get["route"]) && $get["route"] === "cart")
         {
-            $cc->cart();
+            $cc->showCart();
+        }
+        else if(isset($get["route"]) && isset($get["id"]) && $get["route"] === "add-to-cart")
+        {
+            $cc->addToCart($get["id"]);
         }
         else
         {

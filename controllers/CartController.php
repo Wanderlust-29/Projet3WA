@@ -2,19 +2,29 @@
 
 class CartController extends AbstractController
 {
+    public function showCart()
+    {   
+        $cm = new CartManager();
+        $cart = $cm->getCart();
+    
+        return $this->render('pages/cart.html.twig', [
+            'cart' => $cart,
+        ]);
+    }
 
-
-    public function cart() : void
+    public function addToCart($itemId)
     {
         $am = new ArticleManager();
-        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+        $article = $am->findOne($itemId);
+        if ($article) {
+            $cm = new CartManager();
+            $cart = $cm->getCart(); 
 
-        $articles = $am->findAll();
-        $this->render("pages/cart.html.twig", [
-            "articles"=>$articles,
-            "session"=>$session,
-            "error"=>$error
-        ]);
+            $cart->addItem($article);
+
+            $cm->saveCart($cart);
+        }else{
+
+        }
     }
 }
