@@ -12,12 +12,12 @@
     <main id="content" class="cart">
         <header>
             <h2>Mon panier</h2>
-            <p id="cart-total-price">Total : 0$</p>
+            <p id="cart-total-price">Total : {{totalPrice}}€</p>
         </header>
         <main>
             <ul>
-                {% for item in cart.getItems() %}
-                    <li>{{ item }}</li>
+                {% for item in cart.items %}
+                    <li>{{ item.name }}<a href="index.php?route=delete-article-cart">X</a></li>
                 {% endfor %}
             </ul>
         </main>

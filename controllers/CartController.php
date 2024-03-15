@@ -7,8 +7,14 @@ class CartController extends AbstractController
         $cm = new CartManager();
         $cart = $cm->getCart();
     
+        $totalPrice = 0;
+        foreach ($cart->getItems() as $item) {
+            $totalPrice += $item->getPrice(); 
+        }
+        
         return $this->render('pages/cart.html.twig', [
             'cart' => $cart,
+            'totalPrice' => $totalPrice, 
         ]);
     }
 
@@ -16,6 +22,7 @@ class CartController extends AbstractController
     {
         $am = new ArticleManager();
         $article = $am->findOne($itemId);
+
         if ($article) {
             $cm = new CartManager();
             $cart = $cm->getCart(); 
@@ -23,8 +30,10 @@ class CartController extends AbstractController
             $cart->addItem($article);
 
             $cm->saveCart($cart);
+            $this->redirect("index.php?route=article&id=$itemId");
         }else{
-
+            $_SESSION["error-message"] = "Erreur lors de l'ajout au panier";
+            $this->redirect("index.php");
         }
     }
 }
