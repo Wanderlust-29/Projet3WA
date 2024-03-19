@@ -24,7 +24,7 @@
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe"/>
                     {% if error is defined %}
-                        <p class="error">{{ error }}</p>
+                        <p class="error" id="error-msg">{{ error }}</p>
                     {% endif %}
                 </fieldset>
                 
@@ -42,4 +42,5 @@
 {% endblock %}
 
 {% block javascript %}
+    <script src="assets/js/error-success.js" defer></script>
 {% endblock %}

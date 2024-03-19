@@ -17,4 +17,17 @@ class CartManager
     {
         $_SESSION['cart'] = $cart;
     }
+    public function delete($cart, $itemId)
+    {
+        $items = $cart->getItems(); 
+        foreach ($items as $key => $item) {
+            if ($item->getId() == $itemId) { 
+                unset($items[$key]); 
+                $cart->setItems($items);
+                $this->saveCart($cart); 
+                return true; 
+            }
+        }
+        return false;
+    }
 }

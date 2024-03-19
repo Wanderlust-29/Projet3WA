@@ -115,6 +115,10 @@ class Router
         {
             $cc->addToCart($get["id"]);
         }
+        else if(isset($get["route"]) && $get["route"] === "deleteFromCart")
+        {
+            $cc->deleteFromCart();
+        }
         else
         {
             $dc->home();

@@ -26,7 +26,7 @@
                 <input type="password" name="password" id="password"/>
             </fieldset>
             {% if error is defined %}
-                <p>{{ error }}</p>
+                <p class="error" id="error-msg">{{ error }}</p>
             {% endif %}
             <fieldset>
                 <button type="submit">Se connecter</button>
@@ -39,4 +39,5 @@
 {% endblock %}
 
 {% block javascript %}
+    <script src="assets/js/error-success.js" defer></script>
 {% endblock %}

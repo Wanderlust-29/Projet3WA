@@ -23,7 +23,13 @@
                     <input class="add-to-cart" type="submit" value="Ajouter au panier">
                 </form>
 
-                    
+                {% if error is defined %}
+                    <p id="error-msg">{{ error }}</p>
+                {% endif %}
+                {% if success is defined %}
+                    <p id="success-msg">{{ success }}</p>
+                {% endif %}
+                        
                 <table>
                     <thead>
                     <tr >
@@ -43,5 +49,6 @@
 {% endblock %}
 
 {% block javascript %}
-<script src="assets/js/article.js" defer></script>
+    <script src="assets/js/article.js" defer></script>
+    <script src="assets/js/error-success.js" defer></script>
 {% endblock %}

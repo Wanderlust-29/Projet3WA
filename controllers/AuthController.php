@@ -5,12 +5,15 @@ class AuthController extends AbstractController
     public function login() : void
     {   
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+        unset($_SESSION["error-message"]);
+
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         $this->render('account/login.html.twig', [
             'error' => $error,
             'csrf_token' => $_SESSION["csrf-token"],
-            'session' => $session
+            'session' => $session,
+            'error' => $error
         ]);
     }
 
@@ -52,6 +55,8 @@ class AuthController extends AbstractController
     public function register() : void
     {   
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+        unset($_SESSION["error-message"]);
+
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         $this->render('account/register.html.twig', [
@@ -121,6 +126,8 @@ class AuthController extends AbstractController
     public function admin(): void
     {
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+        unset($_SESSION["error-message"]);
+
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $this->render('account/login-admin.html.twig', [
             'error' => $error,

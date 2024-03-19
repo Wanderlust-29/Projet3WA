@@ -40,7 +40,7 @@
                     <label for="confirm-password">Confirmer le mot de passe</label>
                     <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmez votre mot de passe"/>
                         {% if error is defined %}
-                            <p class="error">{{ error }}</p>
+                            <p class="error" id="error-msg">{{ error }}</p>
                         {% endif %}
                 </fieldset>
                 
@@ -78,4 +78,5 @@
 {% endblock %}
 
 {% block javascript %}
+    <script src="assets/js/error-success.js" defer></script>
 {% endblock %}

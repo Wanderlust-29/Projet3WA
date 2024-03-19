@@ -50,7 +50,7 @@
                         <input type="password" name="confirm-password" id="confirm-password" placeholder="confirmer le nouveau mot de passe"/>
                     </fieldset>
                     {% if error is defined %}
-                        <p>{{ error }}</p>
+                        <p class="error" id="error-msg">{{ error }}</p>
                     {% endif %}
                     <fieldset>
                         <label for="address">
@@ -134,4 +134,5 @@
 
 {% block javascript %}
     <script src="assets/js/account.js" defer></script>
+    <script src="assets/js/error-success.js" defer></script>
 {% endblock %}
