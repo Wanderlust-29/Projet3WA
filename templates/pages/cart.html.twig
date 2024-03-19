@@ -15,6 +15,9 @@
             <p id="cart-total-price">Total : {{totalPrice}}€</p>
         </header>
         <main>
+        <pre>
+            {{ dump(cart) }}
+        </pre>
             {% for item in cart.items %}
                 <form action="index.php?route=deleteFromCart" method="post" class="articles">
                     <fieldset>

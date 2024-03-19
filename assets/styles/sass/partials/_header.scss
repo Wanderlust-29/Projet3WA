@@ -42,6 +42,7 @@ body > header {
   .menu-icons > ul {
     display: flex;
     a {
+      color: $white;
       position: relative;
       .cart-count {
         position: absolute;

@@ -4,14 +4,12 @@ class ArticleController extends AbstractController
 {
     public function articles() : void
     {   
-        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $am = new ArticleManager();
-        
+
         $articles = $am->findAll();
         
         $this->render("pages/articles.html.twig", [
             "articles"=>$articles,
-            "session"=>$session,
         ]);
     }
     public function article(string $id) : void
@@ -22,52 +20,45 @@ class ArticleController extends AbstractController
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
         unset($_SESSION["error-message"]);
 
-        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $am = new ArticleManager();
 
         $article = $am->findOne(intval($id));
 
         $this->render("pages/article.html.twig", [
             "article"=>$article,
-            "session"=>$session,
             "success" => $success,
             "error" => $error
         ]);
     }
     public function dogFood() : void
     {
-        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
         $am = new ArticleManager();
 
         $articles = $am->findAll();
 
         $this->render("pages/dog-food.html.twig", [
             "articles"=>$articles,
-            "session"=>$session,
         ]);
     }
     public function toys() : void
     {
         $am = new ArticleManager();
-        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         $articles = $am->findAll();
 
         $this->render("pages/toys.html.twig", [
             "articles"=>$articles,
-            "session"=>$session,
         ]);
     }
     public function treats() : void
     {   
         $am = new ArticleManager();
-        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         $articles = $am->findAll();
 
         $this->render("pages/treats.html.twig", [
             "articles"=>$articles,
-            "session"=>$session,
+
         ]);
     }
 }

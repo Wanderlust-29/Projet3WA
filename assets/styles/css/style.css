@@ -48,6 +48,7 @@ body > header .menu-icons > ul {
   display: flex;
 }
 body > header .menu-icons > ul a {
+  color: #fff;
   position: relative;
 }
 body > header .menu-icons > ul a .cart-count {

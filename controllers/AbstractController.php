@@ -9,9 +9,17 @@ abstract class AbstractController
         $twig = new \Twig\Environment($loader,[
             'debug' => true,
         ]);
+        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
+
+        // Nombre d'articles dans le panier
+        $cm = new CartManager();
+        $cart = $cm->getCart();
+        $items = $cart->getItems();
+        $count = count($items);
 
         $twig->addExtension(new \Twig\Extension\DebugExtension());
-        $twig->addGlobal("session", $_SESSION);
+        $twig->addGlobal("session", $session);
+        $twig->addGlobal("count", $count);
 
         $this->twig = $twig;
     }
