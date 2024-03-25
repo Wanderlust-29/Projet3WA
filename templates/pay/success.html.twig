@@ -1,7 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    404
+    Merci pour votre commande
     {{ parent() }}
 {% endblock %}
 
@@ -9,9 +9,12 @@
 {% endblock %}
 
 {% block main %}
-    <main id="content" class="404">
-        <h1>Erreur 404</h1>
-    </main>
+  <section>
+    <p>
+      Merci pour votre commande !
+      <a href="mailto:orders@example.com">orders@example.com</a>.
+    </p>
+  </section>
 {% endblock %}
 
 {% block javascript %}

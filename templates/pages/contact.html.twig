@@ -1,7 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    {{article.name}}
+    Contact
     {{ parent() }}
 {% endblock %}
 
@@ -11,6 +11,27 @@
 {% block main %}
     <main id="content" class="contact">
         <h1>Contact</h1>
+        <form action="index.php?route=contact" method="post">
+                <fieldset>
+                    <input type="text" name="firstName" id="firstName" placeholder="Entrez votre prénom"/>
+                </fieldset>
+                
+                <fieldset>
+                    <input type="text" name="lastName" id="lastName" placeholder="Entrez votre nom"/>
+                </fieldset>
+                
+                <fieldset>
+                    <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail"/>
+                </fieldset>
+
+                <fieldset>
+                    <textarea id="message" name="message" rows="10" cols="50">Entrez votre message...</textarea>
+                </fieldset>
+
+                <fieldset>
+                    <button type="submit" name="btn-send">Envoyer</button>
+                </fieldset>
+        </form>
     </main>
 {% endblock %}
 

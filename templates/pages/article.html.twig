@@ -17,11 +17,12 @@
                 </figure>
 
                    
-                <form action="index.php?route=add-to-cart&id={{ article.id }}" method="post">
-                    <label>{{ article.price }} €</label>
-                    <input type="number" name="quantity" value="1">
-                    <input class="add-to-cart" type="submit" value="Ajouter au panier">
-                </form>
+                <div>
+                    <a class="btn-add-to-cart" data-article="{{ article.id }}">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                    <p class="price">{{ article.price }} €</p>
+                </div>
 
                 {% if error is defined %}
                     <p id="error-msg">{{ error }}</p>

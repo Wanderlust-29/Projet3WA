@@ -12,10 +12,8 @@ abstract class AbstractController
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         // Nombre d'articles dans le panier
-        $cm = new CartManager();
-        $cart = $cm->getCart();
-        $items = $cart->getItems();
-        $count = count($items);
+        $cart = $_SESSION["cart"];
+        $count = count($cart);
 
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         $twig->addGlobal("session", $session);
@@ -31,5 +29,9 @@ abstract class AbstractController
     protected function redirect(string $route) : void
     {
         header("Location: $route");
+    }
+    protected function renderJson(array $data) : void
+    {
+        echo json_encode($data);
     }
 }

@@ -123,11 +123,11 @@
             <h2>Gestion des utilisateurs :</h2>
 
             {% for user in users %}
-            <form action="index.php?route=delete" method="post" class="users row g-2">
-                <label class="col-sm-auto col-form-label" for="user{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</label>
-                <input type="hidden" name="userId" value="{{ user.id }}">
-                <button type="submit" name="delete" value="Supprimer" class="btn btn-danger col-sm-auto">Supprimer</button>
-            </form>
+                <form action="index.php?route=delete" method="post" class="users row g-2">
+                    <label class="col-sm-auto col-form-label" for="user{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</label>
+                    <input type="hidden" name="userId" value="{{ user.id }}">
+                    <button type="submit" name="delete" value="Supprimer" class="btn btn-danger col-sm-auto">Supprimer</button>
+                </form>
             {% endfor %}
 
             <form action="index.php?route=logout" class="disconnect" method="post">

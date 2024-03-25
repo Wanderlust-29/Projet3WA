@@ -17,4 +17,10 @@ class DefaultController extends AbstractController
         $this->render("pages/contact.html.twig", [
         ]);
     }
+
+    public function notfound() : void
+    {
+        $this->render("pages/404.html.twig", [
+        ]);
+    }
 }

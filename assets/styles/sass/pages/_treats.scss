@@ -1,4 +1,4 @@
-#content.articles {
+#content.treats {
   display: grid;
   grid-template-columns: 10% 80% 10%;
 
@@ -9,7 +9,7 @@
     color: $black;
   }
 
-  .all-products {
+  .all-treats {
     grid-column: 2;
     padding: 2rem 0;
     display: flex;
@@ -96,8 +96,8 @@
   color: $white;
 }
 @media screen and (min-width: 800px) {
-  #content.articles {
-    .all-products {
+  #content.treats {
+    .all-treats {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       grid-template-rows: auto auto auto;

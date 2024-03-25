@@ -5,7 +5,6 @@ class AccountController extends AbstractController
     public function account(): void
     {
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
     
         $sessionId = null;
         $orders = [];
@@ -29,7 +28,6 @@ class AccountController extends AbstractController
             'error' => $error,
             'orders' => $orders,
             'ordersArticles' => $ordersArticles,
-            'session' => $session
         ]);
     }
     
@@ -85,7 +83,6 @@ class AccountController extends AbstractController
 
     function admin(){
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-        $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
     
         $um = new UserManager();
         $am = new ArticleManager();
@@ -108,7 +105,6 @@ class AccountController extends AbstractController
     
         $this->render("account/admin.html.twig", [
             'error' => $error,
-            'session' => $session,
             'articles' => $articles,
             'users' => $users,
             'orders' => $orders,

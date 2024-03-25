@@ -34,7 +34,7 @@ class ArticleController extends AbstractController
     {
         $am = new ArticleManager();
 
-        $articles = $am->findAll();
+        $articles = $am->dogFood();
 
         $this->render("pages/dog-food.html.twig", [
             "articles"=>$articles,
@@ -44,7 +44,7 @@ class ArticleController extends AbstractController
     {
         $am = new ArticleManager();
 
-        $articles = $am->findAll();
+        $articles = $am->toys();
 
         $this->render("pages/toys.html.twig", [
             "articles"=>$articles,
@@ -54,7 +54,7 @@ class ArticleController extends AbstractController
     {   
         $am = new ArticleManager();
 
-        $articles = $am->findAll();
+        $articles = $am->treats();
 
         $this->render("pages/treats.html.twig", [
             "articles"=>$articles,

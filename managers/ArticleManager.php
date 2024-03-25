@@ -90,6 +90,86 @@ class ArticleManager extends AbstractManager
     }
 
     /**
+     * Récupère les articles de la categorie Croquettes.
+     *
+     * @return array Liste des articles de la categorie Croquettes.
+     */
+    public function dogFood(): array
+    {
+        $query = $this->db->prepare('SELECT * FROM articles WHERE category_id = 1');
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+        
+        foreach($result as $item){
+
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+    
+            $cm = new CategoryManager();
+            $category = $cm->findOne($item["category_id"]);
+
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
+            $article->setId($item["id"]);
+            $articles[] = $article;
+        }
+        return $articles;
+    }
+    /**
+     * Récupère les articles de la categorie Friandises.
+     *
+     * @return array Liste des articles de la categorie Friandises.
+     */
+    public function treats(): array
+    {
+        $query = $this->db->prepare('SELECT * FROM articles WHERE category_id = 2');
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+        
+        foreach($result as $item){
+
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+    
+            $cm = new CategoryManager();
+            $category = $cm->findOne($item["category_id"]);
+
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
+            $article->setId($item["id"]);
+            $articles[] = $article;
+        }
+        return $articles;
+    }
+
+    /**
+     * Récupère les articles de la categorie Jouets.
+     *
+     * @return array Liste des articles de la categorie Jouets.
+     */
+    public function toys(): array
+    {
+        $query = $this->db->prepare('SELECT * FROM articles WHERE category_id = 3');
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+        
+        foreach($result as $item){
+
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+    
+            $cm = new CategoryManager();
+            $category = $cm->findOne($item["category_id"]);
+
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
+            $article->setId($item["id"]);
+            $articles[] = $article;
+        }
+        return $articles;
+    }
+
+    /**
      * Met à jour le stock d'un article.
      *
      * @param Article $article L'article à mettre à jour.

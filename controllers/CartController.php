@@ -2,61 +2,71 @@
 
 class CartController extends AbstractController
 {
-    public function showCart()
-    {   
-        $success = isset($_SESSION["success-message"]) ? $_SESSION["success-message"] : null;
-        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-
-        $cm = new CartManager();
-        $cart = $cm->getCart();
-
-        $totalPrice = 0;
-        foreach ($cart->getItems() as $item) {
-            $totalPrice += $item->getPrice(); 
+    public function addToCart() : void
+    {
+        // Récupérer l'identifiant de l'article envoyé par la requête POST
+        $id = intval($_POST['article_id']);
+        
+        // Récupérer l'article correspondant à l'identifiant
+        $am = new ArticleManager();
+        $article = $am->findOne($id);
+        
+        // Initialiser le panier s'il n'existe pas encore dans la session
+        if (!isset($_SESSION["cart"])) {
+            $_SESSION["cart"] = array();
         }
         
-        return $this->render('pages/cart.html.twig', [
-            'cart' => $cart,
-            'totalPrice' => $totalPrice, 
-            'success' => $success,
-            'error' => $error,
+        // Ajouter l'article au panier
+        $_SESSION["cart"][] = $article->toArray();
+        
+        // Renvoyer le contenu du panier au format JSON
+        $this->renderJson($_SESSION["cart"]);
+    }
+    
+    
+    public function cart() : void
+    {
+        $totalPrice = 0;
+        $cart = $_SESSION["cart"];
+        foreach ($cart as $article) {
+            if (isset($article['price'])) {
+                $totalPrice += $article['price'];
+            }
+        }
+        $this->render("pay/cart.html.twig", [
+            "cart" => $cart,
+            "totalPrice" => $totalPrice,
         ]);
     }
-
-    public function addToCart($itemId)
+    public function deleteFromCart() : void
     {
-        $am = new ArticleManager();
-        $article = $am->findOne($itemId);
-
-        if ($article) {
-            $cm = new CartManager();
-            $cart = $cm->getCart(); 
-
-            $cart->addItem($article);
-
-            $cm->saveCart($cart);
-            $this->redirect("index.php?route=article&id=$itemId");
-            $_SESSION["success-message"] = "L'article a été ajouté au panier.";
-        }else{
-            $_SESSION["error-message"] = "Erreur lors de l'ajout au panier";
-            $this->redirect("index.php");
+        // Récupére l'identifiant de l'article à supprimer envoyé par la requête POST
+        $id = intval($_POST['article_id']);
+            
+        // Vérifie si le panier existe dans la session
+        if (isset($_SESSION["cart"])) {
+            foreach ($_SESSION["cart"] as $key => $article) {
+                if ($article['id'] === $id) {
+                    unset($_SESSION["cart"][$key]);
+                    break; 
+                }
+            }
         }
+
+        // Renvoye le contenu mis à jour du panier au format JSON
+        $this->renderJson($_SESSION["cart"]);
     }
 
-    public function deleteFromCart()
-    {
-        $itemId = $_POST['itemId'];
-        $cm = new CartManager();
-        $cart = $cm->getCart();
-        $success = $cm->delete($cart, $itemId);
+    public function success()
+    {   
+        return $this->render('pay/success.html.twig', [
+        ]);
+    }
     
-        if ($success) {
-            $_SESSION["success-message"] = "L'article a été supprimé du panier avec succès.";
-        } else {
-            $_SESSION["error-message"] = "Erreur lors de la suppression de l'article du panier.";
-        }
-    
-        $this->redirect("index.php?route=cart");
+    public function cancel()
+    {   
+        return $this->render('pay/cancel.html.twig', [
+        ]);
     }
     
 }

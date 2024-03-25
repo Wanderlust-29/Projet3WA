@@ -7,6 +7,24 @@ class Article
     {
 
     }
+    // Transforme en tableau
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'price' => $this->price,
+            'stock' => $this->stock,
+            'category' => $this->category,
+            'image' => $this->image,
+            'description' => $this->description,
+            'ingredients' => $this->ingredients,
+            'age' => $this->age,
+        ];
+    }
 
     // Getter and Setter for ID
     /**
@@ -76,7 +94,7 @@ class Article
         $this->stock = $stock;
     }
 
-    // Getter and Setter for Password
+    // Getter and Setter for Category
     /**
      * @return Category
      */
@@ -127,7 +145,7 @@ class Article
         $this->description = $description;
     }
 
-    // Getter and Setter for Description
+    // Getter and Setter for Ingredient
     /**
      * @return string
      */
