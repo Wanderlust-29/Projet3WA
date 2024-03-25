@@ -38,6 +38,7 @@ class CartController extends AbstractController
             "totalPrice" => $totalPrice,
         ]);
     }
+
     public function deleteFromCart() : void
     {
         // Récupére l'identifiant de l'article à supprimer envoyé par la requête POST
@@ -65,7 +66,7 @@ class CartController extends AbstractController
     
     public function cancel()
     {   
-        return $this->render('pay/cancel.html.twig', [
+        return $this->render('pay/cart.html.twig', [
         ]);
     }
     

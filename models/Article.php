@@ -87,9 +87,9 @@ class Article
     }
 
     /**
-     * @param string $stock
+     * @param int $stock
      */
-    public function setStock(string $stock): void
+    public function setStock(int $stock): void
     {
         $this->stock = $stock;
     }

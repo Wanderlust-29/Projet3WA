@@ -121,10 +121,6 @@ class Router
             {
                 $cc->success();
             }
-            else if($get["route"] === "cancel")
-            {
-                $cc->cancel();
-            }
             else
             {
                 $dc->notFound();

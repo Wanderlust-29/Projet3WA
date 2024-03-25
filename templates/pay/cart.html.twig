@@ -28,7 +28,12 @@
             </label>
             <input type="hidden" name="totalPrice" value="{{totalPrice}}">
             <a class="btn btn-cart-back" href="index.php">Continuer mes achats</a>
-            <button type="submit" id="checkout-button">Checkout</button>
+            {% if session is defined and session is not null %}
+                <button type="submit" id="checkout-button">Valider et payer</button>
+            {% else %}
+                <a class="btn-login" href="index.php?route=login">Connectez-vous pour payer</a>
+            {% endif %}
+            
         </form>
     </main>
 {% endblock %}
