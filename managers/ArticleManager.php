@@ -8,7 +8,7 @@ class ArticleManager extends AbstractManager
      * @param int $id L'identifiant de l'article à récupérer.
      * @return Article|null L'objet article trouvé ou null s'il n'existe pas.
      */
-    public function findOne(int $id) : ?Article
+    public function findOne(int $id) : ? Article
     {
         $query = $this->db->prepare('SELECT * FROM articles WHERE id=:id');
         $parameters = ["id" => $id];
@@ -186,6 +186,19 @@ class ArticleManager extends AbstractManager
             "stock" => $article->getStock()
         ];
         $query->execute($parameters);
+    }
+
+    private function decrementArticleStock(int $articleId) : void {
+        $articleManager = new ArticleManager($this->db); // Supposons que vous avez un gestionnaire d'articles
+        $article = $articleManager->findOne($articleId); // Supposons que vous avez une méthode pour obtenir un article par son ID
+    
+        if ($article) {
+            // Décrémente le stock de 1
+            $article->setStock($article->getStock() - 1);
+    
+            // Met à jour le stock de l'article dans la base de données
+            $articleManager->update($article);
+        }
     }
 
     /**

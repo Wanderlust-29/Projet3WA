@@ -12,19 +12,19 @@
 {% block main %}
     <main id="content" class="cart">
         <h1>Mon panier</h1>
-        {% for article in cart %}
-            <fieldset class="cart-article">
-                <label for="article{{ article.id }}">
+        <ul class="list-articles">
+            {% for article in cart %}
+                <li class="article">
                     {{ article.name }} {{ article.price }} €
-                </label>
-                <a class="btn-delete-from-cart" data-article="{{ article.id }}">
-                    <i class="fa-solid fa-x"></i>
-                </a>
-            </fieldset>
-        {% endfor %}
+                    <a class="btn-delete-from-cart" data-article="{{ article.id }}">
+                        <i class="fa-solid fa-x"></i>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
         <form action="stripe/checkout.php" method="POST">
             <label id="cart-total-price">
-                Total : <span class="amount">{{totalPrice}}</span>€
+                Total : <span class="total-price">{{totalPrice}}</span>€
             </label>
             <input type="hidden" name="totalPrice" value="{{totalPrice}}">
             <a class="btn btn-cart-back" href="index.php">Continuer mes achats</a>

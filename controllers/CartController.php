@@ -19,7 +19,7 @@ class CartController extends AbstractController
         // Ajouter l'article au panier
         $_SESSION["cart"][] = $article->toArray();
         
-        // Renvoyer le contenu du panier au format JSON
+        // Renvoyer le contenu du panier au format JSON après l'ajout
         $this->renderJson($_SESSION["cart"]);
     }
     
@@ -27,12 +27,14 @@ class CartController extends AbstractController
     public function cart() : void
     {
         $totalPrice = 0;
-        $cart = $_SESSION["cart"];
+        $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
+        
         foreach ($cart as $article) {
             if (isset($article['price'])) {
                 $totalPrice += $article['price'];
             }
         }
+
         $this->render("pay/cart.html.twig", [
             "cart" => $cart,
             "totalPrice" => $totalPrice,
@@ -53,13 +55,19 @@ class CartController extends AbstractController
                 }
             }
         }
-
-        // Renvoye le contenu mis à jour du panier au format JSON
+        // Réindexe le tableau après la suppression d'un élément
+        $_SESSION["cart"] = array_values($_SESSION["cart"]);
+        // Renvoye le contenu du panier au format JSON après la suppression
         $this->renderJson($_SESSION["cart"]);
     }
 
+
     public function success()
     {   
+        $om = new OrderManager();
+        $om->createOrder();
+        $_SESSION["cart"] = [];
+
         return $this->render('pay/success.html.twig', [
         ]);
     }

@@ -15,6 +15,8 @@ function addToCart(article_id) {
     .then((response) => response.json()) // Analyser la réponse JSON
     .then((data) => {
       console.log(data); // Afficher les données renvoyées par le serveur dans la console
+      updateCount(data);
+      updateTotal(data);
     })
     .catch((error) => {
       console.error(
@@ -39,6 +41,8 @@ function deleteFromCart(article_id) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data); // Afficher les données renvoyées par le serveur dans la console
+      updateCount(data);
+      updateTotal(data);
     })
     .catch((error) => {
       console.error(
@@ -46,6 +50,21 @@ function deleteFromCart(article_id) {
         error
       ); // Gérer les erreurs de la requête fetch
     });
+}
+
+function updateCount(data) {
+  let count = Object.keys(data).length;
+  const cartCount = document.querySelector(".cart-count");
+  cartCount.innerText = count;
+}
+function updateTotal(data) {
+  let totalPrice = 0;
+  data.forEach((article) => {
+    totalPrice += article.price;
+  });
+  const cartTotalPrice = document.querySelector(".total-price");
+  totalPrice = parseFloat(totalPrice);
+  cartTotalPrice.innerText = totalPrice;
 }
 
 export { addToCart, deleteFromCart };

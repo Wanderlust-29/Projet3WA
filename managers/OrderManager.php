@@ -51,7 +51,7 @@ class OrderManager extends AbstractManager
         return $orders;
     }
 
-        /**
+    /**
      * Récupère toutes les commandes par ordre décroissant.
      *
      * @return array Liste des commandes.
@@ -100,4 +100,29 @@ class OrderManager extends AbstractManager
         }
         return $orders;
     }
+
+    /**
+     * Crée une nouvelle commande en utilisant la date actuelle.
+     *
+     * @return void
+     */
+     public function createOrder() : void
+    {
+        $currentDate = date('Y-m-d');
+
+        $query = $this->db->prepare('INSERT INTO orders (user_id, created_at) 
+            VALUES (:user_id, :created_at)');
+
+        $parameters = [
+            "user_id" => $_SESSION["user"]->getId(),
+            "created_at" => $currentDate
+        ];
+        
+        $query->execute($parameters);
+        $orderId = $this->db->lastInsertId();
+
+        $ordersArticlesManager = new OrderArticleManager($this->db);
+        $ordersArticlesManager->insertArticles($orderId);
+    }
+
 }

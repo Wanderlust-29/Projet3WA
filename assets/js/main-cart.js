@@ -1,8 +1,6 @@
 import { addToCart, deleteFromCart } from "./cart.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Le DOM est chargé.");
-
   const addToCartButtons = document.querySelectorAll(".btn-add-to-cart");
   addToCartButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -16,7 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
   deleteFromCartButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const article_id = button.dataset.article;
+      const articleListItem = button.closest("li");
       deleteFromCart(article_id);
+      articleListItem.remove();
     });
   });
 });

@@ -12,8 +12,13 @@ abstract class AbstractController
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
 
         // Nombre d'articles dans le panier
-        $cart = $_SESSION["cart"];
-        $count = count($cart);
+        if (isset($_SESSION["cart"]) && is_array($_SESSION["cart"])) {
+            $cart = $_SESSION["cart"];
+            $count = count($cart);
+        } else {
+            $cart = [];
+            $count = 0;
+        }
 
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         $twig->addGlobal("session", $session);
