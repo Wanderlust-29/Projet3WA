@@ -64,13 +64,18 @@ class CartController extends AbstractController
 
     public function success()
     {   
+        $user = $_SESSION["user"];
+        $order = new Order($user, date('Y-m-d'));
+        
+        
         $om = new OrderManager();
-        $om->createOrder();
+        $om->createOrder($order);
         $_SESSION["cart"] = [];
-
+    
         return $this->render('pay/success.html.twig', [
         ]);
     }
+    
     
     public function cancel()
     {   

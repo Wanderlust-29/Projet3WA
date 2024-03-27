@@ -44,7 +44,7 @@ class OrderManager extends AbstractManager
             $um = new UserManager;
             $user = $um->findOne($item["user_id"]);
 
-            $order = new Order($user, $item["created_at"]);
+            $order = new Order($user, $item["created_at"], $item["status"]);
             $order->setId($item["id"]);
             $orders[]= $order;
         }
@@ -68,7 +68,7 @@ class OrderManager extends AbstractManager
             $um = new UserManager;
             $user = $um->findOne($item["user_id"]);
 
-            $order = new Order($user, $item["created_at"]);
+            $order = new Order($user, $item["created_at"], $item["status"]);
             $order->setId($item["id"]);
             $orders[]= $order;
         }
@@ -94,28 +94,28 @@ class OrderManager extends AbstractManager
             $um = new UserManager;
             $user = $um->findOne($item["user_id"]);
 
-            $order = new Order($user, $item["created_at"]);
+            $order = new Order($user, $item["created_at"], $item["status"]);
             $order->setId($item["id"]);
             $orders[]= $order;
         }
         return $orders;
     }
-
+    
     /**
      * Crée une nouvelle commande en utilisant la date actuelle.
      *
+     * @param Order $order L'objet Order représentant la commande à créer.
      * @return void
      */
-     public function createOrder() : void
+    public function createOrder(Order $order) : void
     {
-        $currentDate = date('Y-m-d');
-
-        $query = $this->db->prepare('INSERT INTO orders (user_id, created_at) 
-            VALUES (:user_id, :created_at)');
+        $query = $this->db->prepare('INSERT INTO orders (user_id, created_at, status) 
+            VALUES (:user_id, :created_at, :status)');
 
         $parameters = [
-            "user_id" => $_SESSION["user"]->getId(),
-            "created_at" => $currentDate
+            "user_id" => $order->getUserId()->getId(), // Récupérer l'ID de l'utilisateur
+            "created_at" => $order->getCreatedAt(),
+            "status" => $order->getStatus() // Récupérer le statut de la commande
         ];
         
         $query->execute($parameters);
@@ -124,5 +124,6 @@ class OrderManager extends AbstractManager
         $ordersArticlesManager = new OrderArticleManager($this->db);
         $ordersArticlesManager->insertArticles($orderId);
     }
+
 
 }

@@ -12,7 +12,7 @@ class ArticleController extends AbstractController
             "articles"=>$articles,
         ]);
     }
-    public function article(string $id) : void
+    public function article(int $id) : void
     {
         $success = isset($_SESSION["success-message"]) ? $_SESSION["success-message"] : null;
         unset($_SESSION["success-message"]);
@@ -21,15 +21,19 @@ class ArticleController extends AbstractController
         unset($_SESSION["error-message"]);
 
         $am = new ArticleManager();
+        $cm = new CommentManager();
 
         $article = $am->findOne(intval($id));
+        $comments = $cm->findAllById($article->getId());
 
         $this->render("pages/article.html.twig", [
             "article"=>$article,
+            "comments"=> $comments,
             "success" => $success,
             "error" => $error
         ]);
     }
+
     public function dogFood() : void
     {
         $am = new ArticleManager();

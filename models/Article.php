@@ -7,6 +7,7 @@ class Article
     {
 
     }
+
     // Transforme en tableau
     /**
      * @return array
@@ -26,7 +27,7 @@ class Article
         ];
     }
 
-    // Getter and Setter for ID
+    // Getter and Setter for id
     /**
      * @return int|null
      */

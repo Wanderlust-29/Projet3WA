@@ -63,8 +63,7 @@ function updateTotal(data) {
     totalPrice += article.price;
   });
   const cartTotalPrice = document.querySelector(".total-price");
-  totalPrice = parseFloat(totalPrice);
-  cartTotalPrice.innerText = totalPrice;
+  cartTotalPrice.innerText = totalPrice.toFixed(2);
 }
 
 export { addToCart, deleteFromCart };

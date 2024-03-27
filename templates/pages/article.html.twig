@@ -46,6 +46,12 @@
                     </tbody>
                 </table>
         </section>
+        <section class="comments">
+        <h2>Commentaires :</h2>
+        {% for comment in comments %}
+            <p>{{comment.comment}}</p>
+        {% endfor %}
+        </section>
     </main>
 {% endblock %}
 

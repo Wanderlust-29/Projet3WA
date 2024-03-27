@@ -8,7 +8,7 @@ class Media
     {
 
     }
-
+    // Getter and Setter for id
     /**
      * @return int|null
      */
@@ -25,6 +25,7 @@ class Media
         $this->id = $id;
     }
 
+    // Getter and Setter for url
     /**
      * @return string
      */
@@ -41,6 +42,7 @@ class Media
         $this->url = $url;
     }
 
+    // Getter and Setter for alt
     /**
      * @return string
      */

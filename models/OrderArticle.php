@@ -7,7 +7,7 @@ class OrderArticle
     {
 
     }
-
+    // Getter and Setter for Order
     /**
      * @return Order
      */
@@ -15,7 +15,6 @@ class OrderArticle
     {
         return $this->orderId;
     }
-
     /**
      * @param Order $orderId
      */
@@ -23,7 +22,7 @@ class OrderArticle
     {
         $this->orderId = $orderId;
     }
-
+    // Getter and Setter for Article
     /**
      * @return Article
      */

@@ -8,7 +8,7 @@ class Category
     {
 
     }
-
+    // Getter and Setter for id
     /**
      * @return int|null
      */
@@ -25,6 +25,7 @@ class Category
         $this->id = $id;
     }
 
+    // Getter and Setter for name
     /**
      * @return string
      */
@@ -40,7 +41,7 @@ class Category
     {
         $this->name = $name;
     }
-
+    // Getter and Setter for description
     /**
      * @return string
      */

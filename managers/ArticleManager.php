@@ -188,19 +188,6 @@ class ArticleManager extends AbstractManager
         $query->execute($parameters);
     }
 
-    private function decrementArticleStock(int $articleId) : void {
-        $articleManager = new ArticleManager($this->db); // Supposons que vous avez un gestionnaire d'articles
-        $article = $articleManager->findOne($articleId); // Supposons que vous avez une méthode pour obtenir un article par son ID
-    
-        if ($article) {
-            // Décrémente le stock de 1
-            $article->setStock($article->getStock() - 1);
-    
-            // Met à jour le stock de l'article dans la base de données
-            $articleManager->update($article);
-        }
-    }
-
     /**
      * Insère un nouvel article dans la base de données.
      *
