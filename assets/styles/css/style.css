@@ -571,10 +571,11 @@ body > footer .social-networks ul li {
 #content.article {
   display: grid;
   grid-template-columns: 10% 80% 10%;
+  padding: 2rem 0;
 }
 #content.article .product {
   grid-column: 2;
-  padding: 2rem 0;
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

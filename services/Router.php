@@ -10,6 +10,7 @@ class Router
         $atc = new ArticleController();
         $ic = new InfosController();
         $cc = new CartController();
+        $cmc = new CommentController();
 
         if(isset($get["route"]))
         {
@@ -120,6 +121,14 @@ class Router
             else if($get["route"] === "success")
             {
                 $cc->success();
+            }
+            else if($get["route"] === "comment")
+            {
+                $cmc->newComment($get["articleId"]);
+            }
+            else if($get["route"] === "check-comment")
+            {
+                $cmc->checkComment($get["articleId"]);
             }
             else
             {

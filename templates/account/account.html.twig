@@ -88,7 +88,7 @@
             <ul class="my-orders">
                 {% if orders is not empty %}
                     {% for order in orders %}
-                        <li>Commande n°{{ order.id }} date : {{ order.createdAt }} statut du colis : {{ order.status}}
+                        <li>Commande n°{{ order.id }} date : {{ order.createdAt }} statut du colis : {{ order.status}} 
                             <span class="plus">+</span>
                             <ul class="order-articles">
                                 {% set orderArticles = ordersArticles[order.id] %}
@@ -98,6 +98,7 @@
                                             <a href="index.php?route=article&id={{ article.articleId.id }}">
                                                 <p>{{ article.articleId.name }}</p>
                                             </a>
+                                            <a href="index.php?route=comment&articleId={{ article.articleId.id }}">Ajouter un Commentaires</a>
                                         </li>
                                     {% endfor %}
                                 {% else %}

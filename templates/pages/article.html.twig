@@ -20,7 +20,7 @@
                         <i class="fa-solid fa-cart-shopping"></i>
                     </a>
                     <p class="price">{{ article.price }} €</p>
-                    {% if averageGrade is defined %}
+                    {% if averageGrade is defined and averageGrade != 0 %}
                         <p class="average-grade">{{averageGrade}}</p>
                     {% endif %}
                 </div>
@@ -46,15 +46,17 @@
                 </tr>
             </tbody>
         </table>
-        
-        <section class="comments">
-        <h2>Commentaires :</h2>
-            {% for comment in comments %}
-                <h3>{{comment.userId.firstName}}</h3>
-                <p class="grade">{{comment.grade}}</p>
-                <p>{{comment.comment}}</p>
-            {% endfor %}
-        </section>
+
+        {% if comments is defined and comments != [] %}
+            <section class="comments">
+            <h2>Commentaires :</h2>
+                {% for comment in comments %}
+                    <h3>{{comment.userId.firstName}}</h3>
+                    <p class="grade">{{comment.grade}}</p>
+                    <p>{{comment.comment | raw}}</p>
+                {% endfor %}
+            </section>
+        {% endif %}
     </main>
 {% endblock %}
 

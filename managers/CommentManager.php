@@ -27,4 +27,23 @@ class CommentManager extends AbstractManager
         }
         return $comments;
     }
+
+    /**
+     * Crée un nouveau commentaire dans la base de données.
+     *
+     * @param Comment $comment Le commentaire à créer.
+     * @return void
+     */
+    public function create(Comment $comment) : void
+    {
+        $query = $this->db->prepare('INSERT INTO comments (article_id, user_id, grade, comment) VALUES (:article_id, :user_id, :grade, :comment)');
+        $parameters = [
+            "article_id" => $comment->getArticleId()->getId(),
+            "user_id" => $comment->getUserId()->getId(),
+            "grade" => $comment->getGrade(),
+            "comment" => $comment->getComment(),
+        ];
+
+        $query->execute($parameters);
+    }
 }
