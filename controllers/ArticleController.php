@@ -12,6 +12,7 @@ class ArticleController extends AbstractController
             "articles"=>$articles,
         ]);
     }
+    
     public function article(int $id) : void
     {
         $success = isset($_SESSION["success-message"]) ? $_SESSION["success-message"] : null;
@@ -26,11 +27,23 @@ class ArticleController extends AbstractController
         $article = $am->findOne(intval($id));
         $comments = $cm->findAllById($article->getId());
 
+        
+        $totalGrade = 0;
+        $numberOfComments = count($comments);
+        foreach ($comments as $comment) {
+            $totalGrade += $comment->getGrade();
+        }
+        
+        $averageGrade = $numberOfComments > 0 ? $totalGrade / $numberOfComments : 0;
+
+        $averageGrade = ceil($averageGrade);
+
         $this->render("pages/article.html.twig", [
             "article"=>$article,
             "comments"=> $comments,
             "success" => $success,
-            "error" => $error
+            "error" => $error,
+            "averageGrade" => $averageGrade
         ]);
     }
 

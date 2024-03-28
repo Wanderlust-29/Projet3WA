@@ -3,10 +3,10 @@
 class CommentManager extends AbstractManager
 {
     /**
-     * Récupère les commentaires en fonction de l'id de l'article.
+     * Récupère les commentaires en fonction de l'ID de l'article.
      *
-     * @param int id L'identifiant des commentaires à récupérer.
-     * @return Comment[] un tableau.
+     * @param int $articleId L'identifiant de l'article pour lequel récupérer les commentaires.
+     * @return Comment[] Un tableau contenant les commentaires.
      */
     public function findAllById(int $articleId): array
     {
@@ -19,7 +19,10 @@ class CommentManager extends AbstractManager
         $article = $am->findOne($articleId);
     
         foreach ($result as $item) {
-            $comment = new Comment($article, $item["grade"], $item["comment"]);
+
+            $um = new UserManager();
+            $user = $um->findOne($item["user_id"]);
+            $comment = new Comment($article, $user, $item["grade"], $item["comment"]);
             $comments[] = $comment;
         }
         return $comments;

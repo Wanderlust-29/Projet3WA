@@ -15,42 +15,45 @@
                 <figure>
                     <img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
                 </figure>
-
-                   
                 <div>
                     <a class="btn-add-to-cart" data-article="{{ article.id }}">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </a>
                     <p class="price">{{ article.price }} €</p>
+                    {% if averageGrade is defined %}
+                        <p class="average-grade">{{averageGrade}}</p>
+                    {% endif %}
                 </div>
-
                 {% if error is defined %}
                     <p id="error-msg">{{ error }}</p>
                 {% endif %}
                 {% if success is defined %}
                     <p id="success-msg">{{ success }}</p>
                 {% endif %}
-                        
-                <table>
-                    <thead>
-                    <tr >
-                        <td><h3 class="btn-description">Description<h3></td>
-                        <td><h3 href="#table" class="btn-ingredients">Ingrédients<h3></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="description"> {{article.description | raw}}</td>
-                            <td class="ingredients">{{article.ingredients | raw}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-        </section>
+        </section>  
+
+        <table class="description-ingredients">
+            <thead>
+            <tr >
+                <td><h3 class="btn-description">Description<h3></td>
+                <td><h3 href="#table" class="btn-ingredients">Ingrédients<h3></td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="description"> {{article.description | raw}}</td>
+                    <td class="ingredients">{{article.ingredients | raw}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
         <section class="comments">
         <h2>Commentaires :</h2>
-        {% for comment in comments %}
-            <p>{{comment.comment}}</p>
-        {% endfor %}
+            {% for comment in comments %}
+                <h3>{{comment.userId.firstName}}</h3>
+                <p class="grade">{{comment.grade}}</p>
+                <p>{{comment.comment}}</p>
+            {% endfor %}
         </section>
     </main>
 {% endblock %}

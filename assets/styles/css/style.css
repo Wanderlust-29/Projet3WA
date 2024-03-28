@@ -568,7 +568,12 @@ body > footer .social-networks ul li {
     margin: 0;
   }
 }
+#content.article {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+}
 #content.article .product {
+  grid-column: 2;
   padding: 2rem 0;
   display: flex;
   flex-direction: column;
@@ -590,56 +595,50 @@ body > footer .social-networks ul li {
   width: 80%;
   height: auto;
 }
-#content.article .product form {
+#content.article .product div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 0;
 }
-#content.article .product form .add-to-cart {
-  cursor: pointer;
-  margin-top: 1rem;
-  border: none;
-  padding: 1rem 2rem;
-  color: #fff;
-  background: rgb(0, 154, 135);
-  background: linear-gradient(135deg, rgb(0, 154, 135), rgb(1, 54, 95));
-}
-#content.article .product table {
+#content.article .description-ingredients {
+  grid-column: 2;
   border: 1px solid #9c9c9c;
   justify-self: center;
   width: 80vw;
 }
-#content.article .product table thead tr {
+#content.article .description-ingredients thead tr {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#content.article .product table thead tr td {
+#content.article .description-ingredients thead tr td {
   width: 100%;
   background-color: #fff;
   text-align: center;
 }
-#content.article .product table thead tr td h3 {
+#content.article .description-ingredients thead tr td h3 {
   cursor: pointer;
   text-transform: uppercase;
   color: #009a87;
 }
-#content.article .product table thead tr td:hover {
+#content.article .description-ingredients thead tr td:hover {
   background-color: #009a87;
 }
-#content.article .product table thead tr td:hover h3 {
+#content.article .description-ingredients thead tr td:hover h3 {
   color: #fff;
 }
-#content.article .product table tbody {
+#content.article .description-ingredients tbody {
   display: flex;
   flex-direction: column;
 }
-#content.article .product table tbody tr {
+#content.article .description-ingredients tbody tr {
   padding: 1rem 3rem;
 }
-#content.article .product table tbody .ingredients {
+#content.article .description-ingredients tbody .ingredients {
   display: none;
+}
+#content.article .comments {
+  grid-column: 2;
 }
 
 #content.dog-food {

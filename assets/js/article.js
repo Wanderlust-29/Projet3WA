@@ -30,5 +30,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
     });
   }
+  function gradeStar() {
+    const grades = document.querySelectorAll(".grade");
+    const averageGrade = document.querySelector(".average-grade");
+    averageGradeInt = parseInt(averageGrade.textContent);
+    let averageStars = "";
+    for (let i = 0; i < averageGradeInt; i++) {
+      averageStars += "⭐";
+    }
+    averageGrade.innerText = `${averageStars}`;
+    grades.forEach((grade) => {
+      const gradeInt = parseInt(grade.textContent);
+      let stars = "";
+      for (let i = 0; i < gradeInt; i++) {
+        stars += "⭐";
+      }
+      grade.innerText = `${stars}`;
+    });
+  }
   burgerMenu();
+  gradeStar();
 });

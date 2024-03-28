@@ -3,7 +3,7 @@
 class Comment
 {
     
-    public function __construct(private Article $articleId, private int $grade, private string $comment)
+    public function __construct(private Article $articleId, private User $userId, private int $grade, private string $comment)
     {
 
     }
@@ -22,6 +22,23 @@ class Comment
     public function setArticleId(Article $articleId): void
     {
         $this->articleId = $articleId;
+    }
+
+    // Getter and Setter for Article
+    /**
+     * @return User
+     */
+    public function getUserId(): User
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param User $userId
+     */
+    public function setUserId(User $userId): void
+    {
+        $this->userId = $userId;
     }
 
     // Getter and Setter for grade
