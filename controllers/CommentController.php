@@ -15,7 +15,6 @@ class CommentController extends AbstractController
 
     public function checkComment($articleId) : void
     {
-        
         if (isset($_POST["grade"]) && isset($_POST["comment"])) 
         {
 

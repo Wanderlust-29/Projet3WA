@@ -2,11 +2,30 @@
 
 class Comment
 {
+    private ? int $id = null;
     
     public function __construct(private Article $articleId, private User $userId, private int $grade, private string $comment)
     {
 
     }
+
+    // Getter and Setter for id
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
+
     // Getter and Setter for Article
     /**
      * @return Article

@@ -130,6 +130,10 @@ class Router
             {
                 $cmc->checkComment($get["articleId"]);
             }
+            else if($get["route"] === "articles-search")
+            {
+                $atc->search();
+            }
             else
             {
                 $dc->notFound();

@@ -45,5 +45,6 @@ class CommentManager extends AbstractManager
         ];
 
         $query->execute($parameters);
+        $comment->setId($this->db->lastInsertId());
     }
 }

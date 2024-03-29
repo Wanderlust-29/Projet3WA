@@ -214,4 +214,30 @@ class ArticleManager extends AbstractManager
         $article->setId($this->db->lastInsertId());
     }
 
+    public function searchArticles($search) : array
+    {
+        $query = $this->db->prepare('SELECT * FROM articles WHERE name LIKE :search OR description LIKE :search OR ingredients LIKE :search');
+        $parameters = [
+            ':search' => "%$search%"
+        ];
+        $query->execute($parameters);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $articles = [];
+    
+        foreach ($result as $item) {
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+    
+            $cm = new CategoryManager();
+            $category = $cm->findOne($item["category_id"]);
+    
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
+            $article->setId($item["id"]);
+            
+            $articles[] = $article;
+        }
+    
+        return $articles;
+    }
 }

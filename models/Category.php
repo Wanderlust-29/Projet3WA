@@ -41,6 +41,7 @@ class Category
     {
         $this->name = $name;
     }
+    
     // Getter and Setter for description
     /**
      * @return string

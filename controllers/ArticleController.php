@@ -27,7 +27,7 @@ class ArticleController extends AbstractController
         $article = $am->findOne(intval($id));
         $comments = $cm->findAllById($article->getId());
 
-        
+        // Calculer la moyenne des notes
         $totalGrade = 0;
         $numberOfComments = count($comments);
         foreach ($comments as $comment) {
@@ -35,7 +35,6 @@ class ArticleController extends AbstractController
         }
         
         $averageGrade = $numberOfComments > 0 ? $totalGrade / $numberOfComments : 0;
-
         $averageGrade = ceil($averageGrade);
 
         $this->render("pages/article.html.twig", [
@@ -78,4 +77,21 @@ class ArticleController extends AbstractController
 
         ]);
     }
+
+    public function search() : void
+    {
+        if(isset($_POST['search'])) { 
+            $search = htmlspecialchars($_POST['search']);
+    
+            $am = new ArticleManager();
+            $articles = $am->searchArticles($search);
+            
+            $this->render("pages/articles-search.html.twig", [
+                "articles"=>$articles
+            ]);
+        } else {
+            $this->redirect("index.php");
+        }
+    }
+    
 }
