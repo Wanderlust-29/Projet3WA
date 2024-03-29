@@ -64,6 +64,10 @@ function updateTotal(data) {
   });
   const cartTotalPrice = document.querySelector(".total-price");
   cartTotalPrice.innerText = totalPrice.toFixed(2);
+  const btnCheckout = document.getElementById("checkout-button");
+  if (totalPrice === 0) {
+    btnCheckout.remove();
+  }
 }
 
 export { addToCart, deleteFromCart };

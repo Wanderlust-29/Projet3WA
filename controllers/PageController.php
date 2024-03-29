@@ -1,6 +1,6 @@
 <?php
 
-class ArticleController extends AbstractController
+class PageController extends AbstractController
 {
     public function articles() : void
     {   
@@ -93,5 +93,30 @@ class ArticleController extends AbstractController
             $this->redirect("index.php");
         }
     }
-    
+
+    public function contact() : void
+    {
+        $this->render("pages/contact.html.twig", [
+        ]);
+    }
+    public function conditions() : void
+    {
+        $this->render("pages/conditions.html.twig", [
+        ]);
+    }
+    public function legal() : void
+    {
+        $this->render("pages/legal.html.twig", [
+        ]);
+    }
+    public function privacy() : void
+    {
+        $this->render("pages/privacy.html.twig", [
+        ]);
+    }
+    public function refund() : void
+    {
+        $this->render("pages/refund.html.twig", [
+        ]);
+    }
 }

@@ -7,20 +7,14 @@ class DefaultController extends AbstractController
         $am = new ArticleManager();
         $articles = $am->TopFour();
 
-        $this->render("pages/home.html.twig", [
+        $this->render("default/home.html.twig", [
             "articles"=>$articles,
-        ]);
-    }
-
-    public function contact() : void
-    {
-        $this->render("pages/contact.html.twig", [
         ]);
     }
 
     public function notfound() : void
     {
-        $this->render("pages/404.html.twig", [
+        $this->render("default/404.html.twig", [
         ]);
     }
 }

@@ -36,7 +36,9 @@
             <thead>
             <tr >
                 <td><h3 class="btn-description">Description<h3></td>
-                <td><h3 href="#table" class="btn-ingredients">Ingrédients<h3></td>
+                {% if article.category.getName() != "Jouets" %}
+                    <td><h3 href="#table" class="btn-ingredients">Ingrédients<h3></td>
+                {% endif %}
             </tr>
             </thead>
             <tbody>

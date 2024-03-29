@@ -31,8 +31,6 @@
             {% if session is defined and session is not null %}
                 {% if cart != [] %}
                     <button type="submit" id="checkout-button">Valider et payer</button>
-                {% else %}
-                    <a class="btn-shop" href="index.php?route=articles">Remplir mon panier</a>
                 {% endif %}
             {% else %}
                 <a class="btn-login" href="index.php?route=login">Connectez-vous pour payer</a>

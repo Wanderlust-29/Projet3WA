@@ -48,7 +48,6 @@ class AuthController extends AbstractController
         }
     }
     
-
     public function register() : void
     {   
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
@@ -167,7 +166,6 @@ class AuthController extends AbstractController
             $this->redirect("index.php?route=login-admin");
         }
     }
-    
     
     public function logout() : void
     {

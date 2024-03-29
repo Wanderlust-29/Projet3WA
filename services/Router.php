@@ -7,10 +7,9 @@ class Router
         $dc = new DefaultController();
         $athc = new AuthController();
         $acc = new AccountController();
-        $atc = new ArticleController();
-        $ic = new InfosController();
+        $pc = new PageController();
         $cc = new CartController();
-        $cmc = new CommentController();
+        
 
         if(isset($get["route"]))
         {
@@ -68,43 +67,43 @@ class Router
             }
             else if($get["route"] === "articles")
             {
-                $atc->articles();
+                $pc->articles();
             }         
             else if($get["route"] === "article")
             {
-                $atc->article($get["id"]);
+                $pc->article($get["id"]);
             }
             else if($get["route"] === "dog-food")
             {
-                $atc->dogFood();
+                $pc->dogFood();
             }
             else if($get["route"] === "treats")
             {
-                $atc->treats();
+                $pc->treats();
             }
             else if($get["route"] === "toys")
             {
-                $atc->toys();
+                $pc->toys();
             }
             else if($get["route"] === "contact")
             {
-                $dc->contact();
+                $pc->contact();
             }
             else if($get["route"] === "conditions")
             {
-                $ic->conditions();
+                $pc->conditions();
             }
             else if($get["route"] === "legal")
             {
-                $ic->legal();
+                $pc->legal();
             }
             else if($get["route"] === "privacy")
             {
-                $ic->privacy();
+                $pc->privacy();
             }
             else if($get["route"] === "refund")
             {
-                $ic->refund();
+                $pc->refund();
             }
             else if($get["route"] === "cart")
             {
@@ -124,15 +123,15 @@ class Router
             }
             else if($get["route"] === "comment")
             {
-                $cmc->newComment($get["articleId"]);
+                $acc->newComment($get["articleId"]);
             }
             else if($get["route"] === "check-comment")
             {
-                $cmc->checkComment($get["articleId"]);
+                $acc->checkComment($get["articleId"]);
             }
             else if($get["route"] === "articles-search")
             {
-                $atc->search();
+                $pc->search();
             }
             else
             {

@@ -2,6 +2,7 @@
 
 class AccountController extends AbstractController
 {
+    // USER
     public function account(): void
     {
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
@@ -30,7 +31,6 @@ class AccountController extends AbstractController
             'ordersArticles' => $ordersArticles,
         ]);
     }
-    
     
     public function updateUserProfile(): void
     {
@@ -80,39 +80,6 @@ class AccountController extends AbstractController
         $this->redirect("index.php?route=account");
     }
     
-
-    function admin(){
-        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-    
-        $um = new UserManager();
-        $am = new ArticleManager();
-        $om = new OrderManager();
-    
-        $articles = $am->findAll();
-        $users = $um->findAll();
-        $orders = $om->findAllDecreasing();
-    
-        // Initialise un tableau pour stocker les articles de chaque commande
-        $ordersArticles = [];
-
-        // Pour chaque commande, récupère les articles associés
-        foreach ($orders as $order) {
-            $orderId = $order->getId();
-            $oAm = new OrderArticleManager();
-            $orderArticles = $oAm->findByOrderId($orderId);
-            $ordersArticles[$orderId] = $orderArticles;
-        }
-    
-        $this->render("account/admin.html.twig", [
-            'error' => $error,
-            'articles' => $articles,
-            'users' => $users,
-            'orders' => $orders,
-            'ordersArticles' => $ordersArticles,
-        ]);
-    }
-
-
     public function deleteUser()
     {
         if (isset($_SESSION["user"]) && isset($_POST['delete']) && isset($_POST['userId'])) {
@@ -144,8 +111,38 @@ class AccountController extends AbstractController
             $this->redirect("index.php");
         }
     }
-    
 
+    // ADMIN
+    function admin(){
+        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+    
+        $um = new UserManager();
+        $am = new ArticleManager();
+        $om = new OrderManager();
+    
+        $articles = $am->findAll();
+        $users = $um->findAll();
+        $orders = $om->findAllDecreasing();
+    
+        // Initialise un tableau pour stocker les articles de chaque commande
+        $ordersArticles = [];
+
+        // Pour chaque commande, récupère les articles associés
+        foreach ($orders as $order) {
+            $orderId = $order->getId();
+            $oAm = new OrderArticleManager();
+            $orderArticles = $oAm->findByOrderId($orderId);
+            $ordersArticles[$orderId] = $orderArticles;
+        }
+    
+        $this->render("account/admin.html.twig", [
+            'error' => $error,
+            'articles' => $articles,
+            'users' => $users,
+            'orders' => $orders,
+            'ordersArticles' => $ordersArticles,
+        ]);
+    }
     public function updateStock(): void
     {
         if (isset($_SESSION['user'])) {
@@ -183,7 +180,6 @@ class AccountController extends AbstractController
         $this->redirect("index.php?route=admin");
     }
     
-
     public function createArticle(): void
     {
         if (
@@ -243,5 +239,50 @@ class AccountController extends AbstractController
             $this->redirect("index.php?route=admin");
         }
     }
-    
+
+    public function newComment($articleId) : void
+    {
+        $am = new ArticleManager();
+
+        $article = $am->findOne(intval($articleId));
+
+        $this->render("account/comment.html.twig", [
+            "article" => $article,
+        ]);
+    }
+
+    public function checkComment($articleId) : void
+    {
+        if (isset($_POST["grade"]) && isset($_POST["comment"])) 
+        {
+
+            if (isset($_SESSION['user'])) {
+                // L'objet $user avec les informations de l'utilisateur connecté
+                $userId = $_SESSION['user']->getId();
+
+                $userManager = new UserManager();
+                $user = $userManager->findOne(($userId));
+
+                $cm = new CommentManager();
+
+                $am = new ArticleManager();
+                $article = $am->findOne(intval($articleId));
+
+                // Crée un nouveau commentaire
+                $grade = $_POST["grade"];
+                $commentText = htmlspecialchars($_POST["comment"]);
+                $comment = new Comment($article, $user, $grade, $commentText);
+                $cm->create($comment);
+                $this->redirect("index.php?route=account");
+            } else {
+                // Redirection si l'utilisateur n'est pas connecté
+                $_SESSION["error-message"] = "Vous devez être connecté pour commenter.";
+                $this->redirect("index.php");
+            }
+        } else {
+            // Redirection si les données de commentaire ne sont pas complètes
+            $_SESSION["error-message"] = "Veuillez remplir tous les champs du commentaire.";
+            $this->redirect("index.php");
+        }
+    }
 }
