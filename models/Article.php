@@ -73,7 +73,7 @@ class Article
     /**
      * @param float $price
      */
-    public function setPrice(string $price): void
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }

@@ -2,6 +2,24 @@
 
 class CartController extends AbstractController
 {
+
+    public function cart() : void
+    {
+        $totalPrice = 0;
+        $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
+        
+        foreach ($cart as $article) {
+            if (isset($article['price'])) {
+                $totalPrice += $article['price'];
+            }
+        }
+
+        $this->render("pay/cart.html.twig", [
+            "cart" => $cart,
+            "totalPrice" => $totalPrice,
+        ]);
+    }    
+    
     public function addToCart() : void
     {
         // Récupérer l'identifiant de l'article envoyé par la requête POST
@@ -23,27 +41,9 @@ class CartController extends AbstractController
         $this->renderJson($_SESSION["cart"]);
     }
     
-    
-    public function cart() : void
-    {
-        $totalPrice = 0;
-        $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
-        
-        foreach ($cart as $article) {
-            if (isset($article['price'])) {
-                $totalPrice += $article['price'];
-            }
-        }
-
-        $this->render("pay/cart.html.twig", [
-            "cart" => $cart,
-            "totalPrice" => $totalPrice,
-        ]);
-    }
-
     public function deleteFromCart() : void
     {
-        // Récupére l'identifiant de l'article à supprimer envoyé par la requête POST
+        // Récupère l'identifiant de l'article à supprimer envoyé par la requête POST
         $id = intval($_POST['article_id']);
             
         // Vérifie si le panier existe dans la session
@@ -61,11 +61,39 @@ class CartController extends AbstractController
         $this->renderJson($_SESSION["cart"]);
     }
 
+    public function updateShippingCosts()
+    {   
+        if (isset($_SESSION["cart"])) {
+            // Assume 'shippingMethod' est envoyé via POST
+            $shippingMethod = $_POST['shipping-method'] ?? 'home'; // valeur par défaut si non spécifié
+        
+            // Vous pourriez avoir un tableau des coûts de livraison ou les récupérer d'une base de données
+            $shippingCosts = [
+                'udp' => 11.99,
+                'chronopost' => 9.99,
+                'home' => 0.00
+            ];
+        }
+        // Mettre à jour la session avec le coût de livraison sélectionné
+        $_SESSION['cart']['shipping_costs'] = $shippingCosts[$shippingMethod];
+        
+        // Répondre avec le nouveau contenu du panier ou tout autre information pertinente
+        $this->renderJson($_SESSION["cart"]);
+    }
 
     public function success()
     {   
         $user = $_SESSION["user"];
-        $order = new Order($user, date('Y-m-d'));
+        $totalPrice = 0;
+        $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
+        $status = "success";
+        
+        foreach ($cart as $article) {
+            if (isset($article['price'])) {
+                $totalPrice += $article['price'];
+            }
+        }
+        $order = new Order($user, date('Y-m-d'), $status, $totalPrice);
         
         
         $om = new OrderManager();
@@ -76,11 +104,9 @@ class CartController extends AbstractController
         ]);
     }
     
-    
     public function cancel()
     {   
         return $this->render('pay/cart.html.twig', [
         ]);
     }
-    
 }

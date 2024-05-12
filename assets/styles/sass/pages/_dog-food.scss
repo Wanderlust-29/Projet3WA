@@ -54,7 +54,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        .cart {
+        .btn-add-to-cart {
+          cursor: pointer;
           color: $green;
           padding: 1rem;
         }

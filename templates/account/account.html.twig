@@ -88,7 +88,7 @@
             <ul class="my-orders">
                 {% if orders is not empty %}
                     {% for order in orders %}
-                        <li>Commande n°{{ order.id }} date : {{ order.createdAt }} statut du colis : {{ order.status}} 
+                        <li>Commande n°{{ order.id }} date : {{ order.createdAt }} statut du colis : {{ order.status}} prix de la commande: {{ order.totalPrice}} 
                             <span class="plus">+</span>
                             <ul class="order-articles">
                                 {% set orderArticles = ordersArticles[order.id] %}

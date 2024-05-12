@@ -20,7 +20,7 @@ class OrderManager extends AbstractManager
             $um = new UserManager;
             $user = $um->findOne($result["user_id"]);
 
-            $order = new Order($user, $result["created_at"]);
+            $order = new Order($user, $result["created_at"],  $result["status"], $result["total_price"]);
             $order->setId($result["id"]);
             return $order;
         }
@@ -44,7 +44,7 @@ class OrderManager extends AbstractManager
             $um = new UserManager;
             $user = $um->findOne($item["user_id"]);
 
-            $order = new Order($user, $item["created_at"], $item["status"]);
+            $order = new Order($user, $item["created_at"], $item["status"], $item["total_price"]);
             $order->setId($item["id"]);
             $orders[]= $order;
         }
@@ -68,7 +68,7 @@ class OrderManager extends AbstractManager
             $um = new UserManager;
             $user = $um->findOne($item["user_id"]);
 
-            $order = new Order($user, $item["created_at"], $item["status"]);
+            $order = new Order($user, $item["created_at"], $item["status"], $item["total_price"]);
             $order->setId($item["id"]);
             $orders[]= $order;
         }
@@ -94,7 +94,7 @@ class OrderManager extends AbstractManager
             $um = new UserManager;
             $user = $um->findOne($item["user_id"]);
 
-            $order = new Order($user, $item["created_at"], $item["status"]);
+            $order = new Order($user, $item["created_at"], $item["status"], $item["total_price"],);
             $order->setId($item["id"]);
             $orders[]= $order;
         }
@@ -109,13 +109,14 @@ class OrderManager extends AbstractManager
      */
     public function createOrder(Order $order) : void
     {
-        $query = $this->db->prepare('INSERT INTO orders (user_id, created_at, status) 
-            VALUES (:user_id, :created_at, :status)');
+        $query = $this->db->prepare('INSERT INTO orders (user_id, created_at, status, total_price) 
+            VALUES (:user_id, :created_at, :status, :total_price)');
 
         $parameters = [
             "user_id" => $order->getUserId()->getId(), // Récupérer l'ID de l'utilisateur
             "created_at" => $order->getCreatedAt(),
-            "status" => $order->getStatus() // Récupérer le statut de la commande
+            "status" => $order->getStatus(), // Récupérer le statut de la commande
+            "total_price" => $order->getTotalPrice() // Récupérer le prix total de la commande
         ];
         
         $query->execute($parameters);

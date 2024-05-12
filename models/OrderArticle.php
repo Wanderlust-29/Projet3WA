@@ -22,6 +22,7 @@ class OrderArticle
     {
         $this->orderId = $orderId;
     }
+    
     // Getter and Setter for Article
     /**
      * @return Article

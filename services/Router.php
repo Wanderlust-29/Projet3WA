@@ -113,7 +113,7 @@ class Router
             {
                 $cc->addToCart();
             }
-            else if($get["route"] === "deleteFromCart")
+            else if($get["route"] === "delete-from-cart")
             {
                 $cc->deleteFromCart();
             }
@@ -132,6 +132,10 @@ class Router
             else if($get["route"] === "articles-search")
             {
                 $pc->search();
+            }
+            else if($get["route"] === "update-shipping-costs")
+            {
+                $cc->updateShippingCosts();
             }
             else
             {

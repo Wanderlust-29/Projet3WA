@@ -1,4 +1,4 @@
-import { addToCart, deleteFromCart } from "./cart.js";
+import { addToCart, deleteFromCart, changeShippingMethod } from "./cart.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const addToCartButtons = document.querySelectorAll(".btn-add-to-cart");
@@ -19,4 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
       articleListItem.remove();
     });
   });
+  const shippingOptions = document.querySelectorAll('input[name="drone"]');
+  if (shippingOptions) {
+    shippingOptions.forEach((radio) => {
+      radio.addEventListener("change", function () {
+        changeShippingMethod(this.value);
+      });
+    });
+  }
 });

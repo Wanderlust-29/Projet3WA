@@ -11,6 +11,7 @@
 
 {% block main %}
     <main id="content" class="cart">
+        <section class="cart-payement">
         <h1>Mon panier</h1>
         <ul class="list-articles">
             {% for article in cart %}
@@ -22,6 +23,25 @@
                 </li>
             {% endfor %}
         </ul>
+
+        <form action="" method="POST" class="update-shipping-costs">
+                <legend>Frais de port</legend>
+                <fieldset>
+                    <input type="radio" id="udp" name="drone" value="udp"/>
+                    <label for="udp">2-3 jours ouvrés Udp (11.99€)</label>
+                </fieldset>
+
+                <fieldset>
+                    <input type="radio" id="chronopost" name="drone" value="chronopost"  />
+                    <label for="chronopost">Chronopost 4-5 jours ouvrés (9.99€)</label>
+                </fieldset>
+
+                <fieldset>
+                    <input type="radio" id="home" name="drone" value="home" checked/>
+                    <label for="home">Venir chercher sur place (Gratuit)</label>
+                </fieldset>
+        </form>
+
         <form action="stripe/checkout.php" method="POST">
             <label id="cart-total-price">
                Total : <span class="total-price">{{ totalPrice|number_format(2, '.', ',') }}</span>€
@@ -33,9 +53,12 @@
                     <button type="submit" id="checkout-button">Valider et payer</button>
                 {% endif %}
             {% else %}
-                <a class="btn-login" href="index.php?route=login">Connectez-vous pour payer</a>
+                {% if cart != [] %}
+                    <a class="btn-login" href="index.php?route=login">Connectez-vous pour payer</a>
+                {% endif %}
             {% endif %}
         </form>
+        </section>
     </main>
 {% endblock %}
 

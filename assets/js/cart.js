@@ -37,7 +37,7 @@ function deleteFromCart(article_id) {
   };
 
   // Effectuer la requête fetch vers la route 'index.php?route=deleteFromCart' avec les options définies
-  fetch("index.php?route=deleteFromCart", options)
+  fetch("index.php?route=delete-from-cart", options)
     .then((response) => response.json())
     .then((data) => {
       console.log(data); // Afficher les données renvoyées par le serveur dans la console
@@ -52,22 +52,56 @@ function deleteFromCart(article_id) {
     });
 }
 
-function updateCount(data) {
-  let count = Object.keys(data).length;
-  const cartCount = document.querySelector(".cart-count");
-  cartCount.innerText = count;
+function changeShippingMethod(shippingMethod) {
+  let formData = new FormData();
+  formData.append("shipping-method", shippingMethod);
+  fetch("index.php?route=update-shipping-costs", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      updateTotal(data);
+    })
+    .catch((error) => {
+      console.error("Error changing shipping costs:", error);
+    });
 }
+
+function updateCount(data) {
+  const itemCount = Object.keys(data) ? Object.keys(data).length : 0;
+  const cartCount = document.querySelector(".cart-count");
+  cartCount.innerText = itemCount;
+}
+
 function updateTotal(data) {
+  console.log(data);
   let totalPrice = 0;
+
   data.forEach((article) => {
     totalPrice += article.price;
   });
+
   const cartTotalPrice = document.querySelector(".total-price");
-  cartTotalPrice.innerText = totalPrice.toFixed(2);
+  if (cartTotalPrice) {
+    cartTotalPrice.textContent = totalPrice.toFixed(2) + "€";
+  } else {
+    console.error("Total price element not found.");
+  }
+  // shipping cost
+  // if (typeof data.shipping_costs === "number") {
+  //   totalPrice += data.shipping_costs;
+  // }
+
   const btnCheckout = document.getElementById("checkout-button");
   if (totalPrice === 0) {
     btnCheckout.remove();
   }
 }
 
-export { addToCart, deleteFromCart };
+export { addToCart, deleteFromCart, changeShippingMethod };
