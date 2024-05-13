@@ -69,9 +69,9 @@ class CartController extends AbstractController
         
             // Vous pourriez avoir un tableau des coûts de livraison ou les récupérer d'une base de données
             $shippingCosts = [
-                'udp' => 11.99,
-                'chronopost' => 9.99,
-                'home' => 0.00
+                'udp' => ['price' => 11.99, 'name' => '2-3 jours ouvrés Udp'],
+                'chronopost' => ['price' => 9.99, 'name' => 'Chronopost 4-5 jours ouvrés'],
+                'home' => ['price' => 0.00, 'name' => 'Venir chercher sur place']
             ];
         }
         // Mettre à jour la session avec le coût de livraison sélectionné

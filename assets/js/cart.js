@@ -54,6 +54,7 @@ function deleteFromCart(article_id) {
 
 function changeShippingMethod(shippingMethod) {
   let formData = new FormData();
+
   formData.append("shipping-method", shippingMethod);
   fetch("index.php?route=update-shipping-costs", {
     method: "POST",
@@ -83,9 +84,24 @@ function updateTotal(data) {
   console.log(data);
   let totalPrice = 0;
 
-  data.forEach((article) => {
-    totalPrice += article.price;
-  });
+  // Parcourir les articles du panier
+  for (const key in data) {
+    if (Object.hasOwnProperty.call(data, key)) {
+      const item = data[key];
+      // Vérifier si l'élément est un article
+      if (item.hasOwnProperty("price")) {
+        totalPrice += item.price;
+      }
+    }
+  }
+
+  // Ajouter les frais de livraison au total
+  if (
+    data.hasOwnProperty("shipping_costs") &&
+    data.shipping_costs.hasOwnProperty("price")
+  ) {
+    totalPrice += data.shipping_costs.price;
+  }
 
   const cartTotalPrice = document.querySelector(".total-price");
   if (cartTotalPrice) {
@@ -93,10 +109,6 @@ function updateTotal(data) {
   } else {
     console.error("Total price element not found.");
   }
-  // shipping cost
-  // if (typeof data.shipping_costs === "number") {
-  //   totalPrice += data.shipping_costs;
-  // }
 
   const btnCheckout = document.getElementById("checkout-button");
   if (totalPrice === 0) {
