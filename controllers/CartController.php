@@ -44,14 +44,18 @@ class CartController extends AbstractController
     public function deleteFromCart() : void
     {
         // Récupère l'identifiant de l'article à supprimer envoyé par la requête POST
-        $id = intval($_POST['article_id']);
-            
+        $id = !empty($_POST['article_id']) ? intval($_POST['article_id']) : null;
+        
         // Vérifie si le panier existe dans la session
         if (isset($_SESSION["cart"])) {
-            foreach ($_SESSION["cart"] as $key => $article) {
-                if ($article['id'] === $id) {
-                    unset($_SESSION["cart"][$key]);
-                    break; 
+            if(is_null($id)){
+                unset($_SESSION['cart']['shipping_costs']);
+            }else{
+                foreach ($_SESSION["cart"] as $key => $article) {
+                    if ($article['id'] === $id) {
+                        unset($_SESSION["cart"][$key]);
+                        break; 
+                    }
                 }
             }
         }
@@ -74,7 +78,9 @@ class CartController extends AbstractController
                 'home' => ['price' => 0.00, 'name' => 'Venir chercher sur place']
             ];
         }
+        
         // Mettre à jour la session avec le coût de livraison sélectionné
+        unset($_SESSION['cart']['shipping_costs']);
         $_SESSION['cart']['shipping_costs'] = $shippingCosts[$shippingMethod];
         
         // Répondre avec le nouveau contenu du panier ou tout autre information pertinente
