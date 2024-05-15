@@ -6,9 +6,19 @@ class DefaultController extends AbstractController
     {
         $am = new ArticleManager();
         $articles = $am->TopFour();
+        $totalPrice = 0;
+        $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
+        
+        foreach ($cart as $article) {
+            if (isset($article['price'])) {
+                $totalPrice += $article['price'];
+            }
+        }
 
         $this->render("default/home.html.twig", [
             "articles"=>$articles,
+            "cart" => $cart,
+            "totalPrice" => $totalPrice,
         ]);
     }
 
