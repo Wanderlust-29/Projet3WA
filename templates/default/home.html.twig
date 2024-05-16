@@ -1,101 +1,109 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    Accueil
-    {{ parent() }}
+	Accueil
+	{{ parent() }}
 {% endblock %}
 
 {% block head %}
+	<link rel="stylesheet" href="node_modules/@splidejs/splide/dist/css/splide.min.css">
 {% endblock %}
 
 {% block main %}
-    <main id="content" class="home">
-        <section class="banner">
-                <h1>TimberWolf</h1>
-                <a class="btn-1" href="index.php?route=articles">Nos Produits</a>
-        </section>
+	<main id="content" class="home">
+		<section class="banner">
+			<h1>TimberWolf</h1>
+			<a class="btn-1" href="index.php?route=articles">Nos Produits</a>
+		</section>
 
-        <section class="home-nav">
-            <h2>Acheter par catégories</h2>
-            <ul>
-                <li class="dog-food"><a href="index.php?route=dog-food">Croquettes</a></li>
-                <li class="treats"><a href="index.php?route=treats">Friandises</a></li>
-                <li class="toys"><a href="index.php?route=toys">Jouets</a></li>
-            </ul>
-        </section>
+		<section class="home-nav">
+			<h2>Acheter par catégories</h2>
+			<ul>
+				<li class="dog-food">
+					<a href="index.php?route=dog-food">Croquettes</a>
+				</li>
+				<li class="treats">
+					<a href="index.php?route=treats">Friandises</a>
+				</li>
+				<li class="toys">
+					<a href="index.php?route=toys">Jouets</a>
+				</li>
+			</ul>
+		</section>
 
-        <section class="top-sales">
-            <h2>Nos meilleurs ventes</h2>
-            {% for article in articles %}
-                {% if article.stock != 0 %}
-                    <article class="products">
-                        <a href="index.php?route=article&id={{ article.id }}">
-                            <h3>{{ article.name }}</h3>
-                            <figure>
-                                <img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}" />
-                            </figure>
-                        </a>
-                        <div>
-                            <a class="btn-add-to-cart" data-article="{{ article.id }}">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </a>
-                            <p class="price">{{ article.price }} €</p>
-                        </div>
-                    </article>
-                {% else %}
-                    <article class="products">
-                        <p class="out-of-stock">Rupture de stock</p>  
-                        <a>
-                            <h3>{{ article.name }}</h3>
-                            <figure>
-                                <img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}" />
-                            </figure>
-                        </a>
-                        <div>
-                            <a class="cart-out-of-stock">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                            </a>
-                            <p class="price">{{ article.price }} €</p>
-                        </div>
-                    </article> 
-                {% endif %}
-            {% endfor %}
-        </section>
-        <section id="about">
-            <h2>A propos</h2>
-            <p>Nous sommes une équipe passionnée par le bien-être animal et engagée à fournir les meilleurs produits et services pour le bonheur et la santé de vos compagnons à quatre pattes.</p>
-            <article class="about-schedules"> 
-                <h3 class="schedules-btn">+ Nos horaires</h3>
-                <ul class="schedules">
-                    <li>Lundi : 10:00-19:00</li>
-                    <li>Mardi : 10:00-19:00</li>
-                    <li>Mercredi : 10:00-19:00</li>
-                    <li>Jeudi : 10:00-19:00</li>
-                    <li>Vendredi : 10:00-19:00</li>
-                </ul>
-            </article>
-            <article class="about-coordinates">    
-                <h3 class="coordinates-btn">+ Nos coordonnées</h3>
-                <ul class="coordinates">
-                    <li><a href="mailto:contact@timberwolf.fr"><i class="fa-solid fa-envelope"></i> contact@timberwolf.fr</a></li>
-                    <li><a href="tel:0298000000"><i class="fa-solid fa-phone"></i> 02.98.00.00.00</a></li>
-                    <li>Esplanade du général de Gaulle</li>
-                    <li>Pont de buis-lès-Quimerch</li>
-                    <li>Code postal : 29590</li>            
-                </ul>
-                <div class="container-map">
-                    <div id="map"></div>
-                </div>
-            </article>
-        </section>
-        
-    </main>
+		<section class="splide" aria-label="Splide Basic">
+			<h2>Nos meilleurs ventes</h2>
+			<div class="splide__track">
+
+				<ul class="splide__list">
+					{% for article in articles %}
+						{% if article.stock != 0 %}
+							<li class="splide__slide">
+								<a href="index.php?route=article&id={{ article.id }}">
+									<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+									<h3>{{ article.name }}</h3>
+									<p class="price">{{ article.price }}€</p>
+								</a>
+							</li>
+						{% else %}
+							<li class="splide__slide">
+								<p class="out-of-stock">Rupture de stock</p>
+								<a>
+									<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+									<h3>{{ article.name }}</h3>
+									<p class="price">{{ article.price }}€</p>
+								</a>
+							</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+
+			</div>
+		</section>
+
+
+		<section id="about">
+			<h2>A propos</h2>
+			<p>Nous sommes une équipe passionnée par le bien-être animal et engagée à fournir les meilleurs produits et services pour le bonheur et la santé de vos compagnons à quatre pattes.</p>
+			<article class="about-schedules">
+				<h3 class="schedules-btn">+ Nos horaires</h3>
+				<ul class="schedules">
+					<li>Lundi : 10:00-19:00</li>
+					<li>Mardi : 10:00-19:00</li>
+					<li>Mercredi : 10:00-19:00</li>
+					<li>Jeudi : 10:00-19:00</li>
+					<li>Vendredi : 10:00-19:00</li>
+				</ul>
+			</article>
+			<article class="about-coordinates">
+				<h3 class="coordinates-btn">+ Nos coordonnées</h3>
+				<ul class="coordinates">
+					<li>
+						<a href="mailto:contact@timberwolf.fr">
+							<i class="fa-solid fa-envelope"></i>
+							contact@timberwolf.fr</a>
+					</li>
+					<li>
+						<a href="tel:0298000000">
+							<i class="fa-solid fa-phone"></i>
+							02.98.00.00.00</a>
+					</li>
+					<li>Esplanade du général de Gaulle</li>
+					<li>Pont de buis-lès-Quimerch</li>
+					<li>Code postal : 29590</li>
+				</ul>
+				<div class="container-map">
+					<div id="map"></div>
+				</div>
+			</article>
+		</section>
+
+	</main>
 {% endblock %}
 
 {% block javascript %}
- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin="">
-</script>
-<script src="assets/js/home.js" defer></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	<script src="assets/js/home.js" defer></script>
+	<script type="text/javascript" src="assets/js/slider.js"></script>
+	<script type="text/javascript" src="node_modules/@splidejs/splide/dist/js/splide.min.js"></script>
 {% endblock %}

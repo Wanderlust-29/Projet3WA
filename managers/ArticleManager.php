@@ -63,13 +63,13 @@ class ArticleManager extends AbstractManager
      *
      * @return array Liste des 4 meilleurs articles.
      */
-    public function TopFour(): array
+    public function TopSix(): array
     {
         $query = $this->db->prepare('SELECT articles.*, COUNT(orders_articles.article_id) AS total_sales
                                     FROM articles
                                     JOIN orders_articles ON articles.id = orders_articles.article_id
                                     GROUP BY articles.id
-                                    ORDER BY total_sales DESC LIMIT 4;');
+                                    ORDER BY total_sales DESC LIMIT 6;');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $articles = [];
