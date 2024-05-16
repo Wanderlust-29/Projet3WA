@@ -11,7 +11,7 @@ body > .modal-box {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 3;
   
   .modal {
     background-position: center;
@@ -25,7 +25,8 @@ body > .modal-box {
     overflow: hidden;
     position: relative;
     width: 90%;
-    z-index: 2;
+    z-index: 4;
+    padding: 1rem;
     #close {
       color: $white;
       font-size: 2.8rem;
@@ -46,17 +47,13 @@ body > .modal-box {
       display: flex;
       flex-direction: column;
       align-items: center;
-      h2 {
-        color: $white;
-      }
-
-      .article{
-        color: $white;
-      }
+      background-color: $white;
+      border-radius: 10px;
+      width: 80%;
 
       .modal-btn {
         background-color: $white;
-        border: 1px solid $white;
+        border: 1px solid $green;
         border-radius: 50px;
         color: $green;
         font-weight: 500;
@@ -69,7 +66,7 @@ body > .modal-box {
       }
 
       .modal-btn:hover {
-        background-color: transparent;
+        background-color: $green;
         color: $white;
       }
     }

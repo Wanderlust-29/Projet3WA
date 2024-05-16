@@ -2,13 +2,14 @@ function modal() {
   // Get the modal
   const modal = document.getElementById("myModal");
   // Get the button that opens the modal
-  const btn = document.getElementById("myBtn");
+  const btns = document.querySelectorAll(".myBtn");
   // Get the <span> element that closes the modal
   const span = document.getElementById("close");
 
-  // When the user clicks on the button, open the modal
-  btn.addEventListener("click", () => {
-    modal.style.display = "flex";
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
   });
 
   // When the user clicks on <span> (x), close the modal
