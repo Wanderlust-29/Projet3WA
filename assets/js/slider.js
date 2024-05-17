@@ -1,14 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var splide = new Splide(".splide", {
-
-    autoHeight : true,
-    autoWidth: true,
-    perPage     : 3,
-    perMove     : 1,
-    focus       : 'center',
-    omitEnd  : true,
-    pagination: false,
+  $(".owl-carousel").owlCarousel({
+    loop: true,
+    margin: 10,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1,
+        nav: true,
+      },
+      600: {
+        items: 3,
+        nav: false,
+      },
+      1000: {
+        items: 5,
+        nav: true,
+        loop: false,
+      },
+    },
   });
-
-  splide.mount();
 });

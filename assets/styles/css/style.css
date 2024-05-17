@@ -3,12 +3,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 /* PARTIALS */
 body > header {
-  position: relative;
-  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  padding: 1rem 2rem;
   background-color: #009a87;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 2;
+  /*******************
+        ICONS
+  *******************/
   /*******************
         MENU
   *******************/
@@ -25,38 +30,36 @@ body > header .logo img {
   width: 60px;
   height: auto;
 }
-body > header .logo figcaption {
+body > header .logo p {
   padding-left: 0.5rem;
   font-family: "Dancing Script", cursive;
   color: #fff;
   width: 8rem;
 }
-body > header .search {
+body > header .icons {
+  width: 10rem;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-body > header .search .input-searchbar {
-  border-radius: 8rem 0 0 8rem;
-  padding-left: 1rem;
-  width: 80%;
-}
-body > header .search .button-searchbar {
-  border-radius: 0 8rem 8rem 0;
-  padding: 0 1rem;
-  width: 20%;
-}
-body > header .menu-icons > ul {
-  display: flex;
-}
-body > header .menu-icons > ul a {
+body > header .icons li i {
   color: #fff;
+}
+body > header .icons li span {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 900;
+}
+body > header .icons li .cart-icon {
   position: relative;
 }
-body > header .menu-icons > ul a .cart-count {
-  position: absolute;
+body > header .icons li .cart-icon .cart-count {
+  border: 1px solid #fff;
   border-radius: 50%;
-  background-color: black;
-  opacity: 0.9;
+  background-color: #009a87;
+  position: absolute;
   color: #fff;
+  opacity: 0.9;
   z-index: 2;
   top: -1.7rem;
   left: 2rem;
@@ -66,90 +69,26 @@ body > header .menu-icons > ul a .cart-count {
   justify-content: center;
   align-items: center;
 }
-body > header .menu-icons > ul li {
-  list-style: none;
-  color: #fff;
-}
-body > header .menu-icons > ul li i:not(:last-child) {
-  padding-right: 1.2rem;
-}
 body > header .menu {
-  z-index: 999;
-  position: absolute;
-  display: inline-block;
-  background-color: #fff;
-  top: 12vh;
-}
-body > header .menu li {
-  border-bottom: 1px solid black;
-}
-body > header .menu li a {
-  padding-left: 1rem;
-  display: block;
-  height: 100%;
-  width: 100%;
-  color: #009a87;
-}
-body > header .menu li:hover {
-  background-color: #009a87;
-}
-body > header .menu li:hover a {
-  color: #fff;
-}
-body > header .menu.open {
-  width: 100vw;
-  height: 100vh;
-  left: 0;
-  transition: ease-in 0.4s;
-}
-body > header .menu.close {
-  left: -999rem;
-  transition: ease-out 0.3s;
-}
-body > header .menu.hiden {
   display: none;
 }
-body > header .menu.sticky {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 999;
+body > header .search {
+  display: none;
 }
 
-@media screen and (max-width: 1250px) {
-  body > header .search {
-    display: none;
-  }
-}
 @media screen and (min-width: 800px) {
-  body > header {
-    position: static;
-  }
-  body > header .menu-icons {
+  body > header .icons {
     display: none;
   }
   body > header .menu {
-    background-color: transparent;
-    position: static;
-  }
-  body > header .menu ul {
     display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
+    justify-content: space-around;
   }
-  body > header .menu ul li {
-    padding: 0 0.5rem;
-    border: none;
+  body > header .menu li {
+    list-style: none;
   }
-  body > header .menu ul li a {
+  body > header .menu li a {
     color: #fff;
-  }
-  body > header .menu .hiden {
-    display: block;
-  }
-  body > header.close {
-    height: auto;
   }
 }
 body > footer {
@@ -274,9 +213,6 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 
 /* PAGES */
 #content.home {
-  display: grid;
-  grid-template-rows: minmax(25vh, max-content) minmax(25vh, max-content) minmax(50vh, max-content) minmax(25vh, max-content);
-  grid-template-columns: 10% 80% 10%;
   /*******************
         BANNER
   *******************/
@@ -300,7 +236,6 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 }
 #content.home .banner {
   padding: 2rem 0;
-  grid-column: 1/4;
   background-image: url(../../media/banner.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -323,8 +258,6 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 }
 #content.home .home-nav {
   padding-top: 2rem;
-  grid-row: 2;
-  grid-column: 2;
 }
 #content.home .home-nav ul {
   display: flex;
@@ -363,23 +296,6 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   opacity: 0.5;
   border-radius: 2rem;
 }
-#content.home .splide {
-  grid-row: 3;
-  grid-column: 2;
-  width: 100%;
-}
-#content.home .splide .splide__slide {
-  position: relative;
-}
-#content.home .splide .splide__slide a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#content.home .splide .splide__slide a img {
-  width: 50%;
-  height: auto;
-}
 #content.home .out-of-stock {
   padding: 0 2rem;
   text-align: center;
@@ -394,8 +310,6 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   color: #fff;
 }
 #content.home #about {
-  grid-row: 4;
-  grid-column: 2;
   padding: 2rem 0;
   display: flex;
   flex-direction: column;
@@ -1323,8 +1237,6 @@ body {
   font-style: normal;
   font-size: 1.8rem;
   background-color: #fff;
-  display: grid;
-  grid-template-rows: 12vh minmax(60vh, max-content) minmax(22vh, max-content);
   line-height: 1.8;
 }
 

@@ -1,19 +1,9 @@
 #content.home {
-  display: grid;
-  grid-template-rows:
-    minmax(25vh, max-content) minmax(25vh, max-content) minmax(
-      50vh,
-      max-content
-    )
-    minmax(25vh, max-content);
-  grid-template-columns: 10% 80% 10%;
-
   h2 {
     text-align: center;
     text-transform: uppercase;
     color: $green;
   }
-
   a {
     color: $black;
   }
@@ -23,7 +13,6 @@
   *******************/
   .banner {
     padding: 2rem 0;
-    grid-column: 1/4;
     background-image: url(../../media/banner.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -52,8 +41,6 @@
   *******************/
   .home-nav {
     padding-top: 2rem;
-    grid-row: 2;
-    grid-column: 2;
     ul {
       display: flex;
       flex-direction: column;
@@ -97,23 +84,7 @@
         TOP SALES
   *******************/
 
-  .splide {
-    grid-row: 3;
-    grid-column: 2;
-    width: 100%;
-    .splide__slide {
-      position: relative;
-      a{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        img {
-          width: 50%;
-          height: auto;
-        }
-      }
-
-    }
+  .top-sales {
   }
 
   .out-of-stock {
@@ -134,8 +105,6 @@
         ABOUT
   *******************/
   #about {
-    grid-row: 4;
-    grid-column: 2;
     padding: 2rem 0;
     display: flex;
     flex-direction: column;

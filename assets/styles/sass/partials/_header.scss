@@ -1,10 +1,12 @@
 body > header {
-  position: relative;
-  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  padding: 1rem 2rem;
   background-color: $green;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 2;
   .logo {
     display: flex;
     align-items: center;
@@ -13,144 +15,81 @@ body > header {
       width: 60px;
       height: auto;
     }
-    figcaption {
+    p {
       padding-left: 0.5rem;
       font-family: "Dancing Script", cursive;
       color: $white;
       width: 8rem;
     }
   }
-
-  .search {
+  /*******************
+        ICONS
+  *******************/
+  .icons {
+    width: 10rem;
     display: flex;
-    .input-searchbar {
-      border-radius: 8rem 0 0 8rem;
-      padding-left: 1rem;
-      width: 80%;
-    }
-    .button-searchbar {
-      border-radius: 0 8rem 8rem 0;
-      padding: 0 1rem;
-      width: 20%;
+    justify-content: space-between;
+    align-items: center;
+    li {
+      i {
+        color: $white;
+      }
+      span {
+        color: $white;
+        font-size: 2rem;
+        font-weight: 900;
+      }
+      .cart-icon {
+        position: relative;
+        .cart-count {
+          border: 1px solid $white;
+          border-radius: 50%;
+          background-color: $green;
+          position: absolute;
+          color: $white;
+          opacity: 0.9;
+          z-index: 2;
+          top: -1.7rem;
+          left: 2rem;
+          width: 2rem;
+          height: 2rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
   }
-
   /*******************
         MENU
   *******************/
-
-  .menu-icons > ul {
-    display: flex;
-    a {
-      color: $white;
-      position: relative;
-      .cart-count {
-        position: absolute;
-        border-radius: 50%;
-        background-color: $black;
-        opacity: 0.9;
-        color: $white;
-        z-index: 2;
-        top: -1.7rem;
-        left: 2rem;
-        width: 2rem;
-        height: 2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-    li {
-      list-style: none;
-      color: $white;
-      i:not(:last-child) {
-        padding-right: 1.2rem;
-      }
-    }
+  .menu {
+    display: none;
   }
 
   /*******************
     MENU-BURGER
   *******************/
 
-  .menu {
-    z-index: 999;
-    position: absolute;
-    display: inline-block;
-    background-color: $white;
-    top: 12vh;
-    li {
-      border-bottom: 1px solid $black;
-      a {
-        padding-left: 1rem;
-        display: block;
-        height: 100%;
-        width: 100%;
-        color: $green;
-      }
-    }
-    li:hover {
-      background-color: $green;
-      a {
-        color: $white;
-      }
-    }
-    &.open {
-      width: 100vw;
-      height: 100vh;
-      left: 0;
-      transition: ease-in 0.4s;
-    }
-    &.close {
-      left: -999rem;
-      transition: ease-out 0.3s;
-    }
-    &.hiden {
-      display: none;
-    }
-    &.sticky {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      z-index: 999;
-    }
+  .search {
+    display: none;
   }
 }
-@media screen and (max-width: 1250px) {
-  body > header {
-    .search {
-      display: none;
-    }
-  }
-}
+
 @media screen and (min-width: 800px) {
   body > header {
-    position: static;
-    .menu-icons {
+    .icons {
       display: none;
     }
     .menu {
-      background-color: transparent;
-      position: static;
-      ul {
-        display: flex;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        li {
-          padding: 0 0.5rem;
-          border: none;
-          a {
-            color: $white;
-          }
+      display: flex;
+      justify-content: space-around;
+      li {
+        list-style: none;
+        a {
+          color: $white;
         }
       }
-      .hiden {
-        display: block;
-      }
-    }
-    &.close {
-      height: auto;
     }
   }
 }

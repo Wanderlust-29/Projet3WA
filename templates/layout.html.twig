@@ -14,68 +14,68 @@
 	</head>
 	<body>
 		<header class="header">
-			<figure class="logo">
+			<a href="index.php" class="logo">
 				<img src="assets/media/logo.svg" alt="logo"/>
-				<figcaption>TimberWolf</figcaption>
-			</figure>
+				<p>TimberWolf</p>
+			</a>
 
+			<ul class="icons">
+				<li>
+					<a class="myBtn cart-icon">
+						<i class="fa-solid fa-cart-shopping"></i>
+						<span class="cart-count">{{count}}</span>
+					</a>
+				</li>
+				<li class="search-btn">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</li>
+				<li>
+					<span class="menu-burger">☰</span>
+				</li>
+			</ul>
+
+
+			<menu class="menu">
+				<li class="desktop">
+					<a href="index.php">Accueil</a>
+				</li>
+				<li class="desktop">
+					<a href="index.php?route=dog-food">Croquettes</a>
+				</li>
+				<li class="desktop">
+					<a href="index.php?route=treats">Friandises</a>
+				</li>
+				<li class="desktop">
+
+					<a href="index.php?route=toys">Jouets</a>
+				</li>
+				<li class="desktop">
+					<a class="myBtn">Panier</a>
+				</li>
+				{% if session is defined and session is not null %}
+					<li class="desktop">
+						<a href="index.php?route=account">Mon compte</a>
+					</li>
+					<li class="desktop">
+						<a href="index.php?route=logout">Se déconnecter</a>
+					</li>
+				{% else %}
+					<li class="desktop">
+						<a href="index.php?route=login">Se connecter</a>
+					</li>
+					<li class="desktop">
+						<a href="index.php?route=register">S'inscrire</a>
+					</li>
+				{% endif %}
+				<li class="desktop">
+					<a href="index.php?route=contact">Contact</a>
+				</li>
+			</menu>
 
 			<form class="search" action="index.php?route=articles-search" method="POST">
 				<input class="input-searchbar" type="search" name="search" placeholder="Rechercher..."/>
 				<input class="button-searchbar" type="submit" value="&#128269;"/>
 			</form>
-
-			<nav class="menu-icons">
-				<ul>
-					<li>
-						<a class="myBtn">
-							<i class="fa-solid fa-cart-shopping"></i>
-							<span class="cart-count">{{count}}</span>
-						</a>
-					</li>
-					<li class="btn-burger-menu">
-						<i class="fa fa-bars"></i>
-					</li>
-				</ul>
-			</nav>
-
-			<nav class="menu close">
-				<ul>
-					<li>
-						<a href="index.php">Accueil</a>
-					</li>
-					<li>
-						<a href="index.php?route=dog-food">Croquettes</a>
-					</li>
-					<li>
-						<a href="index.php?route=treats">Friandises</a>
-					</li>
-					<li>
-						<a href="index.php?route=toys">Jouets</a>
-					</li>
-					<li>
-						<a class="myBtn">Panier</a>
-					</li>
-					{% if session is defined and session is not null %}
-						<li>
-							<a href="index.php?route=account">Mon compte</a>
-						</li>
-						<li>
-							<a href="index.php?route=logout">Se déconnecter</a>
-						</li>
-					{% else %}
-						<li>
-							<a href="index.php?route=login">Se connecter</a>
-						</li>
-						<li>
-							<a href="index.php?route=register">S'inscrire</a>
-						</li>
-					{% endif %}
-					<li>
-						<a href="index.php?route=contact">Contact</a>
-					</li>
-				</ul>
-			</nav>
 		</header>
 
 		<aside id="myModal" class="modal-box">

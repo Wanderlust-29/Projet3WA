@@ -1,152 +1,159 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    Admin
-    {{ parent() }}
+	Admin
+	{{ parent() }}
 {% endblock %}
 
 {% block head %}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 {% endblock %}
 
 {% block main %}
-    <main id="content" class="admin">
-        {% if session is defined and session.role == "ADMIN" %}
+	<main id="content" class="admin">
+		{% if session is defined and session.role == "ADMIN" %}
 
-            <h1 class="mt-5">Bienvenue {{ session.firstName }} {{ session.lastName }}!</h1>
+			<h1 class="mt-5">Bienvenue
+				{{ session.firstName }}
+				{{ session.lastName }}!</h1>
 
-            {# Voir les commandes #}
+			{# Voir les commandes #}
 
-            <h2 class="mt-4">Toutes les commandes :</h2>
+			<h2 class="mt-4">Toutes les commandes :</h2>
 
-            <ul class="all-orders list-group">
-                {% if orders is not empty %}
-                    {% for order in orders %}
-                        <li class="list-group-item">Commande n°{{ order.id }} date : {{ order.createdAt }}, {{ order.userId.firstName }} {{ order.userId.lastName }}, total : 
-                            <span class="plus">+</span>
-                            <ul class="order-articles">
-                                {% set orderArticles = ordersArticles[order.id] %}
-                                {% if orderArticles is not empty %}
-                                    {% for article in orderArticles %}
-                                        <li>
-                                            <a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="index.php?route=article&id={{ article.articleId.id }}">
-                                                {{ article.articleId.name }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                {% else %}
-                                    <li>Aucun article trouvé pour cette commande.</li>
-                                {% endif %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                {% else %}
-                    <li class="list-group-item">Aucune commande trouvée.</li>
-                {% endif %}
-            </ul>
+			<ul class="all-orders list-group">
+				{% if orders is not empty %}
+					{% for order in orders %}
+						<li class="list-group-item">Commande n°{{ order.id }}
+							date :
+							{{ order.createdAt }},
+							{{ order.userId.firstName }}
+							{{ order.userId.lastName }}, total :
+							<span class="plus">+</span>
+							<ul class="order-articles">
+								{% set orderArticles = ordersArticles[order.id] %}
+								{% if orderArticles is not empty %}
+									{% for article in orderArticles %}
+										<li>
+											<a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="index.php?route=article&id={{ article.articleId.id }}">
+												{{ article.articleId.name }}
+											</a>
+										</li>
+									{% endfor %}
+								{% else %}
+									<li>Aucun article trouvé pour cette commande.</li>
+								{% endif %}
+							</ul>
+						</li>
+					{% endfor %}
+				{% else %}
+					<li class="list-group-item">Aucune commande trouvée.</li>
+				{% endif %}
+			</ul>
 
-            {# Gestion des stocks #}
+			{# Gestion des stocks #}
 
-            <h2 class="mt-4">Gestion des stocks :</h2>
+			<h2 class="mt-4">Gestion des stocks :</h2>
 
-            {% for article in articles %}
-                <form action="index.php?route=update-stock" method="post" class="stocks row g-2">
-                    <label for="add{{ article.id }}" class="col-sm-auto col-form-label">{{ article.name }}</label>
-                    <input type="number" class="form-control col-sm" name="stock" id="add{{ article.id }}" value="{{ article.stock }}">
-                    <input type="hidden" name="article_id" value="{{ article.id }}"> 
-                    <button type="submit" name="add" class="btn btn-primary col-sm-auto">Valider</button>
-                </form>
-            {% endfor %}
+			{% for article in articles %}
+				<form action="index.php?route=update-stock" method="post" class="stocks row g-2">
+					<label for="add{{ article.id }}" class="col-sm-auto col-form-label">{{ article.name }}</label>
+					<input type="number" class="form-control col-sm" name="stock" id="add{{ article.id }}" value="{{ article.stock }}">
+					<input type="hidden" name="article_id" value="{{ article.id }}">
+					<button type="submit" name="add" class="btn btn-primary col-sm-auto">Valider</button>
+				</form>
+			{% endfor %}
 
-            {# Ajout d'un article #}
+			{# Ajout d'un article #}
 
-            <h2 class="mt-4">Ajouter un article :</h2>
+			<h2 class="mt-4">Ajouter un article :</h2>
 
-            <form action="index.php?route=add-article" method="post" enctype="multipart/form-data" class="article row g-3">
-                <fieldset class="col-md-6">
-                    <label for="name" class="form-label">Nom</label>
-                    <input type="text" class="form-control" name="name" id="name">
-                </fieldset>
+			<form action="index.php?route=add-article" method="post" enctype="multipart/form-data" class="article row g-3">
+				<fieldset class="col-md-6">
+					<label for="name" class="form-label">Nom</label>
+					<input type="text" class="form-control" name="name" id="name">
+				</fieldset>
 
-                <fieldset class="col-md-6">
-                    <label for="price" class="form-label">Prix</label>
-                    <input type="number" class="form-control" name="price" id="price">
-                </fieldset>
+				<fieldset class="col-md-6">
+					<label for="price" class="form-label">Prix</label>
+					<input type="number" class="form-control" name="price" id="price">
+				</fieldset>
 
-                <fieldset class="col-md-6">
-                    <label for="stock" class="form-label">Stock</label>
-                    <input type="number" class="form-control" name="stock" id="stock">
-                </fieldset>
+				<fieldset class="col-md-6">
+					<label for="stock" class="form-label">Stock</label>
+					<input type="number" class="form-control" name="stock" id="stock">
+				</fieldset>
 
-                <fieldset class="col-md-6">
-                    <label for="category" class="form-label">Catégorie</label>
-                    <select id="category" class="form-select" name="category">
-                        <option value="">--Choisir une catégorie--</option>
-                        <option value="1">Croquettes</option>
-                        <option value="2">Friandises</option>
-                        <option value="3">Jouets</option>
-                    </select>
-                </fieldset>
+				<fieldset class="col-md-6">
+					<label for="category" class="form-label">Catégorie</label>
+					<select id="category" class="form-select" name="category">
+						<option value="">--Choisir une catégorie--</option>
+						<option value="1">Croquettes</option>
+						<option value="2">Friandises</option>
+						<option value="3">Jouets</option>
+					</select>
+				</fieldset>
 
-                <fieldset class="col-md-6">
-                    <label for="image" class="form-label">Image</label>
-                    <input type="file" class="form-control" name="image" id="image">
-                </fieldset>
+				<fieldset class="col-md-6">
+					<label for="image" class="form-label">Image</label>
+					<input type="file" class="form-control" name="image" id="image">
+				</fieldset>
 
-                <fieldset class="col-md-6">
-                    <label for="alt" class="form-label">Alt</label>
-                    <input type="text" class="form-control" name="alt" id="alt">
-                </fieldset>
+				<fieldset class="col-md-6">
+					<label for="alt" class="form-label">Alt</label>
+					<input type="text" class="form-control" name="alt" id="alt">
+				</fieldset>
 
-                <fieldset class="col-md-12">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea id="description" class="form-control" name="description" rows="5" cols="33">Ajouter une description...</textarea>
-                </fieldset>
+				<fieldset class="col-md-12">
+					<label for="description" class="form-label">Description</label>
+					<textarea id="description" class="form-control" name="description" rows="5" cols="33">Ajouter une description...</textarea>
+				</fieldset>
 
-                <fieldset class="col-md-12">
-                    <label for="ingredients" class="form-label">Ingrédients</label>
-                    <textarea id="ingredients" class="form-control" name="ingredients" rows="5" cols="33">Ajouter les ingrédients...</textarea>
-                </fieldset>
+				<fieldset class="col-md-12">
+					<label for="ingredients" class="form-label">Ingrédients</label>
+					<textarea id="ingredients" class="form-control" name="ingredients" rows="5" cols="33">Ajouter les ingrédients...</textarea>
+				</fieldset>
 
-                <fieldset class="col-md-12">
-                    <label for="age" class="form-label">Âge</label>
-                    <input type="text" class="form-control" name="age" id="age">
-                </fieldset>
+				<fieldset class="col-md-12">
+					<label for="age" class="form-label">Âge</label>
+					<input type="text" class="form-control" name="age" id="age">
+				</fieldset>
 
-                <fieldset class="col-12  d-md-flex justify-content-md-center">
-                    <button type="submit" class="btn btn-primary">Créer</button>
-                </fieldset>
-            </form>
+				<fieldset class="col-12  d-md-flex justify-content-md-center">
+					<button type="submit" class="btn btn-primary">Créer</button>
+				</fieldset>
+			</form>
 
-            {# Supprimer un utilisateur #}
+			{# Supprimer un utilisateur #}
 
-            <h2>Gestion des utilisateurs :</h2>
+			<h2>Gestion des utilisateurs :</h2>
 
-            {% for user in users %}
-                <form action="index.php?route=delete" method="post" class="users row g-2">
-                    <label class="col-sm-auto col-form-label" for="user{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</label>
-                    <input type="hidden" name="userId" value="{{ user.id }}">
-                    <button type="submit" name="delete" value="Supprimer" class="btn btn-danger col-sm-auto">Supprimer</button>
-                </form>
-            {% endfor %}
+			{% for user in users %}
+				<form action="index.php?route=delete" method="post" class="users row g-2">
+					<label class="col-sm-auto col-form-label" for="user{{ user.id }}">{{ user.firstName }}
+						{{ user.lastName }}</label>
+					<input type="hidden" name="userId" value="{{ user.id }}">
+					<button type="submit" name="delete" value="Supprimer" class="btn btn-danger col-sm-auto">Supprimer</button>
+				</form>
+			{% endfor %}
 
-            <form action="index.php?route=logout" class="disconnect" method="post">
-                <button type="submit" class="btn btn-primary">Se déconnecter</button>
-            </form>
-        {% else %}
-            <h1>Vous n’êtes pas autorisé à accéder à cette page</h1>
-            <a class="btn-home" href="index.php">Retourner à l'accueil</a>
-        {% endif %}
-    </main>
-    {% if error is defined %}
-            <p class="error" id="error-msg">{{ error }}</p>
-    {% endif %}
+			<form action="index.php?route=logout" class="disconnect" method="post">
+				<button type="submit" class="btn btn-primary">Se déconnecter</button>
+			</form>
+		{% else %}
+			<h1>Vous n’êtes pas autorisé à accéder à cette page</h1>
+			<a class="btn-home" href="index.php">Retourner à l'accueil</a>
+		{% endif %}
+	</main>
+	{% if error is defined %}
+		<p class="error" id="error-msg">{{ error }}</p>
+	{% endif %}
 
 {% endblock %}
 {% block javascript %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="assets/js/admin.js" defer></script>
-    <script src="assets/js/error-success.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+	<script src="assets/js/admin.js" defer></script>
+	<script src="assets/js/error-success.js" defer></script>
 {% endblock %}
