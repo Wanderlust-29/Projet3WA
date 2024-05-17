@@ -100,17 +100,19 @@
   .splide {
     grid-row: 3;
     grid-column: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 100%;
-
     .splide__slide {
       position: relative;
-      img {
-        width: 100%;
-        height: auto;
+      a{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img {
+          width: 50%;
+          height: auto;
+        }
       }
+
     }
   }
 

@@ -5,7 +5,7 @@ class DefaultController extends AbstractController
     public function home() : void
     {
         $am = new ArticleManager();
-        $articles = $am->TopSix();
+        $articles = $am->TopTen();
         $totalPrice = 0;
         $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
         
