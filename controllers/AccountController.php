@@ -118,10 +118,34 @@ class AccountController extends AbstractController
     
         $um = new UserManager();
         $am = new ArticleManager();
-        $om = new OrderManager();
     
         $articles = $am->findAll();
         $users = $um->findAll();
+    
+        $this->render("account/admin.html.twig", [
+            'error' => $error,
+            'articles' => $articles,
+            'users' => $users,
+        ]);
+    }
+
+    function adminUsers(){
+        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+    
+        $um = new UserManager();
+    
+        $users = $um->findAll();
+
+        $this->render("account/admin-users.html.twig", [
+            'error' => $error,
+            'users' => $users,
+        ]);
+    }
+
+    function adminOrders(){
+        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+
+        $om = new OrderManager();
         $orders = $om->findAllDecreasing();
     
         // Initialise un tableau pour stocker les articles de chaque commande
@@ -134,15 +158,26 @@ class AccountController extends AbstractController
             $orderArticles = $oAm->findByOrderId($orderId);
             $ordersArticles[$orderId] = $orderArticles;
         }
-    
-        $this->render("account/admin.html.twig", [
+        $this->render("account/admin-orders.html.twig", [
             'error' => $error,
-            'articles' => $articles,
-            'users' => $users,
             'orders' => $orders,
             'ordersArticles' => $ordersArticles,
         ]);
     }
+
+    function adminStocks(){
+        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+    
+        $am = new ArticleManager();
+    
+        $articles = $am->findAll();
+    
+        $this->render("account/admin-stocks.html.twig", [
+            'error' => $error,
+            'articles' => $articles,
+        ]);
+    }
+
     public function updateStock(): void
     {
         if (isset($_SESSION['user'])) {

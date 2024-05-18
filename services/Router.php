@@ -49,6 +49,18 @@ class Router
             {
                 $acc->admin();
             }
+            else if($get["route"] === "admin-orders")
+            {
+                $acc->adminOrders();
+            }
+            else if($get["route"] === "admin-users")
+            {
+                $acc->adminUsers();
+            }
+            else if($get["route"] === "admin-stocks")
+            {
+                $acc->adminStocks();
+            }
             else if($get["route"] === "update")
             {
                 $acc->updateUserProfile();

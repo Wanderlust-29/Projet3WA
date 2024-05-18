@@ -77,7 +77,7 @@ body > header .menu {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 999;
   background-color: #fff;
   width: 50vw;
   height: 100vh;
@@ -934,55 +934,6 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 }
 
 /* ACCOUNT */
-#content.admin {
-  display: grid;
-  grid-template-columns: 10% 80% 10%;
-  padding: 2rem 0;
-}
-#content.admin h1,
-#content.admin h2 {
-  grid-column: 2;
-}
-#content.admin .all-orders {
-  grid-column: 2;
-}
-#content.admin .all-orders li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-#content.admin .all-orders li .plus {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: black;
-  color: #fff;
-  border-radius: 50%;
-}
-#content.admin .stocks {
-  grid-column: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-#content.admin .article {
-  grid-column: 2;
-}
-#content.admin .users {
-  grid-column: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-#content.admin .disconnect {
-  grid-column: 2;
-  display: flex;
-  justify-content: center;
-}
-
 #content.account {
   display: flex;
   flex-direction: column;

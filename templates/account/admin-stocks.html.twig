@@ -1,0 +1,38 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	Admin
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+{% endblock %}
+
+{% block main %}
+	<main id="content" class="admin">
+		{% if session is defined and session.role == "ADMIN" %}
+			{# Gestion des stocks #}
+			{% for article in articles %}
+				<form action="index.php?route=update-stock" method="post" class="stocks row g-2">
+					<label for="add{{ article.id }}" class="col-sm-auto col-form-label">{{ article.name }}</label>
+					<input type="number" class="form-control col-sm" name="stock" id="add{{ article.id }}" value="{{ article.stock }}">
+					<input type="hidden" name="article_id" value="{{ article.id }}">
+					<button type="submit" name="add" class="btn btn-primary col-sm-auto">Valider</button>
+				</form>
+			{% endfor %}
+		{% else %}
+			<h1>Vous n’êtes pas autorisé à accéder à cette page</h1>
+			<a class="btn-home" href="index.php">Retourner à l'accueil</a>
+		{% endif %}
+		{% if error is defined %}
+			<p class="error" id="error-msg">{{ error }}</p>
+		{% endif %}
+
+	</main>
+{% endblock %}
+{% block javascript %}
+	<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+	<script src="assets/js/admin.js" defer></script>
+	<script src="assets/js/error-success.js" defer></script>
+{% endblock %}
