@@ -61,6 +61,10 @@ class Router
             {
                 $acc->adminStocks();
             }
+            else if($get["route"] === "admin-add-article")
+            {
+                $acc->adminAddArticle();
+            }
             else if($get["route"] === "update")
             {
                 $acc->updateUserProfile();

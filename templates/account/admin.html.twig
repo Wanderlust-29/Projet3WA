@@ -15,9 +15,8 @@
 
 			<h1 class="mt-5">Bienvenue
 				{{ session.firstName }}
-				{{ session.lastName }}!</h1>
-
-			{# Voir les commandes #}
+				{{ session.lastName }} !
+			</h1>
 
 			<div class="small-box bg-info">
 				<div class="inner">
@@ -58,68 +57,21 @@
 				</a>
 			</div>
 
-			{# Ajout d'un article #}
-
-			<h2 class="mt-4">Ajouter un article :</h2>
-
-			<form action="index.php?route=add-article" method="post" enctype="multipart/form-data" class="article row g-3">
-				<fieldset class="col-md-6">
-					<label for="name" class="form-label">Nom</label>
-					<input type="text" class="form-control" name="name" id="name">
-				</fieldset>
-
-				<fieldset class="col-md-6">
-					<label for="price" class="form-label">Prix</label>
-					<input type="number" class="form-control" name="price" id="price">
-				</fieldset>
-
-				<fieldset class="col-md-6">
-					<label for="stock" class="form-label">Stock</label>
-					<input type="number" class="form-control" name="stock" id="stock">
-				</fieldset>
-
-				<fieldset class="col-md-6">
-					<label for="category" class="form-label">Catégorie</label>
-					<select id="category" class="form-select" name="category">
-						<option value="">--Choisir une catégorie--</option>
-						<option value="1">Croquettes</option>
-						<option value="2">Friandises</option>
-						<option value="3">Jouets</option>
-					</select>
-				</fieldset>
-
-				<fieldset class="col-md-6">
-					<label for="image" class="form-label">Image</label>
-					<input type="file" class="form-control" name="image" id="image">
-				</fieldset>
-
-				<fieldset class="col-md-6">
-					<label for="alt" class="form-label">Alt</label>
-					<input type="text" class="form-control" name="alt" id="alt">
-				</fieldset>
-
-				<fieldset class="col-md-12">
-					<label for="description" class="form-label">Description</label>
-					<textarea id="description" class="form-control" name="description" rows="5" cols="33">Ajouter une description...</textarea>
-				</fieldset>
-
-				<fieldset class="col-md-12">
-					<label for="ingredients" class="form-label">Ingrédients</label>
-					<textarea id="ingredients" class="form-control" name="ingredients" rows="5" cols="33">Ajouter les ingrédients...</textarea>
-				</fieldset>
-
-				<fieldset class="col-md-12">
-					<label for="age" class="form-label">Âge</label>
-					<input type="text" class="form-control" name="age" id="age">
-				</fieldset>
-
-				<fieldset class="col-12  d-md-flex justify-content-md-center">
-					<button type="submit" class="btn btn-primary">Créer</button>
-				</fieldset>
-			</form>
+			<div class="small-box bg-gradient-primary">
+				<div class="inner">
+					<h2>Ajout d'un article</h2>
+				</div>
+				<div class="icon">
+					<i class="fas fa-plus"></i>
+				</div>
+				<a href="index.php?route=admin-add-article" class="small-box-footer">
+					Plus d'infos
+					<i class="fas fa-arrow-circle-right"></i>
+				</a>
+			</div>
 
 			<form action="index.php?route=logout" class="disconnect" method="post">
-				<button type="submit" class="btn btn-primary">Se déconnecter</button>
+				<button type="submit" class="btn btn-block bg-gradient-success btn-lg">Se déconnecter</button>
 			</form>
 		{% else %}
 			<h1>Vous n’êtes pas autorisé à accéder à cette page</h1>

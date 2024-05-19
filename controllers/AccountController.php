@@ -177,6 +177,18 @@ class AccountController extends AbstractController
             'articles' => $articles,
         ]);
     }
+    function adminAddArticle(){
+        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
+    
+        $am = new ArticleManager();
+    
+        $articles = $am->findAll();
+    
+        $this->render("account/admin-add-article.html.twig", [
+            'error' => $error,
+            'articles' => $articles,
+        ]);
+    }
 
     public function updateStock(): void
     {
