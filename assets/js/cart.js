@@ -75,10 +75,12 @@ function changeShippingMethod(shippingMethod) {
 }
 
 function updateCount(data) {
-  const itemCount = Object.keys(data) ? Object.keys(data).length : 0;
+  const itemCount = Object.keys(data).length;
   const cartCount = document.querySelector("[data-count]");
-  console.log(cartCount);
-  cartCount.innerText = itemCount;
+  if (cartCount) {
+    cartCount.setAttribute("data-count", itemCount);
+    console.log(itemCount);
+  }
 }
 
 function updateTotal(data) {

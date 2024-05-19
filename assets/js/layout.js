@@ -7,7 +7,6 @@ function burgerMenu() {
 
   burger.addEventListener("click", () => {
     navLinks.classList.toggle("active");
-    console.log("click");
   });
   burger.addEventListener("click", () => {
     burger.classList.toggle("active");

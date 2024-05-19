@@ -14,7 +14,9 @@
 	<main id="content" class="home">
 		<section class="banner">
 			<h1>Accessoires et nourritures pour Chien</h1>
-			<a class="btn-articles" href="index.php?route=articles"><span>Nos Produits</span></a>
+			<a class="btn-articles" href="index.php?route=articles">
+				<span>Nos Produits</span>
+			</a>
 		</section>
 
 		<section class="home-nav">
@@ -46,13 +48,14 @@
 						</article>
 					{% else %}
 						<article class="product">
-							<p class="out-of-stock">Rupture de stock</p>
 							<a>
 								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 								<h3>{{ article.name }}</h3>
 								<p class="price">{{ article.price }}€</p>
 							</a>
+							<p class="out-of-stock">Rupture de stock</p>
 						</article>
+
 					{% endif %}
 				{% endfor %}
 				<div></section>

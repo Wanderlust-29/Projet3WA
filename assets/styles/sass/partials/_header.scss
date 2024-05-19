@@ -7,13 +7,13 @@ body > header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 2;
+  z-index: 1001;
   .logo {
     display: flex;
     align-items: center;
     img {
       max-width: 100%;
-      width: 60px;
+      width: 40px;
       height: auto;
     }
     p {
@@ -34,6 +34,7 @@ body > header {
       list-style: none;
       i {
         color: $white;
+        cursor: pointer;
       }
       .fa-stack[data-count]:after {
         position: absolute;
@@ -65,7 +66,6 @@ body > header {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 999;
     background-color: $white;
     width: 50vw;
     height: 100vh;
@@ -79,6 +79,7 @@ body > header {
       list-style: none;
       padding-bottom: 0.5rem;
       a {
+        cursor: pointer;
         color: $black;
         position: relative;
         &::after {
