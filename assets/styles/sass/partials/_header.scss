@@ -38,7 +38,7 @@ body > header {
       .fa-stack[data-count]:after {
         position: absolute;
         right: 0%;
-        top: -15%;
+        top: -25%;
         content: attr(data-count);
         font-size: 50%;
         padding: 0.6em;
@@ -46,13 +46,11 @@ body > header {
         line-height: 0.75em;
         color: $green;
         text-align: center;
-        font-weight: bold;
+        font-weight: 900;
         background: white;
         border-style: solid;
-        width: 0.8rem;
         .white-cart {
           color: white;
-          font-size: 2rem;
         }
       }
     }

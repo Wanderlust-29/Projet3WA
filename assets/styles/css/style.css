@@ -51,7 +51,7 @@ body > header .icons li i {
 body > header .icons li .fa-stack[data-count]:after {
   position: absolute;
   right: 0%;
-  top: -15%;
+  top: -25%;
   content: attr(data-count);
   font-size: 50%;
   padding: 0.6em;
@@ -59,14 +59,12 @@ body > header .icons li .fa-stack[data-count]:after {
   line-height: 0.75em;
   color: #009a87;
   text-align: center;
-  font-weight: bold;
+  font-weight: 900;
   background: white;
   border-style: solid;
-  width: 0.8rem;
 }
 body > header .icons li .fa-stack[data-count]:after .white-cart {
   color: white;
-  font-size: 2rem;
 }
 body > header .icons li + li {
   margin-left: 1rem;
@@ -356,14 +354,45 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   justify-content: center;
 }
 #content.home .banner h1 {
-  font-size: 4rem;
+  color: black;
+  text-align: center;
+  max-width: 35rem;
+  padding-bottom: 1rem;
 }
-#content.home .banner .btn-1 {
-  background-color: transparent;
-  border: 3px solid #009a87;
-  padding: 1.2rem 1rem;
+#content.home .banner .btn-articles {
+  display: block;
+  width: 20rem;
+  height: 4rem;
+  line-height: 40px;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
   color: #009a87;
-  text-transform: uppercase;
+  border: 2px solid #009a87;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all 0.35s;
+}
+#content.home .banner .btn-articles span {
+  position: relative;
+  z-index: 2;
+}
+#content.home .banner .btn-articles:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #009a87;
+  transition: all 0.35s;
+}
+#content.home .banner .btn-articles:hover {
+  color: #fff;
+}
+#content.home .banner .btn-articles:hover:after {
+  width: 100%;
 }
 #content.home .home-nav {
   padding-top: 2rem;
@@ -405,6 +434,14 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   opacity: 0.5;
   border-radius: 2rem;
 }
+#content.home .top-sales {
+  padding: 2rem 0;
+}
+#content.home .top-sales .product {
+  max-width: 30rem;
+  height: 50rem;
+  border: 1px solid black;
+}
 #content.home .out-of-stock {
   padding: 0 2rem;
   text-align: center;
@@ -417,6 +454,9 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   transform: translate(-50%, -50%);
   background-color: #c91619;
   color: #fff;
+}
+#content.home .owl-nav {
+  display: none;
 }
 #content.home #about {
   padding: 2rem 0;
@@ -454,14 +494,16 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 
 @media screen and (min-width: 800px) {
   #content.home .home-nav {
-    display: grid;
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   #content.home .home-nav ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 20px;
+    width: 80vw;
   }
   #content.home .home-nav ul li {
     margin: 0;
@@ -470,6 +512,18 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
     grid-column: 1;
     grid-row: span 2;
     height: 100%;
+  }
+  #content.home .owl-nav {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+  }
+  #content.home .owl-nav .owl-prev, #content.home .owl-nav .owl-next {
+    font-size: 50px;
+    color: #009a87;
   }
   #content.home #about li {
     text-align: start;
@@ -1305,7 +1359,7 @@ body {
 }
 
 i {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 h1 {
