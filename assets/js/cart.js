@@ -76,7 +76,7 @@ function changeShippingMethod(shippingMethod) {
 
 function updateCount(data) {
   const itemCount = Object.keys(data) ? Object.keys(data).length : 0;
-  const cartCount = document.querySelector(".cart-count");
+  const cartCount = document.querySelector("[data-count]");
   cartCount.innerText = itemCount;
 }
 

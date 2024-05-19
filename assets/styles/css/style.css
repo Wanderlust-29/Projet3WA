@@ -54,24 +54,28 @@ body > header .icons li span {
   font-size: 2rem;
   font-weight: 900;
 }
-body > header .icons li .cart-icon {
-  position: relative;
-}
-body > header .icons li .cart-icon .cart-count {
-  border: 1px solid #fff;
-  border-radius: 50%;
-  background-color: #009a87;
+body > header .icons li .fa-stack[data-count]:after {
   position: absolute;
-  color: #fff;
-  opacity: 0.9;
-  z-index: 2;
-  top: -1.7rem;
-  left: 2rem;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  right: -8%;
+  top: -25%;
+  content: attr(data-count);
+  font-size: 40%;
+  padding: 1rem 0.5rem;
+  border-radius: 50%;
+  line-height: 0.75em;
+  color: white;
+  color: #009a87;
+  text-align: center;
+  min-width: 2em;
+  font-weight: bold;
+  background: white;
+  border-style: solid;
+}
+body > header .icons li .fa-stack[data-count]:after .green-cart {
+  color: white;
+}
+body > header .icons li .fa-circle {
+  color: transparent;
 }
 body > header .menu {
   position: absolute;

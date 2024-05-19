@@ -17,10 +17,7 @@ class OrderManager extends AbstractManager
 
         if($result)
         {
-            $um = new UserManager;
-            $user = $um->findOne($result["user_id"]);
-
-            $order = new Order($user, $result["created_at"],  $result["status"], $result["total_price"]);
+            $order = new Order($id, $result["created_at"],  $result["status"], $result["total_price"]);
             $order->setId($result["id"]);
             return $order;
         }
@@ -40,35 +37,8 @@ class OrderManager extends AbstractManager
         $orders =[];
 
         foreach ($result as $item){
-
-            $um = new UserManager;
-            $user = $um->findOne($item["user_id"]);
-
-            $order = new Order($user, $item["created_at"], $item["status"], $item["total_price"]);
-            $order->setId($item["id"]);
-            $orders[]= $order;
-        }
-        return $orders;
-    }
-
-    /**
-     * Récupère toutes les commandes par ordre décroissant.
-     *
-     * @return array Liste des commandes.
-     */
-    public function findAllDecreasing() : array
-    {
-        $query = $this->db->prepare('SELECT * FROM `orders` ORDER BY `orders`.`created_at` DESC');
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        $orders =[];
-
-        foreach ($result as $item){
-
-            $um = new UserManager;
-            $user = $um->findOne($item["user_id"]);
-
-            $order = new Order($user, $item["created_at"], $item["status"], $item["total_price"]);
+      
+            $order = new Order($item["user_id"], $item["created_at"], $item["status"], $item["total_price"]);
             $order->setId($item["id"]);
             $orders[]= $order;
         }
@@ -81,7 +51,7 @@ class OrderManager extends AbstractManager
      * @param mixed $userId L'identifiant de l'utilisateur.
      * @return array Liste des commandes de l'utilisateur.
      */
-    public function findByUserId($userId) : array
+    public function allOrdersByUserId(int $userId) : array
     {
         $query = $this->db->prepare("SELECT * FROM orders WHERE user_id = :user_id");
         $parameters = ["user_id" => $userId];
@@ -90,11 +60,7 @@ class OrderManager extends AbstractManager
         $orders =[];
 
         foreach ($result as $item){
-
-            $um = new UserManager;
-            $user = $um->findOne($item["user_id"]);
-
-            $order = new Order($user, $item["created_at"], $item["status"], $item["total_price"],);
+            $order = new Order($userId, $item["created_at"], $item["status"], $item["total_price"],);
             $order->setId($item["id"]);
             $orders[]= $order;
         }
@@ -107,13 +73,13 @@ class OrderManager extends AbstractManager
      * @param Order $order L'objet Order représentant la commande à créer.
      * @return void
      */
-    public function createOrder(Order $order) : void
+    public function createOrder(int $order) : void
     {
         $query = $this->db->prepare('INSERT INTO orders (user_id, created_at, status, total_price) 
             VALUES (:user_id, :created_at, :status, :total_price)');
 
         $parameters = [
-            "user_id" => $order->getUserId()->getId(), // Récupérer l'ID de l'utilisateur
+            "user_id" => $order->getUserId(), // Récupérer l'ID de l'utilisateur
             "created_at" => $order->getCreatedAt(),
             "status" => $order->getStatus(), // Récupérer le statut de la commande
             "total_price" => $order->getTotalPrice() // Récupérer le prix total de la commande

@@ -14,8 +14,10 @@ class AccountController extends AbstractController
         // Vérifie si un utilisateur est connecté en session et s'il s'agit bien d'une instance de la classe User
         if (isset($_SESSION["user"]) && $_SESSION["user"] instanceof User) {
             $sessionId = $_SESSION["user"]->getId(); // Récupère l'identifiant de l'utilisateur connecté
-            $om = new OrderManager(); // Initialise le gestionnaire de commandes
-            $orders = $om->findByUserId($sessionId); // Récupère les commandes de l'utilisateur
+            // var_dump($sessionId); die();
+            $om = new OrderManager();
+            // Initialise le gestionnaire de commandes
+            $orders = $om->allOrdersByUserId($sessionId); // Récupère les commandes de l'utilisateur
     
             foreach ($orders as $order) {
                 $orderId = $order->getId();
@@ -146,7 +148,7 @@ class AccountController extends AbstractController
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
 
         $om = new OrderManager();
-        $orders = $om->findAllDecreasing();
+        $orders = $om->findAll();
     
         // Initialise un tableau pour stocker les articles de chaque commande
         $ordersArticles = [];

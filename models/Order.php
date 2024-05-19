@@ -5,7 +5,7 @@ class Order
     private ? int $id = null;
     
     
-    public function __construct(private User $userId, private string $createdAt, private string $status = "en cours", private float $total_price)
+    public function __construct(private int $userId, private string $createdAt, private string $status = "en cours", private float $total_price)
     {
 
     }
@@ -26,19 +26,19 @@ class Order
         $this->id = $id;
     }
 
-    // Getter and Setter for User
+    // Getter and Setter for $userId
     /**
-     * @return User
+     * @return int 
      */
-    public function getUserId(): User
+    public function getUserId(): int
     {
         return $this->userId;
     }
 
     /**
-     * @param User $userId
+     * @param int $userId
      */
-    public function setUserId(User $userId): void
+    public function setUserId(int $userId): void
     {
         $this->userId = $userId;
     }

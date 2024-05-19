@@ -12,7 +12,7 @@
 {% block main %}
 	<main id="content" class="admin">
 		{% if session is defined and session.role == "ADMIN" %}
-		
+
 		{# Ajout d'un article #}
 
 			<h2 class="mt-4">Ajouter un article :</h2>
@@ -72,7 +72,6 @@
 					<button type="submit" class="btn btn-primary">Créer</button>
 				</fieldset>
 			</form>
-
 
 			<form action="index.php?route=logout" class="disconnect" method="post">
 				<button type="submit" class="btn btn-primary">Se déconnecter</button>
