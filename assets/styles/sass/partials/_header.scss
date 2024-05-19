@@ -27,7 +27,6 @@ body > header {
         ICONS
   *******************/
   .icons {
-    width: 10rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,34 +35,29 @@ body > header {
       i {
         color: $white;
       }
-      span {
-        color: $white;
-        font-size: 2rem;
-        font-weight: 900;
-      }
-      .fa-stack[data-count]:after{
-        position:absolute;
-        right: -8%;
-        top: -25%;
+      .fa-stack[data-count]:after {
+        position: absolute;
+        right: 0%;
+        top: -15%;
         content: attr(data-count);
-        font-size:40%;
-        padding: 1rem 0.5rem;
-        border-radius:50%;
-        line-height:.75em;
-        color: white;
-        color:#009a87;;
-        text-align:center;
-        min-width:2em;
-        font-weight:bold;
+        font-size: 50%;
+        padding: 0.6em;
+        border-radius: 50%;
+        line-height: 0.75em;
+        color: $green;
+        text-align: center;
+        font-weight: bold;
         background: white;
-        border-style:solid;
-        .green-cart {
+        border-style: solid;
+        width: 0.8rem;
+        .white-cart {
           color: white;
-        }     
+          font-size: 2rem;
+        }
       }
-      .fa-circle {  
-        color:transparent;
-      }   
+    }
+    li + li {
+      margin-left: 1rem;
     }
   }
   /*******************
