@@ -21,8 +21,7 @@ class AccountController extends AbstractController
     
             foreach ($orders as $order) {
                 $orderId = $order->getId();
-                $oAm = new OrderArticleManager();
-                $orderArticles = $oAm->findByOrderId($orderId);
+                $orderArticles = $om->OrderArticle($orderId);
                 $ordersArticles[$orderId] = $orderArticles;
             }
         }
@@ -156,8 +155,7 @@ class AccountController extends AbstractController
         // Pour chaque commande, récupère les articles associés
         foreach ($orders as $order) {
             $orderId = $order->getId();
-            $oAm = new OrderArticleManager();
-            $orderArticles = $oAm->findByOrderId($orderId);
+            $orderArticles = $om->OrderArticle($orderId);
             $ordersArticles[$orderId] = $orderArticles;
         }
         $this->render("account/admin-orders.html.twig", [

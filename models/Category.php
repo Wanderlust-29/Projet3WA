@@ -4,7 +4,7 @@ class Category
 {
     private ? int $id = null;
     
-    public function __construct(private string $name, private string $description)
+    public function __construct(private string $name, private string $description, private string $slug)
     {
 
     }
@@ -57,5 +57,22 @@ class Category
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+    
+    // Getter and Setter for slug
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 }

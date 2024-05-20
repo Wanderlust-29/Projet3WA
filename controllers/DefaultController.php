@@ -5,10 +5,9 @@ class DefaultController extends AbstractController
     public function home() : void
     {
         $am = new ArticleManager();
-        $articles = $am->TopTen();
+        $articles = $am->TopNine();
         $totalPrice = 0;
         $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
-        dump($articles);
         
         foreach ($cart as $article) {
             if (isset($article['price'])) {

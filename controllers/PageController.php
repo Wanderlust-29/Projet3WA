@@ -46,35 +46,21 @@ class PageController extends AbstractController
         ]);
     }
 
-    public function dogFood() : void
-    {
+    // Récupération des articles de la catégorie
+    public function categorie(string $slug) : void{
+        // Récupéation des informations de la catégorie
+        $cm = new CategoryManager();
+        $categorie = $cm->findOneBySlug($slug);
+
+        $categorie_id = $categorie->getId();
+
+        // Récupération des articles
         $am = new ArticleManager();
+        $articles = $am->findByCat($categorie_id);
 
-        $articles = $am->dogFood();
-
-        $this->render("pages/dog-food.html.twig", [
+        $this->render("pages/categorie.html.twig", [
+            "categorie"=>$categorie,
             "articles"=>$articles,
-        ]);
-    }
-    public function toys() : void
-    {
-        $am = new ArticleManager();
-
-        $articles = $am->toys();
-
-        $this->render("pages/toys.html.twig", [
-            "articles"=>$articles,
-        ]);
-    }
-    public function treats() : void
-    {   
-        $am = new ArticleManager();
-
-        $articles = $am->treats();
-
-        $this->render("pages/treats.html.twig", [
-            "articles"=>$articles,
-
         ]);
     }
 

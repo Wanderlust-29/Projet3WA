@@ -101,7 +101,6 @@ class CartController extends AbstractController
         }
         $order = new Order($user, date('Y-m-d'), $status, $totalPrice);
         
-        
         $om = new OrderManager();
         $om->createOrder($order);
         $_SESSION["cart"] = [];

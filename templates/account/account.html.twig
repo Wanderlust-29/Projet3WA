@@ -104,7 +104,7 @@
 										{% for article in orderArticles %}
 											<li>
 												<a href="index.php?route=article&id={{ article.articleId.id }}">
-													<p>{{ article.articleId.name }}</p>
+													<p>{{ article.name }}</p>
 												</a>
 												<a href="index.php?route=comment&articleId={{ article.articleId.id }}">Ajouter un Commentaires</a>
 											</li>

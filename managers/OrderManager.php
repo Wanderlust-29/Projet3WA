@@ -73,7 +73,7 @@ class OrderManager extends AbstractManager
      * @param Order $order L'objet Order représentant la commande à créer.
      * @return void
      */
-    public function createOrder(int $order) : void
+    public function createOrder(Order $order) : void
     {
         $query = $this->db->prepare('INSERT INTO orders (user_id, created_at, status, total_price) 
             VALUES (:user_id, :created_at, :status, :total_price)');
@@ -92,5 +92,20 @@ class OrderManager extends AbstractManager
         $ordersArticlesManager->insertArticles($orderId);
     }
 
-
+    /**
+     * Retrieves all articles for a specific order.
+     *
+     * @param int $orderId Order ID.
+     * @return array List of articles for the order.
+     */
+    public function OrderArticle(int $orderId) : array {
+        $query = $this->db->prepare(
+            'SELECT a.image_id, a.name, a.price 
+             FROM orders_articles AS oa 
+             LEFT JOIN articles AS a ON oa.article_id = a.id 
+             WHERE oa.order_id = :order_id'
+        );
+        $query->execute(['order_id' => $orderId]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

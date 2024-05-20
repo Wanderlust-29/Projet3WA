@@ -1416,4 +1416,24 @@ figcaption {
   font-size: 1.6rem;
 }
 
+@media (max-width: 900px) {
+  body:has(.menu.active) {
+      overflow: hidden;
+  }
+  
+  body:has(.menu.active):after {
+      backdrop-filter: blur(2px);
+      background: rgba(0, 0, 0, 0.1);
+      bottom: 0;
+      content: "";
+      height: 100vh;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+      z-index: 998;  
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

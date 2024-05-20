@@ -19,7 +19,31 @@ class CategoryManager extends AbstractManager
 
         if($result)
         {
-            $category = new Category($result["name"], $result["description"]);
+            $category = new Category($result["name"], $result["description"], $result["slug"]);
+            $category->setId($result["id"]);
+            return $category;
+        }
+        return null;
+    }
+
+        /**
+     * Récupère une catégorie en fonction de son identifiant.
+     *
+     * @param string $slug Le slug de la catégorie à récupérer.
+     * @return Category|null L'objet catégorie trouvé ou null s'il n'existe pas.
+     */
+    public function findOneBySlug(string $slug) : ?Category
+    {
+        $query = $this->db->prepare('SELECT * FROM categories WHERE slug=:slug');
+        $parameters = [
+            "slug" => $slug
+        ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if($result)
+        {
+            $category = new Category($result["name"], $result["description"], $result["slug"]);
             $category->setId($result["id"]);
             return $category;
         }
@@ -30,7 +54,7 @@ class CategoryManager extends AbstractManager
      * Récupère toutes les catégories.
      *
      * @return array Liste des catégories.
-     */
+    */
     public function findAll() : array
     {
         $query = $this->db->prepare('SELECT * FROM categories');
@@ -39,10 +63,11 @@ class CategoryManager extends AbstractManager
         $categories=[];
 
         foreach($result as $item){
-            $category = new Category($item["name"], $item["description"]);
+            $category = new Category($item["name"], $item["description"],  $item["slug"]);
             $category->setId($item["id"]);
             $categories[]=$category;
         }
         return $categories;
     }
+
 }
