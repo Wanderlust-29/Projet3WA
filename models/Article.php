@@ -107,7 +107,7 @@ class Article
     /**
      * @param Category $category
      */
-    public function setPassword(Category $category): void
+    public function setCategory(Category $category): void
     {
         $this->category = $category;
     }

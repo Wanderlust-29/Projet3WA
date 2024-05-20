@@ -8,6 +8,7 @@ class DefaultController extends AbstractController
         $articles = $am->TopTen();
         $totalPrice = 0;
         $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
+        dump($articles);
         
         foreach ($cart as $article) {
             if (isset($article['price'])) {

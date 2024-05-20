@@ -28,7 +28,7 @@ body > header .logo {
 }
 body > header .logo img {
   max-width: 100%;
-  width: 40px;
+  width: 60px;
   height: auto;
 }
 body > header .logo p {
@@ -113,8 +113,8 @@ body > header .menu.active {
   transform: translateX(0%);
 }
 body > header #hamburger-icon {
-  width: 2rem;
-  height: 2.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
   position: relative;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -465,8 +465,8 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   z-index: 1;
   position: absolute;
   top: 30%;
-  left: 20%;
-  transform: translate(-50%, -50%);
+  left: 10%;
+  transform: translate(-30%, -10%);
   border: 3px solid #f15c60;
   color: #f15c60;
   background: transparent;
