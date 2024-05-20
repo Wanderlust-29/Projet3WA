@@ -76,7 +76,7 @@ class OrderManager extends AbstractManager
     public function createOrder(Order $order) : void
     {
         $query = $this->db->prepare('INSERT INTO orders (user_id, created_at, status, total_price) 
-            VALUES (:user_id, :created_at, :status, :total_price)');
+        VALUES (:user_id, :created_at, :status, :total_price)');
 
         $parameters = [
             "user_id" => $order->getUserId(), // Récupérer l'ID de l'utilisateur
@@ -88,8 +88,8 @@ class OrderManager extends AbstractManager
         $query->execute($parameters);
         $orderId = $this->db->lastInsertId();
 
-        $ordersArticlesManager = new OrderArticleManager($this->db);
-        $ordersArticlesManager->insertArticles($orderId);
+        // $ordersArticlesManager = new OrderArticleManager($this->db);
+        // $ordersArticlesManager->insertArticles($orderId);
     }
 
     /**

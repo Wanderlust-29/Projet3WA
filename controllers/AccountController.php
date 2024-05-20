@@ -14,15 +14,15 @@ class AccountController extends AbstractController
         // Vérifie si un utilisateur est connecté en session et s'il s'agit bien d'une instance de la classe User
         if (isset($_SESSION["user"]) && $_SESSION["user"] instanceof User) {
             $sessionId = $_SESSION["user"]->getId(); // Récupère l'identifiant de l'utilisateur connecté
-            // var_dump($sessionId); die();
             $om = new OrderManager();
             // Initialise le gestionnaire de commandes
             $orders = $om->allOrdersByUserId($sessionId); // Récupère les commandes de l'utilisateur
     
             foreach ($orders as $order) {
                 $orderId = $order->getId();
-                $orderArticles = $om->OrderArticle($orderId);
-                $ordersArticles[$orderId] = $orderArticles;
+                $orderArticle = $om->OrderArticle($orderId);
+                // var_dump($orderArticle);
+                $ordersArticles[$orderId] = $orderArticle;
             }
         }
     
@@ -102,7 +102,7 @@ class AccountController extends AbstractController
             } else {
                 $_SESSION["error-message"] = "Une erreur s'est produite lors de la suppression de l'utilisateur.";
                 if($user->getRole() === "ADMIN"){
-                    $this->redirect("index.php?route=admin");
+                    $this->redirect("index.php?route=admin-admin-users");
                 }else{
                     $this->redirect("index.php?route=account");
                 }
@@ -123,7 +123,7 @@ class AccountController extends AbstractController
         $articles = $am->findAll();
         $users = $um->findAll();
     
-        $this->render("account/admin.html.twig", [
+        $this->render("account/admin/admin.html.twig", [
             'error' => $error,
             'articles' => $articles,
             'users' => $users,
@@ -137,7 +137,7 @@ class AccountController extends AbstractController
     
         $users = $um->findAll();
 
-        $this->render("account/admin-users.html.twig", [
+        $this->render("account/admin/admin-users.html.twig", [
             'error' => $error,
             'users' => $users,
         ]);
@@ -155,10 +155,13 @@ class AccountController extends AbstractController
         // Pour chaque commande, récupère les articles associés
         foreach ($orders as $order) {
             $orderId = $order->getId();
-            $orderArticles = $om->OrderArticle($orderId);
-            $ordersArticles[$orderId] = $orderArticles;
+            $orderArticle = $om->OrderArticle($orderId);
+            // var_dump($orderArticle);
+            $ordersArticles[$orderId] = $orderArticle;
+            // var_dump($ordersArticles);
         }
-        $this->render("account/admin-orders.html.twig", [
+        
+        $this->render("account/admin/admin-orders.html.twig", [
             'error' => $error,
             'orders' => $orders,
             'ordersArticles' => $ordersArticles,
@@ -172,11 +175,12 @@ class AccountController extends AbstractController
     
         $articles = $am->findAll();
     
-        $this->render("account/admin-stocks.html.twig", [
+        $this->render("account/admin/admin-stocks.html.twig", [
             'error' => $error,
             'articles' => $articles,
         ]);
     }
+
     function adminAddArticle(){
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
     
@@ -184,7 +188,7 @@ class AccountController extends AbstractController
     
         $articles = $am->findAll();
     
-        $this->render("account/admin-add-article.html.twig", [
+        $this->render("account/admin/admin-add-article.html.twig", [
             'error' => $error,
             'articles' => $articles,
         ]);
@@ -214,11 +218,11 @@ class AccountController extends AbstractController
                     $this->redirect("index.php?route=admin");
                 } else { // Gestion des erreurs
                     $_SESSION["error-message"] = "L'article n'existe pas.";
-                    $this->redirect("index.php?route=admin");
+                    $this->redirect("index.php?route=admin-stocks");
                 }
             } else {
                 $_SESSION["error-message"] = "Veuillez définir le nouveau stock.";
-                $this->redirect("index.php?route=admin");
+                $this->redirect("index.php?route=admin-stocks");
             }
         } else {
             $_SESSION["error-message"] = "L'administrateur n'est pas connecté.";
@@ -271,19 +275,19 @@ class AccountController extends AbstractController
                     $am->insert($article);
     
                     unset($_SESSION["error-message"]);
-                    $this->redirect("index.php?route=admin");
+                    $this->redirect("index.php?route=admin-add-article");
                 } else {
                     $_SESSION["error-message"] = "Une erreur s'est produite lors de la création de l'article";
-                    $this->redirect("index.php?route=admin");
+                    $this->redirect("index.php?route=admin-add-article");
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();
                 $_SESSION["error-message"] = "Une erreur s'est produite lors du téléchargement de l'image.";
-                $this->redirect("index.php?route=admin");
+                $this->redirect("index.php?route=admin-add-article");
             }
         } else {
             $_SESSION["error-message"] = "Champs manquants";
-            $this->redirect("index.php?route=admin");
+            $this->redirect("index.php?route=admin-add-article");
         }
     }
 

@@ -1,7 +1,9 @@
 <?php
 
 class PageController extends AbstractController
-{
+{   
+
+    // Récupère tous les articles
     public function articles() : void
     {   
         $am = new ArticleManager();
@@ -12,7 +14,8 @@ class PageController extends AbstractController
             "articles"=>$articles,
         ]);
     }
-    
+
+    // Récupère un article
     public function article(int $id) : void
     {
         $success = isset($_SESSION["success-message"]) ? $_SESSION["success-message"] : null;
@@ -63,7 +66,7 @@ class PageController extends AbstractController
             "articles"=>$articles,
         ]);
     }
-
+    // Récupération des articles suivant le résultat de la recherche
     public function search() : void
     {
         if(isset($_POST['search'])) { 

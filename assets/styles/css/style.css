@@ -16,10 +16,10 @@ body > header {
         ICONS
   *******************/
   /*******************
-        MENU
+    MENU-BURGER
   *******************/
   /*******************
-    MENU-BURGER
+        MENU
   *******************/
 }
 body > header .logo {
@@ -69,48 +69,6 @@ body > header .icons li .fa-stack[data-count]:after .white-cart {
 }
 body > header .icons li + li {
   margin-left: 1rem;
-}
-body > header .menu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  width: 50vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  transform: translateX(-100%);
-  transition: 0.4s ease all;
-}
-body > header .menu li {
-  list-style: none;
-  padding-bottom: 0.5rem;
-}
-body > header .menu li a {
-  cursor: pointer;
-  color: black;
-  position: relative;
-}
-body > header .menu li a::after {
-  position: absolute;
-  content: "";
-  background-color: #009a87;
-  bottom: -5px;
-  left: 0;
-  width: 0%;
-  height: 3px;
-  transition: 0.3s ease all;
-}
-body > header .menu li a:hover::after {
-  width: 100%;
-}
-body > header .menu li:last-child {
-  display: none;
-}
-body > header .menu.active {
-  transform: translateX(0%);
 }
 body > header #hamburger-icon {
   width: 2.5rem;
@@ -171,8 +129,84 @@ body > header #hamburger-icon.active span:nth-child(3) {
   -o-transform: rotate(-135deg);
   transform: rotate(-135deg);
 }
-body > header .search {
+body > header .menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  transform: translateX(-100%);
+  transition: 0.4s ease all;
+}
+body > header .menu li {
+  list-style: none;
+  padding-bottom: 0.5rem;
+}
+body > header .menu li a {
+  cursor: pointer;
+  color: black;
+  position: relative;
+}
+body > header .menu li a::after {
+  position: absolute;
+  content: "";
+  background-color: #009a87;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  transition: 0.3s ease all;
+}
+body > header .menu li a:hover::after {
+  width: 100%;
+}
+body > header .menu li:last-child {
   display: none;
+}
+body > header .menu.active {
+  transform: translateX(0%);
+}
+body > header .search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  animation: Down 1s linear infinite;
+  position: absolute;
+  overflow-y: hidden;
+  top: 8.5rem;
+  left: 0;
+  box-sizing: border-box;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+}
+body > header .search .input-searchbar {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  width: 40%;
+}
+body > header .search .input-searchbar::placeholder {
+  color: #fff;
+  font-size: 1.5rem;
+  padding-left: 0.5rem;
+}
+body > header .search .button-searchbar {
+  position: relative;
+  width: 10%;
+}
+body > header .menu-active {
+  justify-content: end;
+}
+body > header .search.closed {
+  top: 8.5rem;
+  left: -100rem;
 }
 
 @media screen and (min-width: 900px) {
@@ -466,7 +500,6 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   position: absolute;
   top: 30%;
   left: 10%;
-  transform: translate(-30%, -10%);
   border: 3px solid #f15c60;
   color: #f15c60;
   background: transparent;
@@ -1385,6 +1418,21 @@ body {
   background-color: #f8f9fc;
   line-height: 1.8;
 }
+@media (max-width: 900px) {
+  body:has(.menu.active):after {
+    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    content: "";
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 998;
+  }
+}
 
 i {
   font-size: 2.5rem;
@@ -1414,26 +1462,6 @@ button,
 label,
 figcaption {
   font-size: 1.6rem;
-}
-
-@media (max-width: 900px) {
-  body:has(.menu.active) {
-      overflow: hidden;
-  }
-  
-  body:has(.menu.active):after {
-      backdrop-filter: blur(2px);
-      background: rgba(0, 0, 0, 0.1);
-      bottom: 0;
-      content: "";
-      height: 100vh;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 100%;
-      z-index: 998;  
-  }
 }
 
 /*# sourceMappingURL=style.css.map */

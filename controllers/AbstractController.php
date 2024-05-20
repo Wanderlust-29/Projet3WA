@@ -11,7 +11,7 @@ abstract class AbstractController
             'debug' => true,
         ]);
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
-
+        
         $slugify = new Slugify();
 
         // Nombre d'articles dans le panier
