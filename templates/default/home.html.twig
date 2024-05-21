@@ -8,6 +8,8 @@
 {% block head %}
 	<link rel="stylesheet" href="assets/OwlCarousel2-master/dist/assets/owl.carousel.min.css">
 	<link rel="stylesheet" href="assets/OwlCarousel2-master/dist/assets/owl.theme.default.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css">
 {% endblock %}
 
 {% block main %}
@@ -55,55 +57,56 @@
 							</a>
 							<p class="out-of-stock">Rupture de stock</p>
 						</article>
-
 					{% endif %}
 				{% endfor %}
-				<div></section>
+			</div>
+		</section>
 
 
-				<section id="about">
-					<h2>A propos</h2>
-					<p>Nous sommes une équipe passionnée par le bien-être animal et engagée à fournir les meilleurs produits et services pour le bonheur et la santé de vos compagnons à quatre pattes.</p>
-					<article class="about-schedules">
-						<h3 class="schedules-btn">+ Nos horaires</h3>
-						<ul class="schedules">
-							<li>Lundi : 10:00-19:00</li>
-							<li>Mardi : 10:00-19:00</li>
-							<li>Mercredi : 10:00-19:00</li>
-							<li>Jeudi : 10:00-19:00</li>
-							<li>Vendredi : 10:00-19:00</li>
-						</ul>
-					</article>
-					<article class="about-coordinates">
-						<h3 class="coordinates-btn">+ Nos coordonnées</h3>
-						<ul class="coordinates">
-							<li>
-								<a href="mailto:contact@timberwolf.fr">
-									<i class="fa-solid fa-envelope"></i>
-									contact@timberwolf.fr</a>
-							</li>
-							<li>
-								<a href="tel:0298000000">
-									<i class="fa-solid fa-phone"></i>
-									02.98.00.00.00</a>
-							</li>
-							<li>Esplanade du général de Gaulle</li>
-							<li>Pont de buis-lès-Quimerch</li>
-							<li>Code postal : 29590</li>
-						</ul>
-						<div class="container-map">
-							<div id="map"></div>
-						</div>
-					</article>
-				</section>
-			</main>
-		{% endblock %}
-		{% block javascript %}
+		<section id="about">
+			<h2>A propos</h2>
+			<p>Nous sommes une équipe passionnée par le bien-être animal et engagée à fournir les meilleurs produits et services pour le bonheur et la santé de vos compagnons à quatre pattes.</p>
+			<article class="about-schedules">
+				<h3 class="schedules-btn">+ Nos horaires</h3>
+				<ul class="schedules">
+					<li>Lundi : 10:00-19:00</li>
+					<li>Mardi : 10:00-19:00</li>
+					<li>Mercredi : 10:00-19:00</li>
+					<li>Jeudi : 10:00-19:00</li>
+					<li>Vendredi : 10:00-19:00</li>
+				</ul>
+			</article>
+			<article class="about-coordinates">
+				<h3 class="coordinates-btn">+ Nos coordonnées</h3>
+				<ul class="coordinates">
+					<li>
+						<a href="mailto:contact@timberwolf.fr">
+							<i class="fa-solid fa-envelope"></i>
+							contact@timberwolf.fr</a>
+					</li>
+					<li>
+						<a href="tel:0298000000">
+							<i class="fa-solid fa-phone"></i>
+							02.98.00.00.00</a>
+					</li>
+					<li>Esplanade du général de Gaulle</li>
+					<li>Pont de buis-lès-Quimerch</li>
+					<li>Code postal : 29590</li>
+				</ul>
+				<div class="container-map">
+					<div id="map"></div>
+				</div>
+			</article>
+		</section>
+	</main>
+{% endblock %}
+{% block javascript %}
+	<script src="assets/js/home.js" defer></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/leaflet-gesture-handling"></script>
 
-			<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-			<script src="assets/js/home.js" defer></script>
-			<script src="assets/js/slider.js" defer></script>
-			<script src="node_modules/jquery/dist/jquery.min.js"></script>
-			<script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>
-
-		{% endblock %}
+	<script src="https://cdn.jsdelivr.net/gh/maplibre/maplibre-gl-leaflet@main/leaflet-maplibre-gl.js"></script>
+	<script src="assets/js/slider.js" defer></script>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>
+{% endblock %}

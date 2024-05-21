@@ -175,7 +175,6 @@ body > header .search {
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 1;
   animation: Down 1s linear infinite;
   position: absolute;
   overflow-y: hidden;
@@ -201,12 +200,9 @@ body > header .search .button-searchbar {
   position: relative;
   width: 10%;
 }
-body > header .menu-active {
-  justify-content: end;
-}
 body > header .search.closed {
   top: 8.5rem;
-  left: -100rem;
+  left: -10000rem;
 }
 
 @media screen and (min-width: 900px) {
@@ -724,42 +720,132 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   }
 }
 #content.article {
-  display: grid;
-  grid-template-columns: 10% 80% 10%;
-  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 #content.article .product {
-  grid-column: 2;
+  background-color: #fff;
   padding-bottom: 2rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 1.5rem;
-  margin-top: 1rem;
-  margin: 0;
 }
 #content.article .product h1 {
   text-align: center;
 }
-#content.article .product figure {
-  display: flex;
-  justify-content: center;
-  padding: 1rem 0;
-}
-#content.article .product figure img {
+#content.article .product img {
   width: 80%;
   height: auto;
 }
-#content.article .product div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#content.article .product .cart-button {
+  position: relative;
+  padding: 10px;
+  width: 200px;
+  height: 60px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #009a87;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+  overflow: hidden;
+}
+#content.article .product .cart-button:hover {
+  background-color: #0c6f63;
+}
+#content.article .product .cart-button:active {
+  transform: scale(0.9);
+}
+#content.article .product .cart-button .fa-shopping-cart,
+#content.article .product .cart-button .fa-box {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#content.article .product .cart-button .fa-shopping-cart {
+  left: -10%;
+  font-size: 2em;
+}
+#content.article .product .cart-button .fa-box {
+  left: 52%;
+  top: -20%;
+  font-size: 1.2em;
+}
+#content.article .product .cart-button span {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  font-size: 1.2em;
+  color: #fff;
+  transform: translate(-50%, -50%);
+}
+#content.article .product .cart-button span.add-to-cart {
+  opacity: 1;
+}
+#content.article .product .cart-button span.added {
+  opacity: 0;
+}
+#content.article .product .cart-button.clicked .fa-shopping-cart {
+  animation: cart 1.5s ease-in-out forwards;
+}
+#content.article .product .cart-button.clicked .fa-box {
+  animation: box 1.5s ease-in-out forwards;
+}
+#content.article .product .cart-button.clicked span.add-to-cart {
+  animation: txt1 1.5s ease-in-out forwards;
+}
+#content.article .product .cart-button.clicked span.added {
+  animation: txt2 1.5s ease-in-out forwards;
+}
+@keyframes cart {
+  0% {
+    left: -10%;
+  }
+  40%, 60% {
+    left: 50%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+@keyframes box {
+  0%, 40% {
+    top: -20%;
+  }
+  60% {
+    top: 40%;
+    left: 52%;
+  }
+  100% {
+    top: 40%;
+    left: 112%;
+  }
+}
+@keyframes txt1 {
+  0% {
+    opacity: 1;
+  }
+  20%, 100% {
+    opacity: 0;
+  }
+}
+@keyframes txt2 {
+  0%, 80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 #content.article .description-ingredients {
-  grid-column: 2;
   border: 1px solid #9c9c9c;
-  justify-self: center;
   width: 80vw;
 }
 #content.article .description-ingredients thead tr {
@@ -769,19 +855,20 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 }
 #content.article .description-ingredients thead tr td {
   width: 100%;
-  background-color: #fff;
+  background-color: #009a87;
   text-align: center;
+  border-bottom: 1px solid #fff;
 }
 #content.article .description-ingredients thead tr td h3 {
   cursor: pointer;
   text-transform: uppercase;
-  color: #009a87;
+  color: #fff;
 }
 #content.article .description-ingredients thead tr td:hover {
-  background-color: #009a87;
+  background-color: #fff;
 }
 #content.article .description-ingredients thead tr td:hover h3 {
-  color: #fff;
+  color: #009a87;
 }
 #content.article .description-ingredients tbody {
   display: flex;
@@ -793,10 +880,22 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 #content.article .description-ingredients tbody .ingredients {
   display: none;
 }
-#content.article .comments {
-  grid-column: 2;
+#content.article .comments .comment {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #9c9c9c;
 }
 
+@media screen and (min-width: 900px) {
+  #content.article .comments .owl-carousel {
+    transform: rotate(90deg);
+    width: 270px;
+    margin-top: 100px;
+  }
+  #content.article .comments .owl-carousel .item {
+    transform: rotate(-90deg);
+  }
+}
 #content.dog-food {
   display: grid;
   grid-template-columns: 10% 80% 10%;
@@ -1417,21 +1516,6 @@ body {
   font-size: 1.8rem;
   background-color: #f8f9fc;
   line-height: 1.8;
-}
-@media (max-width: 900px) {
-  body:has(.menu.active):after {
-    backdrop-filter: blur(2px);
-    background: rgba(0, 0, 0, 0.1);
-    bottom: 0;
-    content: "";
-    height: 100vh;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    z-index: 998;
-  }
 }
 
 i {

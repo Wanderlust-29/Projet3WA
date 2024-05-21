@@ -176,7 +176,7 @@ body > header {
     width: 100%;
     display: flex;
     justify-content: center;
-    z-index: 1;
+    // z-index: 10001;
     animation: Down 1s linear infinite;
     position: absolute;
     overflow-y: hidden;
@@ -202,13 +202,10 @@ body > header {
       width: 10%;
     }
   }
-  .menu-active {
-    justify-content: end;
-  }
 
   .search.closed {
     top: 8.5rem;
-    left: -100rem;
+    left: -10000rem;
   }
 }
 

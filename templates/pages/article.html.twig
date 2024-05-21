@@ -1,68 +1,80 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    {{article.name}}
-    {{ parent() }}
+	{{article.name}}
+	{{ parent() }}
 {% endblock %}
 
 {% block head %}
+	<link rel="stylesheet" href="assets/OwlCarousel2-master/dist/assets/owl.carousel.min.css">
+	<link rel="stylesheet" href="assets/OwlCarousel2-master/dist/assets/owl.theme.default.min.css">
 {% endblock %}
 
 {% block main %}
-    <main id="content" class="article">
-        <section class="product">
-            <h1>{{article.name}}</h1>
-                <figure>
-                    <img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-                </figure>
-                <div>
-                    <a class="btn-add-to-cart" data-article="{{ article.id }}">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
-                    <p class="price">{{ article.price }} €</p>
-                    {% if averageGrade is defined and averageGrade != 0 %}
-                        <p class="average-grade">{{averageGrade}}</p>
-                    {% endif %}
-                </div>
-                {% if error is defined %}
-                    <p id="error-msg">{{ error }}</p>
-                {% endif %}
-                {% if success is defined %}
-                    <p id="success-msg">{{ success }}</p>
-                {% endif %}
-        </section>  
+	<main id="content" class="article">
+		<section class="product">
+			<h1>{{article.name}}</h1>
 
-        <table class="description-ingredients">
-            <thead>
-            <tr >
-                <td><h3 class="btn-description">Description<h3></td>
-                {% if article.category.getName() != "Jouets" %}
-                    <td><h3 href="#table" class="btn-ingredients">Ingrédients<h3></td>
-                {% endif %}
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="description"> {{article.description | raw}}</td>
-                    <td class="ingredients">{{article.ingredients | raw}}</td>
-                </tr>
-            </tbody>
-        </table>
+			<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 
-        {% if comments is defined and comments != [] %}
-            <section class="comments">
-            <h2>Commentaires :</h2>
-                {% for comment in comments %}
-                    <h3>{{comment.userId.firstName}}</h3>
-                    <p class="grade">{{comment.grade}}</p>
-                    <p>{{comment.comment | raw}}</p>
-                {% endfor %}
-            </section>
-        {% endif %}
-    </main>
+			<button class="cart-button btn-add-to-cart" data-article="{{ article.id }}">
+				<span class="add-to-cart">Ajouter au Panier</span>
+				<span class="added">ajouté</span>
+				<i class="fas fa-shopping-cart"></i>
+				<i class="fas fa-box"></i>
+			</button>
+			<p class="price">{{ article.price }}
+				€</p>
+			{% if averageGrade is defined and averageGrade != 0 %}
+				<p class="average-grade">{{averageGrade}}</p>
+			{% endif %}
+		</section>
+
+		<table class="description-ingredients">
+			<thead>
+				<tr>
+					<td>
+						<h3 class="btn-description">Description<h3></td>
+							{% if article.category.getName() != "Jouets" %}
+								<td>
+									<h3 href="#table" class="btn-ingredients">Ingrédients<h3></td>
+									{% endif %}
+								</td>
+							</tr>
+						</thead>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="description">
+						{{article.description | raw}}</td>
+					<td class="ingredients">{{article.ingredients | raw}}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		{% if comments is defined and comments != [] %}
+			<section class="comments">
+				<h2>Commentaires :</h2>
+				<div class="owl-carousel">
+					{% for comment in comments %}
+						<article class="comment">
+							<h3>{{comment.userId.firstName}}</h3>
+							<p class="grade">{{comment.grade}}</p>
+							<p>{{comment.comment | raw}}</p>
+						</article>
+					{% endfor %}
+				</div>
+			</section>
+		{% endif %}
+	</main>
 {% endblock %}
 
 {% block javascript %}
-    <script src="assets/js/article.js" defer></script>
-    <script src="assets/js/error-success.js" defer></script>
+	<script src="assets/js/article.js" defer></script>
+	<script src="assets/js/slider-comments.js" defer></script>
+	<script src="assets/js/error-success.js" defer></script>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>
 {% endblock %}

@@ -1,15 +1,22 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   function map() {
-    const map = L.map("map").setView([48.25, -4.08], 11);
-    let marker = L.marker([48.254588, -4.089867]).addTo(map);
+    const marker_coords = [48.254614, -4.089905];
+    const map = L.map("map", {
+      center: marker_coords,
+      zoom: 18,
+      zoomControl: false,
+      gestureHandling: true,
+    });
+    // Correct instantiation of the marker
+    L.marker(marker_coords, { interactive: false }).addTo(map);
 
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      minZoom: 3,
+      maxZoom: 18,
     }).addTo(map);
   }
-  map();
 
   function about() {
     const coordinate = document.querySelector(".coordinates");
@@ -50,4 +57,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   about();
+  map();
 });
