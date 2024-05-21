@@ -5,7 +5,7 @@ class Order
     private ? int $id = null;
     
     
-    public function __construct(private int $userId, private string $createdAt, private string $status = "en cours", private float $total_price)
+    public function __construct(private int $userId, private string $createdAt, private string $status = "en cours", private float $totalPrice)
     {
 
     }
@@ -77,20 +77,20 @@ class Order
         $this->status = $status;
     }
 
-    // Getter and Setter for total_price
+    // Getter and Setter for totalPrice
     /**
      * @return float
      */
     public function getTotalPrice(): float
     {
-        return $this->total_price;
+        return $this->totalPrice;
     }
 
     /**
      * @param float $total_price
      */
-    public function setTotalPrice(float $total_price): void
+    public function setTotalPrice(float $totalPrice): void
     {
-        $this->total_price = $total_price;
+        $this->totalPrice = $totalPrice;
     }
 }

@@ -21,9 +21,8 @@
 					{% for order in orders %}
 						<li class="list-group-item">Commande n°{{ order.id }}
 							date :
-							{{ order.createdAt }},
-							{{ order.userId.firstName }}
-							{{ order.userId.lastName }}, total :
+							{{ order.createdAt }}, ajouter le nom de l'utilisateur, {{ order.status}} total :
+							{{ order.totalPrice}} €
 							<span class="plus">+</span>
 							<ul class="order-articles">
 								{% set orderArticles = ordersArticles[order.id] %}

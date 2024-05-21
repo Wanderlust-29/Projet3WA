@@ -100,7 +100,7 @@
 								<span class="plus">+</span>
 								<ul
 									class="order-articles">
-									{# {% set orderArticles = ordersArticles[order.id] %} #}
+									{% set orderArticles = ordersArticles[order.id] %}
 									{% if orderArticles is not empty %}
 										{% for article in orderArticles %}
 											<li>

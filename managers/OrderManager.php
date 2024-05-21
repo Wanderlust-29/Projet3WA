@@ -88,6 +88,14 @@ class OrderManager extends AbstractManager
         $query->execute($parameters);
         $orderId = $this->db->lastInsertId();
 
+        $query = $this->db->prepare('INSERT INTO ordersArticles (order_id, article_id) 
+        VALUES (:order_id, :article_id)');
+
+        $parameters = [
+            "order_id" => $orderId,
+            "article_id" => $order->getCreatedAt(),
+        ];
+
         // $ordersArticlesManager = new OrderArticleManager($this->db);
         // $ordersArticlesManager->insertArticles($orderId);
     }
@@ -98,7 +106,7 @@ class OrderManager extends AbstractManager
      * @param int $orderId Order ID.
      * @return array List of articles for the order.
      */
-    public function OrderArticle(int $orderId) : array {
+    public function orderArticle(int $orderId) : array {
         $query = $this->db->prepare(
             'SELECT a.image_id, a.name, a.price 
              FROM orders_articles AS oa 
@@ -108,4 +116,29 @@ class OrderManager extends AbstractManager
         $query->execute(['order_id' => $orderId]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // public function oldOrderArticle(int $orderId) : array {
+    //     $query = $this->db->prepare(
+    //         'SELECT a.*
+    //          FROM orders_articles AS oa 
+    //          LEFT JOIN articles AS a ON oa.article_id = a.id 
+    //          WHERE oa.order_id = :order_id'
+    //     );
+    //     $query->execute(['order_id' => $orderId]);
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     $article =[];
+    //     foreach ($result as $item){
+
+    //         $mm = new MediaManager();
+    //         $media = $mm->findOne($item["image_id"]);
+    
+    //         $cm = new CategoryManager();
+    //         $category = $cm->findOne($item["category_id"]);
+
+    //         $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
+    //         $$article->setId($item["id"]);
+    //         $article[]= $article;
+    //     }
+    //     return $articles;
+    // }
 }

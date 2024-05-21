@@ -20,8 +20,7 @@ class AccountController extends AbstractController
     
             foreach ($orders as $order) {
                 $orderId = $order->getId();
-                $orderArticle = $om->OrderArticle($orderId);
-                // var_dump($orderArticle);
+                $orderArticle = $om->orderArticle($orderId);
                 $ordersArticles[$orderId] = $orderArticle;
             }
         }
@@ -155,7 +154,7 @@ class AccountController extends AbstractController
         // Pour chaque commande, récupère les articles associés
         foreach ($orders as $order) {
             $orderId = $order->getId();
-            $orderArticle = $om->OrderArticle($orderId);
+            $orderArticle = $om->orderArticle($orderId);
             // var_dump($orderArticle);
             $ordersArticles[$orderId] = $orderArticle;
             // var_dump($ordersArticles);
