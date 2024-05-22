@@ -8,15 +8,14 @@ class ArticleManager extends AbstractManager
      * @param int $id L'identifiant de l'article à récupérer.
      * @return Article|null L'objet article trouvé ou null s'il n'existe pas.
      */
-    public function findOne(int $id) : ? Article
+    public function findOne(int $id): ?Article
     {
         $query = $this->db->prepare('SELECT * FROM articles WHERE id=:id');
         $parameters = ["id" => $id];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if($result)
-        {
+        if ($result) {
             $mm = new MediaManager();
             $media = $mm->findOne($result["image_id"]);
 
@@ -36,18 +35,18 @@ class ArticleManager extends AbstractManager
      *
      * @return array Liste des articles.
      */
-    public function findAll() : array
+    public function findAll(): array
     {
         $query = $this->db->prepare('SELECT * FROM articles');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $articles = [];
-        
-        foreach($result as $item){
+
+        foreach ($result as $item) {
 
             $mm = new MediaManager();
             $media = $mm->findOne($item["image_id"]);
-    
+
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
@@ -69,16 +68,16 @@ class ArticleManager extends AbstractManager
                                     FROM articles
                                     JOIN orders_articles ON articles.id = orders_articles.article_id
                                     GROUP BY articles.id
-                                    ORDER BY total_sales DESC LIMIT 10;');
+                                    ORDER BY total_sales DESC LIMIT 9;');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $articles = [];
-        
-        foreach($result as $item){
+
+        foreach ($result as $item) {
 
             $mm = new MediaManager();
             $media = $mm->findOne($item["image_id"]);
-    
+
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
@@ -103,12 +102,12 @@ class ArticleManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $articles = [];
-        
-        foreach($result as $item){
+
+        foreach ($result as $item) {
 
             $mm = new MediaManager();
             $media = $mm->findOne($item["image_id"]);
-    
+
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
@@ -125,7 +124,7 @@ class ArticleManager extends AbstractManager
      * @param Article $article L'article à mettre à jour.
      * @return void
      */
-    public function update(Article $article) : void
+    public function update(Article $article): void
     {
         $query = $this->db->prepare('UPDATE articles 
         SET stock = :stock
@@ -136,6 +135,10 @@ class ArticleManager extends AbstractManager
             "stock" => $article->getStock()
         ];
         $query->execute($parameters);
+        // Vérifier si l'article a été trouvé et mis à jour
+        if ($query->rowCount() === 0) {
+            throw new Exception("Article with ID " . $article->getId() . " not found.");
+        }
     }
 
     /**
@@ -143,8 +146,9 @@ class ArticleManager extends AbstractManager
      *
      * @param Article $article Le nouvel article à insérer.
      * @return void
+     * 
      */
-    public function insert(Article $article) : void
+    public function insert(Article $article): void
     {
         $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age) 
             VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age)');
@@ -159,12 +163,12 @@ class ArticleManager extends AbstractManager
             "ingredients" => $article->getIngredients(),
             "age" => $article->getAge()
         ];
-        
+
         $query->execute($parameters);
         $article->setId($this->db->lastInsertId());
     }
 
-    public function searchArticles($search) : array
+    public function searchArticles($search): array
     {
         $query = $this->db->prepare('SELECT * FROM articles WHERE name LIKE :search OR description LIKE :search OR ingredients LIKE :search');
         $parameters = [
@@ -174,20 +178,42 @@ class ArticleManager extends AbstractManager
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         $articles = [];
-    
+
         foreach ($result as $item) {
             $mm = new MediaManager();
             $media = $mm->findOne($item["image_id"]);
-    
+
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
-    
+
             $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
             $article->setId($item["id"]);
-            
+
             $articles[] = $article;
         }
-    
+
         return $articles;
+    }
+
+    /**
+     * Supprime un article.
+     *
+     * @param Article $article L'article à mettre à jour.
+     * @return void
+     * @throws Exception Si l'article n'existe pas.
+     */
+    public function delete(Article $article): void
+    {
+        $query = $this->db->prepare('DELETE articles 
+        WHERE id = :id');
+
+        $parameters = [
+            "id" => $article->getId()
+        ];
+        $query->execute($parameters);
+        // Vérifier si l'article a été trouvé et supprimé
+        if ($query->rowCount() === 0) {
+            throw new Exception("Article with ID " . $article->getId() . " not found.");
+        }
     }
 }

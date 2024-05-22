@@ -1,0 +1,51 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	Admin - Supprimer un article
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="assets/OwlCarousel2-master/dist/assets/owl.carousel.min.css">
+	<link rel="stylesheet" href="assets/OwlCarousel2-master/dist/assets/owl.theme.default.min.css">
+{% endblock %}
+
+{% block main %}
+	<main id="content" class="articles">
+		{% if session is defined and session.role == "ADMIN" %}
+			<section class="all-products">
+				<h1>Tous les articles</h1>
+				{% for article in articles %}
+					{% if article.stock != 0 %}
+						<article class="product">
+							<a href="">
+								<span id="delete">&times;</span>
+							</a>
+							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+							<h3>{{ article.name }}</h3>
+							<p class="price">{{ article.price }}€</p>
+						</article>
+					{% else %}
+						<article class="product">
+							<a href="">
+								<span id="delete">&times;</span>
+							</a>
+							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+							<h3>{{ article.name }}</h3>
+							<p class="price">{{ article.price }}€</p>
+							<p class="out-of-stock">Rupture de stock</p>
+						</article>
+					{% endif %}
+				{% endfor %}
+			</section>
+		{% else %}
+			<h1>Vous n’êtes pas autorisé à accéder à cette page</h1>
+			<a class="btn-home" href="index.php">Retourner à l'accueil</a>
+		{% endif %}
+		{% if error is defined %}
+			<p class="error" id="error-msg">{{ error }}</p>
+		{% endif %}
+	</main>
+{% endblock %}
+
+{% block javascript %}{% endblock %}

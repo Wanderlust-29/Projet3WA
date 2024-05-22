@@ -65,6 +65,10 @@ class Router
             {
                 $acc->adminAddArticle();
             }
+            else if($route === "admin-delete-article")
+            {
+                $acc->deleteArticle();
+            }
             else if($route === "update")
             {
                 $acc->updateUserProfile();
