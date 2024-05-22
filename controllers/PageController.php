@@ -40,6 +40,8 @@ class PageController extends AbstractController
         $averageGrade = $numberOfComments > 0 ? $totalGrade / $numberOfComments : 0;
         $averageGrade = ceil($averageGrade);
 
+
+
         $this->render("pages/article.html.twig", [
             "article"=>$article,
             "comments"=> $comments,
@@ -50,19 +52,19 @@ class PageController extends AbstractController
     }
 
     // Récupération des articles de la catégorie
-    public function categorie(string $slug) : void{
+    public function category(string $slug) : void{
         // Récupéation des informations de la catégorie
         $cm = new CategoryManager();
-        $categorie = $cm->findOneBySlug($slug);
+        $category = $cm->findOneBySlug($slug);
 
-        $categorie_id = $categorie->getId();
+        $category_id = $category->getId();
 
         // Récupération des articles
         $am = new ArticleManager();
-        $articles = $am->findByCat($categorie_id);
+        $articles = $am->findByCat($category_id);
 
-        $this->render("pages/categorie.html.twig", [
-            "categorie"=>$categorie,
+        $this->render("pages/category.html.twig", [
+            "category"=>$category,
             "articles"=>$articles,
         ]);
     }

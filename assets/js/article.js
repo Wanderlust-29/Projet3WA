@@ -30,24 +30,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
     });
   }
+
   function gradeStar() {
     const grades = document.querySelectorAll(".grade");
+    countComment = "";
     const averageGrade = document.querySelector(".average-grade");
     averageGradeInt = parseInt(averageGrade.textContent);
     let averageStars = "";
+
     for (let i = 0; i < averageGradeInt; i++) {
       averageStars += "⭐";
     }
-    averageGrade.innerText = `${averageStars}`;
+    
     grades.forEach((grade) => {
       const gradeInt = parseInt(grade.textContent);
       let stars = "";
       for (let i = 0; i < gradeInt; i++) {
         stars += "⭐";
+        
       }
-      grade.innerText = `${stars}`;
+      countComment ++;
+      grade.innerText = `${stars} `;
     });
+    averageGrade.innerText = `${averageStars} (${countComment})`;
   }
+
   function animationCart() {
     const cartButtons = document.querySelectorAll(".cart-button");
 

@@ -93,11 +93,11 @@ class Router
             {
                 $pc->article($get["id"]);
             }
-            else if($route === "categorie")
+            else if($route === "category")
             {   
                 $slug = isset($get["slug"]) && !empty($get["slug"]) ? $get["slug"] : null;
                 if(!is_null($slug)){
-                    $pc->categorie($slug);
+                    $pc->category($slug);
                 }else{
                     $dc->notFound();
                 }

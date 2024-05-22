@@ -1,39 +1,79 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    Contact
-    {{ parent() }}
+	Contact
+	{{ parent() }}
 {% endblock %}
 
 {% block head %}
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css">
 {% endblock %}
+
 
 {% block main %}
-    <main id="content" class="contact">
-        <h1>Contact</h1>
-        <form action="index.php?route=contact" method="post">
-                <fieldset>
-                    <input type="text" name="firstName" id="firstName" placeholder="Entrez votre prénom"/>
-                </fieldset>
-                
-                <fieldset>
-                    <input type="text" name="lastName" id="lastName" placeholder="Entrez votre nom"/>
-                </fieldset>
-                
-                <fieldset>
-                    <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail"/>
-                </fieldset>
+	<main id="content" class="contact">
+		<h1>Contactez-nous</h1>
 
-                <fieldset>
-                    <textarea id="message" name="message" rows="10" cols="50">Entrez votre message...</textarea>
-                </fieldset>
+		<section class="contact-form">
 
-                <fieldset>
-                    <button type="submit" name="btn-send">Envoyer</button>
-                </fieldset>
-        </form>
-    </main>
+			<h2>Envoyer nous un message</h2>
+
+			<form action="index.php?route=contact" method="post">
+				<fieldset>
+					<label for="firstName">Entrez votre prénom</label>
+					<input type="text" name="firstName" id="firstName" placeholder="John"/>
+				</fieldset>
+
+				<fieldset>
+					<label for="lastName">Entrez votre prénom</label>
+					<input type="text" name="lastName" id="lastName" placeholder="Doe"/>
+				</fieldset>
+
+				<fieldset>
+					<label for="email">Entrez votre adresse e-mail</label>
+					<input type="email" name="email" id="email" placeholder="johndoe@gmail.com"/>
+				</fieldset>
+				<fieldset>
+					<label for="message">Votre message</label>
+					<textarea id="message" name="message" rows="10" cols="50" placeholder=""></textarea>
+				</fieldset>
+
+				<button type="submit" name="btn-send">Envoyer</button>
+			</form>
+		</section>
+
+		<section id="about">
+			<h2>A propos</h2>
+			<p>Nous sommes une équipe passionnée par le bien-être animal et engagée à fournir les meilleurs produits et services pour le bonheur et la santé de vos compagnons à quatre pattes.</p>
+			<article class="about-schedules">
+				<h3 class="schedules-btn">Nos horaires :
+				</h3>
+				<ul class="schedules">
+					<li>Lundi : 10:00-19:00</li>
+					<li>Mardi : 10:00-19:00</li>
+					<li>Mercredi : 10:00-19:00</li>
+					<li>Jeudi : 10:00-19:00</li>
+					<li>Vendredi : 10:00-19:00</li>
+				</ul>
+			</article>
+			<article class="about-coordinates">
+				<h3 class="coordinates-btn">Nos coordonnées :</h3>
+				<ul class="coordinates">
+					<li>Esplanade du général de Gaulle</li>
+					<li>Pont de buis-lès-Quimerch</li>
+					<li>Code postal : 29590</li>
+				</ul>
+			</article>
+		</section>
+		<div class="container-map">
+			<div id="map"></div>
+		</div>
+	</main>
 {% endblock %}
-
 {% block javascript %}
+	<script src="assets/js/contact.js" defer></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/leaflet-gesture-handling"></script>
+	<script src="https://cdn.jsdelivr.net/gh/maplibre/maplibre-gl-leaflet@main/leaflet-maplibre-gl.js"></script>
 {% endblock %}

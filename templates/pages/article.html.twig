@@ -12,10 +12,13 @@
 
 {% block main %}
 	<main id="content" class="article">
-		<section class="product">
-			<h1>{{article.name}}</h1>
 
-			<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+		<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+
+		<section class="article-item">
+			<h1>{{article.name}}</h1>
+			<p class="short-desc">{{article.shortDescription}}</p>
+
 
 			<button class="cart-button btn-add-to-cart" data-article="{{ article.id }}">
 				<span class="add-to-cart">Ajouter au Panier</span>
@@ -28,6 +31,8 @@
 			{% if averageGrade is defined and averageGrade != 0 %}
 				<p class="average-grade">{{averageGrade}}</p>
 			{% endif %}
+
+
 		</section>
 
 		<table class="description-ingredients">

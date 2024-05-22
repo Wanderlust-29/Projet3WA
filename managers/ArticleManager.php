@@ -22,7 +22,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($result["category_id"]);
 
-            $article = new Article($result["name"], $result["price"], $result["stock"], $category, $media, $result["description"], $result["ingredients"], $result["age"]);
+            $article = new Article($result["name"], $result["price"], $result["stock"], $category, $media, $result["description"], $result["ingredients"], $result["age"], $result["short_description"]);
             $article->setId($result["id"]);
             return $article;
         }
@@ -50,7 +50,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"]);
             $article->setId($item["id"]);
             $articles[] = $article;
         }
@@ -81,7 +81,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"]);
             $article->setId($item["id"]);
             $articles[] = $article;
         }
@@ -111,7 +111,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"]);
             $article->setId($item["id"]);
             $articles[] = $article;
         }
@@ -150,8 +150,8 @@ class ArticleManager extends AbstractManager
      */
     public function insert(Article $article): void
     {
-        $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age) 
-            VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age)');
+        $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age, short_description) 
+            VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age, :short_description');
 
         $parameters = [
             "name" => $article->getName(),
@@ -161,7 +161,8 @@ class ArticleManager extends AbstractManager
             "image_id" => $article->getImage()->getId(),
             "description" => $article->getDescription(),
             "ingredients" => $article->getIngredients(),
-            "age" => $article->getAge()
+            "age" => $article->getAge(),
+            "short_description" => $article->getShortDescription()
         ];
 
         $query->execute($parameters);
@@ -186,7 +187,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"]);
             $article->setId($item["id"]);
 
             $articles[] = $article;

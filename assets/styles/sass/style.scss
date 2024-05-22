@@ -11,9 +11,8 @@
 @import "pages/home";
 @import "pages/articles";
 @import "pages/article";
-@import "pages/dog-food";
-@import "pages/treats";
 @import "pages/cart";
+@import "pages/contact";
 
 /* ACCOUNT */
 @import "account/admin";
@@ -40,6 +39,61 @@ body {
   font-size: 1.8rem;
   background-color: $background;
   line-height: 1.8;
+  @media (max-width: 800px) {
+    &:has(.menu.active) {
+      overflow: hidden;
+      &:after {
+        backdrop-filter: blur(2px);
+        background: rgba(0, 0, 0, 0.1);
+        bottom: 0;
+        content: "";
+        height: 100vh;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 998;
+      }
+    }
+  }
+}
+.product {
+  background-color: $white;
+  // max-width: 30rem;
+  height: 50rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  margin-bottom: 0.5rem;
+  a {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 60%;
+      height: auto;
+    }
+  }
+  .out-of-stock {
+    padding: 0 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 1rem;
+    z-index: 1;
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    border: 3px solid $soldOut;
+    color: $soldOut;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 900;
+    transform: rotate(15deg) translateY(15px);
+  }
 }
 
 i {
