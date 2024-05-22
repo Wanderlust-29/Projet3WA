@@ -352,6 +352,7 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 
 /* PAGES */
 #content.home {
+  position: relative;
   /*******************
         BANNER
   *******************/
@@ -469,10 +470,35 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   align-items: center;
 }
 #content.home .owl-carousel {
-  width: 80%;
+  width: 60%;
 }
 #content.home .owl-nav {
   display: none;
+}
+
+#adopt {
+  width: 20vh;
+  position: absolute;
+  top: 190px;
+}
+#adopt h3 {
+  text-align: center;
+}
+#adopt article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  margin-bottom: 0.5rem;
+  width: 18vh;
+}
+#adopt article img {
+  width: 100%;
+  height: auto;
 }
 
 @media screen and (min-width: 800px) {
@@ -486,7 +512,7 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 20px;
-    width: 80vw;
+    width: 60vw;
   }
   #content.home .home-nav ul li {
     margin: 0;
@@ -729,7 +755,7 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 }
 #content.article .comments {
   padding: 2rem 1rem 0 1rem;
-  width: 100%;
+  width: 80vh;
 }
 #content.article .comments .comment {
   padding: 0.5rem 1rem;

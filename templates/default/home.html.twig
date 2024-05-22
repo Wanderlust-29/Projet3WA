@@ -48,19 +48,19 @@
 						</article>
 					{% else %}
 						<article class="product">
-								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-								<h3>{{ article.name }}</h3>
-								<p class="price">{{ article.price }}€</p>
+							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+							<h3>{{ article.name }}</h3>
+							<p class="price">{{ article.price }}€</p>
 							<p class="out-of-stock">Rupture de stock</p>
 						</article>
 					{% endif %}
 				{% endfor %}
 			</div>
 		</section>
-	</main>
-{% endblock %}
-{% block javascript %}
-	<script src="assets/js/slider.js" defer></script>
-	<script src="node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>
-{% endblock %}
+
+		<aside id="adopt">
+		  <h3>Adoptez moi</h3>
+		</aside>
+
+	</table>
+</section></main>{% endblock %}{% block javascript %}<script src="assets/js/slider.js" defer></script><script src="assets/js/rescuegroups.js" defer></script><script src="node_modules/jquery/dist/jquery.min.js"></script><script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>{% endblock %}
