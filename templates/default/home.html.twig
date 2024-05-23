@@ -36,7 +36,7 @@
 
 		<section class="top-sales">
 			<h2>Nos meilleurs ventes</h2>
-			<div class="owl-carousel">
+			<div class="owl-carousel" >
 				{% for article in articles %}
 					{% if article.stock != 0 %}
 						<article class="product">
@@ -58,9 +58,9 @@
 			</div>
 		</section>
 
-		<aside id="adopt">
-		  <h3>Adoptez moi</h3>
-		</aside>
+		<section class="section-adopt">
+		  <h2>Animaux disponibles à l'adoption</h2>
+		</section>
 
 	</table>
 </section></main>{% endblock %}{% block javascript %}<script src="assets/js/slider.js" defer></script><script src="assets/js/rescuegroups.js" defer></script><script src="node_modules/jquery/dist/jquery.min.js"></script><script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>{% endblock %}

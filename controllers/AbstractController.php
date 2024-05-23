@@ -1,5 +1,4 @@
 <?php
-use Cocur\Slugify\Slugify;
 abstract class AbstractController
 {
     private \Twig\Environment $twig;
@@ -11,8 +10,6 @@ abstract class AbstractController
             'debug' => true,
         ]);
         $session = isset($_SESSION["user"]) ? $_SESSION["user"] : null;
-        
-        $slugify = new Slugify();
 
         // Nombre d'articles dans le panier
         if (isset($_SESSION["cart"]) && is_array($_SESSION["cart"])) {
@@ -27,7 +24,6 @@ abstract class AbstractController
         $twig->addGlobal("session", $session);
         $twig->addGlobal("count", $count);
         $twig->addGlobal("cart", $cart);
-        $twig->addGlobal("slugify", $slugify);
 
         $this->twig = $twig;
     }

@@ -1,5 +1,4 @@
 function addToCart(article_id) {
-  console.log(`Ajouter l'article ${article_id} au panier.`);
 
   let formData = new FormData();
   formData.append("article_id", article_id);
@@ -14,7 +13,7 @@ function addToCart(article_id) {
   fetch("index.php?route=add-to-cart", options)
     .then((response) => response.json()) // Analyser la réponse JSON
     .then((data) => {
-      console.log(data); // Afficher les données renvoyées par le serveur dans la console
+      updateItems(data);
       updateCount(data);
       updateTotal(data);
     })
@@ -40,7 +39,6 @@ function deleteFromCart(article_id) {
   fetch("index.php?route=delete-from-cart", options)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data); // Afficher les données renvoyées par le serveur dans la console
       updateCount(data);
       updateTotal(data);
     })
@@ -74,17 +72,27 @@ function changeShippingMethod(shippingMethod) {
     });
 }
 
+function updateItems(data) {
+  const items = Object(data);
+  const ul = document.querySelector(".list-articles");
+  console.log(items);
+  items.forEach((item) => {
+    console.log(item.name);
+    const li = document.createElement("li");
+    li.textContent = item.name;
+    ul.appendChild(li);
+  });
+}
+
 function updateCount(data) {
   const itemCount = Object.keys(data).length;
   const cartCount = document.querySelector("[data-count]");
   if (cartCount) {
     cartCount.setAttribute("data-count", itemCount);
-    console.log(itemCount);
   }
 }
 
 function updateTotal(data) {
-  console.log(data);
   let totalPrice = 0;
 
   // Parcourir les articles du panier
