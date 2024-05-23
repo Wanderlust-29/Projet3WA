@@ -29,9 +29,11 @@
 					</article>
 				{% else %}
 					<article class="product">
-						<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-						<h3>{{ article.name }}</h3>
-						<p class="price">{{ article.price }}€</p>
+						<a>
+							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+							<h3>{{ article.name }}</h3>
+							<p class="price">{{ article.price }}€</p>
+						</a>
 						<p class="out-of-stock">Rupture de stock</p>
 					</article>
 				{% endif %}
