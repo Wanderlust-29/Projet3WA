@@ -1,5 +1,5 @@
+// Ajoute au panier
 function addToCart(article_id) {
-
   let formData = new FormData();
   formData.append("article_id", article_id);
 
@@ -24,7 +24,7 @@ function addToCart(article_id) {
       ); // Gérer les erreurs de la requête fetch
     });
 }
-
+// Supprime du panier
 function deleteFromCart(article_id) {
   let formData = new FormData();
   formData.append("article_id", article_id);
@@ -49,7 +49,7 @@ function deleteFromCart(article_id) {
       ); // Gérer les erreurs de la requête fetch
     });
 }
-
+//Change les frais de ports
 function changeShippingMethod(shippingMethod) {
   let formData = new FormData();
 
@@ -72,18 +72,58 @@ function changeShippingMethod(shippingMethod) {
     });
 }
 
+function groupArticlesByName(articles) {
+  const groupedArticles = {};
+
+  articles.forEach((article) => {
+    if (groupedArticles[article.name]) {
+      groupedArticles[article.name].count += 1;
+    } else {
+      groupedArticles[article.name] = {
+        name: article.name,
+        price: article.price,
+        count: 1,
+      };
+    }
+  });
+
+  return Object.values(groupedArticles);
+}
+
 function updateItems(data) {
-  const items = Object(data);
+  const groupedItems = groupArticlesByName(data);
   const ul = document.querySelector(".list-articles");
-  console.log(items);
-  items.forEach((item) => {
-    console.log(item.name);
+  ul.innerHTML = "";
+
+  groupedItems.forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = item.name;
+    li.className = "article";
+    li.textContent = `${item.name} ${item.price}€ (x${item.count})`;
+
+    const a = document.createElement("a");
+    a.className = "btn-delete-from-cart";
+    a.setAttribute("data-article", item.name);
+
+    const i = document.createElement("i");
+    i.className = "fa-solid fa-x";
+
+    a.appendChild(i);
+    li.appendChild(a);
+
+    a.addEventListener("click", () => {
+      const index = groupedItems.findIndex(
+        (groupedItem) => groupedItem.name === item.name
+      );
+      if (index !== -1) {
+        groupedItems.splice(index, 1);
+        updateItems(groupedItems);
+      }
+    });
+
     ul.appendChild(li);
   });
 }
-
+// Mets a jour le compteur
 function updateCount(data) {
   const itemCount = Object.keys(data).length;
   const cartCount = document.querySelector("[data-count]");
@@ -91,7 +131,7 @@ function updateCount(data) {
     cartCount.setAttribute("data-count", itemCount);
   }
 }
-
+// Mets a jour le prix total
 function updateTotal(data) {
   let totalPrice = 0;
 

@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
       addToCart(article_id);
     });
   });
+
   const deleteFromCartButtons = document.querySelectorAll(
     ".btn-delete-from-cart"
   );
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       articleListItem.remove();
     });
   });
+
   const shippingOptions = document.querySelectorAll('input[name="drone"]');
   if (shippingOptions) {
     shippingOptions.forEach((radio) => {
@@ -27,4 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+  const articles = document.querySelectorAll(".article");
+  let arrayArticles = [];
+
+  articles.forEach((item) => {
+    arrayArticles.push(item);
+  });
+
+  console.log(arrayArticles);
 });
