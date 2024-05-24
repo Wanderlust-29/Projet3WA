@@ -19,7 +19,7 @@
 			<section>
 				{# Formulaire pour modifier les données de l'utilisateur #}
 				<h2>Modifier mes coordonnées</h2>
-				<form action="index.php?route=update" method="post" class="update">
+				<form action="/update" method="post" class="update">
 					<fieldset class="container">
 						<fieldset>
 							<label for="firstName">
@@ -104,10 +104,10 @@
 									{% if orderArticles is not empty %}
 										{% for article in orderArticles %}
 											<li>
-												<a href="index.php?route=article&id={{ article.articleId.id }}">
+												<a href="/article&id={{ article.articleId.id }}">
 													<p>{{ article.name }}</p>
 												</a>
-												<a href="index.php?route=comment&articleId={{ article.articleId.id }}">Ajouter un Commentaires</a>
+												<a href="/comment&articleId={{ article.articleId.id }}">Ajouter un Commentaires</a>
 											</li>
 										{% endfor %}
 									{% else %}
@@ -122,22 +122,22 @@
 				</ul>
 			</section>
 
-			<form action="index.php?route=delete" method="post" class="other-btns">
+			<form action="/delete" method="post" class="other-btns">
 				<fieldset>
 					<input type="hidden" name="userId" value="{{ session.id }}"/>
 					<button type="submit" name="delete">Supprimer</button>
 				</fieldset>
 			</form>
 
-			<form action="index.php?route=logout" method="post" class="other-btns">
+			<form action="/logout" method="post" class="other-btns">
 				<fieldset>
 					<button type="submit" name="logout">Se déconnecter</button>
 				</fieldset>
 			</form>
 		{% else %}
 			<h1>Pour continuer, vous devez être connecté</h1>
-			<a class="btn-login" href="index.php?route=login">Se connecter</a>
-			<a class="btn-register" href="index.php?route=register">S'inscrire</a>
+			<a class="btn-login" href="/login">Se connecter</a>
+			<a class="btn-register" href="/register">S'inscrire</a>
 		{% endif %}
 	</main>
 {% endblock %}

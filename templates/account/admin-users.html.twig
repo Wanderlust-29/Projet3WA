@@ -1,7 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-	Admin -Stocks
+	Admin
 	{{ parent() }}
 {% endblock %}
 
@@ -12,15 +12,19 @@
 {% block main %}
 	<main id="content" class="admin">
 		{% if session is defined and session.role == "ADMIN" %}
-			{# Gestion des stocks #}
-			{% for article in articles %}
-				<form action="/update-stock" method="post" class="stocks row g-2">
-					<label for="add{{ article.id }}" class="col-sm-auto col-form-label">{{ article.name }}</label>
-					<input type="number" class="form-control col-sm" name="stock" id="add{{ article.id }}" value="{{ article.stock }}">
-					<input type="hidden" name="article_id" value="{{ article.id }}">
-					<button type="submit" name="add" class="btn btn-primary col-sm-auto">Valider</button>
+			{# Gestion des utilisateur #}
+			{% for user in users %}
+				<form action="/delete" method="post" class="users row g-2">
+					<label class="col-sm-auto col-form-label" for="user{{ user.id }}">{{ user.firstName }}
+						{{ user.lastName }}</label>
+					<input type="hidden" name="userId" value="{{ user.id }}">
+					<button type="submit" name="delete" value="Supprimer" class="btn btn-danger col-sm-auto">Supprimer</button>
 				</form>
 			{% endfor %}
+
+			<form action="/logout" class="disconnect" method="post">
+				<button type="submit" class="btn btn-primary">Se déconnecter</button>
+			</form>
 		{% else %}
 			<h1>Vous n’êtes pas autorisé à accéder à cette page</h1>
 			<a class="btn-home" href="/">Retourner à l'accueil</a>

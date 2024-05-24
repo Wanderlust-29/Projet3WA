@@ -1,5 +1,5 @@
 <?php
-
+use Cocur\Slugify\Slugify;
 class ArticleManager extends AbstractManager
 {
     /**
@@ -22,7 +22,35 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($result["category_id"]);
 
-            $article = new Article($result["name"], $result["price"], $result["stock"], $category, $media, $result["description"], $result["ingredients"], $result["age"], $result["short_description"]);
+            $article = new Article($result["name"], $result["price"], $result["stock"], $category, $media, $result["description"], $result["ingredients"], $result["age"], $result["short_description"],$result["slug"]);
+            $article->setId($result["id"]);
+            return $article;
+        }
+
+        return null;
+    }
+
+    /**
+     * Récupère un article en fonction de son slug.
+     *
+     * @param string $slug Le slug de l'article à récupérer.
+     * @return Article|null L'objet article trouvé ou null s'il n'existe pas.
+     */
+    public function findBySlug(string $slug): ?Article
+    {
+        $query = $this->db->prepare('SELECT * FROM articles WHERE slug=:slug');
+        $parameters = ["slug" => $slug];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $mm = new MediaManager();
+            $media = $mm->findOne($result["image_id"]);
+
+            $cm = new CategoryManager();
+            $category = $cm->findOne($result["category_id"]);
+
+            $article = new Article($result["name"], $result["price"], $result["stock"], $category, $media, $result["description"], $result["ingredients"], $result["age"], $result["short_description"],$result["slug"]);
             $article->setId($result["id"]);
             return $article;
         }
@@ -50,7 +78,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"],$item["slug"]);
             $article->setId($item["id"]);
             $articles[] = $article;
         }
@@ -81,7 +109,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"],$item["slug"]);
             $article->setId($item["id"]);
             $articles[] = $article;
         }
@@ -111,7 +139,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"],$item["slug"]);
             $article->setId($item["id"]);
             $articles[] = $article;
         }
@@ -151,7 +179,10 @@ class ArticleManager extends AbstractManager
     public function insert(Article $article): void
     {
         $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age, short_description) 
-            VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age, :short_description');
+            VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age, :short_description, :slug');
+
+        $slugify = new Slugify();
+        $slug = $slugify->slugify($article->getName());
 
         $parameters = [
             "name" => $article->getName(),
@@ -162,7 +193,8 @@ class ArticleManager extends AbstractManager
             "description" => $article->getDescription(),
             "ingredients" => $article->getIngredients(),
             "age" => $article->getAge(),
-            "short_description" => $article->getShortDescription()
+            "short_description" => $article->getShortDescription(),
+            "slug" => $slug
         ];
 
         $query->execute($parameters);
@@ -187,7 +219,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
             $article->setId($item["id"]);
 
             $articles[] = $article;

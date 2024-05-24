@@ -4,14 +4,18 @@ class DefaultController extends AbstractController
 {
     public function home() : void
     {
+
         $am = new ArticleManager();
         $articles = $am->TopNine();
-        $totalPrice = 0;
-        $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
         
-        foreach ($cart as $article) {
-            if (isset($article['price'])) {
-                $totalPrice += $article['price'];
+        $totalPrice = 0;
+        $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : null;
+        
+        if(!is_null($cart)){
+            foreach ($cart as $article) {
+                if (isset($article['price'])) {
+                    $totalPrice += $article['price'];
+                }
             }
         }
 

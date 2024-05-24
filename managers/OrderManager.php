@@ -87,17 +87,71 @@ class OrderManager extends AbstractManager
         
         $query->execute($parameters);
         $orderId = $this->db->lastInsertId();
+        $this->insertArticles($orderId);
+    }
 
-        $query = $this->db->prepare('INSERT INTO ordersArticles (order_id, article_id) 
-        VALUES (:order_id, :article_id)');
+    /**
+     * Insère les articles associés à une commande donnée dans la table orders_articles.
+     *
+     * @param int $orderId L'identifiant de la commande.
+     * @return void
+     */
+    public function insertArticles(int $orderId) : void {
+        $cart = $_SESSION["cart"];
+        foreach ($cart as $key => $articleData) {
+            if($key == "shipping_costs"){
+                $type = "shipping";
+                switch ($articleData["name"]) {
+                    case '2-3 jours ouvrés Udp':
+                        $articleId = 1;
+                        break;
+                    case 'Chronopost 4-5 jours ouvrés':
+                        $articleId = 2;
+                        break;
+                    case 'Venir chercher sur place':
+                        $articleId = 3;
+                        break;
+                    default:
+                        $articleId = 1;
+                        break;
+                }
+            }else{
+                $type = "article";
+                $articleId = $articleData['id'];
+            }
+            
+            $query = $this->db->prepare('INSERT INTO orders_articles (order_id, article_id,item_type) 
+                VALUES (:order_id, :article_id, :item_type)');
+            $query->execute([
+                "order_id" => $orderId,
+                "article_id" => $articleId,
+                "item_type" => $type
+            ]);
+            // Mettre à jour le stock de l'article
+            if($type == 'article'){
+                $this->decrementArticleStock($articleId);
+            }
+        }
+        unset($_SESSION["cart"]);
+    }
 
-        $parameters = [
-            "order_id" => $orderId,
-            "article_id" => $order->getCreatedAt(),
-        ];
-
-        // $ordersArticlesManager = new OrderArticleManager($this->db);
-        // $ordersArticlesManager->insertArticles($orderId);
+    /**
+     * Méthode pour décrémenter le stock d'un article.
+     *
+     * @param int $articleId L'identifiant de l'article.
+     * @return void
+     */
+    private function decrementArticleStock(int $articleId) : void {
+        $am = new ArticleManager($this->db); 
+        $article = $am->findOne($articleId); 
+    
+        if ($article) {
+            // Décrémente le stock de 1
+            $article->setStock($article->getStock() - 1);
+    
+            // Met à jour le stock de l'article dans la base de données
+            $am->update($article);
+        }
     }
 
     /**

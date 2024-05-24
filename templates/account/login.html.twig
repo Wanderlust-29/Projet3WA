@@ -10,7 +10,7 @@
 
 {% block main %}
     <main id="content" class="login">
-        <form action="index.php?route=check-login" method="post">
+        <form action="/check-login" method="post">
             <fieldset class="container">
                 <legend>Se connecter</legend>
                 <input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}" />
@@ -33,7 +33,7 @@
                         <button type="submit" name="login">Se connecter</button>
                     </fieldset>
                     <fieldset>
-                        <a class="btn-register" href="index.php?route=register">S'inscrire</a>
+                        <a class="btn-register" href="/register">S'inscrire</a>
                     </fieldset>
                 </fieldset>
             </fieldset>

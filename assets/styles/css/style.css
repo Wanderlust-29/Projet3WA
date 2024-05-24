@@ -130,6 +130,7 @@ body > header #hamburger-icon.active span:nth-child(3) {
   transform: rotate(-135deg);
 }
 body > header .menu {
+  z-index: 999;
   position: absolute;
   top: 0;
   left: 0;
@@ -787,6 +788,7 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   padding: 2rem 0;
 }
 #content.cart .cart-payement {
+  background-color: #fff;
   grid-column: 2;
   border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -1279,24 +1281,6 @@ body {
   font-size: 1.8rem;
   background-color: #f8f9fc;
   line-height: 1.8;
-}
-@media (max-width: 800px) {
-  body:has(.menu.active) {
-    overflow: hidden;
-  }
-  body:has(.menu.active):after {
-    backdrop-filter: blur(2px);
-    background: rgba(0, 0, 0, 0.1);
-    bottom: 0;
-    content: "";
-    height: 100vh;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    z-index: 998;
-  }
 }
 
 .product {

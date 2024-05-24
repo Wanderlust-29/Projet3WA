@@ -1,15 +1,18 @@
 <?php
 require_once '../vendor/autoload.php';
-require_once 'secrets.php';
+require_once __DIR__ . '/secret.php';
 
 \Stripe\Stripe::setApiKey($stripeSecretKey);
 header('Content-Type: application/json');
 
-$YOUR_DOMAIN = 'http://localhost/Projet3wa/index.php';
+$YOUR_DOMAIN = 'http://projet3wa.local/';
 
 // Récupérer les informations du panier (exemple simplifié)
 session_start();
-$cartItems = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
+$cartItems = isset($_SESSION["cart"]['articles']) ? $_SESSION["cart"]['articles'] : [];
+$shipping = isset($_SESSION["cart"]['shipping_costs']) ? $_SESSION["cart"]['shipping_costs'] : [];
+
+var_dump($shipping);
 
 // Préparer les articles pour Stripe
 $lineItems = [];
@@ -33,8 +36,30 @@ $checkoutSession = \Stripe\Checkout\Session::create([
     'payment_method_types' => ['card'],
     'line_items' => $lineItems,
     'mode' => 'payment',
-    'success_url' => $YOUR_DOMAIN . '?route=success',
-    'cancel_url' => $YOUR_DOMAIN . '?route=cart',
+    'success_url' => $YOUR_DOMAIN . 'success',
+    'cancel_url' => $YOUR_DOMAIN . 'cart',
+    'shipping_options' => [
+        [
+            'shipping_rate_data' => [
+                    "type" => "fixed_amount",
+                    "fixed_amount" => [
+                        "amount" => $shipping['price'] * 100,
+                        "currency" => "eur"
+                    ],
+                    'display_name' => $shipping['name'],
+                    'delivery_estimate' => [
+                        'minimum' => [
+                            'unit' => 'business_day',
+                            'value' => $shipping['delivery_min'],
+                        ],
+                        'maximum' => [
+                            'unit' => 'business_day',
+                            'value' => $shipping['delivery_max'],
+                        ]
+                    ]
+                ],
+            ]
+    ]
 ]);
 
 // Rediriger l'utilisateur vers la page de paiement de Stripe

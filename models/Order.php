@@ -5,9 +5,9 @@ class Order
     private ? int $id = null;
     
     
-    public function __construct(private int $userId, private string $createdAt, private string $status = "en cours", private float $totalPrice)
+    public function __construct(private int $userId, private string $createdAt, private string $status, private float $totalPrice)
     {
-
+        $this->status = !empty($status) ? $status : "pending";
     }
     // Getter and Setter for id
     /**

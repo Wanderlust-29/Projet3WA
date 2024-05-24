@@ -1,5 +1,5 @@
 vendor/
 .env
 composer.lock
-stripe/secrets.php
+stripe/secret.php
 ryanroudaut_projet.sql

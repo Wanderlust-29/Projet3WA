@@ -6,16 +6,23 @@ function burgerMenu() {
 
   burger.addEventListener("click", () => {
     burger.classList.toggle("active");
-    search.classList.add("closed");
     navLinks.classList.toggle("active");
   });
 
-  searchBtns.forEach((searchBtn) => {
-    searchBtn.addEventListener("click", (event) => {
+  // When the user clicks anywhere outside of the modal, close it
+  window.addEventListener("click", (event) => {
+    if (!navLinks.contains(event.target) && !burger.contains(event.target)) {
       navLinks.classList.remove("active");
       burger.classList.remove("active");
+    }
+  });
+
+  searchBtns.forEach((searchBtn) => {
+    searchBtn.addEventListener("click", () => {
       search.classList.toggle("closed");
     });
   });
 }
-addEventListener("DOMContentLoaded", burgerMenu());
+
+// Ensure the function reference is passed to DOMContentLoaded
+document.addEventListener("DOMContentLoaded", burgerMenu);

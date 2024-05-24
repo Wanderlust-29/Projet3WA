@@ -11,7 +11,7 @@
 {% block main %}
     <main id="content" class="comment">
         <h1>Ajouter un Commentaire pour l'article {{article.name}}</h1>
-        <form action="index.php?route=check-comment&articleId={{ article.id }}" method="post">
+        <form action="/check-comment&articleId={{ article.id }}" method="post">
             <fieldset>
                 <label for="grade">Choisir une note :</label>
 

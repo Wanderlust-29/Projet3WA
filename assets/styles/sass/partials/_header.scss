@@ -130,6 +130,7 @@ body > header {
         MENU
   *******************/
   .menu {
+    z-index: 999;
     position: absolute;
     top: 0;
     left: 0;
@@ -176,7 +177,6 @@ body > header {
     width: 100%;
     display: flex;
     justify-content: center;
-    // z-index: 10001;
     animation: Down 1s linear infinite;
     position: absolute;
     overflow-y: hidden;

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
+		<base href="http://Projet3wa.local/">
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Découvrez nos accessoires et nourritures pour chien. Achetez en ligne les meilleures croquettes, friandises et jouets pour votre animal. Livraison rapide.">
 		<title>
-			{% block title %}{% endblock %}| TimberWolf</title>
+		{% block title %}{% endblock %}| TimberWolf</title>
 		{% block head %}{% endblock %}
 		<link href="./assets/font/css/fontawesome.css" rel="stylesheet">
 		<link href="./assets/font/css/brands.css" rel="stylesheet">
@@ -14,7 +15,7 @@
 	</head>
 	<body>
 		<header class="header">
-			<a href="index.php" class="logo">
+			<a href="/" class="logo">
 				<img src="assets/media/logo.svg" alt="logo"/>
 				<p>TimberWolf</p>
 			</a>
@@ -41,54 +42,53 @@
 
 			<menu class="menu">
 				<li>
-					<a href="index.php">Accueil</a>
+					<a href="/">Accueil</a>
 				</li>
 				<li>
-					<a href="index.php?route=category&slug=croquettes">Croquettes</a>
+					<a href="/categorie/croquettes/">Croquettes</a>
 				</li>
 				<li>
-					<a href="index.php?route=category&slug=mastication">Friandises</a>
+					<a href="/categorie/mastications/">Friandises</a>
 				</li>
 				<li>
-					<a href="index.php?route=category&slug=jouets">Jouets</a>
+					<a href="/categorie/jouets/">Jouets</a>
 				</li>
 				<li>
 					<a class="myBtn">Panier</a>
 				</li>
 				{% if session is defined and session is not null %}
 					<li>
-						<a href="index.php?route=account">Mon compte</a>
+						<a href="/account">Mon compte</a>
 					</li>
 					<li>
-						<a href="index.php?route=logout">Se déconnecter</a>
+						<a href="/logout">Se déconnecter</a>
 					</li>
 				{% else %}
 					<li>
-						<a href="index.php?route=login">Se connecter</a>
+						<a href="/login">Se connecter</a>
 					</li>
 					<li>
-						<a href="index.php?route=register">S'inscrire</a>
+						<a href="/register">S'inscrire</a>
 					</li>
 				{% endif %}
 				<li>
-					<a href="index.php?route=contact">Contact</a>
+					<a href="/contact">Contact</a>
 				</li>
 				<li class="search-btn menu-desktop">
 					<i class="fa-solid fa-magnifying-glass"></i>
 				</li>
 			</menu>
 
-			<form class="search closed" action="index.php?route=articles-search" method="POST">
+			<form class="search closed" action="/articles-search" method="POST">
 				<input class="input-searchbar" type="search" name="search" placeholder="Rechercher..."/>
 				<input class="button-searchbar" type="submit" value="&#128269;"/>
 			</form>
 
 		</header>
-
 		<aside id="myModal" class="modal-box">
 			<div class="modal">
 				<span id="close">&times;</span>
-				<form action="index.php?route=cart" method="POST" id="modal-content">
+				<form action="/cart" method="POST" id="modal-content">
 					<h2>Panier</h2>
 					<ul class="list-articles">
 						{% for article in cart %}
@@ -111,16 +111,21 @@
 				</form>
 			</div>
 		</aside>
-
 		{% block main %}{% endblock %}
 		<footer class="footer">
 			<section>
-				<a href="index.php">
+				<a href="/">
 					<h2 class='title'>TimberWolf</h2>
 				</a>
 				<ul>
-					<li><a href="mailto:contact@timberwolf.fr"><i class="fa-solid fa-envelope"></i>contact@timberwolf.fr</a></li>
-					<li><a href="tel:0298000000"><i class="fa-solid fa-phone"></i>02.98.00.00.00</a></li>
+					<li><a href="mailto:contact@timberwolf.fr">
+							<i class="fa-solid fa-envelope"></i>
+							contact@timberwolf.fr</a></li>
+										<li>
+						<a href="tel:0298000000">
+							<i class="fa-solid fa-phone"></i>
+							02.98.00.00.00</a>
+					</li>
 				</ul>
 			</section>
 			<section>
@@ -128,17 +133,17 @@
 				<ul>
 					{% if session is defined and session is not null %}
 						<li>
-							<a href="index.php?route=account">Mon compte</a>
+							<a href="/account">Mon compte</a>
 						</li>
 						<li>
-							<a href="index.php?route=logout">Se déconnecter</a>
+							<a href="/logout">Se déconnecter</a>
 						</li>
 					{% else %}
 						<li>
-							<a href="index.php?route=login">Se connecter</a>
+							<a href="/login">Se connecter</a>
 						</li>
 						<li>
-							<a href="index.php?route=register">S'inscrire</a>
+							<a href="/register">S'inscrire</a>
 						</li>
 					{% endif %}
 				</ul>
@@ -146,10 +151,10 @@
 			<section>
 				<h2>Infos pratiques</h2>
 				<ul>
-					<li><a href="index.php?route=privacy">Politique de confidentialités</a></li>
-					<li><a href="index.php?route=legal">Mentions légales</a></li>
-					<li><a href="index.php?route=conditions">Conditions générale de vente</a></li>
-					<li><a href="index.php?route=refund">Politique de remboursement</a></li>
+					<li><a href="/privacy">Politique de confidentialités</a></li>
+					<li><a href="/legal">Mentions légales</a></li>
+					<li><a href="/conditions">Conditions générale de vente</a></li>
+					<li><a href="/refund">Politique de remboursement</a></li>
 				</ul>
 			</section>
 			<section class="social-networks">

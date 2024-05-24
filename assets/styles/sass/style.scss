@@ -39,24 +39,6 @@ body {
   font-size: 1.8rem;
   background-color: $background;
   line-height: 1.8;
-  @media (max-width: 800px) {
-    &:has(.menu.active) {
-      overflow: hidden;
-      &:after {
-        backdrop-filter: blur(2px);
-        background: rgba(0, 0, 0, 0.1);
-        bottom: 0;
-        content: "";
-        height: 100vh;
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 100%;
-        z-index: 998;
-      }
-    }
-  }
 }
 .product {
   background-color: $white;

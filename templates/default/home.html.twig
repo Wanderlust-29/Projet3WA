@@ -14,7 +14,7 @@
 	<main id="content" class="home">
 		<section class="banner">
 			<h1>Accessoires et nourritures pour Chien</h1>
-			<a class="btn-articles" href="index.php?route=articles">
+			<a class="btn-articles" href="/articles">
 				<span>Nos Produits</span>
 			</a>
 		</section>
@@ -23,24 +23,24 @@
 			<h2>Acheter par catégories</h2>
 			<ul>
 				<li class="dog-food">
-					<a href="index.php?route=dog-food">Croquettes</a>
+					<a href="/categorie/croquettes/">Croquettes</a>
 				</li>
 				<li class="treats">
-					<a href="index.php?route=treats">Friandises</a>
+					<a href="/categorie/mastications/">Friandises</a>
 				</li>
 				<li class="toys">
-					<a href="index.php?route=toys">Jouets</a>
+					<a href="/categorie/jouets/">Jouets</a>
 				</li>
 			</ul>
 		</section>
 
 		<section class="top-sales">
 			<h2>Nos meilleurs ventes</h2>
-			<div class="owl-carousel" >
+			<div class="owl-carousel">
 				{% for article in articles %}
 					{% if article.stock != 0 %}
 						<article class="product">
-							<a href="index.php?route=article&id={{ article.id }}">
+							<a href="/article/{{ article.slug }}">
 								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 								<h3>{{ article.name }}</h3>
 								<p class="price">{{ article.price }}€</p>
@@ -58,9 +58,9 @@
 			</div>
 		</section>
 
-		<section class="section-adopt">
-		  <h2>Animaux disponibles à l'adoption</h2>
-		</section>
+		<aside class="section-adopt">
+		  <h2>Adoptez moi</h2>
+		</aside>
 
 	</table>
 </section></main>{% endblock %}{% block javascript %}<script src="assets/js/slider.js" defer></script><script src="assets/js/rescuegroups.js" defer></script><script src="node_modules/jquery/dist/jquery.min.js"></script><script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>{% endblock %}

@@ -14,7 +14,7 @@
 		{% if session is defined and session.role == "ADMIN" %}
 			{# Gestion des utilisateur #}
 			{% for user in users %}
-				<form action="index.php?route=delete" method="post" class="users row g-2">
+				<form action="/delete" method="post" class="users row g-2">
 					<label class="col-sm-auto col-form-label" for="user{{ user.id }}">{{ user.firstName }}
 						{{ user.lastName }}</label>
 					<input type="hidden" name="userId" value="{{ user.id }}">
@@ -22,12 +22,12 @@
 				</form>
 			{% endfor %}
 
-			<form action="index.php?route=logout" class="disconnect" method="post">
+			<form action="/logout" class="disconnect" method="post">
 				<button type="submit" class="btn btn-primary">Se déconnecter</button>
 			</form>
 		{% else %}
 			<h1>Vous n’êtes pas autorisé à accéder à cette page</h1>
-			<a class="btn-home" href="index.php">Retourner à l'accueil</a>
+			<a class="btn-home" href="/">Retourner à l'accueil</a>
 		{% endif %}
 		{% if error is defined %}
 			<p class="error" id="error-msg">{{ error }}</p>

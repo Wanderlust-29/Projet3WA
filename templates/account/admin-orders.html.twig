@@ -1,7 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-	Admin - Commandes
+	Admin
 	{{ parent() }}
 {% endblock %}
 
@@ -21,8 +21,9 @@
 					{% for order in orders %}
 						<li class="list-group-item">Commande n°{{ order.id }}
 							date :
-							{{ order.createdAt }}, ajouter le nom de l'utilisateur, {{ order.status}} total :
-							{{ order.totalPrice}} €
+							{{ order.createdAt }},
+							{{ order.userId.firstName }}
+							{{ order.userId.lastName }}, total :
 							<span class="plus">+</span>
 							<ul class="order-articles">
 								{% set orderArticles = ordersArticles[order.id] %}
@@ -30,7 +31,7 @@
 									{% for article in orderArticles %}
 										<li>
 											<a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/article&id={{ article.articleId.id }}">
-												{{ article.name }}
+												{{ article.articleId.name }}
 											</a>
 										</li>
 									{% endfor %}

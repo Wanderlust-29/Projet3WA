@@ -1,9 +1,10 @@
 <?php
+use Cocur\Slugify\Slugify;
 class Article
 {
     private ?int $id = null;
 
-    public function __construct(private string $name, private float $price, private int $stock, private Category $category, private Media $image, private string $description, private string $ingredients, private string $age, private $shortDescription)
+    public function __construct(private string $name, private float $price, private int $stock, private Category $category, private Media $image, private string $description, private string $ingredients, private string $age, private $shortDescription, private $slug)
     {
 
     }
@@ -24,6 +25,8 @@ class Article
             'description' => $this->description,
             'ingredients' => $this->ingredients,
             'age' => $this->age,
+            'shortDescription' => $this->shortDescription,
+            'slug' => $this->slug
         ];
     }
 
@@ -194,5 +197,22 @@ class Article
     public function setShortDescription(string $shortDescription): void
     {
         $this->shortDescription = $shortDescription;
+    }
+
+    // Getter and Setter for $slug
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $shortDescription
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
     }
 }

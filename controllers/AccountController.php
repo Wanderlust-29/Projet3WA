@@ -1,4 +1,5 @@
 <?php
+use Cocur\Slugify\Slugify;
 
 class AccountController extends AbstractController
 {
@@ -64,20 +65,20 @@ class AccountController extends AbstractController
                         // Met à jour la session utilisateur et réinitialise le message d'erreur
                         $_SESSION["user"] = $currentUser;
                         unset($_SESSION["error-message"]);
-                        $this->redirect("index.php");
+                        $this->redirect("/");
                     } elseif ($_POST["password"] !== null) {
                         $_SESSION["error-message"] = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
-                        $this->redirect("index.php?route=admin");
+                        $this->redirect("/admin");
                     }
                 } else {
                     $_SESSION["error-message"] = "Les mots de passe ne correspondent pas";
-                    $this->redirect("index.php?route=admin");
+                    $this->redirect("/admin");
                 }
             }
         } else {
             $_SESSION["error-message"] = "L'utilisateur n'est pas connecté.";
         }
-        $this->redirect("index.php?route=account");
+        $this->redirect("/account");
     }
 
     public function deleteUser()
@@ -92,22 +93,22 @@ class AccountController extends AbstractController
                 // Vérifier si l'utilisateur supprimé n'est pas l'administrateur actuellement connecté
                 if ($user->getRole() !== "ADMIN") {
                     session_destroy(); // Détruire la session si l'utilisateur supprimé n'est pas un administrateur
-                    $this->redirect("index.php");
+                    $this->redirect("/");
                 } else { // Gestion des erreurs
-                    $this->redirect("index.php?route=admin");
+                    $this->redirect("/admin");
                 }
                 unset($_SESSION["error-message"]);
             } else {
                 $_SESSION["error-message"] = "Une erreur s'est produite lors de la suppression de l'utilisateur.";
                 if ($user->getRole() === "ADMIN") {
-                    $this->redirect("index.php?route=admin-admin-users");
+                    $this->redirect("/admin-admin-users");
                 } else {
-                    $this->redirect("index.php?route=account");
+                    $this->redirect("/account");
                 }
             }
         } else {
             $_SESSION["error-message"] = "Une erreur s'est produite.";
-            $this->redirect("index.php");
+            $this->redirect("/");
         }
     }
 
@@ -143,16 +144,16 @@ class AccountController extends AbstractController
                 $commentText = htmlspecialchars($_POST["comment"]);
                 $comment = new Comment($article, $user, $grade, $commentText);
                 $cm->create($comment);
-                $this->redirect("index.php?route=account");
+                $this->redirect("/account");
             } else {
                 // Redirection si l'utilisateur n'est pas connecté
                 $_SESSION["error-message"] = "Vous devez être connecté pour commenter.";
-                $this->redirect("index.php");
+                $this->redirect("/");
             }
         } else {
             // Redirection si les données de commentaire ne sont pas complètes
             $_SESSION["error-message"] = "Veuillez remplir tous les champs du commentaire.";
-            $this->redirect("index.php");
+            $this->redirect("/");
         }
     }
 
@@ -263,20 +264,20 @@ class AccountController extends AbstractController
                     $am->update($article);
 
                     unset($_SESSION["error-message"]);
-                    $this->redirect("index.php?route=admin");
+                    $this->redirect("/admin");
                 } else { // Gestion des erreurs
                     $_SESSION["error-message"] = "L'article n'existe pas.";
-                    $this->redirect("index.php?route=admin-stocks");
+                    $this->redirect("/admin-stocks");
                 }
             } else {
                 $_SESSION["error-message"] = "Veuillez définir le nouveau stock.";
-                $this->redirect("index.php?route=admin-stocks");
+                $this->redirect("/admin-stocks");
             }
         } else {
             $_SESSION["error-message"] = "L'administrateur n'est pas connecté.";
-            $this->redirect("index.php?route=login-admin");
+            $this->redirect("/login-admin");
         }
-        $this->redirect("index.php?route=admin");
+        $this->redirect("/admin");
     }
 
     public function createArticle(): void
@@ -285,6 +286,7 @@ class AccountController extends AbstractController
             isset($_POST["name"]) && isset($_POST["price"]) && isset($_POST["stock"])
             && isset($_POST["category"]) && isset($_FILES['image']) && isset($_POST["alt"])
             && isset($_POST["description"]) && isset($_POST["ingredients"]) && isset($_POST["age"])
+            && isset($_POST["short_description"])
         ) {
             try {
                 // Chemin temporaire de l'image uploadée
@@ -305,6 +307,9 @@ class AccountController extends AbstractController
                     $description = htmlspecialchars($_POST["description"]);
                     $ingredients = htmlspecialchars($_POST["ingredients"]);
                     $age = htmlspecialchars($_POST["age"]);
+                    $short_description = htmlspecialchars($_POST["short_description"]);
+                    $slugify = new Slugify();
+                    $slug = $slugify->slugify($name);
 
                     // Récupération de la catégorie sélectionnée
                     $cm = new CategoryManager();
@@ -316,26 +321,26 @@ class AccountController extends AbstractController
                     $mm->insert($media);
 
                     // Création d'un nouvel article avec les données fournies
-                    $article = new Article($name, $price, $stock, $category, $media, $description, $ingredients, $age);
+                    $article = new Article($name, $price, $stock, $category, $media, $description, $ingredients, $age, $short_description, $slug);
 
                     // Enregistrement de l'article dans la base de données
                     $am = new ArticleManager();
                     $am->insert($article);
 
                     unset($_SESSION["error-message"]);
-                    $this->redirect("index.php?route=admin-add-article");
+                    $this->redirect("/admin-add-article");
                 } else {
                     $_SESSION["error-message"] = "Une erreur s'est produite lors de la création de l'article";
-                    $this->redirect("index.php?route=admin-add-article");
+                    $this->redirect("/admin-add-article");
                 }
             } catch (Exception $e) {
                 echo $e->getMessage();
                 $_SESSION["error-message"] = "Une erreur s'est produite lors du téléchargement de l'image.";
-                $this->redirect("index.php?route=admin-add-article");
+                $this->redirect("/admin-add-article");
             }
         } else {
             $_SESSION["error-message"] = "Champs manquants";
-            $this->redirect("index.php?route=admin-add-article");
+            $this->redirect("/admin-add-article");
         }
     }
 

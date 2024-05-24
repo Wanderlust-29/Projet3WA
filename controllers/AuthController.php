@@ -29,22 +29,22 @@ class AuthController extends AbstractController
                     if(password_verify($_POST["password"], $user->getPassword())){
                         $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
                         unset($_SESSION["error-message"]);
-                        $this->redirect("index.php");
+                        $this->redirect("/");
                     } else {// Gestion des erreurs
                         $_SESSION["error-message"] = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
-                        $this->redirect("index.php?route=login");
+                        $this->redirect("/login");
                     }
                 } else {
                     $_SESSION["error-message"] = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
-                    $this->redirect("index.php?route=login");
+                    $this->redirect("/login");
                 }
             } else {
                 $_SESSION["error-message"] = "token CSRF invalide";
-                $this->redirect("index.php?route=login");
+                $this->redirect("/login");
             }
         } else {
             $_SESSION["error-message"] = "Champs manquants";
-            $this->redirect("index.php?route=login");
+            $this->redirect("/login");
         }
     }
     
@@ -93,26 +93,26 @@ class AuthController extends AbstractController
     
                             $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
                             unset($_SESSION["error-message"]);
-                            $this->redirect("index.php"); 
+                            $this->redirect("/"); 
                         } else { // Gestion des erreurs
                             $_SESSION["error-message"] = "L'utilisateur existe déjà";
-                            $this->redirect("index.php?route=register");
+                            $this->redirect("/register");
                         }
                     } else {
                         $_SESSION["error-message"] = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
-                        $this->redirect("index.php?route=register");
+                        $this->redirect("/register");
                     }
                 } else {
                     $_SESSION["error-message"] = "Les mots de passe ne correspondent pas";
-                    $this->redirect("index.php?route=register");
+                    $this->redirect("/register");
                 }
             } else {
                 $_SESSION["error-message"] = "Token CSRF invalide";
-                $this->redirect("index.php?route=register");
+                $this->redirect("/register");
             }
         } else {
             $_SESSION["error-message"] = "Champs manquants";
-            $this->redirect("index.php?route=register");
+            $this->redirect("/register");
         }
     }
     
@@ -144,26 +144,26 @@ class AuthController extends AbstractController
                         if ($user->getRole() === "ADMIN") {
                             $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
                             unset($_SESSION["error-message"]);
-                            $this->redirect("index.php?route=admin");
+                            $this->redirect("/admin");
                         } else { // Gestion des erreurs
                             $_SESSION["error-message"] = "Vous n’êtes pas autorisé à accéder à cette page";
-                            $this->redirect("index.php?route=login-admin");
+                            $this->redirect("/login-admin");
                         }
                     } else {
                         $_SESSION["error-message"] = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
-                        $this->redirect("index.php?route=login-admin");
+                        $this->redirect("/login-admin");
                     }
                 } else {
                     $_SESSION["error-message"] = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
-                    $this->redirect("index.php?route=login-admin");
+                    $this->redirect("/login-admin");
                 }
             } else {
                 $_SESSION["error-message"] = "Token CSRF invalide";
-                $this->redirect("index.php?route=login-admin");
+                $this->redirect("/login-admin");
             }
         } else {
             $_SESSION["error-message"] = "Champs manquants";
-            $this->redirect("index.php?route=login-admin");
+            $this->redirect("/login-admin");
         }
     }
     
@@ -171,6 +171,6 @@ class AuthController extends AbstractController
     {
         session_destroy();
 
-        $this->redirect("index.php");
+        $this->redirect("/");
     }
 }

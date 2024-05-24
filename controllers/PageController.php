@@ -16,7 +16,7 @@ class PageController extends AbstractController
     }
 
     // Récupère un article
-    public function article(int $id) : void
+    public function article(string $slug) : void
     {
         $success = isset($_SESSION["success-message"]) ? $_SESSION["success-message"] : null;
         unset($_SESSION["success-message"]);
@@ -27,7 +27,7 @@ class PageController extends AbstractController
         $am = new ArticleManager();
         $cm = new CommentManager();
 
-        $article = $am->findOne(intval($id));
+        $article = $am->findBySlug($slug);
         $comments = $cm->findAllById($article->getId());
 
         // Calculer la moyenne des notes
@@ -68,6 +68,7 @@ class PageController extends AbstractController
             "articles"=>$articles,
         ]);
     }
+
     // Récupération des articles suivant le résultat de la recherche
     public function search() : void
     {
@@ -81,7 +82,7 @@ class PageController extends AbstractController
                 "articles"=>$articles
             ]);
         } else {
-            $this->redirect("index.php");
+            $this->redirect("/");
         }
     }
 

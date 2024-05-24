@@ -21,7 +21,7 @@
 			{% for article in articles %}
 				{% if article.stock != 0 %}
 					<article class="product">
-						<a href="index.php?route=article&id={{ article.id }}">
+						<a href="/article/{{ article.slug }}">
 							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 							<h3>{{ article.name }}</h3>
 							<p class="price">{{ article.price }}€</p>
@@ -29,11 +29,9 @@
 					</article>
 				{% else %}
 					<article class="product">
-						<a>
-							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-							<h3>{{ article.name }}</h3>
-							<p class="price">{{ article.price }}€</p>
-						</a>
+						<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+						<h3>{{ article.name }}</h3>
+						<p class="price">{{ article.price }}€</p>
 						<p class="out-of-stock">Rupture de stock</p>
 					</article>
 				{% endif %}

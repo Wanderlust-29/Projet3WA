@@ -11,7 +11,7 @@
 {% block main %}
     <main id="content" class="login-admin">
         <h1>Admin</h1>
-            <form action="index.php?route=check-admin" method="post">
+            <form action="/check-admin" method="post">
             <input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}" />
             <fieldset>
                 <label for="email">
@@ -32,7 +32,7 @@
                 <button type="submit">Se connecter</button>
             </fieldset>
             <fieldset>
-                <a class="btn-register" href="index.php?route=register">S'inscrire</a>
+                <a class="btn-register" href="/register">S'inscrire</a>
             </fieldset>
         </form>
     </main>

@@ -11,7 +11,7 @@
 {% block main %}
     <main id="content" class="register">
         {# Formulaire d'inscription #}
-        <form action="index.php?route=check-register" method="post">
+        <form action="/check-register" method="post">
             <input type="hidden" name="csrf-token" id="csrf-token" value="{{csrf_token}}" />
             <fieldset class="container">
                 <legend>S'inscrire</legend>
@@ -69,7 +69,7 @@
                         <button type="submit" name="register">S'inscrire</button>
                     </fieldset>
                     <fieldset>
-                        <a class="btn-login" href="index.php?route=login">Se connecter</a>
+                        <a class="btn-login" href="/login">Se connecter</a>
                     </fieldset>
                 </fieldset>
             </fieldset>
