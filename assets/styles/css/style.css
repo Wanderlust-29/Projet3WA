@@ -677,6 +677,9 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
 #content.article .article-item .cart-button.clicked span.added {
   animation: txt2 1.5s ease-in-out forwards;
 }
+#content.article .article-item .disabled {
+  background-color: #9c9c9c;
+}
 @keyframes cart {
   0% {
     left: -10%;
@@ -783,14 +786,15 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   }
 }
 #content.cart {
-  display: grid;
-  grid-template-columns: 10% 80% 10%;
+  display: flex;
+  justify-content: center;
   padding: 2rem 0;
 }
 #content.cart .cart-payement {
+  padding: 1rem;
+  width: 80%;
   background-color: #fff;
   grid-column: 2;
-  border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   display: flex;
   flex-direction: column;
@@ -800,8 +804,50 @@ body > .modal-box .modal #modal-content .modal-btn:hover {
   text-align: center;
 }
 #content.cart .cart-payement .article {
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+#content.cart .cart-payement .article img {
+  width: 10%;
+  height: auto;
+}
+#content.cart .cart-payement .article p {
+  padding: 1rem;
+  text-align: center;
+}
+#content.cart .cart-payement .article .increment-decrement-btns {
+  display: flex;
+  flex-direction: column;
+}
+#content.cart .cart-payement .article .quantity {
+  text-align: center;
+}
+#content.cart .cart-payement .update-shipping-costs legend {
+  width: 100%;
+  text-align: center;
+}
+#content.cart .cart-payement .update-shipping-costs fieldset {
+  width: 100%;
+}
+#content.cart .cart-payement .form-checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#content.cart .cart-payement .form-checkout .btn-cart-back,
+#content.cart .cart-payement .form-checkout #checkout-button {
+  padding: 10px;
+  width: 200px;
+  height: 60px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #009a87;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  overflow: hidden;
 }
 
 #content.contact {
@@ -1272,6 +1318,12 @@ table {
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
+}
+
+.alertStock-modal {
+  color: red;
+  font-weight: bold;
+  display: none;
 }
 
 body {

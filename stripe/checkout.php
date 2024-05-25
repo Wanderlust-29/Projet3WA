@@ -12,7 +12,6 @@ session_start();
 $cartItems = isset($_SESSION["cart"]['articles']) ? $_SESSION["cart"]['articles'] : [];
 $shipping = isset($_SESSION["cart"]['shipping_costs']) ? $_SESSION["cart"]['shipping_costs'] : [];
 
-var_dump($shipping);
 
 // Préparer les articles pour Stripe
 $lineItems = [];
@@ -27,7 +26,7 @@ foreach ($cartItems as $article) {
             ],
             'unit_amount' => $article['price'] * 100, // Prix de l'article en centimes
         ],
-        'quantity' => 1, // Quantité de cet article dans le panier
+        'quantity' => $article['quantity'], // Quantité de cet article dans le panier
     ];
 }
 
@@ -41,28 +40,27 @@ $checkoutSession = \Stripe\Checkout\Session::create([
     'shipping_options' => [
         [
             'shipping_rate_data' => [
-                    "type" => "fixed_amount",
-                    "fixed_amount" => [
-                        "amount" => $shipping['price'] * 100,
-                        "currency" => "eur"
-                    ],
-                    'display_name' => $shipping['name'],
-                    'delivery_estimate' => [
-                        'minimum' => [
-                            'unit' => 'business_day',
-                            'value' => $shipping['delivery_min'],
-                        ],
-                        'maximum' => [
-                            'unit' => 'business_day',
-                            'value' => $shipping['delivery_max'],
-                        ]
-                    ]
+                "type" => "fixed_amount",
+                "fixed_amount" => [
+                    "amount" => $shipping['price'] * 100,
+                    "currency" => "eur"
                 ],
-            ]
+                'display_name' => $shipping['name'],
+                'delivery_estimate' => [
+                    'minimum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping['delivery_min'],
+                    ],
+                    'maximum' => [
+                        'unit' => 'business_day',
+                        'value' => $shipping['delivery_max'],
+                    ]
+                ]
+            ],
+        ]
     ]
 ]);
 
 // Rediriger l'utilisateur vers la page de paiement de Stripe
 header("HTTP/1.1 303 See Other");
 header("Location: " . $checkoutSession->url);
-?>

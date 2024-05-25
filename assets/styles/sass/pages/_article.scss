@@ -98,6 +98,9 @@
         }
       }
     }
+    .disabled {
+      background-color: $grey;
+    }
 
     @keyframes cart {
       0% {

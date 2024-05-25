@@ -1,11 +1,13 @@
 #content.cart {
-  display: grid;
-  grid-template-columns: 10% 80% 10%;
+  display: flex;
+  justify-content: center;
   padding: 2rem 0;
+
   .cart-payement {
+    padding: 1rem;
+    width: 80%;
     background-color: $white;
     grid-column: 2;
-    border-radius: 1rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
       rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     display: flex;
@@ -15,8 +17,54 @@
       text-align: center;
     }
     .article {
+      padding: 1rem;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+
+      img {
+        width: 10%;
+        height: auto;
+      }
+      p {
+        padding: 1rem;
+        text-align: center;
+      }
+      .increment-decrement-btns {
+        display: flex;
+        flex-direction: column;
+      }
+      .quantity {
+        text-align: center;
+      }
+    }
+    .update-shipping-costs {
+      legend {
+        width: 100%;
+        text-align: center;
+      }
+
+      fieldset {
+        width: 100%;
+      }
+    }
+    .form-checkout {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .btn-cart-back,
+      #checkout-button {
+        padding: 10px;
+        width: 200px;
+        height: 60px;
+        border: 0;
+        border-radius: 10px;
+        background-color: $green;
+        outline: none;
+        cursor: pointer;
+        color: $white;
+        overflow: hidden;
+      }
     }
   }
 }

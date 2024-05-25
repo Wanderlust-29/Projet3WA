@@ -19,13 +19,21 @@
 			<h1>{{article.name}}</h1>
 			<p class="short-desc">{{article.shortDescription}}</p>
 
-
-			<button class="cart-button btn-add-to-cart" data-article="{{ article.id }}">
-				<span class="add-to-cart">Ajouter au Panier</span>
-				<span class="added">ajouté</span>
-				<i class="fas fa-shopping-cart"></i>
-				<i class="fas fa-box"></i>
-			</button>
+			{% if soldOut %}
+				<button class="cart-button disabled btn-add-to-cart" data-article="{{ article.id }}" disabled>
+					<span class="add-to-cart">Rupture de stock</span>
+					<span class="added">ajouté</span>
+					<i class="fas fa-shopping-cart"></i>
+					<i class="fas fa-box"></i>
+				</button>
+			{% else %}
+				<button class="cart-button btn-add-to-cart" data-article="{{ article.id }}">
+					<span class="add-to-cart">Ajouter au Panier</span>
+					<span class="added">ajouté</span>
+					<i class="fas fa-shopping-cart"></i>
+					<i class="fas fa-box"></i>
+				</button>
+			{% endif %}
 			<p class="price">{{ article.price }}
 				€</p>
 			{% if averageGrade is defined and averageGrade != 0 %}

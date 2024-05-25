@@ -25,55 +25,56 @@
 				<ul class="list-articles">
 					{% for article in cart %}
 						<li class="article">
-							{{ article.name }}
-							-
-							{{ article.price }}€
-							<span>
+							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+							<p>{{ article.name }}
+								-
+								{{ article.price }}€
+							</p>
+							<span class="increment-decrement-btns">
 								<button class="btn-increment" data-article="{{ article.id }}" data-action="increment">+</button>
 								<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
 								<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
 							</span>
 						</li>
 					{% endfor %}
-				</ul>
+				</li>
+			</ul>
 
-				<form action="" method="POST" class="update-shipping-costs">
-					<legend>Frais de port</legend>
-					{% for cost in shipping_costs %}
-						<fieldset>
-							<input type="radio" id="{{ cost.name }}" name="drone" value="{{ cost.id }}"/>
-							<label for="{{ cost.name }}">{{ cost.description }}
-								(
-								{% if cost.price == 0 %}Gratuit
-								{% else %}
-									{{ cost.price }}€
-								{% endif %})</label>
-						</fieldset>
-					{% endfor %}
-				</form>
+			<form action="" method="POST" class="update-shipping-costs" id="shippingForm">
+				<legend>Frais de port</legend>
+				{% for cost in shipping_costs %}
+					<fieldset>
+						<input type="radio" id="{{ cost.name }}" name="drone" value="{{ cost.id }}" required/>
+						<label for="{{ cost.name }}">{{ cost.description }}
+							(
+							{% if cost.price == 0 %}Gratuit
+							{% else %}
+								{{ cost.price }}€
+							{% endif %})</label>
+					</fieldset>
+				{% endfor %}
+			</form>
 
-				<form action="stripe/checkout.php" method="POST">
-					<label id="cart-total-price">
-						Total :
-						<span class="total-price">{{ totalPrice|number_format(2, '.', ',') }}</span>€
-					</label>
-					<input type="hidden" name="totalPrice" value="{{totalPrice}}">
-					<a class="btn btn-cart-back" href="/">Continuer mes achats</a>
-					{% if session is defined and session is not null %}
-						{% if cart != [] %}
-							<button type="submit" id="checkout-button">Valider et payer</button>
-						{% endif %}
-					{% else %}
-						{% if cart != [] %}
-							<a class="btn-login" href="/login">Connectez-vous pour payer</a>
-						{% endif %}
+			<form class="form-checkout" action="stripe/checkout.php" method="POST">
+
+				<a class="btn btn-cart-back" href="/">Continuer mes achats</a>
+				<label id="cart-total-price">
+					Total :
+					<span class="total-price">{{ totalPrice|number_format(2, '.', ',') }}
+						€</span>
+				</label>
+				<input type="hidden" name="totalPrice" value="{{totalPrice}}">
+				{% if session is defined and session is not null %}
+					{% if cart != [] %}
+						<button type="submit" id="checkout-button">Valider et payer</button>
 					{% endif %}
-				</form>
-			{% endif %}
-		</section>
-	</main>
-{% endblock %}
-
-{% block javascript %}
-	<script src="assets/js/error-success.js" defer></script>
-{% endblock %}
+				{% else %}
+					{% if cart != [] %}
+						<a class="btn-login" href="/login">Connectez-vous pour payer</a>
+					{% endif %}
+				{% endif %}
+			</form>
+		{% endif %}
+	</section>
+</main>{% endblock %}{% block javascript %}
+<script src="assets/js/error-success.js" defer></script>{% endblock %}

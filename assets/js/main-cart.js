@@ -1,6 +1,7 @@
 import { addToCart, incrementDecrement, changeShippingMethod } from "./cart.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Boutton ajouter au panier
   const addToCartButtons = document.querySelectorAll(".btn-add-to-cart");
   addToCartButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -8,30 +9,21 @@ document.addEventListener("DOMContentLoaded", () => {
       addToCart(article_id);
     });
   });
-
-  // const deleteFromCartButtons = document.querySelectorAll(
-  //   ".btn-delete-from-cart"
-  // );
-  // deleteFromCartButtons.forEach((button) => {
-  //   button.addEventListener("click", () => {
-  //     const article_id = button.dataset.article;
-  //     const articleListItem = button.closest("li");
-  //     deleteFromCart(article_id);
-  //     articleListItem.remove();
-  //   });
-  // });
-
+  // Buttons increment/decrement
   document
     .querySelectorAll(".btn-increment, .btn-decrement")
-    .forEach(function (button) {
-      button.addEventListener("click", function () {
-        let articleId = this.getAttribute("data-article");
-        let action = this.getAttribute("data-action");
+    .forEach((button) => {
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        const articleId = this.getAttribute("data-article");
+        const action = this.getAttribute("data-action");
         incrementDecrement(articleId, action);
       });
     });
 
+  // Shipping Options
   const shippingOptions = document.querySelectorAll('input[name="drone"]');
+
   if (shippingOptions) {
     shippingOptions.forEach((radio) => {
       radio.addEventListener("change", function () {
@@ -40,12 +32,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const articles = document.querySelectorAll(".article");
-  let arrayArticles = [];
+  //désactive le boutton
+  const btnCheckout = document.getElementById("checkout-button");
+  btnCheckout.disabled = true;
 
-  articles.forEach((item) => {
-    arrayArticles.push(item);
+  const radios = document.querySelectorAll('input[name="drone"]');
+  radios.forEach((radio) => {
+    radio.addEventListener("change", function () {
+      if (this.checked) {
+        btnCheckout.disabled = false;
+      }
+    });
   });
 
-  console.log(arrayArticles);
+  document
+    .getElementById("paymentForm")
+    .addEventListener("submit", function (event) {
+      let selected = false;
+      for (const radio of radios) {
+        if (radio.checked) {
+          selected = true;
+          break;
+        }
+      }
+      if (!selected) {
+        alert("Veuillez sélectionner une option de frais de port.");
+        event.preventDefault(); // Empêche la soumission du formulaire de paiement
+      }
+    });
 });

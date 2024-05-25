@@ -7,27 +7,29 @@ class CartController extends AbstractController
     {
         $totalPrice = 0;
         $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : null;
-        $quantity = "";
+        $quantity = 0;
+
+        $sm  = new ShippingManager();
+        $shipping_costs = $sm->findAll();
 
         if (!is_null($cart)) {
             foreach ($cart as $article) {
-                if (isset($article['price'], $article['quantity'])) {
-                    $quantity = $article['quantity'];
+                if (isset($article['price'], $article['quantity'], $article['stock'])) {
+                    $quantity += $article['quantity']; // Incrémenter la quantité totale
                     $totalPrice += $article['price'] * $article['quantity'];
                 }
             }
         }
-        dump($cart);
-        $sm  = new ShippingManager();
-        $shipping_costs = $sm->findAll();
+
 
         $this->render("pay/cart.html.twig", [
             "cart" => $cart,
             "totalPrice" => $totalPrice,
             "quantity" => $quantity,
-            "shipping_costs" => $shipping_costs
+            "shipping_costs" => $shipping_costs,
         ]);
     }
+
 
     public function addToCart(): void
     {
@@ -58,7 +60,6 @@ class CartController extends AbstractController
         $this->renderJson($_SESSION["cart"]);
     }
 
-
     public function updateQuantity(): void
     {
         $id = !empty($_POST['article_id']) ? intval($_POST['article_id']) : null;
@@ -81,25 +82,15 @@ class CartController extends AbstractController
         ]);
     }
 
-    private function calculateTotalPrice(array $articles): float
-    {
-        $total = 0;
-        foreach ($articles as $article) {
-            $total += $article['price'] * $article['quantity'];
-        }
-        return $total;
-    }
+    // public function getShippingCosts($name)
+    // {
+    //     // Mettre à jour la session avec le coût de livraison sélectionné
+    //     unset($_SESSION['cart']['shipping_costs']);
+    //     $_SESSION['cart']['shipping_costs'] = $shippingCosts[$shippingMethod];
 
-
-    public function getShippingCosts($name)
-    {
-        // Mettre à jour la session avec le coût de livraison sélectionné
-        unset($_SESSION['cart']['shipping_costs']);
-        $_SESSION['cart']['shipping_costs'] = $shippingCosts[$shippingMethod];
-
-        // Répondre avec le nouveau contenu du panier ou tout autre information pertinente
-        $this->renderJson($_SESSION["cart"]);
-    }
+    //     // Répondre avec le nouveau contenu du panier ou tout autre information pertinente
+    //     $this->renderJson($_SESSION["cart"]);
+    // }
 
     public function updateShippingCosts()
     {
@@ -128,14 +119,23 @@ class CartController extends AbstractController
         $id_user = $user->getId();
 
         $totalPrice = 0;
-        $cart = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
-        $status = "success";
+
+        $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : null;
+        $shipping = isset($_SESSION['cart']['shipping_costs']) ? $_SESSION['cart']['shipping_costs'] : null;
 
         foreach ($cart as $article) {
             if (isset($article['price'])) {
-                $totalPrice += $article['price'];
+                $price = (float) $article['price'];
+                $quantity = isset($article['quantity']) ? (int) $article["quantity"] : 1;
+                $totalPrice += $price * $quantity;
             }
         }
+        if (!is_null($shipping)) {
+            $price = (float) $shipping['price'];
+            $totalPrice += $price;
+        }
+
+        $status = "success";
         $order = new Order($id_user, date('Y-m-d'), $status, $totalPrice);
 
         $om = new OrderManager();
