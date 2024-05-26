@@ -1,25 +1,24 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    {{ category.name }}
-    {{ parent() }}
+	{{ category.name }}
+	{{ parent() }}
 {% endblock %}
 
-{% block head %}
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block main %}
-<main id="content" class="articles">
-        <section class="all-products">
-            <h1>{{ category.name }}</h1>
-            <form class="order" method="GET">
-                <select class="order-by">
-                    <option value="Trier par prix">Trier par prix croissant</option>
-                    <option value="Trier par prix">Trier par prix décroissant</option>
-                    <option value="Trier par prix">Trier par popularité</option>
-                </select>
-            </form>
-            {% for article in articles %}
+	<main id="content" class="articles">
+		<section class="all-products">
+			<h1>{{ category.name }}</h1>
+
+			<select class="order-by">
+				<option value="Trier par prix">Trier par prix croissant</option>
+				<option value="Trier par prix">Trier par prix décroissant</option>
+				<option value="Trier par prix">Trier par popularité</option>
+			</select>
+
+			{% for article in articles %}
 				{% if article.stock != 0 %}
 					<article class="product">
 						<a href="/article/{{ article.slug }}">
@@ -37,9 +36,8 @@
 					</article>
 				{% endif %}
 			{% endfor %}
-        </section>
-    </main>
+		</section>
+	</main>
 {% endblock %}
 
-{% block javascript %}
-{% endblock %}
+{% block javascript %}{% endblock %}

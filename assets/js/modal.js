@@ -14,7 +14,6 @@ function modal() {
 
   // When the user clicks on <span> (x), close the modal
   span.addEventListener("click", () => {
-    console.log("click");
     modal.style.display = "none";
   });
 

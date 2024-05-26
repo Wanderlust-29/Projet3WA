@@ -1,0 +1,34 @@
+#content.adopt {
+  .section-adopt {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px 5px;
+    h2 {
+      // text-align: center;
+
+      width: 100%;
+    }
+    article {
+      color: $green;
+
+      max-width: 15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      background-color: $white;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      margin-bottom: 0.5rem;
+
+      min-height: 100%;
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

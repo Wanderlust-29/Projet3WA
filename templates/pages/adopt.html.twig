@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{{Adoption}}
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block main %}
+	<main id="content" class="adopt">
+		<h1>Animaux disponible pour l'adoption</h1>
+		<p>Chez TimberWolf, notre mission va au-delà de la simple vente de produits pour animaux. Nous sommes passionnés par le bien-être de chaque créature et croyons que chaque animal mérite un foyer aimant. C'est cette conviction qui nous a inspirés à créer une page dédiée à l'adoption sur notre site.</p>
+		<p>Cette initiative est notre façon de contribuer à une cause qui nous est chère. En adoptant un animal via TimberWolf, vous ne faites pas qu'accueillir un nouveau membre dans votre famille, vous changez une vie. Chaque adoption est un pas de plus vers un monde où chaque animal est aimé et chéri.</p>
+		<aside class="section-adopt">
+			<h2>Adoptez moi</h2>
+		</aside>
+	</main>
+{% endblock %}
+
+{% block javascript %}
+	<script src="assets/js/rescuegroups.js" defer></script>
+{% endblock %}

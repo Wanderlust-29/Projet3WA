@@ -27,7 +27,6 @@ function displayData(animals) {
     const image = animal.attributes.pictureThumbnailUrl;
 
     if (url && name && image) {
-      console.log(animal);
       const a = document.createElement("a");
       a.href = animal.attributes.url;
       const article = document.createElement("article");

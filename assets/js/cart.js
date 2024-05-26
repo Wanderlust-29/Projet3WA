@@ -49,6 +49,7 @@ function incrementDecrement(article_id, action) {
         updateTotal(data.articles, data.shipping_costs);
         disableIncrement(data.articles);
         disableIncrementModal(data.articles);
+        disabledButtonArticle(data.articles);
       } else {
         console.error("Invalid response structure:", data);
       }
@@ -156,14 +157,16 @@ function updateTotal(articles, shipping_costs) {
 function disabledButtonArticle(articles) {
   let articlesArray = Object.values(articles);
   articlesArray.forEach((article) => {
-    const cartButton = document.querySelectorAll(
+    const cartButton = document.querySelector(
       `.cart-button[data-article="${article.id}"]`
+    );
+    const spanCart = document.querySelector(
+      `.cart-button[data-article="${article.id} span.add-to-cart"]`
     );
     if (cartButton) {
       // Vérifie si la quantité dépasse le stock
       if (article.quantity >= article.stock) {
         cartButton.classList.add("disabled");
-        cartButton.innerText = "Rupture de stock";
         cartButton.disabled = true;
       } else {
         cartButton.classList.remove("disabled");
@@ -212,5 +215,7 @@ function disableIncrementModal(articles) {
     }
   });
 }
+
+function modalAddtoCart() {}
 
 export { addToCart, incrementDecrement, changeShippingMethod };

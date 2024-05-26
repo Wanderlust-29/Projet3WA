@@ -90,27 +90,41 @@
 				<span id="close">&times;</span>
 				<form action="/cart" method="POST" id="modal-content">
 					<h2>Panier</h2>
-					<ul class="list-articles">
-						{% for article in cart %}
-							<li class="article">
-								{{ article.name }}
-								-
-								{{ article.price }}€
-								<span>
-									<button class="btn-increment" data-article="{{ article.id }}" data-action="increment">+</button>
-									<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
-									<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
-								</span>
+					{% if cart is empty %}
+						<p>Votre panier est vide</p>
+					{% else %}
+						<ul class="list-articles">
+							{% for article in cart %}
+								<li class="article">
+									<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+									<p>{{ article.name }}
+										-
+										{{ article.price }}€
+									</p>
+									{% if stock != 0 %}
+										<span class="increment-decrement-btns">
+											<button class="btn-increment" data-article="{{ article.id }}" data-action="increment">+</button>
+											<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
+											<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
+										</span>
+									{% else %}
+										<span class="increment-decrement-btns">
+											<button class="btn-increment" data-article="{{ article.id }}" data-action="increment" disabled>+</button>
+											<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
+											<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
+										</span>
+									{% endif %}
+								</li>
+							{% endfor %}
+						</ul>
+						<label id="cart-total-price">
+							Total :
+							<span class="total-price">{{ totalPrice|number_format(2, '.', ',') }}</span>
+							€
+						</label>
+						<input type="submit" class="modal-btn" value="Payer" target="_blank">
 
-							</li>
-						{% endfor %}
-					</ul>
-					<label id="cart-total-price">
-						Total :
-						<span class="total-price">{{ totalPrice|number_format(2, '.', ',') }}</span>
-						€
-					</label>
-					<input type="submit" class="modal-btn" value="Payer" target="_blank">
+					{% endif %}
 				</form>
 			</div>
 		</aside>
@@ -123,8 +137,10 @@
 				<ul>
 					<li><a href="mailto:contact@timberwolf.fr"><i class="fa-solid fa-envelope"></i>contact@timberwolf.fr</a></li>
 					<li><a href="tel:0298000000"><i class="fa-solid fa-phone"></i>02.98.00.00.00</a></li>
+					<li><a href="/adoption"><i class="fa-solid fa-paw"></i>Adopter un animal</a></li>
 				</ul>
 			</section>
+
 			<section>
 				<h2>Mon compte</h2>
 				<ul>
@@ -168,4 +184,4 @@
 		<script src="assets/js/modal.js" defer></script>
 		<script type="module" src="assets/js/main-cart.js"></script>
 	</body>
-</html>
+</html></body></html>

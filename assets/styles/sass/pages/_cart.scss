@@ -39,31 +39,42 @@
       }
     }
     .update-shipping-costs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       legend {
         width: 100%;
         text-align: center;
       }
 
       fieldset {
-        width: 100%;
+        width: 50%;
+        text-align: center;
       }
     }
     .form-checkout {
       display: flex;
       justify-content: space-between;
+      flex-direction: column;
       align-items: center;
       .btn-cart-back,
-      #checkout-button {
+      #checkout-button,
+      .btn-login {
         padding: 10px;
         width: 200px;
-        height: 60px;
-        border: 0;
-        border-radius: 10px;
-        background-color: $green;
+        border: 2px solid $green;
         outline: none;
         cursor: pointer;
+        color: $green;
+        background: $white;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .btn-cart-back:hover,
+      #checkout-button:hover,
+      .btn-login:hover {
         color: $white;
-        overflow: hidden;
+        background: $green;
       }
     }
   }

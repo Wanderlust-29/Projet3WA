@@ -58,9 +58,29 @@
 			</div>
 		</section>
 
-		<aside class="section-adopt">
-		  <h2>Adoptez moi</h2>
-		</aside>
-
-	</table>
-</section></main>{% endblock %}{% block javascript %}<script src="assets/js/slider.js" defer></script><script src="assets/js/rescuegroups.js" defer></script><script src="node_modules/jquery/dist/jquery.min.js"></script><script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>{% endblock %}
+		<section class="why-choose-us">
+			<h2>Pourquoi Nous Choisir ?</h2>
+			<article>
+				<img src="assets/media/quality.svg" alt='qualité'/>
+				<h3>Qualité et Éthique</h3>
+				<p>Nous sélectionnons rigoureusement nos produits pour leur qualité et le respect des animaux.</p>
+			</article>
+			<article>
+				<img src="assets/media/adopt.svg" alt='engagement social'/>
+				<h3>Engagement Social</h3>
+				<p>
+					Une partie de nos profits est reversée aux refuges et aux associations partenaires.</p>
+			</article>
+			<article>
+				<img src="assets/media/earth.svg" alt='environnement terre'/>
+				<h3>Engagement Environnemental</h3>
+				<p>Nous minimisons l'utilisation de plastique et le suremballage, en privilégiant le papier kraft recyclé.</p>
+			</article>
+		</section>
+	</main>
+{% endblock %}
+{% block javascript %}
+	<script src="assets/js/slider.js" defer></script>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>
+{% endblock %}

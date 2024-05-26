@@ -26,7 +26,7 @@ class PageController extends AbstractController
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
         unset($_SESSION["error-message"]);
 
-        $soldOut = false;
+
 
         $am = new ArticleManager();
         $cm = new CommentManager();
@@ -34,8 +34,9 @@ class PageController extends AbstractController
         $article = $am->findBySlug($slug);
         $comments = $cm->findAllById($article->getId());
 
-        $stock = $article->getStock();
         $soldOut = false;
+        $stock = $article->getStock();
+
         if (!is_null($cart)) {
             foreach ($cart as $cartItem) {
                 // Vérifier si l'article du panier correspond à l'article actuel
@@ -90,6 +91,7 @@ class PageController extends AbstractController
         ]);
     }
 
+
     // Récupération des articles suivant le résultat de la recherche
     public function search(): void
     {
@@ -107,6 +109,11 @@ class PageController extends AbstractController
         }
     }
 
+
+    public function adoption(): void
+    {
+        $this->render("pages/adopt.html.twig", []);
+    }
     public function contact(): void
     {
         $this->render("pages/contact.html.twig", []);

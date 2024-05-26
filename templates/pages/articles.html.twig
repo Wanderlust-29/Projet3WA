@@ -11,13 +11,13 @@
 	<main id="content" class="articles">
 		<section class="all-products">
 			<h1>Tous nos produits</h1>
-			<form class="order" method="GET">
-				<select class="order-by">
-					<option value="Trier par prix">Trier par prix croissant</option>
-					<option value="Trier par prix">Trier par prix décroissant</option>
-					<option value="Trier par prix">Trier par popularité</option>
-				</select>
-			</form>
+
+			<select class="order-by">
+				<option value="Trier par prix">Trier par prix croissant</option>
+				<option value="Trier par prix">Trier par prix décroissant</option>
+				<option value="Trier par prix">Trier par popularité</option>
+			</select>
+
 			{% for article in articles %}
 				{% if article.stock != 0 %}
 					<article class="product">

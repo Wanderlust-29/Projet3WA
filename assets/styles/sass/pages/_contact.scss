@@ -71,6 +71,9 @@
       color: black;
     }
   }
+  .leaflet-pane {
+    z-index: 0 !important;
+  }
   .container-map {
     width: 100%;
     #map {

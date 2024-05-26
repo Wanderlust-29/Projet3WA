@@ -27,6 +27,7 @@ SimpleRouter::post('/add-article', [AccountController::class, 'createArticle']);
 SimpleRouter::post('/delete', [AccountController::class, 'deleteUser']);
 
 SimpleRouter::get('/', [DefaultController::class, 'home']);
+SimpleRouter::get('/adoption', [PageController::class, 'adoption']);
 SimpleRouter::get('/articles', [PageController::class, 'articles']);
 SimpleRouter::get('/categorie/{slug}', [PageController::class, 'category'])->setSettings(['includeSlash' => false]);
 SimpleRouter::get('/article/{slug}', [PageController::class, 'article'])->setSettings(['includeSlash' => false]);

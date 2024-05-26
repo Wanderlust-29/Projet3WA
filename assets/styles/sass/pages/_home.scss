@@ -4,16 +4,20 @@
     text-align: center;
     text-transform: uppercase;
     color: $green;
+    padding: 4.8rem;
   }
   a {
     color: $black;
+  }
+  section {
+    padding-bottom: 3rem;
   }
 
   /*******************
         BANNER
   *******************/
   .banner {
-    padding: 2rem 0;
+    padding: 10rem 0;
     background-image: url(../../media/banner.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -70,7 +74,6 @@
        HOME-NAV
   *******************/
   .home-nav {
-    padding-top: 2rem;
     ul {
       display: flex;
       flex-direction: column;
@@ -115,7 +118,6 @@
   *******************/
 
   .top-sales {
-    padding: 2rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -129,32 +131,25 @@
     display: none;
   }
 }
-.section-adopt {
+
+.why-choose-us {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 20px 5px;
-  h2 {
-    // text-align: center;
-    width: 100%;
-  }
+  flex-direction: column;
   article {
-    max-width: 15rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    background-color: $white;
-    padding: 1rem;
-    border-radius: 1rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    margin-bottom: 0.5rem;
-
-    min-height: 100%;
+    align-items: center;
+    h3 {
+      padding: 0 1rem;
+      text-align: center;
+    }
+    p {
+      text-align: center;
+      padding: 2rem;
+    }
     img {
-      max-width: 1000%;
-      height: auto;
+      margin-bottom: 1rem;
+      width: 10rem;
     }
   }
 }
@@ -182,7 +177,6 @@
       }
     }
 
-
     .owl-dots {
       text-align: center;
     }
@@ -203,6 +197,22 @@
       height: 16px;
       width: 16px;
       position: relative;
+    }
+  }
+  .why-choose-us {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    h2 {
+      width: 100%;
+    }
+    article {
+      width: 20%;
+      img {
+        width: auto;
+        height: 10rem;
+      }
     }
   }
 }

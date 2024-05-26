@@ -30,11 +30,20 @@
 								-
 								{{ article.price }}€
 							</p>
-							<span class="increment-decrement-btns">
-								<button class="btn-increment" data-article="{{ article.id }}" data-action="increment">+</button>
-								<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
-								<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
-							</span>
+							{}
+							{% if stock != 0 %}
+								<span class="increment-decrement-btns">
+									<button class="btn-increment" data-article="{{ article.id }}" data-action="increment">+</button>
+									<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
+									<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
+								</span>
+							{% else %}
+								<span class="increment-decrement-btns">
+									<button class="btn-increment" data-article="{{ article.id }}" data-action="increment" disabled>+</button>
+									<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
+									<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
+								</span>
+							{% endif %}
 						</li>
 					{% endfor %}
 				</li>
@@ -56,17 +65,18 @@
 			</form>
 
 			<form class="form-checkout" action="stripe/checkout.php" method="POST">
-
-				<a class="btn btn-cart-back" href="/">Continuer mes achats</a>
 				<label id="cart-total-price">
 					Total :
 					<span class="total-price">{{ totalPrice|number_format(2, '.', ',') }}
 						€</span>
 				</label>
 				<input type="hidden" name="totalPrice" value="{{totalPrice}}">
+
+				<a class="btn-cart-back" href="/">Continuer mes achats</a>
+
 				{% if session is defined and session is not null %}
 					{% if cart != [] %}
-						<button type="submit" id="checkout-button">Valider et payer</button>
+						<input type="submit" id="checkout-button" value='Valider et payer'/>
 					{% endif %}
 				{% else %}
 					{% if cart != [] %}
