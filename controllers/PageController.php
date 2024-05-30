@@ -96,28 +96,74 @@ class PageController extends AbstractController
     public function search(): void
     {
         if (isset($_POST['search'])) {
-            $search = htmlspecialchars($_POST['search']);
+            // Vérifie si le jeton CSRF est valide
+            $tokenManager = new CSRFTokenManager();
+            if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
+                $search = htmlspecialchars($_POST['search']);
 
-            $am = new ArticleManager();
-            $articles = $am->searchArticles($search);
+                $am = new ArticleManager();
+                $articles = $am->searchArticles($search);
 
-            $this->render("pages/articles-search.html.twig", [
-                "articles" => $articles
-            ]);
+                $this->render("pages/articles-search.html.twig", [
+                    "articles" => $articles
+                ]);
+            } else {
+                $_SESSION["error-message"] = "Token CSRF invalide";
+                $this->redirect("/");
+            }
         } else {
             $this->redirect("/");
         }
     }
 
 
-    public function adoption(): void
+    public function adopt(): void
     {
         $this->render("pages/adopt.html.twig", []);
     }
+
     public function contact(): void
     {
-        $this->render("pages/contact.html.twig", []);
+        $this->render("pages/contact.html.twig", [
+            'csrf_token' => $_SESSION["csrf-token"],
+        ]);
     }
+    public function contactCheck()
+    { {
+            if (
+                isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"])
+                && isset($_POST["message"])
+            ) {
+                // Vérifie si le jeton CSRF est valide
+                $tokenManager = new CSRFTokenManager();
+                if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
+                    $cmm = new ContactMessagesManager();
+                    // Crée un nouvel utilisateur et le sauvegarde en base de données
+                    $firstName = htmlspecialchars($_POST["firstName"]);
+                    $lastName = htmlspecialchars($_POST["lastName"]);
+                    $email = htmlspecialchars($_POST["email"]);
+                    $message = htmlspecialchars($_POST["message"]);
+                    // $texte_echappe = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+
+                    $contactMessage = new ContactMessages($firstName, $lastName, $email, $message);
+                    
+                    if ($cmm->create($contactMessage)) {
+                        // Redirige vers la page d'accueil si le message est bien enregistré
+                        $this->redirect("/contact");
+                    } else {
+                        $this->redirect("/contact");
+                    }
+                } else {
+                    $_SESSION["error-message"] = "Token CSRF invalide";
+                    $this->redirect("/");
+                }
+            } else {
+                $_SESSION["error-message"] = "Champs manquants";
+                $this->redirect("/contact");
+            }
+        }
+    }
+
     public function conditions(): void
     {
         $this->render("pages/conditions.html.twig", []);

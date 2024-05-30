@@ -135,8 +135,7 @@ class CartController extends AbstractController
             $totalPrice += $price;
         }
 
-        $status = "success";
-        $order = new Order($id_user, date('Y-m-d'), $status, $totalPrice);
+        $order = new Order($id_user, date('Y-m-d'), "success",  $shipping['id'], $totalPrice);
 
         $om = new OrderManager();
         $om->createOrder($order);

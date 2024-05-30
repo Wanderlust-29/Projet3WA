@@ -116,12 +116,11 @@ class AuthController extends AbstractController
         }
     }
     
-    public function admin(): void
+    public function loginAdmin(): void
     {
         $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
         unset($_SESSION["error-message"]);
-
-        $this->render('account/login-admin.html.twig', [
+        $this->render('layout.admin-login.html.twig', [
             'error' => $error,
             'csrf_token' => $_SESSION["csrf-token"],  
         ]);
@@ -170,7 +169,6 @@ class AuthController extends AbstractController
     public function logout() : void
     {
         session_destroy();
-
         $this->redirect("/");
     }
 }

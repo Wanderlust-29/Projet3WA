@@ -1,0 +1,152 @@
+{% extends "layout.admin.html.twig" %}
+
+{% block title %}
+	Article n° {{ article.id }} - {{ article.name }}
+{% endblock %}
+
+{% block main %}
+	<!-- Begin Page Content -->
+	<div class="container-fluid">
+		<!-- Page Heading -->
+		<h1 class="h3 mb-2 text-gray-800">Article n° {{ article.id }} - {{ article.name }}</h1>
+		<!-- DataTales Example -->
+		<div class="row">
+			<div class="col-lg-6 mb-4">
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Article</h6>
+					</div>
+					<div class="card-body">
+						<form action="/admin/articles/update" method="post" enctype="multipart/form-data" class="article">
+							<input type="hidden" name="id" value="{{ article.id }}">
+							<input type="hidden" name="stock" value="{{ article.stock }}">
+							<input type="hidden" name="image_id" value="{{ article.image.id }}">
+							<div class="mb-3 row">
+								<label for="name" class="col-sm-2 col-form-label">Nom</label>
+								<div class="col-sm-10">
+									<input required type="text" class="form-control" name="name" id="name" value="{{ article.name }}">
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="slug" class="col-sm-2 col-form-label">URL</label>
+								<div class="col-sm-10">
+									<input required type="text" class="form-control" name="slug" id="slug" value="{{ article.slug }}" readonly>
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="price" class="col-sm-2 col-form-label">Prix</label>
+								<div class="col-sm-10">
+									<input required type="number" class="form-control" name="price" id="price" value="{{ article.price }}">
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="category_id" class="col-sm-2 col-form-label">Catégorie</label>
+								<div class="col-sm-10">
+									<select required id="category_id" class="form-control" name="category_id">
+										{% for categorie in categories %}
+											<option value="{{ categorie.id }}" {% if categorie.id == article.category.id %}selected{% endif %}>{{ categorie.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="description" class="col-sm-2 col-form-label">Description</label>
+								<div class="col-sm-10">
+									<textarea required id="description" class="form-control wysiwyg" name="description">{{ article.description }}</textarea>
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="short_description" class="col-sm-2 col-form-label">Description courte</label>
+								<div class="col-sm-10">
+									<textarea required id="short_description" class="form-control wysiwyg" name="short_description">{{ article.short_description }}</textarea>
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="ingredients" class="col-sm-2 col-form-label">Ingrédients</label>
+								<div class="col-sm-10">
+									<textarea required id="ingredients" class="form-control wysiwyg" name="ingredients">{{ article.ingredients }}</textarea>
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="age" class="col-sm-2 col-form-label">Âge</label>
+								<div class="col-sm-10">
+									<input required type="text" class="form-control" name="age" id="age" value="{{ article.age }}">
+								</div>
+							</div>
+
+							<div class="col-12  d-md-flex justify-content-md-center">
+								<button type="submit" class="btn btn-primary">Modifier</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 mb-4">
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Gestion du stock</h6>
+					</div>
+					<div class="card-body">
+						<form action="/admin/articles/update/stock/{{ article.id }}" method="post" class="stock">
+							<input type="hidden" name="id" value="{{ article.id }}">
+							<div class="mb-3 row">
+								<label for="name" class="col-sm-2 col-form-label">Stock</label>
+								<div class="col-sm-8">
+									<input required type="text" class="form-control" name="stock" id="stock" value="{{ article.stock }}">
+								</div>
+								<div class="col-sm-2">
+									<button type="submit" class="btn btn-primary">Mettre à jour</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Gestion de l'image</h6>
+					</div>
+					<div class="card-body">
+						<figure>
+							<img src="{{ article.image.url }}" alt="{{ article.image.alt }}" width="250">
+						</figure>
+						<h6 class="m-0 font-weight-bold text-primary">Modifier l'image</h6>
+						<form action="/admin/articles/update/image" method="post" enctype="multipart/form-data" class="article">
+							<input type="hidden" name="article_id" value="{{ article.id }}">
+							<input type="hidden" name="image_id" value="{{ article.image.id }}">
+							<div class="mb-3 row">
+								<label for="image" class="col-sm-4 col-form-label">Image du produit</label>
+								<div class="col-sm-8">
+									<input required type="file" class="form-control-file" id="image" name="image">
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="alt" class="col-sm-4 col-form-label">Texte alternatif de l'image</label>
+								<div class="col-sm-8">
+									<input required type="text" class="form-control" id="alt" name="alt" value="{{ article.image.alt }}">
+								</div>
+							</div>
+
+							<div class="col-12  d-md-flex justify-content-md-center">
+								<button type="submit" class="btn btn-primary">Modifier</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		{# TO DO : Ajouter les commentaires #}
+	{# </div> #}
+	<!-- /.container-fluid -->
+{% endblock %}
+{% block javascript %}
+{% endblock %}

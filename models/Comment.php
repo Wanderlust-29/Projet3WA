@@ -4,7 +4,7 @@ class Comment
 {
     private ? int $id = null;
     
-    public function __construct(private Article $articleId, private User $userId, private int $grade, private string $comment)
+    public function __construct(private Article $articleId, private User $userId, private int $grade, private string $comment, private string $status = "pending")
     {
 
     }
@@ -90,5 +90,21 @@ class Comment
     public function setComment (?string $comment): void
     {
         $this->comment = $comment;
+    }
+
+    // Getter and Setter for status
+    /**
+     * @return string
+     */
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+    /**
+     * @param string|null $comment
+     */
+    public function setStatus (?string $status): void
+    {
+        $this->status = $status;
     }
 }

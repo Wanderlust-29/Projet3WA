@@ -146,13 +146,60 @@ class ArticleManager extends AbstractManager
         return $articles;
     }
 
+
     /**
      * Met à jour le stock d'un article.
      *
      * @param Article $article L'article à mettre à jour.
      * @return void
      */
-    public function update(Article $article): void
+    public function update(Article $article): bool
+    {
+        $query = $this->db->prepare('
+            UPDATE articles 
+            SET 
+            name = :name,
+            price = :price,
+            category_id = :category_id,
+            image_id = :image_id,
+            description = :description,
+            ingredients = :ingredients,
+            age = :age,
+            short_description = :short_description,
+            slug = :slug
+            WHERE id = :id'
+        );
+
+        $parameters = [
+            "id" => $article->getId(),
+            "name" => $article->getName(),
+            "price" => $article->getPrice(),
+            "category_id" => $article->getCategory()->getId(),
+            "image_id" => $article->getImage()->getId(),
+            "description" => $article->getDescription(),
+            "ingredients" => $article->getIngredients(),
+            "age" => $article->getAge(),
+            "short_description" => $article->getShortDescription(),
+            "slug" => $article->getSlug(),
+        ];
+
+        $query->execute($parameters);
+        // Vérifier si l'article a été trouvé et mis à jour
+        if ($query->rowCount() === 0) {
+            // throw new Exception("Article with ID " . $article->getId() . " not found.");
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    /**
+     * Met à jour le stock d'un article.
+     *
+     * @param Article $article L'article à mettre à jour.
+     * @return void
+     */
+    public function updateStock(Article $article): bool
     {
         $query = $this->db->prepare('UPDATE articles 
         SET stock = :stock
@@ -165,7 +212,38 @@ class ArticleManager extends AbstractManager
         $query->execute($parameters);
         // Vérifier si l'article a été trouvé et mis à jour
         if ($query->rowCount() === 0) {
-            throw new Exception("Article with ID " . $article->getId() . " not found.");
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+        /**
+     * Met à jour le stock d'un article.
+     *
+     * @param Article $article L'article à mettre à jour.
+     * @return void
+     */
+    public function updateImage(Article $article, Media $media): bool
+    {
+        $old_media = $article->getImage();
+
+        $query = $this->db->prepare('UPDATE articles 
+        SET image_id = :image_id
+        WHERE id = :id');
+
+        $parameters = [
+            "id" => $article->getId(),
+            "image_id" => $media->getId()
+        ];
+        $query->execute($parameters);
+        // Vérifier si l'article a été trouvé et mis à jour
+        if ($query->rowCount() === 0) {
+            return false;
+        }else{
+            $om = new MediaManager();
+            $om->delete($old_media);
+            return true;
         }
     }
 
@@ -176,13 +254,10 @@ class ArticleManager extends AbstractManager
      * @return void
      * 
      */
-    public function insert(Article $article): void
+    public function insert(Article $article): int
     {
-        $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age, short_description) 
-            VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age, :short_description, :slug');
-
-        $slugify = new Slugify();
-        $slug = $slugify->slugify($article->getName());
+        $sql = 
+        $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age, short_description, slug) VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age, :short_description, :slug)');
 
         $parameters = [
             "name" => $article->getName(),
@@ -194,11 +269,12 @@ class ArticleManager extends AbstractManager
             "ingredients" => $article->getIngredients(),
             "age" => $article->getAge(),
             "short_description" => $article->getShortDescription(),
-            "slug" => $slug
+            "slug" => $article->getSlug()
         ];
 
         $query->execute($parameters);
-        $article->setId($this->db->lastInsertId());
+
+        return $this->db->lastInsertId();
     }
 
     public function searchArticles($search): array

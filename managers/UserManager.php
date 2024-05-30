@@ -31,7 +31,9 @@ class UserManager extends AbstractManager
      */
     public function findAll() : array
     {
-        $query = $this->db->prepare('SELECT * FROM users');
+
+
+        $query = $this->db->prepare('SELECT u.*, COUNT(o.user_id) AS total_orders, SUM(o.total_price) AS total_value FROM users AS u LEFT JOIN orders AS o ON u.id = o.user_id GROUP BY u.id');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $users =[];
@@ -39,6 +41,10 @@ class UserManager extends AbstractManager
         foreach ($result as $item){
             $user = new User($item["first_name"], $item["last_name"], $item["email"], $item["password"], $item["address"], $item["city"], $item["postal_code"], $item["country"], $item["role"]);
             $user->setId($item["id"]);
+            $user = $user->toArray();
+            $user['id'] = $item["id"];
+            $user['total_value'] = $item['total_value'];
+            $user['total_orders'] = $item['total_orders'];
             $users[]= $user;
         }
         return $users;
@@ -72,7 +78,7 @@ class UserManager extends AbstractManager
      * @param User $user L'utilisateur à créer.
      * @return void
      */
-    public function create(User $user) : void
+    public function create(User $user) : int
     {
         $query = $this->db->prepare('INSERT INTO users (id, first_name, last_name, email, password, address, city, postal_code, country, role) VALUES (NULL, :first_name, :last_name, :email, :password, :address, :city, :postal_code, :country, :role)');
         $parameters = [
@@ -86,10 +92,8 @@ class UserManager extends AbstractManager
             "country" => $user->getCountry(),
             "role" => $user->getRole(),
         ];
-
         $query->execute($parameters);
-
-        $user->setId($this->db->lastInsertId());
+        return $this->db->lastInsertId();
     }
 
     /**

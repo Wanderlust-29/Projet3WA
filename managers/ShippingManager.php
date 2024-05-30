@@ -25,6 +25,30 @@ class ShippingManager extends AbstractManager
     }
 
     /**
+     * Récupère un frais de port en fonction de OrderId.
+     *
+     * @param string $name Le nom du frais de port à récupérer.
+     * @return Shipping|null L'objet shipping trouvé ou null s'il n'existe pas.
+     */
+    public function findOneByOrderId(int $orderId): ?Shipping
+    {
+        $query = $this->db->prepare('SELECT * FROM shippings WHERE order_id = :order_id');
+        $parameters = [
+            "order_id" => $orderId
+        ];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $shipping = new Shipping($result["name"], $result["description"], $result["price"], $result["delivery_min"], $result["delivery_max"]);
+            $shipping->setId($result["id"]);
+            return $shipping;
+        }
+
+        return null;
+    }
+
+    /**
      * Récupère un frais de port en fonction de son nom.
      *
      * @param string $name Le nom du frais de port à récupérer.
@@ -73,7 +97,7 @@ class ShippingManager extends AbstractManager
      * @return void
      * 
      */
-    public function insert(Shipping $shipping): void
+    public function insert(Shipping $shipping): int
     {
         $query = $this->db->prepare('INSERT INTO shipping (name, description, price, delivery_min, delivery_max) VALUES (:name, :description, :price, :delivery_min, :delivery_max)');
 
@@ -86,7 +110,31 @@ class ShippingManager extends AbstractManager
         ];
 
         $query->execute($parameters);
-        $shipping->setId($this->db->lastInsertId());
+        return $this->db->lastInsertId();
+    }
+
+    /**
+     * Metsà jour un frais de port.
+     *
+     * @param Shipping $shipping Le frais de port à mettre à jour
+     * @return bool
+     * @throws Exception Si le frais de port n'existe pas.
+     */
+    public function update(Shipping $shipping): bool
+    {
+        $query = $this->db->prepare('UPDATE shipping SET name=:name,description=:description,delivery_min=:delivery_min, delivery_max=:delivery_max, price=:price WHERE id = :id');
+
+        $parameters = [
+            "id" => $shipping->getId(),
+            "name" => $shipping->getName(),
+            "description" => $shipping->getDescription(),
+            "delivery_min" => $shipping->getDeliveryMin(),
+            "delivery_max" => $shipping->getDeliveryMax(),
+            "price" => $shipping->getPrice(),
+        ];
+
+        $result = $query->execute($parameters);
+        return $result;
     }
 
     /**
@@ -98,7 +146,7 @@ class ShippingManager extends AbstractManager
      */
     public function delete(Shipping $shipping): void
     {
-        $query = $this->db->prepare('DELETE articles 
+        $query = $this->db->prepare('DELETE FROM articles 
         WHERE id = :id');
 
         $parameters = [

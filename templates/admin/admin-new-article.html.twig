@@ -1,0 +1,117 @@
+{% extends "layout.admin.html.twig" %}
+
+{% block title %}
+	Ajouter un nouvel article - Timberwolf Admin
+{% endblock %}
+
+{% block main %}
+	<!-- Begin Page Content -->
+	<div class="container-fluid">
+		<!-- Page Heading -->
+		<h1 class="h3 mb-2 text-gray-800">Ajouter un nouvel article</h1>
+		<!-- DataTales Example -->
+		<div class="row">
+			<div class="col-lg-12 mb-4">
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Informations</h6>
+					</div>
+					<div class="card-body">
+						<form action="/admin/articles/add" method="post" enctype="multipart/form-data" class="article">
+							<input type="hidden" name="stock" value="0">
+							<div class="mb-3 row">
+								<label for="name" class="col-sm-2 col-form-label">Nom</label>
+								<div class="col-sm-10">
+									<input required type="text" class="form-control" name="name" id="name" value="">
+								</div>
+							</div>
+
+							{# <div class="mb-3 row">
+								<label for="slug" class="col-sm-2 col-form-label">URL</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="slug" id="slug" value="" readonly>
+								</div>
+							</div> #}
+
+							<div class="mb-3 row">
+								<label for="price" class="col-sm-2 col-form-label">Prix</label>
+								<div class="col-sm-10">
+									<input required type="number" class="form-control" name="price" id="price" value="">
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="category" class="col-sm-2 col-form-label">Catégorie</label>
+								<div class="col-sm-10">
+									<select required id="category_id" class="form-control" name="category">
+										{% for category in categories %}
+											<option value="{{ category.id }}">{{ category.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="description" class="col-sm-2 col-form-label">Description</label>
+								<div class="col-sm-10">
+									<textarea required id="description" class="form-control wysiwyg" name="description"></textarea>
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="short_description" class="col-sm-2 col-form-label">Description</label>
+								<div class="col-sm-10">
+									<textarea required id="short_description" class="form-control wysiwyg" name="short_description"></textarea>
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="ingredients" class="col-sm-2 col-form-label">Ingrédients</label>
+								<div class="col-sm-10">
+									<textarea required id="ingredients" class="form-control wysiwyg" name="ingredients"></textarea>
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="age" class="col-sm-2 col-form-label">Âge</label>
+								<div class="col-sm-10">
+									<input required type="text" class="form-control" name="age" id="age" value="">
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="image" class="col-sm-2 col-form-label">Image du produit</label>
+								<div class="col-sm-10">
+									<input required type="file" class="form-control-file" id="image" name="image">
+								</div>
+							</div>
+
+							<div class="mb-3 row">
+								<label for="alt" class="col-sm-2 col-form-label">Texte alternatif de l'image</label>
+								<div class="col-sm-10">
+									<input required type="text" class="form-control" id="alt" name="alt">
+								</div>
+							</div>
+
+							<div class="col-12  d-md-flex justify-content-md-center">
+								<button type="submit" class="btn btn-primary">Créer</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	{# </div> #}
+	<!-- /.container-fluid -->
+{% endblock %}
+{% block javascript %}
+    <!-- Page level plugins -->
+    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	<script>
+		// Call the dataTables jQuery plugin
+		$(document).ready(function() {
+			$('#orderTable').DataTable();
+		});
+	</script>
+{% endblock %}

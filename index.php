@@ -23,31 +23,25 @@ if(!isset($_SESSION["csrf-token"]))
 
 // use Cocur\Slugify\Slugify;
 // $slugify = new Slugify();
-// $mysqli = new mysqli("db.3wa.io", "ryanroudaut", "d5eb7817da268ddd4f55484fc69f8474", "ryanroudaut_projet");
-// $sql = "SELECT id, name FROM articles";
+
+// $mysqli = new mysqli("localhost", "root", "", "ryan");
+// $sql = "SELECT o.order_id,a.id,a.price FROM orders_articles as o LEFT JOIN articles as a ON o.article_id = a.id";
 // $result = $mysqli->query($sql);
 
 // while($row = $result->fetch_assoc()) {
-//     $slug = $slugify->slugify($row['name']);
-//     $id = $row['id'];
-//     $sql = "UPDATE articles SET slug = '$slug' WHERE id = $id";
+//     $oi = $row['order_id'];
+//     $ai = $row['id'];
+//     $price = $row['price'];
+//     $sql = "UPDATE orders_articles SET item_price = '$price ' WHERE order_id = $oi AND article_id = $ai";
 //     $mysqli->query($sql);
 // }
-// die();
 
 use Pecee\SimpleRouter\SimpleRouter;
 
-
 /* Load external routes file */
 require_once 'services/RouterHelpers.php';
-require_once 'services/RouterBis.php';
-
-/**
- * The default namespace for route-callbacks, so we don't have to specify it each time.
- * Can be overwritten by using the namespace config option on your routes.
- */
-
-SimpleRouter::setDefaultNamespace('\Demo\Controllers');
-
+require_once 'services/RouterFront.php';
+require_once 'services/RouterAdmin.php';
+SimpleRouter::setDefaultNamespace('\Projet3wa\Controllers');
 // Start the routing
 SimpleRouter::start();

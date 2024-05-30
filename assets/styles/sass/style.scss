@@ -5,7 +5,6 @@
 /* PARTIALS */
 @import "partials/header";
 @import "partials/footer";
-@import "partials/aside";
 
 /* PAGES */
 @import "pages/home";
@@ -28,18 +27,34 @@
 * {
   box-sizing: border-box;
 }
+
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
 
 body {
+  position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 1.8rem;
   background-color: $background;
   line-height: 1.8;
+
+}
+
+.dark-mode {
+  position: fixed;
+  bottom: 10px;
+  right: 0;
+}
+
+.color-DM, .color-DM::before, .color-DM::after{
+  color:$darkModeBg;
+}
+.background-color-DM, .background-color-DM::before, .background-color-DM::after{
+  background-color:$darkModeBg;
 }
 
 .product {
@@ -50,17 +65,20 @@ body {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   margin: 0 1rem 1.5rem 1rem;
+
   a {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
     img {
       width: 70%;
       height: auto;
     }
   }
+
   .out-of-stock {
     padding: 0 2rem;
     text-align: center;
@@ -79,22 +97,29 @@ body {
   }
 }
 
+
+
 i {
   font-size: 2.5rem;
 }
+
 h1 {
   font-size: 2.8rem;
 }
+
 h2,
 legend {
   font-size: 2.5rem;
 }
+
 h3 {
   font-size: 2rem;
 }
+
 h4 {
   font-size: 1.9rem;
 }
+
 p,
 a,
 input,

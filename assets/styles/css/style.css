@@ -283,93 +283,6 @@ body > footer .social-networks ul li {
     align-self: normal;
   }
 }
-body > #myModal {
-  align-items: center;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-  display: none;
-  height: 100%;
-  justify-content: center;
-  left: 0;
-  min-height: 100vh;
-  overflow: auto;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 400;
-}
-body > #myModal .modal {
-  background-position: center;
-  background-color: #fff;
-  background-size: cover;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  max-width: 700px;
-  overflow: hidden;
-  position: relative;
-  width: 90%;
-  z-index: 500;
-  padding: 1rem;
-}
-body > #myModal .modal #close {
-  color: #009a87;
-  font-size: 2.8rem;
-  font-weight: bold;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
-body > #myModal .modal #close:hover,
-body > #myModal .modal #close:focus {
-  color: #009a87;
-  text-decoration: none;
-  cursor: pointer;
-}
-body > #myModal .modal #modal-content {
-  padding: 10px 0 15px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 10px;
-}
-body > #myModal .modal #modal-content .modal-btn {
-  padding: 10px;
-  width: 200px;
-  border: 2px solid #009a87;
-  outline: none;
-  cursor: pointer;
-  color: #009a87;
-  text-align: center;
-  margin-bottom: 1rem;
-  background-color: #fff;
-}
-body > #myModal .modal #modal-content .modal-btn:hover {
-  background-color: #009a87;
-  color: #fff;
-}
-body > #myModal .modal #modal-content .article {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-body > #myModal .modal #modal-content .article img {
-  width: 10%;
-  height: auto;
-}
-body > #myModal .modal #modal-content .article p {
-  padding: 1rem;
-  text-align: center;
-}
-body > #myModal .modal #modal-content .article .increment-decrement-btns {
-  display: flex;
-  flex-direction: column;
-}
-body > #myModal .modal #modal-content .article .quantity {
-  text-align: center;
-}
-
 /* PAGES */
 #content.home {
   position: relative;
@@ -1399,12 +1312,27 @@ html {
 }
 
 body {
+  position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 1.8rem;
   background-color: #f8f9fc;
   line-height: 1.8;
+}
+
+.dark-mode {
+  position: fixed;
+  bottom: 10px;
+  right: 0;
+}
+
+.color-DM, .color-DM::before, .color-DM::after {
+  color: #2C3E50;
+}
+
+.background-color-DM, .background-color-DM::before, .background-color-DM::after {
+  background-color: #2C3E50;
 }
 
 .product {

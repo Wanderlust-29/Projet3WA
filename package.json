@@ -2,5 +2,13 @@
   "dependencies": {
     "@splidejs/splide": "^4.1.4",
     "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "testEnvironment": "jsdom",
+    "jsdom": "^24.1.0"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }

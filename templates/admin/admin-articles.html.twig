@@ -1,0 +1,62 @@
+{% extends "layout.admin.html.twig" %}
+
+{% block title %}
+	Tous les produits - Timberwolf Admin
+{% endblock %}
+
+{% block main %}
+	<!-- Begin Page Content -->
+	<div class="container-fluid">
+		<!-- Page Heading -->
+		<h1 class="h3 mb-2 text-gray-800">Tous les produits</h1>
+		<!-- DataTales Example -->
+		<div class="card shadow mb-4">
+			<div class="card-body">
+				{% if articles is not empty %}
+					<div class="table-responsive">
+						<table class="table table-bordered" id="orderTable" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th>Nom</th>
+									<th>Stock</th>
+									<th>Prix</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>Nom</th>
+									<th>Stock</th>
+									<th>Prix</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								{% for article in articles %}
+									<tr>
+										<td><a href="/admin/articles/{{ article.id }}"><img class="img-thumbnail mr-2" height="50" width="50" style="object-fit:cover;object-position:center;" src="{{ article.image.url }}"> {{ article.name }}</a></td>
+										<td>{{ article.stock }}</td>
+										<td>{{ article.price }}€</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				{% else %}
+					<p>Aucun article trouvé.</p>
+				{% endif %}
+   
+			</div>
+		</div>
+	{# </div> #}
+	<!-- /.container-fluid -->
+{% endblock %}
+{% block javascript %}
+    <!-- Page level plugins -->
+    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	<script>
+		// Call the dataTables jQuery plugin
+		$(document).ready(function() {
+			$('#orderTable').DataTable();
+		});
+	</script>
+{% endblock %}

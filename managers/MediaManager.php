@@ -50,7 +50,7 @@ class MediaManager extends AbstractManager
      * @param Media $media Le média à insérer.
      * @return void
      */
-    public function insert(Media $media): void 
+    public function insert(Media $media): Media 
     {
         $query = $this->db->prepare('INSERT INTO media (url, alt) VALUES (:url, :alt)');
         $parameters = [
@@ -59,5 +59,31 @@ class MediaManager extends AbstractManager
         ];
         $query->execute($parameters);
         $media->setId($this->db->lastInsertId());
+
+        return $media;
+    }
+
+        /**
+     * Supprime un média.
+     *
+     * @param Media $media Le média à insérer.
+     * @return void
+     */
+    public function delete(Media $media): bool 
+    {
+        $query = $this->db->prepare('DELETE FROM media WHERE id=:id');
+        $parameters = [
+            'id' => $media->getId(),
+        ];
+        $query->execute($parameters);
+        if ($query->rowCount() === 0) {
+            return false;
+        }else{
+            $url = $media->getUrl();
+            if(!str_starts_with($url, 'http')){
+                unlink(__DIR__ . '/../' . $url);
+            }
+            return true;
+        }
     }
 }

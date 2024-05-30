@@ -48,7 +48,6 @@ function incrementDecrement(article_id, action) {
         updateCount(data.articles);
         updateTotal(data.articles, data.shipping_costs);
         disableIncrement(data.articles);
-        disableIncrementModal(data.articles);
         disabledButtonArticle(data.articles);
       } else {
         console.error("Invalid response structure:", data);
@@ -196,26 +195,6 @@ function disableIncrement(articles) {
     }
   });
 }
-// Désactive le boutton d'incrementation si l'article est en rupture de stock pour le modal
-function disableIncrementModal(articles) {
-  let articlesArray = Object.values(articles);
-  articlesArray.forEach((article) => {
-    const increment = document.querySelector(
-      `.modal .btn-increment[data-article="${article.id}"]`
-    );
-    if (increment) {
-      // Vérifie si la quantité dépasse le stock dans le panier
-      if (article.quantity >= article.stock) {
-        increment.disabled = true;
-      } else {
-        increment.disabled = false;
-      }
-    } else {
-      console.error("Cart button not found for article ID: ", article.id);
-    }
-  });
-}
 
-function modalAddtoCart() {}
 
 export { addToCart, incrementDecrement, changeShippingMethod };

@@ -1,0 +1,65 @@
+{% extends "layout.admin.html.twig" %}
+
+{% block title %}
+	Tous les frais de port - Timberwolf Admin
+{% endblock %}
+
+{% block main %}
+	<!-- Begin Page Content -->
+	<div class="container-fluid">
+		<!-- Page Heading -->
+		<h1 class="h3 mb-2 text-gray-800">Tous les frais de livraison</h1>
+		<!-- DataTales Example -->
+		<div class="card shadow mb-4">
+			<div class="card-body">
+				{% if shippings is not empty %}
+					<div class="table-responsive">
+						<table class="table table-bordered" id="orderTable" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th>Nom</th>
+									<th>Délai minimum</th>
+									<th>Délai maximum</th>
+									<th>Prix</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>Nom</th>
+									<th>Délai minimum</th>
+									<th>Délai maximum</th>
+									<th>Prix</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								{% for shipping in shippings %}								
+								<tr>
+									<td><a href="/admin/shippings/{{ shipping.id }}">{{ shipping.name }}</a></td>
+									<td>{{ shipping.deliveryMin }} J</td>
+									<td>{{ shipping.deliveryMax }} J</td>
+									<td>{{ shipping.price }}€</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				{% else %}
+					<p>Aucun article trouvé.</p>
+				{% endif %}
+   
+			</div>
+		</div>
+	{# </div> #}
+	<!-- /.container-fluid -->
+{% endblock %}
+{% block javascript %}
+    <!-- Page level plugins -->
+    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	<script>
+		// Call the dataTables jQuery plugin
+		$(document).ready(function() {
+			$('#orderTable').DataTable();
+		});
+	</script>
+{% endblock %}

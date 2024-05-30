@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<base href="http://Projet3wa.local/">
+		<base href="http://projet3wa.local/">
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Découvrez nos accessoires et nourritures pour chien. Achetez en ligne les meilleures croquettes, friandises et jouets pour votre animal. Livraison rapide.">
@@ -11,19 +11,27 @@
 		<link href="./assets/font/css/fontawesome.css" rel="stylesheet">
 		<link href="./assets/font/css/brands.css" rel="stylesheet">
 		<link href="./assets/font/css/solid.css" rel="stylesheet">
-		<link rel="stylesheet" href="assets/styles/css/style.css">
+		<link rel="stylesheet" href="/assets/styles/css/style.css">
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/media/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon/avicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/assets/media/favicon/site.webmanifest">
+		<link rel="mask-icon" href="/assets/media/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
 	</head>
 	<body>
 		<header class="header">
 			<a href="/" class="logo">
-				<img src="assets/media/logo.svg" alt="logo"/>
+				<img src="assets/media/logo.svg" alt="logo de TimberWolf"/>
 				<p>TimberWolf</p>
 			</a>
 
 
 			<menu class="icons">
 				<li>
-					<a class="myBtn cart-icon">
+					<a href="/cart/" class="cart-icon">
 						<span class="fa-stack has-badge" data-count="{{count}}">
 							<i class="fa fa-shopping-cart fa-stack-1x white-cart"></i>
 						</span>
@@ -54,7 +62,7 @@
 					<a href="/categorie/jouets/">Jouets</a>
 				</li>
 				<li>
-					<a class="myBtn">Panier</a>
+					<a href="/cart/">Panier</a>
 				</li>
 				{% if session is defined and session is not null %}
 					<li>
@@ -80,55 +88,17 @@
 			</menu>
 
 			<form class="search closed" action="/articles-search" method="POST">
-				<input class="input-searchbar" type="search" name="search" placeholder="Rechercher..."/>
+				<label for="search">Rechercher un article</label>
+				<input class="input-searchbar" type="search" name="search" id="search" placeholder="Rechercher..."/>
+				<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
 				<input class="button-searchbar" type="submit" value="&#128269;"/>
 			</form>
-
 		</header>
-		<aside id="myModal" class="modal-box">
-			<div class="modal">
-				<span id="close">&times;</span>
-				<form action="/cart" method="POST" id="modal-content">
-					<h2>Panier</h2>
-					{% if cart is empty %}
-						<p>Votre panier est vide</p>
-					{% else %}
-						<ul class="list-articles">
-							{% for article in cart %}
-								<li class="article">
-									<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-									<p>{{ article.name }}
-										-
-										{{ article.price }}€
-									</p>
-									{% if stock != 0 %}
-										<span class="increment-decrement-btns">
-											<button class="btn-increment" data-article="{{ article.id }}" data-action="increment">+</button>
-											<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
-											<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
-										</span>
-									{% else %}
-										<span class="increment-decrement-btns">
-											<button class="btn-increment" data-article="{{ article.id }}" data-action="increment" disabled>+</button>
-											<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
-											<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
-										</span>
-									{% endif %}
-								</li>
-							{% endfor %}
-						</ul>
-						<label id="cart-total-price">
-							Total :
-							<span class="total-price">{{ totalPrice|number_format(2, '.', ',') }}</span>
-							€
-						</label>
-						<input type="submit" class="modal-btn" value="Payer" target="_blank">
 
-					{% endif %}
-				</form>
-			</div>
-		</aside>
 		{% block main %}{% endblock %}
+		<a class="dark-mode" aria-label="modifier le contraste">
+			<i class="fa-solid fa-circle-half-stroke"></i>
+		</a>
 		<footer class="footer">
 			<section>
 				<a href="/">
@@ -137,7 +107,7 @@
 				<ul>
 					<li><a href="mailto:contact@timberwolf.fr"><i class="fa-solid fa-envelope"></i>contact@timberwolf.fr</a></li>
 					<li><a href="tel:0298000000"><i class="fa-solid fa-phone"></i>02.98.00.00.00</a></li>
-					<li><a href="/adoption"><i class="fa-solid fa-paw"></i>Adopter un animal</a></li>
+					<li><a href="/adopt"><i class="fa-solid fa-paw"></i>Adopter un animal</a></li>
 				</ul>
 			</section>
 
@@ -173,9 +143,9 @@
 			<section class="social-networks">
 				<h2>Suivez-nous sur :</h2>
 				<ul>
-					<li><a href=""><i class="fa-brands fa-square-instagram"></i></a></li>
-					<li><a href=""><i class="fa-brands fa-square-x-twitter"></i></a></li>
-					<li><a href=""><i class="fa-brands fa-square-facebook"></i></a></li>
+					<li><a href="https://instagram.com"><i class="fa-brands fa-square-instagram"></i></a></li>
+					<li><a href="https://x.com"><i class="fa-brands fa-square-x-twitter"></i></a></li>
+					<li><a href="https://facebook.com"><i class="fa-brands fa-square-facebook"></i></a></li>
 				</ul>
 			</section>
 		</footer>

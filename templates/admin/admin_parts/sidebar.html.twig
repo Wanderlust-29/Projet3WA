@@ -1,0 +1,129 @@
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
+                <img src="assets/media/logo.svg" alt="logo" width="50">
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/admin">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Tableau de bord</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Gestion
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/orders">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Commandes</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#users"
+                    aria-expanded="true" aria-controls="users">
+                    <i class="fa fa-user"></i>
+                    <span>Utilisateurs</span>
+                </a>
+                <div id="users" class="collapse" aria-labelledby="users" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/admin/users">Toutes les utilisateurs</a>
+                        <a class="collapse-item" href="/admin/users/new">Ajouter un utilisateur</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#products"
+                    aria-expanded="true" aria-controls="products">
+                    <i class="fa fa-shopping-basket"></i>
+                    <span>Produits</span>
+                </a>
+                <div id="products" class="collapse" aria-labelledby="products" data-parent="#accordionSidebar">
+                    <div class="dropdown-divider"></div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <div class="dropdown-header">Produits :</div>
+                        <a class="collapse-item" href="/admin/articles">Tous les produits</a>
+                        <a class="collapse-item" href="/admin/articles/new">Ajouter un produit</a>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-header">Catégories :</div>
+                        <a class="collapse-item" href="/admin/categories">Toutes les catégories</a>
+                        <a class="collapse-item" href="/admin/categories/new">Ajouter une catégorie</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#comments"
+                    aria-expanded="true" aria-controls="comments">
+                    <i class="fa fa-comment"></i>
+                    <span>Commentaires</span>
+                </a>
+                <div id="comments" class="collapse" aria-labelledby="comments" data-parent="#accordionSidebar">
+                    <div class="dropdown-divider"></div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/admin/comments">Tous les commentaires</a>
+                        <a class="collapse-item" href="/admin/comments/pending">En attente</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#messages"
+                    aria-expanded="true" aria-controls="messages">
+                    <i class="fa fa-envelope"></i>
+                    <span>Messages</span>
+                </a>
+                <div id="messages" class="collapse" aria-labelledby="messages" data-parent="#accordionSidebar">
+                    <div class="dropdown-divider"></div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/admin/messages">Tous les commentaires</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#params"
+                    aria-expanded="true" aria-controls="params">
+                    <i class="fa fa-cogs"></i>
+                    <span>Paramètres</span>
+                </a>
+                <div id="params" class="collapse" aria-labelledby="params" data-parent="#accordionSidebar">
+                    <div class="dropdown-divider"></div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <div class="dropdown-header">Frais de port :</div>
+                        <a class="collapse-item" href="/admin/shippings">Tous les frais de port</a>
+                        <a class="collapse-item" href="/admin/shippings/new">Ajouter un frais de port</a>
+                        {# <div class="dropdown-divider"></div>
+                        <div class="dropdown-header">Catégories :</div>
+                        <a class="collapse-item" href="/admin/categories">Toutes les catégories</a>
+                        <a class="collapse-item" href="/admin/categories/new">Ajouter une catégorie</a> #}
+                    </div>
+                </div>
+            </li>
+
+             <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->

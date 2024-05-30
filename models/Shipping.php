@@ -99,7 +99,7 @@ class Shipping
      */
     public function getDeliveryMin(): int
     {
-        return $this->price;
+        return $this->delivery_min;
     }
 
     /**
@@ -117,7 +117,7 @@ class Shipping
      */
     public function getDeliveryMax(): int
     {
-        return $this->delivery_min;
+        return $this->delivery_max;
     }
 
     /**

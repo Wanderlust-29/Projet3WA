@@ -1,5 +1,5 @@
 const apiKey = "bUke0SUO";
-// const apiEndpoint = "https://api.rescuegroups.org/v5/public/animals/search/available/haspic/?sort=random&limit=10";
+
 const apiEndpoint =
   "https://api.rescuegroups.org/v5/public/animals/search/available/";
 
@@ -9,7 +9,6 @@ fetch(apiEndpoint, {
     Authorization: apiKey,
     "Content-Type": "application/json",
   },
-  // body: JSON.stringify(),
 })
   .then((response) => response.json())
   .then((data) => {

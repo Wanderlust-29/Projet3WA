@@ -8,6 +8,19 @@ class User
 
     }
 
+    public function toArray(): array
+    {
+        return [
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'email' => $this->email,
+            'address' => $this->address,
+            'city' => $this->city,
+            'postalCode' => $this->postalCode,
+            'country' => $this->country,
+        ];
+    }
+
     // Getter and Setter for ID
     /**
      * @return int|null

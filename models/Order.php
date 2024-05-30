@@ -3,16 +3,30 @@
 class Order
 {
     private ? int $id = null;
+    private ? array $user = [];
+    private ? array $articles = [];
     
-    
-    public function __construct(private int $userId, private string $createdAt, private string $status, private float $totalPrice)
+    public function __construct(private int $userId, private string $createdAt, private string $status, private Shipping $shipping, private float $totalPrice)
     {
         $this->status = !empty($status) ? $status : "pending";
     }
-    // Getter and Setter for id
+
+    // Transform object Order to array
     /**
-     * @return int|null
+     * @return array
      */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'userId' => $this->userId,
+            'createdAt' => $this->createdAt,
+            'shipping' => $this->shipping,
+            'status' => $this->status,
+            'totalPrice' => $this->totalPrice,
+        ];
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +91,23 @@ class Order
         $this->status = $status;
     }
 
+    // Getter and Setter for shipping
+    /**
+     * @return Shipping
+     */
+    public function getShipping(): Shipping
+    {
+        return $this->shipping;
+    }
+
+    /**
+     * @param array $shipping
+     */
+    public function setShipping(Shipping $shipping): void
+    {
+        $this->shipping = $shipping;
+    }
+
     // Getter and Setter for totalPrice
     /**
      * @return float
@@ -93,4 +124,42 @@ class Order
     {
         $this->totalPrice = $totalPrice;
     }
+
+    // Getter and Setter for User
+    /**
+     * @return array
+     */
+    public function getUser(): array
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param array $user
+     */
+    public function setUser(array $user): void
+    {
+        $this->user = $user;
+    }
+
+
+
+    // Getter and Setter for Articles
+    /**
+     * @return array
+     */
+    public function getArticles(): array
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param array $articles
+     */
+    public function setArticles(array $articles): void
+    {
+        $this->articles = $articles;
+    }
+    
+
 }

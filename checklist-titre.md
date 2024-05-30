@@ -23,10 +23,7 @@ OU
 #### Mon IDE
 
 - [x] Je peux installer et configurer un IDE (faites une liste des extensions que vous utilisez)
-- Composer
-- live sass compiler
-- php intelephense
-- twig
+
 
 #### Pour le versionning
 
@@ -103,87 +100,87 @@ OU
 
 ### Utilisation d'asynchrone
 
-- [ ] J'utilise au moins une fois `fetch` pour mettre à jour une information sans recharger ma page.
-- [ ] Je sais convertir du JSON pour l'utiliser dans mon code JavaScript
+- [X] J'utilise au moins une fois `fetch` pour mettre à jour une information sans recharger ma page.
+- [X] Je sais convertir du JSON pour l'utiliser dans mon code JavaScript
 
 ### Utilisation d'API externes
 
-- [ ] Je sais mettre en place et appeler une API externe depuis mon JavaScript (exemple le plus classique : une carte pour localiser une entreprise)
+- [X] Je sais mettre en place et appeler une API externe depuis mon JavaScript (exemple le plus classique : une carte pour localiser une entreprise)
 
 ### Écoute des évenements
 
-- [ ] J'ai mis en place une écoute et un traitement des évenements du DOM (exemple le plus classique : la soumission d'un formulaire)
+- [X] J'ai mis en place une écoute et un traitement des évenements du DOM (exemple le plus classique : la soumission d'un formulaire)
 
 ### UX
 
-- [ ] J'ai mis en place une expérience utilisateur adaptée (par exemple sur le traitement de mes formulaires)
+- [X] J'ai mis en place une expérience utilisateur adaptée (par exemple sur le traitement de mes formulaires)
 
 ### Tests
 
-- [ ] Je peux citer le nom d'une librairie permettant de faire des tests unitaires en JavaScript (Jest)
+- [X] Je peux citer le nom d'une librairie permettant de faire des tests unitaires en JavaScript (Jest)
 
 ## 5 : Mettre en place une base de données relationnelle
 
 ### Implémentation
 
 - [ ] L'implémentation de ma base de données est conforme à mon modèle de données
-- [ ] Si mon implémentation est différente, je peux le justifier et j'ai mon nouveau modèle de données disponible
+- [X] Si mon implémentation est différente, je peux le justifier et j'ai mon nouveau modèle de données disponible
 
 ### Conventions
 
-- [ ] Mes noms de tables et de colonnes sont en anglais
-- [ ] Mes noms de tables et de colonnes sont en snake case (tout en minucule et des \_ à la place des espaces)
-- [ ] Mes colonnes utilisent les types appropriés (int, varchar, datetime, ...)
+- [X] Mes noms de tables et de colonnes sont en anglais
+- [X] Mes noms de tables et de colonnes sont en snake case (tout en minucule et des \_ à la place des espaces)
+- [X] Mes colonnes utilisent les types appropriés (int, varchar, datetime, ...)
 
 ### Sécurité
 
-- [ ] Les mots de passe ne sont pas stockés en clair dans ma base de données
+- [X] Les mots de passe ne sont pas stockés en clair dans ma base de données
 
 ### Relations
 
-- [ ] J'ai moins une relation simple dans ma base de données avec sa foreign key
-- [ ] J'ai au mons une relation complexe avec table de liaison dans ma base de données
+- [x] J'ai moins une relation simple dans ma base de données avec sa foreign key
+- [x] J'ai au mons une relation complexe avec table de liaison dans ma base de données
 
 ### Sauvegarde et restauration
 
-- [ ] J'ai un jeu de données de test complet qui me permet de réinitialiser ma base
-- [ ] Je sais comment sauvegarder et restaurer ma base de données
+- [X] J'ai un jeu de données de test complet qui me permet de réinitialiser ma base
+- [X] Je sais comment sauvegarder et restaurer ma base de données
 
 ### Requêtes
 
-- [ ] J'ai au moins un exemple de SELECT \*
-- [ ] J'ai au moins un exemple de SELECT WHERE
-- [ ] J'ai au moins un exemple de JOIN
-- [ ] J'ai au moins un exemple de INSERT INTO
-- [ ] J'ai au moins un exemple de UPDATE
-- [ ] J'ai au moins un exemple de DELETE
+- [X] J'ai au moins un exemple de SELECT \*
+- [X] J'ai au moins un exemple de SELECT WHERE
+- [X] J'ai au moins un exemple de JOIN
+- [X] J'ai au moins un exemple de INSERT INTO
+- [X] J'ai au moins un exemple de UPDATE
+- [X] J'ai au moins un exemple de DELETE
 
 ## 6 : Développer des composants d’accès aux données SQL et NoSQL
 
 ### NoSQL
 
-- [ ] J'ai bien à disposition les requêtes de mon évaluation de MongoDB
+- [X] J'ai bien à disposition les requêtes de mon évaluation de MongoDB
 
 ### SQL
 
 #### Models
 
-- [ ] Chaque table de ma base de données qui n'est pas une table de liaison a un Model Correspondant
-- [ ] Mes models reprennent bien les colonnes de mes tables ainsi que leur type et si elles peuvent être nulles ou non
-- [ ] Les relations entre mes tables sont représentées par une composition dans ma POO
-  - [ ] Les relations simple : en attribut, la classe correspondante
-  - [ ] Les relations complexes : en attribut, un array de la classe correspondante
+- [X] Chaque table de ma base de données qui n'est pas une table de liaison a un Model Correspondant
+- [X] Mes models reprennent bien les colonnes de mes tables ainsi que leur type et si elles peuvent être nulles ou non
+- [X] Les relations entre mes tables sont représentées par une composition dans ma POO
+  - [X] Les relations simple : en attribut, la classe correspondante
+  - [x] Les relations complexes : en attribut, un array de la classe correspondante
 
 #### Gestion d'erreur
 
-- [ ] Mes managers gèrent le cas où ma base de données ne retourne rien et n'affiche pas d'erreur
-- [ ] Mon AbstractManager gère le cas où mes informations de connexion ne fonctionnent pas et n'affiche pas d'erreur
-- [ ] Les informations de connexion à ma base de données ne sont pas versionnées (j'utilise un .env non versionné)
+- [x] Mes managers gèrent le cas où ma base de données ne retourne rien et n'affiche pas d'erreur
+- [x] Mon AbstractManager gère le cas où mes informations de connexion ne fonctionnent pas et n'affiche pas d'erreur
+- [x] Les informations de connexion à ma base de données ne sont pas versionnées (j'utilise un .env non versionné)
 
 #### Managers
 
-- [ ] Toutes les requêtes de ma base de données sont dans mes managers
-- [ ] Mes managers se chargent d'hydrater mes modèles
+- [x] Toutes les requêtes de ma base de données sont dans mes managers
+- [x] Mes managers se chargent d'hydrater mes modèles
 
 ## 7 : Développer des composants métier coté serveur
 
@@ -194,11 +191,11 @@ OU
 
 ### Sécurité
 
-- [ ] J'ai sécurisé les accès aux pages privées
-- [ ] Je me protège des failles XSS
-- [ ] Je me protège des failles CSRF
-- [ ] Je me protège des injections SQL
-- [ ] J'exige une authentification forte
+- [X] J'ai sécurisé les accès aux pages privées
+- [X] Je me protège des failles XSS
+- [X] Je me protège des failles CSRF
+- [X] Je me protège des injections SQL
+- [X] J'exige une authentification forte
 
 ### Qualité du code
 

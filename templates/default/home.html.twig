@@ -14,7 +14,7 @@
 	<main id="content" class="home">
 		<section class="banner">
 			<h1>Accessoires et nourritures pour Chien</h1>
-			<a class="btn-articles" href="/articles">
+			<a class="btn-articles" href="/articles" aria-label="Voir tous nos produits">
 				<span>Nos Produits</span>
 			</a>
 		</section>
@@ -34,20 +34,20 @@
 			</ul>
 		</section>
 
-		<section class="top-sales">
-			<h2>Nos meilleurs ventes</h2>
+		<section class="top-sales" aria-label="Nos meilleures ventes">
+			<h2>Nos meilleures ventes</h2>
 			<div class="owl-carousel">
 				{% for article in articles %}
 					{% if article.stock != 0 %}
-						<article class="product">
-							<a href="/article/{{ article.slug }}">
+						<article class="product" aria-label="Produit: {{ article.name }}">
+							<a href="/article/{{ article.slug }}" aria-label="Voir les détails du produit {{ article.name }}">
 								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 								<h3>{{ article.name }}</h3>
 								<p class="price">{{ article.price }}€</p>
 							</a>
 						</article>
 					{% else %}
-						<article class="product">
+						<article class="product" aria-label="Produit: {{ article.name }} - Rupture de stock">
 							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 							<h3>{{ article.name }}</h3>
 							<p class="price">{{ article.price }}€</p>
