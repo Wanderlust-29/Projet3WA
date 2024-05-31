@@ -6,7 +6,8 @@
 
 {% block main %}
 	<!-- Begin Page Content -->
-	<div class="container-fluid">
+	<div
+		class="container-fluid">
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">Toutes les catégories de produit</h1>
 		<!-- DataTales Example -->
@@ -34,8 +35,11 @@
 							<tbody>
 								{% for category in categories %}
 									<tr>
-										<td><a href="/admin/categories/{{ category.id }}">{{ category.id }}</a></td>
-										<td> {{ category.name }}</td>
+										<td>
+											<a href="/admin/categories/{{ category.id }}">{{ category.id }}</a>
+										</td>
+										<td>
+											{{ category.name }}</td>
 										<td>{{ category.slug }}</td>
 										<td>{{ category.total_products }}</td>
 									</tr>
@@ -45,20 +49,10 @@
 					</div>
 				{% else %}
 					<p>Aucune catégorie trouvée.</p>
-				{% endif %}    
+				{% endif %}
 			</div>
 		</div>
-	{# </div> #}
-	<!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+		{# </div> #}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}

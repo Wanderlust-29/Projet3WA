@@ -8,25 +8,29 @@ class CartController extends AbstractController
         $totalPrice = 0;
         $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : null;
         $quantity = 0;
+        $notify = [];
 
-        $sm  = new ShippingManager();
+        $sm = new ShippingManager();
         $shipping_costs = $sm->findAll();
 
         if (!is_null($cart)) {
-            foreach ($cart as $article) {
+            foreach ($cart as &$article) {  // Utilisation de la référence pour modifier directement l'article dans le tableau
                 if (isset($article['price'], $article['quantity'], $article['stock'])) {
+                    $article['is_in_stock'] = $article['quantity'] < $article['stock'];
+                    if (!$article['is_in_stock']) {
+                    }
                     $quantity += $article['quantity']; // Incrémenter la quantité totale
                     $totalPrice += $article['price'] * $article['quantity'];
                 }
             }
         }
 
-
         $this->render("pay/cart.html.twig", [
             "cart" => $cart,
             "totalPrice" => $totalPrice,
             "quantity" => $quantity,
             "shipping_costs" => $shipping_costs,
+            "notify" => $notify
         ]);
     }
 
@@ -55,7 +59,6 @@ class CartController extends AbstractController
             $articleArray['quantity'] = 1;
             $_SESSION["cart"]["articles"][$id] = $articleArray;
         }
-
         // Renvoyer le contenu du panier au format JSON après l'ajout
         $this->renderJson($_SESSION["cart"]);
     }

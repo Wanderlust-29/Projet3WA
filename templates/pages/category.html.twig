@@ -12,11 +12,17 @@
 		<section class="all-products">
 			<h1>{{ category.name }}</h1>
 
-			<select class="order-by">
-				<option value="Trier par prix">Trier par prix croissant</option>
-				<option value="Trier par prix">Trier par prix décroissant</option>
-				<option value="Trier par prix">Trier par popularité</option>
-			</select>
+
+			<form action="sort-result-category" method="POST">
+				<input type="hidden" name="slug" value="{{ category.slug }}">
+				<select name="order-by" class="order-by">
+					<option value="price_asc">Trier par prix croissant</option>
+					<option value="price_desc">Trier par prix décroissant</option>
+					<option value="popularity">Trier par popularité</option>
+				</select>
+				<button type="submit">Trier</button>
+			</form>
+
 
 			{% for article in articles %}
 				{% if article.stock != 0 %}

@@ -6,7 +6,8 @@
 
 {% block main %}
 	<!-- Begin Page Content -->
-	<div class="container-fluid">
+	<div
+		class="container-fluid">
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">Ajouter un nouvel utilisateur</h1>
 		<!-- DataTales Example -->
@@ -19,18 +20,18 @@
 					<div class="card-body">
 						<form action="/admin/users/add" method="post" class="add">
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label"for="role">
+								<label class="col-sm-2 col-form-label" for="role">
 									Type d'utilisateur
 								</label>
 								<div class="col-sm-10">
 									<select name="role" class="form-control">
-                                        <option value="USER">Client</option>
-                                        <option value="ADMIN">Administrateur</option>
-                                    </select>
+										<option value="USER">Client</option>
+										<option value="ADMIN">Administrateur</option>
+									</select>
 								</div>
 							</div>
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label"for="firstName">
+								<label class="col-sm-2 col-form-label" for="firstName">
 									Prénom
 								</label>
 								<div class="col-sm-10">
@@ -38,7 +39,7 @@
 								</div>
 							</div>
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label"for="lastName">
+								<label class="col-sm-2 col-form-label" for="lastName">
 									Nom
 								</label>
 								<div class="col-sm-10">
@@ -46,7 +47,7 @@
 								</div>
 							</div>
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label"for="email">
+								<label class="col-sm-2 col-form-label" for="email">
 									E-mail
 								</label>
 								<div class="col-sm-10">
@@ -54,7 +55,7 @@
 								</div>
 							</div>
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label"for="password">
+								<label class="col-sm-2 col-form-label" for="password">
 									Mot de passe
 								</label>
 								<div class="col-sm-10">
@@ -62,7 +63,7 @@
 								</div>
 							</div>
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label"for="address">
+								<label class="col-sm-2 col-form-label" for="address">
 									Adresse
 								</label>
 								<div class="col-sm-10">
@@ -70,7 +71,7 @@
 								</div>
 							</div>
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label"for="city">
+								<label class="col-sm-2 col-form-label" for="city">
 									Ville
 								</label>
 								<div class="col-sm-10">
@@ -78,7 +79,7 @@
 								</div>
 							</div>
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label"for="postalCode">
+								<label class="col-sm-2 col-form-label" for="postalCode">
 									Code postal
 								</label>
 								<div class="col-sm-10">
@@ -86,7 +87,7 @@
 								</div>
 							</div>
 							<div class="mb-3 row">
-								<label class="col-sm-2 col-form-label"for="country">
+								<label class="col-sm-2 col-form-label" for="country">
 									Pays
 								</label>
 								<div class="col-sm-10">
@@ -101,17 +102,7 @@
 				</div>
 			</div>
 		</div>
-	{# </div> #}
-	<!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+		{# </div> #}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}

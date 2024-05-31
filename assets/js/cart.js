@@ -1,4 +1,4 @@
-//fonction pour ajouter au panier
+// Fonction pour ajouter au panier
 function addToCart(article_id) {
   let formData = new FormData();
   formData.append("article_id", article_id);
@@ -15,7 +15,16 @@ function addToCart(article_id) {
         updateQuantity(data.articles);
         updateCount(data.articles);
         updateTotal(data.articles, data.shipping_costs);
-        disabledButtonArticle(data.articles);
+        disableButtonArticle(data.articles);
+        // Afficher la notification Toastify
+        Toastify({
+          text: "Article ajouté au panier avec succès!",
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+        }).showToast();
       } else {
         console.error("Invalid response structure:", data);
       }
@@ -25,9 +34,20 @@ function addToCart(article_id) {
         "Une erreur s'est produite lors de l'ajout de l'article au panier :",
         error
       );
+
+      // Afficher une notification d'erreur Toastify
+      Toastify({
+        text: "Erreur lors de l'ajout de l'article au panier.",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+      }).showToast();
     });
 }
-//fonction pour incrémenter/décrémenter
+
+// Fonction pour incrémenter/décrémenter
 function incrementDecrement(article_id, action) {
   let url = "/update-quantity";
 
@@ -48,7 +68,6 @@ function incrementDecrement(article_id, action) {
         updateCount(data.articles);
         updateTotal(data.articles, data.shipping_costs);
         disableIncrement(data.articles);
-        disabledButtonArticle(data.articles);
       } else {
         console.error("Invalid response structure:", data);
       }
@@ -58,9 +77,20 @@ function incrementDecrement(article_id, action) {
         "Une erreur s'est produite lors de la mise à jour de la quantité :",
         error
       );
+
+      // Afficher une notification d'erreur Toastify
+      Toastify({
+        text: "Erreur lors de la mise à jour de la quantité.",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+      }).showToast();
     });
 }
-//fonction pour changer les frais de port
+
+// Fonction pour changer les frais de port
 function changeShippingMethod(shippingMethod) {
   let formData = new FormData();
   formData.append("shipping-method", shippingMethod);
@@ -77,12 +107,33 @@ function changeShippingMethod(shippingMethod) {
     })
     .then((data) => {
       updateTotal(data.articles, data.shipping_costs);
+
+      // Afficher une notification Toastify
+      Toastify({
+        text: "Méthode de livraison mise à jour.",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+      }).showToast();
     })
     .catch((error) => {
       console.error("Error changing shipping costs:", error);
+
+      // Afficher une notification d'erreur Toastify
+      Toastify({
+        text: "Erreur lors du changement de la méthode de livraison.",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+      }).showToast();
     });
 }
-//Mets à jour la quantité
+
+// Mets à jour la quantité
 function updateQuantity(articles) {
   let articlesArray = Object.values(articles);
   articlesArray.forEach((article) => {
@@ -102,7 +153,8 @@ function updateQuantity(articles) {
     });
   });
 }
-//Mets à jour les compteurs
+
+// Mets à jour les compteurs
 function updateCount(articles) {
   let articlesArray = Object.values(articles);
   let itemCount = 0;
@@ -116,7 +168,8 @@ function updateCount(articles) {
     });
   }
 }
-//Mets à jours les compteurs du total
+
+// Mets à jours les compteurs du total
 function updateTotal(articles, shipping_costs) {
   let totalPrice = 0;
 
@@ -152,21 +205,20 @@ function updateTotal(articles, shipping_costs) {
   }
 }
 
-// Désactive le boutton si l'article est en rupture de stock
-function disabledButtonArticle(articles) {
+// Désactive le bouton si l'article est en rupture de stock
+function disableButtonArticle(articles) {
   let articlesArray = Object.values(articles);
   articlesArray.forEach((article) => {
     const cartButton = document.querySelector(
       `.cart-button[data-article="${article.id}"]`
     );
-    const spanCart = document.querySelector(
-      `.cart-button[data-article="${article.id} span.add-to-cart"]`
-    );
+    const spanCart = document.getElementById("add");
     if (cartButton) {
       // Vérifie si la quantité dépasse le stock
       if (article.quantity >= article.stock) {
         cartButton.classList.add("disabled");
         cartButton.disabled = true;
+        spanCart.innerText = "Rupture de stock";
       } else {
         cartButton.classList.remove("disabled");
         cartButton.disabled = false;
@@ -176,7 +228,7 @@ function disabledButtonArticle(articles) {
     }
   });
 }
-// Désactive le boutton d'incrementation si l'article est en rupture de stock
+
 function disableIncrement(articles) {
   let articlesArray = Object.values(articles);
   articlesArray.forEach((article) => {
@@ -196,5 +248,15 @@ function disableIncrement(articles) {
   });
 }
 
+function popUpOutOfStock() {
+  Toastify({
+    text: `La quantité de l'article dépasse le stock disponible.`,
+    duration: 3000,
+    close: true,
+    gravity: "top",
+    position: "right",
+    backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+  }).showToast();
+}
 
 export { addToCart, incrementDecrement, changeShippingMethod };

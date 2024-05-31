@@ -6,7 +6,8 @@
 
 {% block main %}
 	<!-- Begin Page Content -->
-	<div class="container-fluid">
+	<div
+		class="container-fluid">
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">Toutes les commandes</h1>
 		<!-- DataTales Example -->
@@ -36,9 +37,15 @@
 							<tbody>
 								{% for order in orders %}
 									<tr>
-										<td><a href="/admin/orders/{{ order.id }}">N°{{ order.id }}</a></td>
-										<td> {{ order.createdAt|date("d/m/Y") }}</td>
-										<td><a href="/admin/users/{{ order.userId }}">{{ order.user.firstName }} {{ order.user.lastName }}</a></td>
+										<td>
+											<a href="/admin/orders/{{ order.id }}">N°{{ order.id }}</a>
+										</td>
+										<td>
+											{{ order.createdAt|date("d/m/Y") }}</td>
+										<td>
+											<a href="/admin/users/{{ order.userId }}">{{ order.user.firstName }}
+												{{ order.user.lastName }}</a>
+										</td>
 										<td>{{ order.totalPrice }}</td>
 										<td>{{ order.status }}</td>
 									</tr>
@@ -49,20 +56,10 @@
 				{% else %}
 					<p>Aucune commande trouvée.</p>
 				{% endif %}
-   
+
 			</div>
 		</div>
-	{# </div> #}
-	<!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+		{# </div> #}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}

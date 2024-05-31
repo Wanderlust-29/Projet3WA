@@ -24,27 +24,18 @@
 			{% else %}
 				<ul class="list-articles">
 					{% for article in cart %}
-						<li class="article">
-							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-							<p>{{ article.name }}
-								-
-								{{ article.price }}€
-							</p>
-							{}
-							{% if stock != 0 %}
-								<span class="increment-decrement-btns">
-									<button class="btn-increment" data-article="{{ article.id }}" data-action="increment">+</button>
-									<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
-									<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
-								</span>
-							{% else %}
-								<span class="increment-decrement-btns">
-									<button class="btn-increment" data-article="{{ article.id }}" data-action="increment" disabled>+</button>
-									<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
-									<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
-								</span>
-							{% endif %}
-						</li>
+						<article class="article">
+							<a href="/article/{{ article.slug }}">
+								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+
+								<h2 class="article-name"></h2>
+								{{ article.name }}</a>
+							<span class="increment-decrement-btns" data-article="{{ article.id }}">
+								<button class="btn-increment" data-article="{{ article.id }}" data-action="increment" {% if not article.is_in_stock %} disabled {% endif %}>+</button>
+								<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
+								<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
+							</span>
+						</article>
 					{% endfor %}
 				</li>
 			</ul>

@@ -1,12 +1,10 @@
 // article.js
 
-function initArticlePage() {
-  document.addEventListener("DOMContentLoaded", () => {
-    animationCart();
-    burgerMenu();
-    gradeStar();
-  });
-}
+document.addEventListener("DOMContentLoaded", () => {
+  animationCart();
+  burgerMenu();
+  gradeStar();
+});
 
 function burgerMenu() {
   const btnDescription = document.querySelector(".btn-description");
@@ -51,7 +49,7 @@ function gradeStar() {
   for (let i = 0; i < averageGradeInt; i++) {
     averageStars += "⭐";
   }
-  
+
   grades.forEach((grade) => {
     const gradeInt = parseInt(grade.textContent);
     let stars = "";
@@ -86,6 +84,4 @@ function animationCart() {
   }
 }
 
-
-module.exports = {initArticlePage, burgerMenu, gradeStar, animationCart };
-
+// module.exports = { initArticlePage, burgerMenu, gradeStar, animationCart };

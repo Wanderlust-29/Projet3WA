@@ -1,7 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-	Articles
+	{{ category.name }}
 	{{ parent() }}
 {% endblock %}
 
@@ -10,10 +10,10 @@
 {% block main %}
 	<main id="content" class="articles">
 		<section class="all-products">
-			<h1>Tout nos produits</h1>
+			<h1>{{ category.name }}</h1>
 
-
-			<form action="sort-result-articles" method="POST">
+			<form action="sort-result-category" method="POST">
+				<input type="hidden" name="slug" value="{{ slug }}">
 				<select name="order-by" class="order-by">
 					<option value="price_asc">Trier par prix croissant</option>
 					<option value="price_desc">Trier par prix décroissant</option>
@@ -21,7 +21,6 @@
 				</select>
 				<button type="submit">Trier</button>
 			</form>
-
 
 			{% for article in articles %}
 				{% if article.stock != 0 %}

@@ -13,12 +13,15 @@
     "twig/twig": "^3.0",
     "stripe/stripe-php": "^13.14",
     "cocur/slugify": "^4.5",
-    "pecee/simple-router": "^5.4",
+    "pecee/simple-router": "^5.4.1.7",
     "twig/intl-extra": "^3.10",
     "twig/extra-bundle": "^3.10",
     "nesbot/carbon": "^3.4"
   },
   "require-dev": {
     "symfony/var-dumper": "^6.4"
+  },
+  "config": {
+    "platform-check": false
   }
 }

@@ -1,60 +1,53 @@
 {% extends "layout.admin.html.twig" %}
 
 {% block title %}
-    {{ title }} - Timberwolf Admin
+	{{ title }}
+	- Timberwolf Admin
 {% endblock %}
 
 {% block main %}
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
-        <!-- Page Heading -->
-        <div class="row">
-            <h1 class="h3 mb-2 text-gray-800">{{ title }}</h1>
-        </div>
-            {% if messages is not empty %}
-                {% for message in messages %}
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary"><i class="fa fa-envelope" aria-hidden="true"></i> Message n°{{ message.id }}</h6>
-                            <div class="dropdown no-arrow">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                    aria-labelledby="dropdownMenuLink">
-                                    <form class="dropdown-item" action="/admin/messages/delete" method="POST" data-action="delete">
-                                        <input type="hidden" name="id" value="{{ message.id }}">
-                                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <figure>
-                                <blockquote class="blockquote">
-                                    <p>{{ message.message }}</p>
-                                </blockquote>
-                                <figcaption class="blockquote-footer">
-                                    <a href="mailto:{{message.email}}">{{ message.firstName }} {{ message.lastName }}</a>
-                                </figcaption>
-                            </figure>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>Aucun message trouvé.</p>
-            {% endif %} 
-    <!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script>
-        // Call the dataTables jQuery plugin
-        $(document).ready(function() {
-            $('#orderTable').DataTable();
-        });
-    </script>
-{% endblock %}
+	<!-- Begin Page Content -->
+	<div
+		class="container-fluid">
+		<!-- Page Heading -->
+		<div class="row">
+			<h1 class="h3 mb-2 text-gray-800">{{ title }}</h1>
+		</div>
+		{% if messages is not empty %}
+			{% for message in messages %}
+				<div class="card shadow mb-4">
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+							Message n°{{ message.id }}</h6>
+						<div class="dropdown no-arrow">
+							<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+								<form class="dropdown-item" action="/admin/messages/delete" method="POST" data-action="delete">
+									<input type="hidden" name="id" value="{{ message.id }}">
+									<button type="submit" class="btn btn-danger">Supprimer</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="card-body">
+						<figure>
+							<blockquote class="blockquote">
+								<p>{{ message.message }}</p>
+							</blockquote>
+							<figcaption class="blockquote-footer">
+								<a href="mailto:{{message.email}}">{{ message.firstName }}
+									{{ message.lastName }}</a>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+			{% endfor %}
+		{% else %}
+			<p>Aucun message trouvé.</p>
+		{% endif %}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}

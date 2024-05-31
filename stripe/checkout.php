@@ -5,7 +5,7 @@ require_once __DIR__ . '/secret.php';
 \Stripe\Stripe::setApiKey($stripeSecretKey);
 header('Content-Type: application/json');
 
-$YOUR_DOMAIN = 'http://projet3wa.local/';
+$YOUR_DOMAIN = 'http://projet3wa.test/';
 
 // Récupérer les informations du panier (exemple simplifié)
 session_start();

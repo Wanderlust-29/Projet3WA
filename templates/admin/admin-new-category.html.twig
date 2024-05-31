@@ -6,7 +6,8 @@
 
 {% block main %}
 	<!-- Begin Page Content -->
-	<div class="container-fluid">
+	<div
+		class="container-fluid">
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">Ajouter une nouvel catégorie</h1>
 		<!-- DataTales Example -->
@@ -41,17 +42,7 @@
 				</div>
 			</div>
 		</div>
-	{# </div> #}
-	<!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+		{# </div> #}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}

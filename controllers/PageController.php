@@ -15,6 +15,51 @@ class PageController extends AbstractController
         ]);
     }
 
+    public function sort()
+    {
+        $am = new ArticleManager();
+        $articles = [];
+
+        if ($_POST['order-by'] === "popularity") {
+            $articles = $am->sortByPopularity();
+        } elseif ($_POST['order-by'] === "price_desc") {
+            $articles = $am->sortByDesc();
+        } elseif ($_POST['order-by'] === "price_asc") {
+            $articles = $am->sortByAsc();
+        }
+
+        $this->render("pages/sort-result-articles.html.twig", [
+            "articles" => $articles,
+        ]);
+    }
+
+    public function sortByCategory()
+    {
+        if ($_POST["slug"]) {
+            $slug = $_POST["slug"];
+            // Récupération de l'ID de la catégorie
+            $cm = new CategoryManager();
+            $categoryId = $cm->findOneBySlug($slug);
+
+            $am = new ArticleManager();
+            $articles = [];
+
+            if ($_POST['order-by'] === "popularity") {
+                $articles = $am->sortByPopularityCat($categoryId);
+            } elseif ($_POST['order-by'] === "price_desc") {
+                $articles = $am->sortByDescCat($categoryId);
+            } elseif ($_POST['order-by'] === "price_asc") {
+                $articles = $am->sortByAscCat($categoryId);
+            }
+
+            $this->render("pages/sort-result-category.html.twig", [
+                "articles" => $articles,
+                "slug" => $_POST["slug"]
+            ]);
+        }
+    }
+
+
     // Récupère un article
     public function article(string $slug): void
     {
@@ -146,7 +191,7 @@ class PageController extends AbstractController
                     // $texte_echappe = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
 
                     $contactMessage = new ContactMessages($firstName, $lastName, $email, $message);
-                    
+
                     if ($cmm->create($contactMessage)) {
                         // Redirige vers la page d'accueil si le message est bien enregistré
                         $this->redirect("/contact");

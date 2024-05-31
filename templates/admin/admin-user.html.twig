@@ -1,15 +1,22 @@
 {% extends "layout.admin.html.twig" %}
 
 {% block title %}
-	Client - {{ user.firstName }} - {{ user.lastName }} - Timberwolf Admin
+	Client -
+	{{ user.firstName }}
+	-
+	{{ user.lastName }}
+	- Timberwolf Admin
 {% endblock %}
 
 {% block main %}
 	<!-- Begin Page Content -->
-	<div class="container-fluid">
+	<div
+		class="container-fluid">
 		<!-- Page Heading -->
 		<div class="row d-flex flex-row align-items-center justify-content-between">
-			<h1 class="h3 mb-2 text-gray-800">{{ user.firstName }} - {{ user.lastName }}</h1>
+			<h1 class="h3 mb-2 text-gray-800">{{ user.firstName }}
+				-
+				{{ user.lastName }}</h1>
 			<form action="/admin/users/delete">
 				<input type="hidden" name="id" value="{{ user.id }}">
 				<button type="submit" class="btn btn-danger mb-3" name="delete">Supprimer</button>
@@ -135,9 +142,15 @@
 									<tbody>
 										{% for order in orders %}
 											<tr>
-												<td><a href="/admin/orders/{{ order.id }}">N°{{ order.id }}</a></td>
-												<td> {{ order.createdAt|date("d/m/Y") }}</td>
-												<td><a href="/admin/users/{{ order.userId }}">{{ order.user.firstName }} {{ order.user.lastName }}</a></td>
+												<td>
+													<a href="/admin/orders/{{ order.id }}">N°{{ order.id }}</a>
+												</td>
+												<td>
+													{{ order.createdAt|date("d/m/Y") }}</td>
+												<td>
+													<a href="/admin/users/{{ order.userId }}">{{ order.user.firstName }}
+														{{ order.user.lastName }}</a>
+												</td>
 												<td>{{ order.totalPrice }}</td>
 												<td>{{ order.status }}</td>
 											</tr>
@@ -152,17 +165,7 @@
 				</div>
 			</div>
 		</div>
-	{# </div> #}
-	<!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+		{# </div> #}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}

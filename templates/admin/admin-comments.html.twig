@@ -1,70 +1,69 @@
 {% extends "layout.admin.html.twig" %}
 
 {% block title %}
-	{{ title }} - Timberwolf Admin
+	{{ title }}
+	- Timberwolf Admin
 {% endblock %}
 
 {% block main %}
 	<!-- Begin Page Content -->
-	<div class="container-fluid">
-        <!-- Page Heading -->
-        <div class="row">
-            <h1 class="h3 mb-2 text-gray-800">{{ title }}</h1>
-        </div>
-            {% if comments is not empty %}
-                    {% for comment in comments %}
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary"><i class="fa {% if comment.status == "approved" %}fa-check-circle{% else %}fa-question-circle{% endif %}"  aria-hidden="true"></i> Commentaire n°{{ comment.id }}</h6>
-                                {% if comment.status == "pending" %}
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <form class="dropdown-item" action="/admin/comments/approve" method="POST" data-action="approve">
-                                                <input type="hidden" name="id" value="{{ comment.id }}">
-                                                <button type="submit" class="btn btn-primary">Approuver</button>
-                                            </form>
-                                            <form class="dropdown-item" action="/admin/comments/delete" method="POST" data-action="delete">
-                                                <input type="hidden" name="id" value="{{ comment.id }}">
-                                                <button type="submit" class="btn btn-danger">Supprimer</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <div class="card-body">
-                                <figure>
-                                    <blockquote class="blockquote">
-                                        <p>{{ comment.comment }}</p>
-                                    </blockquote>
-                                    <figcaption class="blockquote-footer">
-                                        <a href="/admin/users/{{ comment.userId.id }}">{{ comment.userId.firstName }} {{ comment.userId.lastName }} </a> pour l'article <cite title="Source Title"><a href="/admin/articles/{{ comment.articleId.id }}">{{ comment.articleId.name }}</a></cite>
-                                    </figcaption>
-                                </figure>
-                                <div class="progress mb-4">
-                                    <div class="progress-bar {% if comment.grade > 2 %} bg-info {% elseif comment.grade == 2 %} bg-warning {% elseif comment.grade == 1 %} bg-danger {% elseif comment.grade == 0 %} bg-danger {% endif %}" role="progressbar" style="width: {{ comment.grade * 20 }}%" aria-valuenow="{{ comment.grade * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ comment.grade }} / 5</div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-            {% else %}
-                <p>Aucun commentaire trouvé.</p>
-            {% endif %} 
-	{# </div> #}
-	<!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+	<div
+		class="container-fluid">
+		<!-- Page Heading -->
+		<div class="row">
+			<h1 class="h3 mb-2 text-gray-800">{{ title }}</h1>
+		</div>
+		{% if comments is not empty %}
+			{% for comment in comments %}
+				<div class="card shadow mb-4">
+					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">
+							<i class="fa {% if comment.status == " approved" %}fa-check-circle{% else %}fa-question-circle{% endif %}" aria-hidden="true"></i>
+							Commentaire n°{{ comment.id }}</h6>
+						{% if comment.status == "pending" %}
+							<div class="dropdown no-arrow">
+								<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+									<form class="dropdown-item" action="/admin/comments/approve" method="POST" data-action="approve">
+										<input type="hidden" name="id" value="{{ comment.id }}">
+										<button type="submit" class="btn btn-primary">Approuver</button>
+									</form>
+									<form class="dropdown-item" action="/admin/comments/delete" method="POST" data-action="delete">
+										<input type="hidden" name="id" value="{{ comment.id }}">
+										<button type="submit" class="btn btn-danger">Supprimer</button>
+									</form>
+								</div>
+							</div>
+						{% endif %}
+					</div>
+					<div class="card-body">
+						<figure>
+							<blockquote class="blockquote">
+								<p>{{ comment.comment }}</p>
+							</blockquote>
+							<figcaption class="blockquote-footer">
+								<a href="/admin/users/{{ comment.userId.id }}">{{ comment.userId.firstName }}
+									{{ comment.userId.lastName }}
+								</a>
+								pour l'article
+								<cite title="Source Title">
+									<a href="/admin/articles/{{ comment.articleId.id }}">{{ comment.articleId.name }}</a>
+								</cite>
+							</figcaption>
+						</figure>
+						<div class="progress mb-4">
+							<div class="progress-bar {% if comment.grade > 2 %} bg-info {% elseif comment.grade == 2 %} bg-warning {% elseif comment.grade == 1 %} bg-danger {% elseif comment.grade == 0 %} bg-danger {% endif %}" role="progressbar" style="width: {{ comment.grade * 20 }}%" aria-valuenow="{{ comment.grade * 20 }}" aria-valuemin="0" aria-valuemax="100">{{ comment.grade }}
+								/ 5</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% else %}
+			<p>Aucun commentaire trouvé.</p>
+		{% endif %}
+		{# </div> #}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}
