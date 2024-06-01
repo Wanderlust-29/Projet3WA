@@ -32,7 +32,7 @@ class ShippingManager extends AbstractManager
      */
     public function findOneByOrderId(int $orderId): ?Shipping
     {
-        $query = $this->db->prepare('SELECT * FROM shippings WHERE order_id = :order_id');
+        $query = $this->db->prepare('SELECT * FROM shipping WHERE order_id = :order_id');
         $parameters = [
             "order_id" => $orderId
         ];

@@ -15,9 +15,7 @@
 @import "pages/adopt";
 
 /* ACCOUNT */
-@import "account/admin";
 @import "account/account";
-@import "account/login-admin";
 @import "account/login";
 @import "account/register";
 
@@ -41,20 +39,244 @@ body {
   font-size: 1.8rem;
   background-color: $background;
   line-height: 1.8;
-
 }
 
-.dark-mode {
+//light-mode
+body.light {
+  header {
+    background-color: $green;
+    .icons {
+      .fa-stack[data-count]:after {
+        color: $green;
+      }
+    }
+
+    .menu {
+      a {
+        &::after {
+          background-color: $green;
+        }
+      }
+    }
+  }
+  #content.articles {
+    h1 {
+      color: $green;
+    }
+  }
+  #content.contact {
+    h1 {
+      color: $green;
+    }
+    .contact-form {
+      button {
+        background-color: $green;
+        &:hover {
+          background-color: $darkGreen;
+        }
+      }
+    }
+    #about {
+      h3 {
+        background-color: $green;
+      }
+    }
+  }
+  .description-ingredients {
+    thead {
+      tr {
+        td {
+          background-color: $green;
+          h3 {
+            cursor: pointer;
+            color: $white;
+          }
+        }
+        td:hover {
+          background-color: $white;
+          h3 {
+            color: $green;
+          }
+        }
+      }
+    }
+  }
+
+  #content.cart {
+    .form-checkout {
+      .btn-cart-back,
+      #checkout-button,
+      .btn-login {
+        border: 2px solid $green;
+        color: $green;
+        background: $white;
+      }
+      .btn-cart-back:hover,
+      #checkout-button:hover,
+      .btn-login:hover {
+        color: $white;
+        background: $green;
+      }
+    }
+  }
+
+  #content.home {
+    h2 {
+      color: $green;
+    }
+    .banner {
+      .btn-articles {
+        color: $green;
+        border: 2px solid $green;
+      }
+      .btn-articles:after {
+        background: $darkMode;
+      }
+      .btn-articles:hover {
+        color: #fff;
+      }
+    }
+    .home-nav {
+      ul {
+        li::before {
+          background-image: url(../../media/nav-home.svg);
+        }
+      }
+    }
+    .owl-dots button.owl-dot.active span,
+    .owl-dots button.owl-dot:hover span {
+      background-color: $green;
+    }
+  }
+
+  footer {
+    background-color: $darkMode;
+  }
+}
+
+//dark-mode
+body.dark {
+  header {
+    background-color: $darkMode;
+    .icons {
+      .fa-stack[data-count]:after {
+        color: $darkMode;
+      }
+    }
+    .menu {
+      a {
+        &::after {
+          background-color: $darkMode;
+        }
+      }
+    }
+  }
+  #content.articles {
+    h1 {
+      color: $darkMode;
+    }
+  }
+  #content.contact {
+    h1 {
+      color: $darkMode;
+    }
+    .contact-form {
+      button {
+        background-color: $darkMode;
+        &:hover {
+          background-color: $darkModeHover;
+        }
+      }
+    }
+    #about {
+      h3 {
+        background-color: $darkMode;
+      }
+    }
+  }
+  #content.article {
+    .cart-button {
+      background-color: $darkMode;
+      &:hover {
+        background-color: $darkModeHover;
+      }
+    }
+    .description-ingredients {
+      thead {
+        tr {
+          td {
+            background-color: $darkMode;
+            h3 {
+              cursor: pointer;
+              color: $white;
+            }
+          }
+          td:hover {
+            background-color: $white;
+            h3 {
+              color: $darkMode;
+            }
+          }
+        }
+      }
+    }
+  }
+  #content.cart {
+    .form-checkout {
+      .btn-cart-back,
+      #checkout-button,
+      .btn-login {
+        border: 2px solid $darkMode;
+        color: $darkMode;
+        background: $white;
+      }
+      .btn-cart-back:hover,
+      #checkout-button:hover,
+      .btn-login:hover {
+        color: $white;
+        background: $darkMode;
+      }
+    }
+  }
+  #content.home {
+    h2 {
+      color: $darkMode;
+    }
+    .banner {
+      .btn-articles {
+        color: $darkMode;
+        border: 2px solid $darkMode;
+      }
+      .btn-articles:after {
+        background: $darkMode;
+      }
+      .btn-articles:hover {
+        color: #fff;
+      }
+    }
+    .home-nav {
+      ul {
+        li::before {
+          background-image: url(../../media/nav-home-dark-mode.svg);
+          opacity: 1;
+        }
+      }
+    }
+    .owl-dots button.owl-dot.active span,
+    .owl-dots button.owl-dot:hover span {
+      background-color: $darkMode;
+    }
+  }
+  footer {
+    background-color: $darkMode;
+  }
+}
+
+.dark-mode-btn {
   position: fixed;
-  bottom: 10px;
-  right: 0;
-}
-
-.color-DM, .color-DM::before, .color-DM::after{
-  color:$darkModeBg;
-}
-.background-color-DM, .background-color-DM::before, .background-color-DM::after{
-  background-color:$darkModeBg;
+  bottom: 2rem;
+  right: 1rem;
+  font-size: 2rem;
 }
 
 .product {
@@ -72,6 +294,9 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    h3 {
+      font-size: 1.6rem;
+    }
 
     img {
       width: 70%;
@@ -85,19 +310,13 @@ body {
     text-transform: uppercase;
     border-radius: 1rem;
     z-index: 1;
-    position: absolute;
-    top: 30%;
-    left: 10%;
     border: 3px solid $soldOut;
     color: $soldOut;
     background: transparent;
     font-size: 20px;
     font-weight: 900;
-    transform: rotate(15deg) translateY(15px);
   }
 }
-
-
 
 i {
   font-size: 2.5rem;

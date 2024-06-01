@@ -13,14 +13,15 @@
 			<h1>{{ category.name }}</h1>
 
 
-			<form action="sort-result-category" method="POST">
+			<form action="sort-result-category" method="POST" class="form-sort">
 				<input type="hidden" name="slug" value="{{ category.slug }}">
 				<select name="order-by" class="order-by">
+					<option value="">--Trier les resultats--</option>
 					<option value="price_asc">Trier par prix croissant</option>
 					<option value="price_desc">Trier par prix décroissant</option>
 					<option value="popularity">Trier par popularité</option>
 				</select>
-				<button type="submit">Trier</button>
+				<button type="submit">Rechercher</button>
 			</form>
 
 

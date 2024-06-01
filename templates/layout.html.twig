@@ -31,7 +31,6 @@
 				<p>TimberWolf</p>
 			</a>
 
-
 			<menu class="icons">
 				<li>
 					<a href="/cart/" class="cart-icon">
@@ -49,7 +48,6 @@
 					<span></span>
 				</li>
 			</menu>
-
 
 			<menu class="menu">
 				<li>
@@ -99,8 +97,8 @@
 		</header>
 
 		{% block main %}{% endblock %}
-		<a class="dark-mode" aria-label="modifier le contraste">
-			<i class="fa-solid fa-circle-half-stroke"></i>
+		<a class="dark-mode-btn" aria-label="modifier le contraste">
+			🌙
 		</a>
 		<footer class="footer">
 			<section>
@@ -134,6 +132,7 @@
 					{% endif %}
 				</ul>
 			</section>
+
 			<section>
 				<h2>Infos pratiques</h2>
 				<ul>
@@ -143,6 +142,7 @@
 					<li><a href="/refund">Politique de remboursement</a></li>
 				</ul>
 			</section>
+
 			<section class="social-networks">
 				<h2>Suivez-nous sur :</h2>
 				<ul>
@@ -154,7 +154,6 @@
 		</footer>
 		{% block javascript %}{% endblock %}
 		<script src="assets/js/layout.js" defer></script>
-		<script src="assets/js/modal.js" defer></script>
 		<script type="module" src="assets/js/main-cart.js"></script>
 		<!-- Système de notification -->
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

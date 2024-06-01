@@ -1,16 +1,16 @@
 <?php
 
 class OrderManager extends AbstractManager
-{   
+{
 
     public array $statusArray = [
         [
             'code' => 'success',
             'text' => 'Commande payée'
-        ],[
+        ], [
             'code' => 'send',
             'text' => 'Commande envoyée'
-        ],[
+        ], [
             'code' => 'delivered',
             'text' => 'Commande receptionnée'
         ]
@@ -28,8 +28,11 @@ class OrderManager extends AbstractManager
         $parameters = ["id" => $id];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        if($result){
-            $order = new Order($result["user_id"], $result["created_at"],  $result["status"], $result["shipping_id"], $result["total_price"]);
+        if ($result) {
+            $sm = new ShippingManager();
+            $shipping = $sm->findOne($result["shipping_id"]);
+
+            $order = new Order($result["user_id"], $result["created_at"],  $result["status"], $shipping, $result["total_price"]);
             $order->setId($id);
             $user = $this->orderUser($result["user_id"]);
             $order->setUser($user);
@@ -50,16 +53,19 @@ class OrderManager extends AbstractManager
         $query = $this->db->prepare('SELECT * FROM orders');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        $orders = [];
 
+        $orders = [];
         foreach ($result as $item) {
+
             $sm = new ShippingManager();
             $shipping = $sm->findOne($item["shipping_id"]);
+
             $order = new Order($item["user_id"], $item["created_at"], $item["status"], $shipping, $item["total_price"]);
             $order->setId($item["id"]);
+
             $user = $this->orderUser($item["id"]);
             $order->setUser($user);
-            $orders[]= $order;
+            $orders[] = $order;
         }
         return $orders;
     }
@@ -79,7 +85,11 @@ class OrderManager extends AbstractManager
         $orders = [];
 
         foreach ($result as $item) {
-            $order = new Order($userId, $item["created_at"], $item["status"], $item["shipping_id"], $item["total_price"],);
+
+            $sm = new ShippingManager();
+            $shipping = $sm->findOne($item["shipping_id"]);
+
+            $order = new Order($userId, $item["created_at"], $item["status"], $shipping, $item["total_price"],);
             $order->setId($item["id"]);
             $orders[] = $order;
         }
@@ -95,13 +105,13 @@ class OrderManager extends AbstractManager
     public function createOrder(Order $order): void
     {
         $query = $this->db->prepare('INSERT INTO orders (user_id, created_at, status, shipping_id, total_price) 
-        VALUES (:user_id, :created_at, :status, :shipping, :total_price)');
+        VALUES (:user_id, :created_at, :status, :shipping_id, :total_price)');
 
         $parameters = [
             "user_id" => $order->getUserId(), // Récupérer l'ID de l'utilisateur
             "created_at" => $order->getCreatedAt(),
             "status" => $order->getStatus(), // Récupérer le statut de la commande
-            "shipping" => $order->getShipping(), // Récupérer le statut de la commande
+            "shipping_id" => $order->getShippingId(), // Récupérer le statut de la commande
             "total_price" => $order->getTotalPrice() // Récupérer le prix total de la commande
         ];
 
@@ -166,7 +176,8 @@ class OrderManager extends AbstractManager
      * @param int $orderId Order ID.
      * @return array List of articles for the order.
      */
-    public function orderArticle(int $orderId) : array {
+    public function orderArticle(int $orderId): array
+    {
         $query = $this->db->prepare(
             'SELECT a.*, oa.item_price as formerPrice, oa.item_quantity as quantity
              FROM orders_articles AS oa
@@ -175,20 +186,20 @@ class OrderManager extends AbstractManager
         );
         $query->execute(['order_id' => $orderId]);
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        $articles =[];
-        foreach ($result as $item){
+        $articles = [];
+        foreach ($result as $item) {
 
             $mm = new MediaManager();
             $media = $mm->findOne($item["image_id"]);
-    
+
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["formerPrice"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"],$item["short_description"],$item["slug"]);
+            $article = new Article($item["name"], $item["formerPrice"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
             $article->setId($item["id"]);
             $article = $article->toArray();
             $article['quantity'] = $item['quantity'];
-            $articles[]= $article;
+            $articles[] = $article;
         }
         return $articles;
     }
@@ -199,16 +210,16 @@ class OrderManager extends AbstractManager
      * @param int $orderId Order ID.
      * @return array Informations utilisateur.
      */
-    public function orderUser(int $userId) : array
+    public function orderUser(int $userId): array
     {
         $user = new UserManager();
         $u = $user->findOne($userId);
-        if($u){
+        if ($u) {
             return $u->toArray();
         }
         return [];
     }
-    
+
     /**
      * Méthode pour ajouter la quantité d'un article dans order_article.
      *
@@ -260,7 +271,8 @@ class OrderManager extends AbstractManager
      * @param string $status Nouveau status de la commande
      * @return bool update effectuée
      */
-    public function updateStatus(int $orderId, string $status) : bool {
+    public function updateStatus(int $orderId, string $status): bool
+    {
         $query = $this->db->prepare(
             'UPDATE orders SET status = :status WHERE id=:id'
         );
@@ -273,15 +285,12 @@ class OrderManager extends AbstractManager
      *
      * @return float total chiffre d'affires
      */
-    function getMonthlyEarning():float{
+    function getMonthlyEarning(): float
+    {
         $query = $this->db->prepare('SELECT SUM(total_price) AS total FROM orders WHERE MONTH(created_at)=MONTH(curdate())');
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        if($result){
-            return $result['total'];
-        }else{
-            return 0;
-        }
+        return $result['total'] !== null ? (float)$result['total'] : 0.0;
     }
 
     /**
@@ -289,15 +298,12 @@ class OrderManager extends AbstractManager
      *
      * @return float total chiffre d'affires
      */
-    function getYearlyEarning():float{
+    function getYearlyEarning(): float
+    {
         $query = $this->db->prepare('SELECT SUM(total_price) AS total FROM orders WHERE YEAR(created_at) = YEAR(curdate())');
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        if($result){
-            return $result['total'];
-        }else{
-            return 0;
-        }
+        return $result['total'] !== null ? (float)$result['total'] : 0.0;
     }
 
     /**
@@ -305,13 +311,14 @@ class OrderManager extends AbstractManager
      *
      * @return int total commandes en cours
      */
-    function getPendingOrdersTotal():int{
+    function getPendingOrdersTotal(): int
+    {
         $query = $this->db->prepare('SELECT SUM(id) AS total FROM orders WHERE status = "success" GROUP BY id');
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        if($result){
+        if ($result) {
             return $result['total'];
-        }else{
+        } else {
             return 0;
         }
     }

@@ -26,6 +26,8 @@ class PageController extends AbstractController
             $articles = $am->sortByDesc();
         } elseif ($_POST['order-by'] === "price_asc") {
             $articles = $am->sortByAsc();
+        } else {
+            $this->redirect("/articles");
         }
 
         $this->render("pages/sort-result-articles.html.twig", [
@@ -50,11 +52,14 @@ class PageController extends AbstractController
                 $articles = $am->sortByDescCat($categoryId);
             } elseif ($_POST['order-by'] === "price_asc") {
                 $articles = $am->sortByAscCat($categoryId);
+            } else {
+                $this->redirect("/categorie/$slug/");
             }
 
             $this->render("pages/sort-result-category.html.twig", [
                 "articles" => $articles,
-                "slug" => $_POST["slug"]
+                "slug" => $_POST["slug"],
+                "category" => $categoryId
             ]);
         }
     }

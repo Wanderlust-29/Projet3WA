@@ -13,7 +13,8 @@ class AdminOrdersController extends AbstractController
     }
 
     // Single order
-    public function order(int $id){
+    public function order(int $id)
+    {
         $om = new OrderManager();
         $order = $om->findOne($id);
         $status = $om->statusArray;
@@ -29,27 +30,27 @@ class AdminOrdersController extends AbstractController
     }
 
     // Single order
-    public function updateStatus(){
+    public function updateStatus()
+    {
         $id = (int) $_POST['id'];
         $type = 'success';
         $text = '';
-        if(isset($_POST) && isset($_POST['status'])){
+        if (isset($_POST) && isset($_POST['status'])) {
             $status = $_POST['status'];
             $om = new OrderManager();
             $update = $om->updateStatus($id, $status);
-            if(!$update){
+            if (!$update) {
                 $type = 'error';
                 $text = "Un problème est survenu lors de la mise à jour 😞";
-            }else{
+            } else {
                 $text = "La mise à jour a bien été effectuée 😃";
             }
-        }else{
+        } else {
             $type = 'error';
             $text = "Veuillez choisir un statut différent de l'existant 🙄";
         }
 
-        $this->notify($text,$type);
+        $this->notify($text, $type);
         $this->redirect("/admin/orders/$id");
     }
-
 }

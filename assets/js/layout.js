@@ -3,20 +3,20 @@ function burgerMenu() {
   const navLinks = document.querySelector(".menu");
 
   burger.addEventListener("click", () => {
-    burger.classList.toggle("active");
-    navLinks.classList.toggle("active");
+    burger.classList.toggle("open");
+    navLinks.classList.toggle("open");
   });
 
   // When the user clicks outside the menu, the menu closes
   window.addEventListener("click", (event) => {
     if (!navLinks.contains(event.target) && !burger.contains(event.target)) {
-      navLinks.classList.remove("active");
-      burger.classList.remove("active");
+      navLinks.classList.remove("open");
+      burger.classList.remove("open");
     }
   });
 }
 
-function search(){
+function search() {
   const searchBtns = document.querySelectorAll(".search-btn");
   const search = document.querySelector(".search");
 
@@ -28,40 +28,30 @@ function search(){
 }
 
 function darkMode() {
-  const buttonDM = document.querySelector(".dark-mode");
+  const buttonDM = document.querySelector(".dark-mode-btn");
+
   buttonDM.addEventListener("click", () => {
-    // Sélectionne tous les éléments de la page
-    const allElements = document.querySelectorAll("*");
-
-    // Parcourt chaque élément de la page
-    allElements.forEach(element => {
-      const computedStyle = window.getComputedStyle(element);
-      const color = computedStyle.getPropertyValue("color");
-      const bgColor = computedStyle.getPropertyValue("background-color");
-  
-      if (color === "rgb(0, 154, 135)") { 
-        element.classList.toggle("color-DM");
-        const beforeElement = window.getComputedStyle(element, "::before");
-        const afterElement = window.getComputedStyle(element, "::after");
-        if (beforeElement.content !== "none") {
-          element.classList.toggle("color-DM-before");
-        }
-        if (afterElement.content !== "none") {
-          element.classList.toggle("color-DM-after");
-        }
-      }
-      if (bgColor === "rgb(0, 154, 135)") { 
-        element.classList.toggle("background-color-DM");
-      }
-    });
-
-    // Inverse la couleur du bouton lui-même
-    buttonDM.classList.toggle("button-color-DM");
+    const body = document.body;
+    const qualitySVG = document.querySelector(".quality");
+    const socialSVG = document.querySelector(".social");
+    const earthSVG = document.querySelector(".earth");
+    if (body.classList.contains("dark")) {
+      buttonDM.innerText = "🌙";
+      body.classList.add("ligth");
+      body.classList.remove("dark");
+      qualitySVG.src = "assets/media/quality.svg";
+      socialSVG.src = "assets/media/adopt.svg";
+      earthSVG.src = "assets/media/earth.svg";
+    } else {
+      buttonDM.innerText = "☀️";
+      body.classList.remove("ligth");
+      body.classList.add("dark");
+      qualitySVG.src = "assets/media/quality-dark-mode.svg";
+      socialSVG.src = "assets/media/adopt-dark-mode.svg";
+      earthSVG.src = "assets/media/earth-dark-mode.svg";
+    }
   });
 }
-
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
   burgerMenu();

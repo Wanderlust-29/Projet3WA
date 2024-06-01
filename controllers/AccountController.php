@@ -1,4 +1,5 @@
 <?php
+
 use Cocur\Slugify\Slugify;
 
 class AccountController extends AbstractController
@@ -6,8 +7,6 @@ class AccountController extends AbstractController
     // USER
     public function account(): void
     {
-        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-
         $sessionId = null;
         $orders = [];
         $ordersArticles = [];
@@ -27,7 +26,6 @@ class AccountController extends AbstractController
         }
 
         $this->render("account/account.html.twig", [
-            'error' => $error,
             'orders' => $orders,
             'ordersArticles' => $ordersArticles,
         ]);

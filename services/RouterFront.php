@@ -36,6 +36,7 @@ SimpleRouter::get('/success', [CartController::class, 'success']);
 SimpleRouter::post('/update-shipping-costs', [CartController::class, 'updateShippingCosts']);
 SimpleRouter::get('/stripe/checkout', [CartController::class, 'updateShippingCosts']);
 
+
 //if($route === "comment") 
 SimpleRouter::post('/new-comment', [CartController::class, 'deleteFromCart']);
 //if($route === "check-comment") 
