@@ -1,18 +1,53 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    {{article.name}}
-    {{ parent() }}
+	Mentions légales
+	{{ parent() }}
 {% endblock %}
 
-{% block head %}
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block main %}
-    <main id="content" class="legal">
-        <h1>Mentions légales</h1>
-    </main>
+	<main id="content" class="legal">
+		<h1>Mentions légales</h1>
+		<section id="edition" aria-label="Informations sur l'édition">
+			<h2>Edition du site</h2>
+			<p>Le présent site, accessible à l’URL
+				<a href="http://www.">www.timberwolf.com</a>
+				(le « Site »), est édité par :</p>
+			<ul>
+				<li>Editeur du site : Ryan ROUDAUT, résidant 120 rue de jean gremillon, de nationalité Française (France), né(e) le 05/02/1999.</li>
+			</ul>
+		</section>
+
+		<section id="hebergement" aria-label="Informations sur l'hébergement">
+			<h2>Hébergement</h2>
+			<p>Le Site est hébergé par la société OVH SAS, situé 2 rue Kellermann – BP 80157 – 59053 Roubaix Cedex 1, (contact téléphonique au 09.72.10.10.07).</p>
+		</section>
+
+		<section id="directeur" aria-label="Informations sur le directeur de publication">
+			<h2>Directeur de publication</h2>
+			<p>Le Directeur de la publication du Site est Ryan ROUDAUT.</p>
+		</section>
+
+		<section id="contact" aria-label="Informations de contact">
+			<h2>Nous contacter</h2>
+			<ul>
+				<li>
+					<a href="tel:0298000000">Par téléphone : 02.98.00.00.00</a>
+				</li>
+				<li>Par email :
+					<a href="mailto:contact@timberwolf.fr">contact@timberwolf.fr</a>
+				</li>
+				<li>Par courrier : Esplanade du général de Gaulle, Pont de buis-lès-Quimerch, 29590</li>
+			</ul>
+		</section>
+
+		<section id="donnees" aria-label="Informations sur les données personnelles">
+			<h2>Données personnelles</h2>
+			<p>Le traitement de vos données à caractère personnel est régi par notre Charte du respect de la vie privée, conformément au Règlement Général sur la Protection des Données 2016/679 du 27 avril 2016 («RGPD»).</p>
+		</section>
+	</main>
 {% endblock %}
 
-{% block javascript %}
-{% endblock %}
+{% block javascript %}{% endblock %}

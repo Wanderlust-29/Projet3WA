@@ -1,18 +1,41 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    {{article.name}}
-    {{ parent() }}
+	Politique de remboursement
+	{{ parent() }}
 {% endblock %}
 
-{% block head %}
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block main %}
-    <main id="content" class="refund">
-        <h1>Politique de remboursement</h1>
-    </main>
+	<main id="content" class="refund">
+		<h1>Politique de remboursement</h1>
+		<section id="objet" aria-label="Objet de la politique de remboursement">
+			<h2>Objet</h2>
+			<p>La présente politique de remboursement a pour objet de définir les conditions dans lesquelles TimberWolf rembourse les clients en cas d'annulation de commande ou de retour de produits.</p>
+		</section>
+
+		<section id="annulation" aria-label="Annulation de commande">
+			<h2>Annulation de commande</h2>
+			<p>Le client peut annuler sa commande avant son expédition. Pour cela, il doit contacter le service clientèle de TimberWolf le plus rapidement possible après la passation de la commande.</p>
+			<p>Si la commande a déjà été expédiée, le client peut toujours exercer son droit de rétractation conformément aux dispositions légales et à la politique de retour de TimberWolf.</p>
+		</section>
+
+		<section id="retours" aria-label="Retours de produits">
+			<h2>Retours de produits</h2>
+			<p>Les clients disposent d'un délai légal pour retourner les produits qui ne leur conviennent pas. Les modalités de retour sont précisées dans la politique de retour de TimberWolf.</p>
+		</section>
+
+		<section id="remboursement" aria-label="Processus de remboursement">
+			<h2>Processus de remboursement</h2>
+			<p>Le remboursement est effectué dans les meilleurs délais et au plus tard dans les 14 jours suivant la réception des produits retournés par le client. Le remboursement est effectué selon le même mode de paiement que celui utilisé lors de la commande initiale, sauf accord contraire entre TimberWolf et le client.</p>
+		</section>
+
+		<section id="exceptions" aria-label="Exceptions">
+			<h2>Exceptions</h2>
+			<p>Certaines exceptions peuvent s'appliquer en fonction du type de produit ou de la situation particulière de la commande. Dans ce cas, TimberWolf informera le client des conditions spécifiques de remboursement.</p>
+		</section>
+	</main>
 {% endblock %}
 
-{% block javascript %}
-{% endblock %}
+{% block javascript %}{% endblock %}

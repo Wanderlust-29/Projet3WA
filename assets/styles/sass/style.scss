@@ -280,14 +280,13 @@ body.dark {
 }
 
 .product {
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   background-color: $white;
-  height: 50rem;
-  border-radius: 1rem;
+  min-height: 40rem;
+  border-radius: 0.35rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   margin: 0 1rem 1.5rem 1rem;
-
   a {
     height: 100%;
     display: flex;
@@ -296,10 +295,11 @@ body.dark {
     align-items: center;
     h3 {
       font-size: 1.6rem;
+      padding: 1rem;
     }
 
     img {
-      width: 70%;
+      width: 100%;
       height: auto;
     }
   }
