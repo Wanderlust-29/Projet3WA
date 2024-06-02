@@ -51,3 +51,5 @@ npm install
 ```
 
 And that's it! You're ready to start working on the project!
+
+**Note:** This project is a training assignment and is not intended for commercial use. The images used in this project are not free to use and may be subject to copyright restrictions.
