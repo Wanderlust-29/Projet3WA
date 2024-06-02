@@ -21,7 +21,7 @@ DB_PASSWORD="YourPassword"
 DB_CHARSET="utf8"
 DB_HOST="localhost"
 ```
-In this file, you can set the necessary information for connecting to your database. Make sure to replace the values of DB_USER, DB_PASSWORD, and DB_NAME with your own login information.
+In this file, you can set the necessary information for connecting to your database. Make sure to replace the values of `DB_USER`, `DB_PASSWORD`, and `DB_NAME` with your own login information.
 
 Open the .env file and configure the values according to your needs, especially for connecting to the database.
 
