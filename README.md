@@ -7,11 +7,11 @@ https://github.com/Wanderlust-29/Projet3wa.git
 ```
 
 ### Using Wamp
-Clone the GitHub repository into the www directory of your Wamp installation:
+Clone the GitHub repository into the `www` directory of your Wamp installation:
 
 Make sure Wamp is running and the Apache server is started.
 
-Here's an example of configuring environment variables in a .env file for your database:
+Here's an example of configuring environment variables in a `.env` file for your database:
 
 #### Database info
 ```
