@@ -1,4 +1,4 @@
-par; // Fonction pour ajouter au panier
+// Fonction pour ajouter au panier
 function addToCart(article_id) {
   let formData = new FormData();
   formData.append("article_id", article_id);
@@ -30,10 +30,7 @@ function addToCart(article_id) {
       }
     })
     .catch((error) => {
-      console.error(
-        "Une erreur s'est produite lors de l'ajout de l'article au panier :",
-        error
-      );
+      console.error("Une erreur s'est produite lors de l'ajout de l'article au panier :", error);
     });
 }
 
@@ -58,9 +55,7 @@ function deleteFromCart(article_id, action) {
         updateCount(data.articles);
         updateTotal(data.articles, data.shipping_costs);
         // Suppression de l'article de l'interface utilisateur
-        const item = document.querySelector(
-          `.article[data-article="${article_id}"]`
-        );
+        const item = document.querySelector(`.article[data-article="${article_id}"]`);
         if (item) {
           item.remove();
         }
@@ -72,17 +67,14 @@ function deleteFromCart(article_id, action) {
           close: true,
           gravity: "top",
           position: "right",
-          background: "linear-gradient(to right, #00b09b, #96c93d)",
+          background: "linear-gradient(to right, #00b09b, #96c93d)"
         }).showToast();
       } else {
         console.error("Invalid response structure:", data);
       }
     })
     .catch((error) => {
-      console.error(
-        "Une erreur s'est produite lors de l'ajout de l'article au panier :",
-        error
-      );
+      console.error("Une erreur s'est produite lors de la suppression de l'article du panier :", error);
     });
 }
 
@@ -107,16 +99,13 @@ function incrementDecrement(article_id, action) {
         updateCount(data.articles);
         updateTotal(data.articles, data.shipping_costs);
         disableIncrement(data.articles);
-        disabledButtonArticle(data.articles);
+        updateCartContent(data.articles);
       } else {
         console.error("Invalid response structure:", data);
       }
     })
     .catch((error) => {
-      console.error(
-        "Une erreur s'est produite lors de la mise à jour de la quantité :",
-        error
-      );
+      console.error("Une erreur s'est produite lors de la mise à jour de la quantité :", error);
     });
 }
 
@@ -137,9 +126,29 @@ function changeShippingMethod(shippingMethod) {
     })
     .then((data) => {
       updateTotal(data.articles, data.shipping_costs);
+
+      // Afficher une notification Toastify
+      Toastify({
+        text: "Méthode de livraison mise à jour.",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        background: "linear-gradient(to right, #00b09b, #96c93d)",
+      }).showToast();
     })
     .catch((error) => {
       console.error("Error changing shipping costs:", error);
+
+      // Afficher une notification d'erreur Toastify
+      Toastify({
+        text: "Erreur lors du changement de la méthode de livraison.",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+      }).showToast();
     });
 }
 
@@ -149,16 +158,12 @@ function updateQuantity(articles) {
   articlesArray.forEach((article) => {
     let quantity = article.quantity;
 
-    let quantityElements = document.querySelectorAll(
-      `.quantity[data-article="${article.id}"]`
-    );
+    let quantityElements = document.querySelectorAll(`.quantity[data-article="${article.id}"]`);
     quantityElements.forEach((quantityElement) => {
       if (quantityElement) {
         quantityElement.textContent = quantity;
       } else {
-        console.error(
-          `Quantity element not found for article ID: ${article.id}`
-        );
+        console.error(`Quantity element not found for article ID: ${article.id}`);
       }
     });
   });
@@ -178,7 +183,8 @@ function updateCount(articles) {
     });
   }
 }
-//Mets à jours les compteurs du total
+
+// Mets à jour le compteur du total
 function updateTotal(articles, shipping_costs) {
   let totalPrice = 0;
 
@@ -218,17 +224,16 @@ function updateTotal(articles, shipping_costs) {
 function disableButtonArticle(articles) {
   let articlesArray = Object.values(articles);
   articlesArray.forEach((article) => {
-    const cartButton = document.querySelector(
-      `.cart-button[data-article="${article.id}"]`
-    );
-    const spanCart = document.querySelector(
-      `.cart-button[data-article="${article.id} span.add-to-cart"]`
-    );
+    const cartButton = document.querySelector(`.cart-button[data-article="${article.id}"]`);
+    const spanCart = document.getElementById("add");
     if (cartButton) {
       // Vérifie si la quantité dépasse le stock
       if (article.quantity >= article.stock) {
         cartButton.classList.add("disabled");
         cartButton.disabled = true;
+        if (spanCart) {
+          spanCart.innerText = "Rupture de stock";
+        }
       } else {
         cartButton.classList.remove("disabled");
         cartButton.disabled = false;
@@ -241,23 +246,19 @@ function disableButtonArticle(articles) {
     }
   });
 }
-// Désactive le boutton d'incrementation si l'article est en rupture de stock
+
+// Désactive le bouton d'incrémentation si l'article est en rupture de stock
 function disableIncrement(articles) {
   let articlesArray = Object.values(articles);
   articlesArray.forEach((article) => {
-    const increment = document.querySelector(
-      `.cart .btn-increment[data-article="${article.id}"]`
-    );
-    const outOfStock = document.querySelector(
-      `.cart .out-of-stock[data-article="${article.id}"]`
-    );
+    const increment = document.querySelector(`.cart .btn-increment[data-article="${article.id}"]`);
+    const outOfStock = document.querySelector(`.cart .out-of-stock[data-article="${article.id}"]`);
 
     if (increment && outOfStock) {
       // Vérifie si la quantité dépasse le stock dans le panier
       if (article.quantity >= article.stock) {
         increment.disabled = true;
-        outOfStock.innerText =
-          "Impossible d'ajouter un article (Rupture de stock)";
+        outOfStock.innerText = "Impossible d'ajouter un article (Rupture de stock)";
         outOfStock.style.display = "flex";
         outOfStock.style.justifyContent = "center";
       } else {
@@ -266,38 +267,22 @@ function disableIncrement(articles) {
         outOfStock.style.display = "none";
       }
     } else {
-      console.error(
-        "Cart button or out-of-stock message not found for article ID: ",
-        article.id
-      );
+      console.error("Cart button or out-of-stock message not found for article ID: ", article.id);
     }
   });
 }
 
-function popUpOutOfStock() {
-  Toastify({
-    text: `La quantité de l'article dépasse le stock disponible.`,
-    duration: 3000,
-    close: true,
-    gravity: "top",
-    position: "right",
-    backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
-  }).showToast();
-}
 
 // Fonction pour vérifier si le panier est vide
 function isCartEmpty(articles) {
   let articlesArray = Object.values(articles);
-  let itemCount = articlesArray.reduce(
-    (total, article) => total + article.quantity,
-    0
-  );
+  let itemCount = articlesArray.reduce((total, article) => total + article.quantity, 0);
   return itemCount === 0;
 }
 
 // Fonction pour mettre à jour le contenu de la page
 function updateCartContent(articles) {
-  const mainContent = document.getElementById("content");
+  const mainContent = document.getElementById('content');
   if (isCartEmpty(articles)) {
     mainContent.innerHTML = `
       <section class="cart-payement">
