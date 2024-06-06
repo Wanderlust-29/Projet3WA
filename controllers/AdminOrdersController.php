@@ -19,8 +19,8 @@ class AdminOrdersController extends AbstractController
         $order = $om->findOne($id);
         $status = $om->statusArray;
         // Récupération du mode de livraison
-        $sm = new ShippingManager();
-        $shipping = $sm->findOneByOrderId($id);
+
+        $shipping = $om->findShippingByOrderId($id);
 
         $this->render("admin/admin-order.html.twig", [
             'order' => $order,

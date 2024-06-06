@@ -70,7 +70,7 @@
 		{% if comments is defined and comments != [] %}
 			<section class="comments">
 				<h2>Commentaires :</h2>
-				<div class="owl-carousel">
+				<div class="owl-carousel-comments">
 					{% for comment in comments %}
 						<article class="comment">
 							<h3>{{comment.userId.firstName}}</h3>
@@ -87,7 +87,6 @@
 {% block javascript %}
 	<script src="assets/js/article.js"></script>
 	<script src="assets/js/slider-comments.js"></script>
-	<script src="assets/js/error-success.js"></script>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="assets/OwlCarousel2-master/dist/owl.carousel.min.js"></script>
 {% endblock %}

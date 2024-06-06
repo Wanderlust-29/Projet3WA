@@ -781,13 +781,36 @@ body > .footer .social-networks ul li {
   display: none;
 }
 #content.article .comments {
-  padding: 2rem 1rem 0 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#content.article .comments .owl-carousel-comments {
+  display: flex;
   width: 80%;
+  max-width: 60%;
+  overflow: hidden;
+}
+#content.article .comments .owl-stage-outer {
+  overflow: visible;
+}
+#content.article .comments .owl-carousel-comments .owl-stage {
+  display: flex;
+}
+#content.article .comments .owl-item {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+#content.article .comments .owl-item.active {
+  opacity: 1;
+}
+#content.article .comments .owl-nav {
+  display: none;
 }
 #content.article .comments .comment {
   padding: 0.5rem 1rem;
   border: 1px solid #6e707e;
-  min-height: 50rem;
 }
 
 @media screen and (min-width: 800px) {
