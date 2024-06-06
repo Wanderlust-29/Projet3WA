@@ -16,9 +16,11 @@ class AdminUsersController extends AbstractController
 
 
     // Un seul utilisateur
-    public function user(int $id){
+    public function user(int $id)
+    {
 
         $um = new UserManager();
+        $id = (int)$id;
         $user = $um->findOne($id);
 
         $om = new OrderManager();
@@ -30,35 +32,35 @@ class AdminUsersController extends AbstractController
         ]);
     }
 
-    function newUser(){
-        $this->render("admin/admin-new-user.html.twig", [
-        ]);
+    function newUser()
+    {
+        $this->render("admin/admin-new-user.html.twig", []);
     }
 
-    public function addUser(){
+    public function addUser()
+    {
         $id_user = null;
-        if(isset($_POST)){
-            $user = new User($_POST["firstName"],$_POST["lastName"],$_POST["email"],password_hash($_POST["password"], PASSWORD_BCRYPT),$_POST["address"],$_POST["city"],$_POST["postalCode"],$_POST["country"]);
+        if (isset($_POST)) {
+            $user = new User($_POST["firstName"], $_POST["lastName"], $_POST["email"], password_hash($_POST["password"], PASSWORD_BCRYPT), $_POST["address"], $_POST["city"], $_POST["postalCode"], $_POST["country"]);
             $um = new UserManager();
             $id_user = $um->create($user);
-            if($id_user){
+            if ($id_user) {
                 $type = 'success';
                 $text = $_POST['firstName'] . ' ' . $_POST['lastName'] . ' a bien été créé 😀';
-                
-            }else{
+            } else {
                 $type = 'error';
                 $text = "Un problème est survenu lors de la création de ce compte client.";
             }
-        }else{
+        } else {
             $type = 'error';
             $text = "Un problème est survenu lors de la création de ce compte client.";
         }
 
-        $this->notify($text,$type);
+        $this->notify($text, $type);
 
-        if(!is_null($id_user) && $id_user){
+        if (!is_null($id_user) && $id_user) {
             $this->redirect("/admin/users/$id_user");
-        }else{
+        } else {
             $this->redirect("/admin/users/ne");
         }
     }
@@ -73,7 +75,7 @@ class AdminUsersController extends AbstractController
             $password_pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
             if (preg_match($password_pattern, $_POST["password"])) {
 
-                $user = new User($_POST["firstName"],$_POST["lastName"],$_POST["email"],password_hash($_POST["password"], PASSWORD_BCRYPT),$_POST["address"],$_POST["city"],$_POST["postalCode"],$_POST["country"]);
+                $user = new User($_POST["firstName"], $_POST["lastName"], $_POST["email"], password_hash($_POST["password"], PASSWORD_BCRYPT), $_POST["address"], $_POST["city"], $_POST["postalCode"], $_POST["country"]);
                 $user->setId($id);
 
                 // Initialise le gestionnaire d'utilisateurs et met à jour l'utilisateur dans la base de données
@@ -82,7 +84,6 @@ class AdminUsersController extends AbstractController
 
                 $type = 'success';
                 $text = "Le profil utilisateur a bien été mis à jour 😀";
-                
             } elseif ($_POST["password"] !== null) {
                 $type = 'error';
                 $text = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
@@ -90,41 +91,41 @@ class AdminUsersController extends AbstractController
         } else {
             $type = 'error';
             $text = "Les mots de passe ne correspondent pas";
-            
         }
 
-        $this->notify($text,$type);
+        $this->notify($text, $type);
         $this->redirect("/admin/users/$id");
     }
 
     public function deleteUser()
     {
         if (isset($_SESSION["user"]) && isset($_POST['delete']) && isset($_POST['userId'])) {
-            $user = $_SESSION["user"];
-            $userId = $_POST["userId"];
-            if ($userId !== null) {
-                $um = new UserManager();
-                $um->delete($userId); // Supprimer l'utilisateur
 
-                // Vérifier si l'utilisateur supprimé n'est pas l'administrateur actuellement connecté
-                if ($user->getRole() !== "ADMIN") {
-                    session_destroy(); // Détruire la session si l'utilisateur supprimé n'est pas un administrateur
-                    $this->redirect("/");
-                } else { // Gestion des erreurs
-                    $this->redirect("/admin");
-                }
-                unset($_SESSION["error-message"]);
+            $user = $_SESSION["user"];
+            $userId = (int)$_POST["userId"]; // Ensure userId is an integer
+
+            if ($userId > 0) {
+                $um = new UserManager();
+                $um->delete($userId); // Delete the user
+                $type = 'success';
+                $text = "Utilisateur supprimé";
+                $this->redirect("/admin/users");
             } else {
-                $_SESSION["error-message"] = "Une erreur s'est produite lors de la suppression de l'utilisateur.";
+                $type = 'error';
+                $text = "Une erreur s'est produite lors de la suppression de l'utilisateur.";
                 if ($user->getRole() === "ADMIN") {
-                    $this->redirect("/admin-admin-users");
+                    $this->redirect("/admin/users");
                 } else {
-                    $this->redirect("/account");
+                    $type = 'error';
+                    $text = "Vous n'êtes pas admin";
+                    $this->redirect("/");
                 }
             }
         } else {
-            $_SESSION["error-message"] = "Une erreur s'est produite.";
+            $type = 'error';
+            $text = "Une erreur s'est produite.";
             $this->redirect("/");
         }
+        $this->notify($text, $type);
     }
 }

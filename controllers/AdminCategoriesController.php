@@ -31,9 +31,9 @@ class AdminCategoriesController extends AbstractController
     public function addCategory(){
         if(isset($_POST['name']) && isset($_POST['description'])){
             $slug = $this->slugify($_POST['name']);
-            $cat = new Category($_POST['name'],$_POST['description'],$slug);
             $cm = new CategoryManager();
-            $insert = $cm->insert($cat);
+            $categorie = new Category($_POST['name'], $_POST['description'], $slug);
+            $insert = $cm->insert($categorie);
             if(!$insert){
                 $type = 'error';
                 $text = "Un problème est survenu lors de la mise à jour 😞";

@@ -1,5 +1,7 @@
 <?php
+
 use Cocur\Slugify\Slugify;
+
 class ArticleManager extends AbstractManager
 {
     /**
@@ -22,7 +24,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($result["category_id"]);
 
-            $article = new Article($result["name"], $result["price"], $result["stock"], $category, $media, $result["description"], $result["ingredients"], $result["age"], $result["short_description"],$result["slug"]);
+            $article = new Article($result["name"], $result["price"], $result["stock"], $category, $media, $result["description"], $result["ingredients"], $result["age"], $result["short_description"], $result["slug"]);
             $article->setId($result["id"]);
             return $article;
         }
@@ -50,7 +52,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($result["category_id"]);
 
-            $article = new Article($result["name"], $result["price"], $result["stock"], $category, $media, $result["description"], $result["ingredients"], $result["age"], $result["short_description"],$result["slug"]);
+            $article = new Article($result["name"], $result["price"], $result["stock"], $category, $media, $result["description"], $result["ingredients"], $result["age"], $result["short_description"], $result["slug"]);
             $article->setId($result["id"]);
             return $article;
         }
@@ -78,7 +80,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"],$item["slug"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
             $article->setId($item["id"]);
             $articles[] = $article;
         }
@@ -109,7 +111,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"],$item["slug"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
             $article->setId($item["id"]);
             $articles[] = $article;
         }
@@ -139,7 +141,7 @@ class ArticleManager extends AbstractManager
             $cm = new CategoryManager();
             $category = $cm->findOne($item["category_id"]);
 
-            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"],$item["slug"]);
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
             $article->setId($item["id"]);
             $articles[] = $article;
         }
@@ -155,7 +157,8 @@ class ArticleManager extends AbstractManager
      */
     public function update(Article $article): bool
     {
-        $query = $this->db->prepare('
+        $query = $this->db->prepare(
+            '
             UPDATE articles 
             SET 
             name = :name,
@@ -188,7 +191,7 @@ class ArticleManager extends AbstractManager
         if ($query->rowCount() === 0) {
             // throw new Exception("Article with ID " . $article->getId() . " not found.");
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -213,12 +216,12 @@ class ArticleManager extends AbstractManager
         // Vérifier si l'article a été trouvé et mis à jour
         if ($query->rowCount() === 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-        /**
+    /**
      * Met à jour le stock d'un article.
      *
      * @param Article $article L'article à mettre à jour.
@@ -240,7 +243,7 @@ class ArticleManager extends AbstractManager
         // Vérifier si l'article a été trouvé et mis à jour
         if ($query->rowCount() === 0) {
             return false;
-        }else{
+        } else {
             $om = new MediaManager();
             $om->delete($old_media);
             return true;
@@ -256,8 +259,8 @@ class ArticleManager extends AbstractManager
      */
     public function insert(Article $article): int
     {
-        $sql = 
-        $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age, short_description, slug) VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age, :short_description, :slug)');
+        $sql =
+            $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age, short_description, slug) VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age, :short_description, :slug)');
 
         $parameters = [
             "name" => $article->getName(),
@@ -324,5 +327,150 @@ class ArticleManager extends AbstractManager
         if ($query->rowCount() === 0) {
             throw new Exception("Article with ID " . $article->getId() . " not found.");
         }
+    }
+
+    public function sortByPopularity(): array
+    {
+        $query = $this->db->prepare('SELECT articles.*, COUNT(orders_articles.article_id) AS total_sales
+                                    FROM articles
+                                    JOIN orders_articles ON articles.id = orders_articles.article_id
+                                    GROUP BY articles.id
+                                    ORDER BY total_sales DESC');
+
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+
+        foreach ($result as $item) {
+
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+
+            $cm = new CategoryManager();
+            $category = $cm->findOne($item["category_id"]);
+
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
+            $article->setId($item["id"]);
+            $articles[] = $article;
+        }
+        return $articles;
+    }
+
+    public function sortByAsc(): array
+    {
+        $query = $this->db->prepare('SELECT * FROM `articles` ORDER BY `articles`.`price` ASC');
+
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+
+        foreach ($result as $item) {
+
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+
+            $cm = new CategoryManager();
+            $category = $cm->findOne($item["category_id"]);
+
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
+            $article->setId($item["id"]);
+            $articles[] = $article;
+        }
+        return $articles;
+    }
+    public function sortByDesc(): array
+    {
+        $query = $this->db->prepare('SELECT * FROM `articles` ORDER BY `articles`.`price` DESC');
+
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+
+        foreach ($result as $item) {
+
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+
+            $cm = new CategoryManager();
+            $category = $cm->findOne($item["category_id"]);
+
+            $article = new Article($item["name"], $item["price"], $item["stock"], $category, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
+            $article->setId($item["id"]);
+            $articles[] = $article;
+        }
+        return $articles;
+    }
+
+    public function sortByPopularityCat(Category $categoryId): array
+    {
+        $query = $this->db->prepare('SELECT articles.*, COUNT(orders_articles.article_id) AS total_sales
+                                    FROM articles
+                                    JOIN orders_articles ON articles.id = orders_articles.article_id
+                                    WHERE articles.category_id = :category_id
+                                    GROUP BY articles.id
+                                    ORDER BY total_sales DESC');
+        $parameters = [
+            ':category_id' => $categoryId->getId()
+        ];
+
+        $query->execute($parameters);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+
+        foreach ($result as $item) {
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+
+            $article = new Article($item["name"], $item["price"], $item["stock"], $categoryId, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
+            $article->setId($item["id"]);
+            $articles[] = $article;
+        }
+
+        return $articles;
+    }
+
+    public function sortByAscCat(Category $categoryId): array
+    {
+        $query = $this->db->prepare('SELECT * FROM articles WHERE category_id = :category_id ORDER BY price ASC');
+        $parameters = [
+            ':category_id' => $categoryId->getId()
+        ];
+
+        $query->execute($parameters);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+
+        foreach ($result as $item) {
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+
+            $article = new Article($item["name"], $item["price"], $item["stock"], $categoryId, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
+            $article->setId($item["id"]);
+            $articles[] = $article;
+        }
+
+        return $articles;
+    }
+
+    public function sortByDescCat(Category $categoryId): array
+    {
+        $query = $this->db->prepare('SELECT * FROM articles WHERE category_id = :category_id ORDER BY price DESC');
+        $parameters = [
+            ':category_id' => $categoryId->getId()
+        ];
+        $query->execute($parameters);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+
+        foreach ($result as $item) {
+            $mm = new MediaManager();
+            $media = $mm->findOne($item["image_id"]);
+
+            $article = new Article($item["name"], $item["price"], $item["stock"], $categoryId, $media, $item["description"], $item["ingredients"], $item["age"], $item["short_description"], $item["slug"]);
+            $article->setId($item["id"]);
+            $articles[] = $article;
+        }
+
+        return $articles;
     }
 }

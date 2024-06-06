@@ -1,14 +1,21 @@
 {% extends "layout.admin.html.twig" %}
 
 {% block title %}
-	Commande n° {{ order.id }} - {{ order.createdAt|date("d/m/Y") }}
+	Commande n°
+	{{ order.id }}
+	-
+	{{ order.createdAt|date("d/m/Y") }}
 {% endblock %}
 
 {% block main %}
 	<!-- Begin Page Content -->
-	<div class="container-fluid">
+	<div
+		class="container-fluid">
 		<!-- Page Heading -->
-		<h1 class="h3 mb-2 text-gray-800">Commande n° {{ order.id }} - {{ order.createdAt|date("d/m/Y") }}</h1>
+		<h1 class="h3 mb-2 text-gray-800">Commande n°
+			{{ order.id }}
+			-
+			{{ order.createdAt|date("d/m/Y") }}</h1>
 		<!-- DataTales Example -->
 		<div class="row">
 			<div class="col-lg-6 mb-4">
@@ -16,13 +23,11 @@
 					<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 						<h6 class="m-0 font-weight-bold text-primary">Client</h6>
 						<div class="dropdown no-arrow">
-							<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
 							</a>
-							<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-								aria-labelledby="dropdownMenuLink">
-								<a class="dropdown-item"href="./admin/users/{{ order.userId }}">Accéder à sa fiche</a>
+							<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+								<a class="dropdown-item" href="./admin/users/{{ order.userId }}">Accéder à sa fiche</a>
 							</div>
 						</div>
 					</div>
@@ -34,7 +39,9 @@
 						<h4 class="small font-weight-bold">Adresse mail</h4>
 						<p>{{ order.user.email }}</p>
 						<h4 class="small font-weight-bold">Adresse</h4>
-						<p>{{ order.user.address }}<br>{{ order.user.postalCode }} {{ order.user.city }} ({{ order.user.country }})</p>
+						<p>{{ order.user.address }}<br>{{ order.user.postalCode }}
+							{{ order.user.city }}
+							({{ order.user.country }})</p>
 					</div>
 				</div>
 			</div>
@@ -50,19 +57,22 @@
 						<h4 class="small font-weight-bold">Date de la commande</h4>
 						<p>{{ order.createdAt }}</p>
 						<h4 class="small font-weight-bold">Total de la commande</h4>
-						<p>{{ order.totalPrice }} €</p>
+						<p>{{ order.totalPrice }}
+							€</p>
 						<h4 class="small font-weight-bold">Status de la commande</h4>
 						{% if order.status == "delivered"  %}
-								{% for st in status %}
-									{% if st.code == order.status %}{{ st.text }}{% endif %}
-								{% endfor %}
+							{% for st in status %}
+								{% if st.code == order.status %}
+									{{ st.text }}
+								{% endif %}
+							{% endfor %}
 						{% else %}
 							<form id="updateStatus" class="form-inline" action="/admin/orders/update/status/" method="POST">
 								<div class="form-group mb-2 mr-2">
 									<input type="hidden" name="id" id="id" value="{{ order.id }}">
 									<select class="form-control" name="status" required>
 										{% for st in status %}
-											<option value="{{ st.code }}" {% if st.code == order.status %}selected disabled{% endif %}>{{ st.text }}</option>
+											<option value="{{ st.code }}" {% if st.code == order.status %} selected disabled {% endif %}>{{ st.text }}</option>
 										{% endfor %}
 									</select>
 								</div>
@@ -83,18 +93,19 @@
 						{% if order.articles is empty %}
 							<p>Désolé cette commande ne contient aucun article 😯😯😯😯</p>
 						{% else %}
-						<ul class="list-group list-group-flush">
-							{% for article in order.articles %}
-								<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
-									<div class="mr-2">
-										<span class="mr-1">{{ article.quantity }} X</span>
-										<img class="img-thumbnail mr-2" height="50" width="50" style="object-fit:cover;object-position:center;" src="{{ article.image.url }}"> 
-										<span>{{ article.name }}</span> 
-									</div>
-									<span>{{ article.price }}€</span>
-								</li>
-							{% endfor %}
-						</ul>
+							<ul class="list-group list-group-flush">
+								{% for article in order.articles %}
+									<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
+										<div class="mr-2">
+											<span class="mr-1">{{ article.quantity }}
+												X</span>
+											<img class="img-thumbnail mr-2" height="50" width="50" style="object-fit:cover;object-position:center;" src="{{ article.image.url }}">
+											<span>{{ article.name }}</span>
+										</div>
+										<span>{{ article.price }}€</span>
+									</li>
+								{% endfor %}
+							</ul>
 						{% endif %}
 					</div>
 				</div>
@@ -108,40 +119,38 @@
 						{% if shipping is empty %}
 							<p>Désolé aucun frais de port défini pour cette commande 😯😯😯😯</p>
 						{% else %}
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
-								<b class="mr-2">Type</b> {{ shipping.name }}
-							</li>
-							<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
-								<b class="mr-2">Description</b> {{ shipping.description }}
-							</li>
-							<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
-								<b class="mr-2">Prix</b> {{ shipping.price }} €
-							</li>
-							<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
-								<b class="mr-2">Délai de livraison minimum</b> {{ shipping.deliveryMin }} J
-							</li>
-							<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
-								<b class="mr-2">Délai de livraison maximum</b> {{ shipping.deliveryMax }} J
-							</li>
-							
-						</ul>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
+									<b class="mr-2">Type</b>
+									{{ shipping.name }}
+								</li>
+								<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
+									<b class="mr-2">Description</b>
+									{{ shipping.description }}
+								</li>
+								<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
+									<b class="mr-2">Prix</b>
+									{{ shipping.price }}
+									€
+								</li>
+								<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
+									<b class="mr-2">Délai de livraison minimum</b>
+									{{ shipping.deliveryMin }}
+									J
+								</li>
+								<li class="list-group-item d-flex flex-row align-items-center justify-content-between">
+									<b class="mr-2">Délai de livraison maximum</b>
+									{{ shipping.deliveryMax }}
+									J
+								</li>
+
+							</ul>
 						{% endif %}
 					</div>
 				</div>
 			</div>
 		</div>
-	{# </div> #}
-	<!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+		{# </div> #}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}

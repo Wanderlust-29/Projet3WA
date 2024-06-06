@@ -6,6 +6,7 @@
   .cart-payement {
     padding: 1rem;
     width: 80%;
+    border-radius: 0.35rem;
     background-color: $white;
     grid-column: 2;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
@@ -13,68 +14,181 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+
     h1 {
       text-align: center;
     }
-    .article {
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
 
-      img {
-        width: 10%;
-        height: auto;
-      }
-      p {
-        padding: 1rem;
-        text-align: center;
-      }
-      .increment-decrement-btns {
-        display: flex;
-        flex-direction: column;
-      }
-      .quantity {
-        text-align: center;
-      }
+    p {
+      padding: 2rem;
     }
+
+    // items in cart
+    ul {
+      .article {
+        padding: 2rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        border-bottom: solid 1px $lightGray;
+
+        a {
+          width: 100%;
+          color: $black;
+          display: flex;
+          align-items: center;
+
+          figure {
+            width: 25%;
+            height: auto;
+
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+
+          h2 {
+            padding-left: 1rem;
+          }
+        }
+
+        p {
+          padding: 1rem;
+          text-align: center;
+        }
+
+        .increment-decrement-btns {
+          display: flex;
+        }
+
+        .quantity {
+          text-align: center;
+          background: $white;
+          color: $black;
+          padding: 0 1rem;
+        }
+
+        .btn-decrement {
+          border-radius: 3px 0 0 3px;
+        }
+
+        .btn-increment {
+          border-radius: 0 3px 3px 0;
+        }
+
+        .btn-decrement,
+        .btn-increment {
+          cursor: pointer;
+          border: none;
+          background-color: $green;
+          color: $white;
+        }
+
+        .btn-decrement:hover,
+        .btn-increment:hover {
+          background-color: $darkGreen;
+        }
+
+        .btn-increment:disabled,
+        .btn-decrement:disabled {
+          opacity: .4;
+          cursor: default;
+        }
+
+        .remove-product {
+          background-color: $red;;
+          color: $white;
+          padding: 0.3rem 1rem;
+          border: none;
+          border-radius: .35rem;
+        }
+
+        .out-of-stock {
+          color: $red;
+          width: 100%;
+        }
+      }
+
+    }
+
+
+
+    //Shipping costs
     .update-shipping-costs {
+      padding: 2rem 0;
+      border-bottom: 1px solid $lightGray;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      width: 100%;
+
       legend {
         width: 100%;
         text-align: center;
       }
 
       fieldset {
-        width: 50%;
-        text-align: center;
+        width: 100%;
       }
     }
+
+    // total cart
     .form-checkout {
       display: flex;
-      justify-content: space-between;
-      flex-direction: column;
+      justify-content: space-around;
       align-items: center;
-      .btn-cart-back,
-      #checkout-button,
-      .btn-login {
-        padding: 10px;
-        width: 200px;
-        border: 2px solid $green;
-        outline: none;
-        cursor: pointer;
-        color: $green;
-        background: $white;
+      flex-wrap: wrap;
+
+
+      label {
         text-align: center;
-        margin-bottom: 1rem;
+        width: 100%;
+        padding-bottom: 1rem;
       }
-      .btn-cart-back:hover,
-      #checkout-button:hover,
-      .btn-login:hover {
-        color: $white;
-        background: $green;
+
+      input[type="submit"]:disabled {
+        cursor: default;
+        padding: 10px;
+        border: none;
+        background-color: $lightGreen;
+        text-align: center;
+        color: white;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .btn-cart-back,
+  input[type="submit"],
+  .btn-login {
+    padding: 10px;
+    border: 2px solid $green;
+    outline: none;
+    cursor: pointer;
+    color: $green;
+    background: $white;
+    text-align: center;
+  }
+
+  .btn-cart-back:hover,
+  input[type="submit"]:hover,
+  .btn-login:hover {
+    color: $white;
+    background: $green;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  #content.cart {
+    .cart-payement {
+      ul {
+        .article {
+          a {
+            width: 50%;
+          }
+        }
       }
     }
   }

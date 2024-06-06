@@ -1,17 +1,21 @@
 <?php
+
 use \Pecee\SimpleRouter\SimpleRouter;
 
 SimpleRouter::get('/', [DefaultController::class, 'home'])->name('home');
 SimpleRouter::get('/articles', [PageController::class, 'articles']);
 SimpleRouter::get('/categorie/{slug}', [PageController::class, 'category'])->setSettings(['includeSlash' => false]);
 SimpleRouter::get('/article/{slug}', [PageController::class, 'article'])->setSettings(['includeSlash' => false]);
-SimpleRouter::get('/articles-search', [PageController::class, 'search'])->setSettings(['includeSlash' => false]);
+SimpleRouter::post('/articles-search', [PageController::class, 'search'])->setSettings(['includeSlash' => false]);
+SimpleRouter::post('/sort-result-articles', [PageController::class, 'sort'])->setSettings(['includeSlash' => false]);
+SimpleRouter::post('/sort-result-category', [PageController::class, 'sortByCategory'])->setSettings(['includeSlash' => false]);
+
 
 SimpleRouter::get('/login', [AuthController::class, 'login']);
 SimpleRouter::post('/check-login', [AuthController::class, 'checkLogin']);
 SimpleRouter::get('/register', [AuthController::class, 'register']);
 SimpleRouter::post('/check-register', [AuthController::class, 'checkRegister']);
-SimpleRouter::match(['get', 'post'],'/logout', [AuthController::class, 'logout']);
+SimpleRouter::match(['get', 'post'], '/logout', [AuthController::class, 'logout']);
 
 SimpleRouter::get('/account', [AccountController::class, 'account']);
 SimpleRouter::post('/update', [AccountController::class, 'updateUserProfile']);
@@ -24,17 +28,18 @@ SimpleRouter::get('/legal', [PageController::class, 'legal'])->setSettings(['inc
 SimpleRouter::get('/privacy', [PageController::class, 'privacy'])->setSettings(['includeSlash' => false]);
 SimpleRouter::get('/refund', [PageController::class, 'refund'])->setSettings(['includeSlash' => false]);
 
-SimpleRouter::match(['get', 'post'],'/cart', [CartController::class, 'cart'])->setSettings(['includeSlash' => false]);
+SimpleRouter::match(['get', 'post'], '/cart', [CartController::class, 'cart'])->setSettings(['includeSlash' => false]);
 SimpleRouter::post('/add-to-cart', [CartController::class, 'addToCart']);
+SimpleRouter::post('/update-quantity', [CartController::class, 'updateQuantity']);
 SimpleRouter::post('/delete-from-cart', [CartController::class, 'deleteFromCart']);
 SimpleRouter::get('/success', [CartController::class, 'success']);
 SimpleRouter::post('/update-shipping-costs', [CartController::class, 'updateShippingCosts']);
 SimpleRouter::get('/stripe/checkout', [CartController::class, 'updateShippingCosts']);
 
-//if($route === "comment") 
-SimpleRouter::post('/new-comment', [CartController::class, 'deleteFromCart']);
-//if($route === "check-comment") 
-SimpleRouter::post('/check-comment', [CartController::class, 'deleteFromCart']);
+
+
+SimpleRouter::get('/new-comment/{slug}', [AccountController::class, 'newComment'])->setSettings(['includeSlash' => false]);
+SimpleRouter::post('/check-comment/{slug}', [AccountController::class, 'checkComment'])->setSettings(['includeSlash' => false]);
 
 
 // SimpleRouter::error(function(Request $request, \Exception $exception) {

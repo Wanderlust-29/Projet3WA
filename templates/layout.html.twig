@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<base href="http://projet3wa.local/">
+		<base href="http://projet3wa.test/">
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="Découvrez nos accessoires et nourritures pour chien. Achetez en ligne les meilleures croquettes, friandises et jouets pour votre animal. Livraison rapide.">
@@ -11,7 +11,10 @@
 		<link href="./assets/font/css/fontawesome.css" rel="stylesheet">
 		<link href="./assets/font/css/brands.css" rel="stylesheet">
 		<link href="./assets/font/css/solid.css" rel="stylesheet">
-		<link rel="stylesheet" href="/assets/styles/css/style.css">
+		<link
+		rel="stylesheet" href="/assets/styles/css/style.css">
+		<!-- Système de notification -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
 		<link rel="apple-touch-icon" sizes="180x180" href="/assets/media/favicon/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon/avicon-32x32.png">
@@ -27,7 +30,6 @@
 				<img src="assets/media/logo.svg" alt="logo de TimberWolf"/>
 				<p>TimberWolf</p>
 			</a>
-
 
 			<menu class="icons">
 				<li>
@@ -46,7 +48,6 @@
 					<span></span>
 				</li>
 			</menu>
-
 
 			<menu class="menu">
 				<li>
@@ -88,16 +89,21 @@
 			</menu>
 
 			<form class="search closed" action="/articles-search" method="POST">
-				<label for="search">Rechercher un article</label>
-				<input class="input-searchbar" type="search" name="search" id="search" placeholder="Rechercher..."/>
+				<fieldset class="form-item">
+					<input class="input-searchbar" type="search" name="search" id="search" placeholder="Rechercher"/>
+					<label for="search">Rechercher un article</label>
+				</fieldset>
 				<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
-				<input class="button-searchbar" type="submit" value="&#128269;"/>
+				<input class="button-searchbar" type="submit" value="Rechercher"/>
+				<a class="btn-close">
+					<i class="fa-solid fa-xmark"></i>
+				</a>
 			</form>
 		</header>
 
 		{% block main %}{% endblock %}
-		<a class="dark-mode" aria-label="modifier le contraste">
-			<i class="fa-solid fa-circle-half-stroke"></i>
+		<a class="dark-mode-btn" aria-label="modifier le contraste">
+			🌙
 		</a>
 		<footer class="footer">
 			<section>
@@ -131,6 +137,7 @@
 					{% endif %}
 				</ul>
 			</section>
+
 			<section>
 				<h2>Infos pratiques</h2>
 				<ul>
@@ -140,6 +147,7 @@
 					<li><a href="/refund">Politique de remboursement</a></li>
 				</ul>
 			</section>
+
 			<section class="social-networks">
 				<h2>Suivez-nous sur :</h2>
 				<ul>
@@ -151,7 +159,22 @@
 		</footer>
 		{% block javascript %}{% endblock %}
 		<script src="assets/js/layout.js" defer></script>
-		<script src="assets/js/modal.js" defer></script>
 		<script type="module" src="assets/js/main-cart.js"></script>
+		<!-- Système de notification -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+		{% if notify is defined and notify is not empty %}
+			<script>
+				function decodeHtmlEntities(text) {
+var textArea = document.createElement('textarea');
+textArea.innerHTML = text;
+return textArea.value;
+}
+
+let cleanedMessage = decodeHtmlEntities("{{ notify.text|e('js') }}");
+console.log(cleanedMessage);
+Toastify({text: cleanedMessage, duration: 3000}).showToast();
+			</script>
+		{% endif %}
 	</body>
-</html></body></html>
+</html>

@@ -1,64 +1,130 @@
 #content.register {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10rem 0;
-  form {
-    border-radius: 1rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 2rem 0 ;
+  button,
+  a,
+  input {
+    margin: 1rem 0;
+  }
+
+  h1 {
+    padding-top: 1.5rem;
+  }
+
+  .register-section {
+    background-color: $white;
+    border-radius: .35rem;
     display: flex;
-    flex-direction: column;
     width: 80vw;
-    .container {
-      padding: 1rem;
-      legend {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+      rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+
+    img {
+      display: none;
+      border-radius: .35rem 0 0 .35rem;
+      width: 50%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .section-form {
+      width: 100%;
+      h1 {
         text-align: center;
-        color: $black;
       }
-      fieldset {
-        padding-top: 1rem;
+
+      form {
+        padding: 1.5rem 3rem 3rem 3rem;
         display: flex;
         flex-direction: column;
-        input {
-          padding: 0.5rem 1rem;
-          border: 1px solid $grey;
-          border-radius: 1rem;
-        }
-      }
-      .nav-buttons {
-        padding: 3rem;
-        display: flex;
-        flex-direction: column;
-        fieldset {
+        align-items: center;
+        justify-content: space-evenly;
+
+        .form-item {
           width: 100%;
-          button {
-            padding: 0.5rem 1rem;
-            margin: 1rem 0;
-            background-color: $white;
-            color: $green;
-            border: none;
-            cursor: pointer;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-              rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-            border-radius: 1rem;
-            a {
-              color: $green;
-            }
+          position: relative;
+          margin-bottom: 20px;
+
+          input {
+            display: block;
+            position:realtive;
+            width: 100%;
+            border-radius: 10rem;
+            display: block;
+            background: transparent;
+            outline:none;
+            border: solid 1px $lightGray;
+            transition: all .3s ease;
+            padding: 10px;
           }
-          button:hover {
-            background-color: $green;
-            color: $white;
-            a {
-              color: $white;
-            }
+
+          input:focus {
+            border-color: $grey
+          }
+
+          label {
+            position: absolute;
+            pointer-events:none;
+            top: 21px;
+            left: 16px;
+            color: $grey;
+            transition:all 300ms ease-in-out;
+          }
+
+          input:focus+label {
+            color: $grey
+          }
+          input::-webkit-input-placeholder{
+            color:transparent;
+          }
+          input::-moz-placeholder{
+            color:transparent;
           }
         }
+
+        input:focus~label,
+        input:not(:placeholder-shown)~label {
+          font-size: 15px;
+          top: -20px
+        }
+
+
+        button,
+        a {
+          line-height: 1.5;
+          width: 100%;
+          border-radius: 10rem;
+          padding: 10px;
+          border: 2px solid $green;
+          outline: none;
+          cursor: pointer;
+          color: $green;
+          background: $white;
+          text-align: center;
+        }
+
+        button:hover,
+        a:hover {
+          color: $white;
+          background: $green;
+        }
+
       }
     }
   }
-  .error {
-    color: $red;
+}
+
+
+
+@media screen and (min-width: 800px) {
+  #content.register {
+    .register-section {
+      img {
+        display: flex;
+      }
+    }
   }
 }

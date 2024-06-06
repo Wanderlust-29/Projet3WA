@@ -32,6 +32,7 @@ abstract class AbstractController
         $twig->addGlobal("count", $count);
         $twig->addGlobal("cart", $cart);
         $twig->addGlobal("slugify", $slugify);
+        $twig->addGlobal('csrf_token', $_SESSION["csrf-token"]);
         
 
         $this->twig = $twig;

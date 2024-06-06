@@ -99,7 +99,7 @@ class CategoryManager extends AbstractManager
      * @param Category $category l'objet catégorie
      * @return bool résultat de la mise à jour en bdd
     */
-    public function insert(Category $category)
+    public function insert(Category $category) 
     {   
         $query = $this->db->prepare(
             'INSERT INTO categories (name, description, slug) VALUES (:name,:description,:slug)'

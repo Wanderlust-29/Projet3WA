@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $(".owl-carousel").owlCarousel({
     loop: true,
     margin: 10,
+    autoHeight: false,
     responsiveClass: true,
     navigation: true,
     navigationText: [

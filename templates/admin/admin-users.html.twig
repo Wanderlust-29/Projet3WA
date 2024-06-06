@@ -1,15 +1,15 @@
 {% extends "layout.admin.html.twig" %}
 
 {% block title %}
-	Toutes les utilisateurs - Timberwolf Admin
+	Tous les utilisateurs - Timberwolf Admin
 {% endblock %}
 
 {% block main %}
-	<!-- Begin Page Content -->
-	<div class="container-fluid">
+	<div
+		class="container-fluid">
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">Tous les utilisateurs</h1>
-		<!-- DataTales Example -->
+
 		<div class="card shadow mb-4">
 			<div class="card-body">
 				{% if users is not empty %}
@@ -38,9 +38,11 @@
 							<tbody>
 								{% for user in users %}
 									<tr>
-										<td><a href="/admin/users/{{ user.id }}">{{ user.id }}</a></td>
-										<td> {{user.firstName }}</td>
-										<td>{{ user.lastName }}</a></td>
+										<td>
+											<a href="/admin/users/{{ user.id }}">{{ user.id }}</a>
+										</td>
+										<td>{{ user.firstName }}</td>
+										<td>{{ user.lastName }}</td>
 										<td>{{ user.email }}</td>
 										<td>{{ user.total_orders }}</td>
 										<td>{{ user.total_value }}</td>
@@ -52,20 +54,10 @@
 				{% else %}
 					<p>Aucun utilisateur trouvé 😞.</p>
 				{% endif %}
-   
 			</div>
 		</div>
-	{# </div> #}
+	</div>
 	<!-- /.container-fluid -->
 {% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+
+{% block javascript %}{% endblock %}

@@ -1,4 +1,5 @@
 <?php
+
 use Cocur\Slugify\Slugify;
 
 class AccountController extends AbstractController
@@ -6,8 +7,6 @@ class AccountController extends AbstractController
     // USER
     public function account(): void
     {
-        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-
         $sessionId = null;
         $orders = [];
         $ordersArticles = [];
@@ -27,7 +26,6 @@ class AccountController extends AbstractController
         }
 
         $this->render("account/account.html.twig", [
-            'error' => $error,
             'orders' => $orders,
             'ordersArticles' => $ordersArticles,
         ]);
@@ -64,66 +62,90 @@ class AccountController extends AbstractController
 
                         // Met à jour la session utilisateur et réinitialise le message d'erreur
                         $_SESSION["user"] = $currentUser;
-                        unset($_SESSION["error-message"]);
+                        $type = 'success';
+                        $text = "Profil mis à jour";
                         $this->redirect("/");
                     } elseif ($_POST["password"] !== null) {
-                        $_SESSION["error-message"] = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
+                        $type = 'error';
+                        $text = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
                         $this->redirect("/admin");
                     }
                 } else {
-                    $_SESSION["error-message"] = "Les mots de passe ne correspondent pas";
+                    $type = 'error';
+                    $text = "Les mots de passe ne correspondent pas";
                     $this->redirect("/admin");
                 }
             }
         } else {
-            $_SESSION["error-message"] = "L'utilisateur n'est pas connecté.";
+            $type = 'error';
+            $text = "L'utilisateur n'est pas connecté.";
+            $this->redirect("/account");
         }
-        $this->redirect("/account");
+        
+        $this->notify($text, $type);
     }
 
 
-    public function newComment($articleId): void
+    public function newComment(string $slug): void
     {
-        $am = new ArticleManager();
 
-        $article = $am->findOne(intval($articleId));
+        $am = new ArticleManager();
+        $cm = new CommentManager();
+
+        $article = $am->findBySlug($slug);
 
         $this->render("account/comment.html.twig", [
             "article" => $article,
+            'csrf_token' => $_SESSION["csrf-token"],
         ]);
     }
 
-    public function checkComment($articleId): void
+    public function checkComment($slug): void
     {
         if (isset($_POST["grade"]) && isset($_POST["comment"])) {
-
-            if (isset($_SESSION['user'])) {
-                // L'objet $user avec les informations de l'utilisateur connecté
-                $userId = $_SESSION['user']->getId();
-
-                $userManager = new UserManager();
-                $user = $userManager->findOne(($userId));
-
-                $cm = new CommentManager();
-
-                $am = new ArticleManager();
-                $article = $am->findOne(intval($articleId));
-
-                // Crée un nouveau commentaire
-                $grade = $_POST["grade"];
-                $commentText = htmlspecialchars($_POST["comment"]);
-                $comment = new Comment($article, $user, $grade, $commentText);
-                $cm->create($comment);
-                $this->redirect("/account");
+            $tokenManager = new CSRFTokenManager();
+            if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
+                if (isset($_SESSION['user'])) {
+                    // L'objet $user avec les informations de l'utilisateur connecté
+                    $userId = $_SESSION['user']->getId();
+    
+                    $userManager = new UserManager();
+                    $user = $userManager->findOne($userId);
+    
+                    $cm = new CommentManager();
+    
+                    $am = new ArticleManager();
+                    $article = $am->findBySlug($slug);
+    
+                    // Crée un nouveau commentaire
+                    $grade = $_POST["grade"];
+                    $commentText = htmlspecialchars($_POST["comment"]);
+                    $comment = new Comment($article, $user, $grade, $commentText);
+                    $cm->create($comment);
+                    $type = 'success';
+                    $text= "Votre commentaire à été pris en compte";
+    
+                    // Redirection après la création du commentaire
+                    $this->redirect("/account");
+                } else {
+                    // Redirection si l'utilisateur n'est pas connecté
+                    $type = 'error';
+                    $text= "Vous devez être connecté pour commenter.";
+                    $this->redirect("/");
+                }
             } else {
-                // Redirection si l'utilisateur n'est pas connecté
-                $_SESSION["error-message"] = "Vous devez être connecté pour commenter.";
-                $this->redirect("/");
+                // Redirection si le token CSRF est invalide
+                $type = 'error';
+                $text = "Token CSRF invalide.";
+                $this->redirect("/login");
             }
         } else {
             // Redirection si les données de commentaire ne sont pas complètes
-            $_SESSION["error-message"] = "Veuillez remplir tous les champs du commentaire.";
+            $type = 'error';
+            $text = "Veuillez remplir tous les champs du commentaire.";
             $this->redirect("/");
         }
+        $this->notify($text, $type);
     }
+    
 }

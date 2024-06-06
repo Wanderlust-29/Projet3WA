@@ -37,44 +37,56 @@
 		<section class="top-sales" aria-label="Nos meilleures ventes">
 			<h2>Nos meilleures ventes</h2>
 			<div class="owl-carousel">
+
 				{% for article in articles %}
 					{% if article.stock != 0 %}
-						<article class="product" aria-label="Produit: {{ article.name }}">
-							<a href="/article/{{ article.slug }}" aria-label="Voir les détails du produit {{ article.name }}">
-								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-								<h3>{{ article.name }}</h3>
-								<p class="price">{{ article.price }}€</p>
+						<article class="card">
+							<a href="/article/{{ article.slug }}">
+								<figure class="card-img">
+									<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+								</figure>
+
+								<span class="card-body">
+									<h3 class="card-title">{{ article.name }}</h3>
+									<p class="card-price">{{ article.price }}€</p>
+								</span>
 							</a>
 						</article>
 					{% else %}
-						<article class="product" aria-label="Produit: {{ article.name }} - Rupture de stock">
-							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-							<h3>{{ article.name }}</h3>
-							<p class="price">{{ article.price }}€</p>
+						<article class="card">
+							<figure class="card-img">
+								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+							</figure>
+
+							<span class="card-body">
+								<h3 class="card-title">{{ article.name }}</h3>
+								<p class="card-price">{{ article.price }}€</p>
+							</span>
 							<p class="out-of-stock">Rupture de stock</p>
 						</article>
 					{% endif %}
 				{% endfor %}
+				
 			</div>
 		</section>
 
 		<section class="why-choose-us">
 			<h2>Pourquoi Nous Choisir ?</h2>
 			<article>
-				<img src="assets/media/quality.svg" alt='qualité'/>
+				<img class="quality" src="assets/media/quality.svg" alt='qualité des produits'/>
 				<h3>Qualité et Éthique</h3>
 				<p>Nous sélectionnons rigoureusement nos produits pour leur qualité et le respect des animaux.</p>
 			</article>
 			<article>
-				<img src="assets/media/adopt.svg" alt='engagement social'/>
+				<img class="social" src="assets/media/adopt.svg" alt='engagement social'/>
 				<h3>Engagement Social</h3>
 				<p>
 					Une partie de nos profits est reversée aux refuges et aux associations partenaires.</p>
 			</article>
 			<article>
-				<img src="assets/media/earth.svg" alt='environnement terre'/>
-				<h3>Engagement Environnemental</h3>
-				<p>Nous minimisons l'utilisation de plastique et le suremballage, en privilégiant le papier kraft recyclé.</p>
+				<img class="earth" src="assets/media/earth.svg" alt="environnement pour l'environnement"/>
+				<h3>Engagement environnemental</h3>
+				<p>nous minimisons l' utilisation de plastique et le suremballage, en privilégiant le papier kraft recyclé.</p>
 			</article>
 		</section>
 	</main>

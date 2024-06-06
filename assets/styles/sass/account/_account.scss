@@ -3,96 +3,176 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem 0;
-  section {
+
+  h2 {
+    text-align: center;
+  }
+
+  .form-account {
+    padding: 2rem;
+    border-radius: .35rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: $white;
+    width: 80vw;
+    margin-bottom: 1rem;
+
     // Modifier les coordonnées
     .update {
-      border-radius: 1rem;
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      background-color: $white;
-      width: 80vw;
-      .container {
-        padding: 1rem;
-        fieldset {
-          padding-top: 1rem;
-          display: flex;
-          flex-direction: column;
-          button {
-            padding: 0.5rem 1rem;
-            margin: 1rem 0;
-            background-color: $white;
-            color: $green;
-            border: none;
-            cursor: pointer;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-              rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-            border-radius: 1rem;
-          }
-          button:hover {
-            background-color: $green;
-            color: white;
-          }
-        }
-        input {
-          padding: 0.5rem 1rem;
-          border: 1px solid $grey;
-          border-radius: 1rem;
-        }
+      align-items: center;
+
+      fieldset {
+        width: 100%;
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      input {
+        padding: 0.5rem 1rem;
+        border: 1px solid $grey;
+        border-radius: 1rem;
       }
     }
-    .error {
-      color: $red;
-    }
+  }
+
+  .container-orders {
+    padding: 2rem;
+    border-radius: .35rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    background-color: $white;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .my-orders {
       display: flex;
       align-items: center;
       flex-direction: column;
       width: 100%;
-      li {
+
+      .order {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        .plus {
+        border: solid 1px $lightGray;
+        border-radius: .35rem;
+        padding: 0 0.5rem;
+        width: 100%;
+        margin-bottom: 1rem;
+
+        .modal-detail {
+          text-align: center;
+          border-left: solid 1px $lightGray;
           display: flex;
-          justify-content: center;
+          flex-direction: column;
           align-items: center;
-          width: 3rem;
-          height: 3rem;
-          background-color: black;
-          color: $white;
-          border-radius: 50%;
+          padding: 1rem;
         }
-        a {
-          color: $black;
-        }
-        a:hover {
-          color: $green;
+
+        .order-articles {
+          width: 80%;
+          max-height: 70%;
+          overflow-y: scroll;
+          flex-direction: column;
+          background-color: $white;
+          border-radius: 0.35rem;
+          display: none;
+          position: fixed;
+          padding: 2rem;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 1000;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+          .order-status {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+
+            .btn-close-modal {
+              color: $black;
+            }
+          }
+
+          .article-detail {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .detail-article {
+              color: $black;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding-right: 2rem;
+
+              figure {
+                padding: 1rem 0;
+                width: 10%;
+                height: auto;
+
+                img {
+                  width: 100%;
+                  height: 100%;
+                  display: block;
+                  object-fit: cover;
+                  object-position: center;
+                }
+              }
+            }
+
+            .comment {
+              color: $black;
+              display: flex;
+              flex-direction: column;
+            }
+          }
         }
       }
     }
   }
+}
 
-  .other-btns {
-    button {
-      padding: 0.5rem 1rem;
-      margin: 1rem 0;
-      background-color: $white;
-      color: $green;
-      border: none;
-      cursor: pointer;
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-      border-radius: 1rem;
+@media screen and (min-width: 800px) {
+  #content.account {
+    padding: 0;
+    display: grid;
+    grid-template-columns: 10% repeat(2, auto) 10%;
+    grid-template-rows: 10rem repeat(2, auto);
+    grid-column-gap: 15px;
+    grid-row-gap: 10px;
+    align-items: start;
+
+    h1 {
+      grid-area: 1 / 2 / 2 / 4;
+      text-align: center;
+      align-self: center;
     }
-    button:hover {
-      background-color: $green;
-      color: white;
+
+    .form-account {
+      width: auto;
+      grid-area: 2 / 2 / 3 / 3;
+    }
+
+    .container-orders {
+      width: auto;
+      grid-area: 2 / 3 / 4 / 4;
+    }
+
+    .account-management {
+      grid-area: 3 / 2 / 4 / 3; 
     }
   }
 }

@@ -2,11 +2,11 @@
 
 class Order
 {
-    private ? int $id = null;
-    private ? array $user = [];
-    private ? array $articles = [];
-    
-    public function __construct(private int $userId, private string $createdAt, private string $status, private Shipping $shipping, private float $totalPrice)
+    private ?int $id = null;
+    private ?array $user = [];
+    private ?array $articles = [];
+
+    public function __construct(private int $userId, private string $createdAt, private string $status, private Shipping $shippingId, private float $totalPrice)
     {
         $this->status = !empty($status) ? $status : "pending";
     }
@@ -21,7 +21,7 @@ class Order
             'id' => $this->id,
             'userId' => $this->userId,
             'createdAt' => $this->createdAt,
-            'shipping' => $this->shipping,
+            'shippingId' => $this->shippingId,
             'status' => $this->status,
             'totalPrice' => $this->totalPrice,
         ];
@@ -95,17 +95,17 @@ class Order
     /**
      * @return Shipping
      */
-    public function getShipping(): Shipping
+    public function getShippingId(): Shipping
     {
-        return $this->shipping;
+        return $this->shippingId;
     }
 
     /**
      * @param array $shipping
      */
-    public function setShipping(Shipping $shipping): void
+    public function setShippingId(Shipping $shippingId): void
     {
-        $this->shipping = $shipping;
+        $this->shippingId = $shippingId;
     }
 
     // Getter and Setter for totalPrice
@@ -160,6 +160,4 @@ class Order
     {
         $this->articles = $articles;
     }
-    
-
 }

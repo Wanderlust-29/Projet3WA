@@ -6,7 +6,8 @@
 
 {% block main %}
 	<!-- Begin Page Content -->
-	<div class="container-fluid">
+	<div
+		class="container-fluid">
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">Tous les produits</h1>
 		<!-- DataTales Example -->
@@ -32,7 +33,10 @@
 							<tbody>
 								{% for article in articles %}
 									<tr>
-										<td><a href="/admin/articles/{{ article.id }}"><img class="img-thumbnail mr-2" height="50" width="50" style="object-fit:cover;object-position:center;" src="{{ article.image.url }}"> {{ article.name }}</a></td>
+										<td>
+											<a href="/admin/articles/{{ article.id }}"><img class="img-thumbnail mr-2" height="50" width="50" style="object-fit:cover;object-position:center;" src="{{ article.image.url }}">
+												{{ article.name }}</a>
+										</td>
 										<td>{{ article.stock }}</td>
 										<td>{{ article.price }}€</td>
 									</tr>
@@ -43,20 +47,10 @@
 				{% else %}
 					<p>Aucun article trouvé.</p>
 				{% endif %}
-   
+
 			</div>
 		</div>
-	{# </div> #}
-	<!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+		{# </div> #}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}

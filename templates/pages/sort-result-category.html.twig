@@ -12,9 +12,8 @@
 		<header>
 			<h1>{{ category.name }}</h1>
 
-
 			<form action="sort-result-category" method="POST" class="form-sort">
-				<input type="hidden" name="slug" value="{{ category.slug }}">
+				<input type="hidden" name="slug" id="sort" value="{{ slug }}">
 				<label for="sort">Filtrer les resultats</label>
 				<select name="order-by" class="order-by" id="sort">
 					<option value="">Choisir une option</option>
@@ -57,4 +56,5 @@
 		</main>
 	</main>
 {% endblock %}
+
 {% block javascript %}{% endblock %}

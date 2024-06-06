@@ -15,18 +15,60 @@ class PageController extends AbstractController
         ]);
     }
 
+    public function sort()
+    {
+        $am = new ArticleManager();
+        $articles = [];
+
+        if ($_POST['order-by'] === "popularity") {
+            $articles = $am->sortByPopularity();
+        } elseif ($_POST['order-by'] === "price_desc") {
+            $articles = $am->sortByDesc();
+        } elseif ($_POST['order-by'] === "price_asc") {
+            $articles = $am->sortByAsc();
+        } else {
+            $this->redirect("/articles");
+        }
+
+        $this->render("pages/sort-result-articles.html.twig", [
+            "articles" => $articles,
+        ]);
+    }
+
+    public function sortByCategory()
+    {
+        if ($_POST["slug"]) {
+            $slug = $_POST["slug"];
+            // Récupération de l'ID de la catégorie
+            $cm = new CategoryManager();
+            $categoryId = $cm->findOneBySlug($slug);
+
+            $am = new ArticleManager();
+            $articles = [];
+
+            if ($_POST['order-by'] === "popularity") {
+                $articles = $am->sortByPopularityCat($categoryId);
+            } elseif ($_POST['order-by'] === "price_desc") {
+                $articles = $am->sortByDescCat($categoryId);
+            } elseif ($_POST['order-by'] === "price_asc") {
+                $articles = $am->sortByAscCat($categoryId);
+            } else {
+                $this->redirect("/categorie/$slug/");
+            }
+
+            $this->render("pages/sort-result-category.html.twig", [
+                "articles" => $articles,
+                "slug" => $_POST["slug"],
+                "category" => $categoryId
+            ]);
+        }
+    }
+
+
     // Récupère un article
     public function article(string $slug): void
     {
-        $success = isset($_SESSION["success-message"]) ? $_SESSION["success-message"] : null;
         $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : null;
-
-        unset($_SESSION["success-message"]);
-
-        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-        unset($_SESSION["error-message"]);
-
-
 
         $am = new ArticleManager();
         $cm = new CommentManager();
@@ -65,8 +107,6 @@ class PageController extends AbstractController
         $this->render("pages/article.html.twig", [
             "article" => $article,
             "comments" => $comments,
-            "success" => $success,
-            "error" => $error,
             "averageGrade" => $averageGrade,
             'soldOut' => $soldOut,
         ]);
@@ -98,6 +138,7 @@ class PageController extends AbstractController
         if (isset($_POST['search'])) {
             // Vérifie si le jeton CSRF est valide
             $tokenManager = new CSRFTokenManager();
+
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
                 $search = htmlspecialchars($_POST['search']);
 
@@ -108,7 +149,7 @@ class PageController extends AbstractController
                     "articles" => $articles
                 ]);
             } else {
-                $_SESSION["error-message"] = "Token CSRF invalide";
+                var_dump("error");
                 $this->redirect("/");
             }
         } else {
@@ -129,39 +170,43 @@ class PageController extends AbstractController
         ]);
     }
     public function contactCheck()
-    { {
-            if (
-                isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"])
-                && isset($_POST["message"])
-            ) {
-                // Vérifie si le jeton CSRF est valide
-                $tokenManager = new CSRFTokenManager();
-                if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-                    $cmm = new ContactMessagesManager();
-                    // Crée un nouvel utilisateur et le sauvegarde en base de données
-                    $firstName = htmlspecialchars($_POST["firstName"]);
-                    $lastName = htmlspecialchars($_POST["lastName"]);
-                    $email = htmlspecialchars($_POST["email"]);
-                    $message = htmlspecialchars($_POST["message"]);
-                    // $texte_echappe = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+    {
+        if (
+            isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"])
+            && isset($_POST["message"])
+        ) {
+            // Vérifie si le jeton CSRF est valide
+            $tokenManager = new CSRFTokenManager();
+            if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
+                
+                // Crée un nouvel utilisateur et le sauvegarde en base de données
+                $firstName = htmlspecialchars($_POST["firstName"]);
+                $lastName = htmlspecialchars($_POST["lastName"]);
+                $email = htmlspecialchars($_POST["email"]);
+                $message = htmlspecialchars($_POST["message"]);
+                // $texte_echappe = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
 
-                    $contactMessage = new ContactMessages($firstName, $lastName, $email, $message);
-                    
-                    if ($cmm->create($contactMessage)) {
-                        // Redirige vers la page d'accueil si le message est bien enregistré
-                        $this->redirect("/contact");
-                    } else {
-                        $this->redirect("/contact");
-                    }
-                } else {
-                    $_SESSION["error-message"] = "Token CSRF invalide";
-                    $this->redirect("/");
-                }
-            } else {
-                $_SESSION["error-message"] = "Champs manquants";
+                $cmm = new ContactMessagesManager();
+                $contactMessage = new ContactMessages($firstName, $lastName, $email, $message);
+
+                $cmm->create($contactMessage);
+                $type = 'success';
+                $text = "Le message à bien été envoyé";
+                // Redirige vers la page d'accueil si le message est bien enregistré
                 $this->redirect("/contact");
+                    
+                
+            } else {
+                $type = 'error';
+                $text = "Token CSRF invalide";
+                $this->redirect("/");
             }
+        } else {
+            $type = 'error';
+            $text = "Champs manquants";
+            $this->redirect("/contact");
         }
+        $this->notify($text, $type);
     }
 
     public function conditions(): void

@@ -124,8 +124,28 @@
   }
 
   .owl-carousel {
-    width: 60%;
+    width: 100%;
+    max-width: 60%;
+    overflow: hidden;
   }
+  .owl-stage-outer { 
+    overflow: visible;
+    }
+  .owl-carousel .owl-stage
+  {display: flex;}
+  .card {
+    display: flex;
+    flex: 1 0 auto;
+    height: 100%;
+
+  }
+  .owl-item {
+    opacity: 0;
+    transition: opacity 500ms;
+ }
+ .owl-item.active {
+   opacity: 1;
+ }
 
   .owl-nav {
     display: none;
@@ -153,6 +173,7 @@
     }
   }
 }
+
 
 @media screen and (min-width: 800px) {
   #content.home {

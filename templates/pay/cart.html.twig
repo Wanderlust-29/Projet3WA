@@ -18,73 +18,72 @@
 			</h1>
 			{% if cart is empty %}
 				<p>Vous souhaitez passer à la caisse sans croquettes, jouets ou mastication pour vos amis à 4 pattes ? 😭😭😭</p>
-				<p>
-					<a class="btn btn-cart-back" href="/">Revenir à la boutique</a>
-				</p>
+				<a class="btn btn-cart-back" href="/">Revenir à la boutique</a>
 			{% else %}
 				<ul class="list-articles">
 					{% for article in cart %}
-						<li class="article">
-							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-							<p>{{ article.name }}
-								-
-								{{ article.price }}€
-							</p>
-							{}
-							{% if stock != 0 %}
-								<span class="increment-decrement-btns">
-									<button class="btn-increment" data-article="{{ article.id }}" data-action="increment">+</button>
-									<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
-									<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
-								</span>
+						<li class="article" data-article="{{ article.id }}">
+							<a href="/article/{{ article.slug }}">
+								<figure>
+									<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+								</figure>
+								<p class="article-name">{{ article.name }}</p>
+							</a>
+							<span class="increment-decrement-btns" data-article="{{ article.id }}">
+								<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement" {% if article.quantity == 1 %} disabled {% endif %}>-</button>
+								<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
+								<button class="btn-increment" data-article="{{ article.id }}" data-action="increment" {% if not article.is_in_stock %} disabled {% endif %}>+</button>
+							</span>
+							<button class="remove-product" data-article="{{ article.id }}" data-action="delete">Supprimer</button>
+							{% if not article.is_in_stock %}
+								<p class="out-of-stock" data-article="{{ article.id }}">Impossible d'ajouter un article (Rupture de stock)</p>
 							{% else %}
-								<span class="increment-decrement-btns">
-									<button class="btn-increment" data-article="{{ article.id }}" data-action="increment" disabled>+</button>
-									<span class="quantity" data-article="{{ article.id }}">{{ article.quantity }}</span>
-									<button class="btn-decrement" data-article="{{ article.id }}" data-action="decrement">-</button>
-								</span>
+								<p class="out-of-stock" data-article="{{ article.id }}" style="display: none;"></p>
 							{% endif %}
 						</li>
 					{% endfor %}
-				</li>
-			</ul>
+				</ul>
 
-			<form action="" method="POST" class="update-shipping-costs" id="shippingForm">
-				<legend>Frais de port</legend>
-				{% for cost in shipping_costs %}
-					<fieldset>
-						<input type="radio" id="{{ cost.name }}" name="drone" value="{{ cost.id }}" required/>
-						<label for="{{ cost.name }}">{{ cost.description }}
-							(
-							{% if cost.price == 0 %}Gratuit
-							{% else %}
-								{{ cost.price }}€
-							{% endif %})</label>
-					</fieldset>
-				{% endfor %}
-			</form>
 
-			<form class="form-checkout" action="stripe/checkout.php" method="POST">
-				<label id="cart-total-price">
-					Total :
-					<span class="total-price">{{ totalPrice|number_format(2, '.', ',') }}
-						€</span>
-				</label>
-				<input type="hidden" name="totalPrice" value="{{totalPrice}}">
+				<form action="" method="POST" class="update-shipping-costs" id="shippingForm">
+					<legend>Frais de port</legend>
+					{% for cost in shipping_costs %}
+						<fieldset>
+							<input type="radio" id="{{ cost.name }}" name="drone" value="{{ cost.id }}"/>
+							<label for="{{ cost.name }}">{{ cost.description }}
+								(
+								{% if cost.price == 0 %}Gratuit
+								{% else %}
+									{{ cost.price }}€
+								{% endif %})</label>
+						</fieldset>
+					{% endfor %}
+				</form>
 
-				<a class="btn-cart-back" href="/">Continuer mes achats</a>
+				<form class="form-checkout" action="stripe/checkout.php" method="POST">
+					<label id="cart-total-price">
+						Total :
+						<span class="total-price">{{ totalPrice|number_format(2, '.', ',') }}
+							€</span>
+					</label>
+					<input type="hidden" name="totalPrice" value="{{totalPrice}}">
 
-				{% if session is defined and session is not null %}
-					{% if cart != [] %}
-						<input type="submit" id="checkout-button" value='Valider et payer'/>
+					<a class="btn-cart-back" href="/">Continuer mes achats</a>
+
+					{% if session is defined and session is not null %}
+						{% if cart != [] %}
+							<input type="submit" id="checkout-button" value='Valider et payer' disabled/>
+						{% endif %}
+					{% else %}
+						{% if cart != [] %}
+							<a class="btn-login" href="/login">Connectez-vous pour payer</a>
+						{% endif %}
 					{% endif %}
-				{% else %}
-					{% if cart != [] %}
-						<a class="btn-login" href="/login">Connectez-vous pour payer</a>
-					{% endif %}
-				{% endif %}
-			</form>
-		{% endif %}
-	</section>
-</main>{% endblock %}{% block javascript %}
-<script src="assets/js/error-success.js" defer></script>{% endblock %}
+				</form>
+			{% endif %}
+		</section>
+	</main>
+{% endblock %}
+{% block javascript %}
+	<script src="assets/js/error-success.js" defer></script>
+{% endblock %}

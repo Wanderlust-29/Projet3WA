@@ -24,29 +24,6 @@ class ShippingManager extends AbstractManager
         return null;
     }
 
-    /**
-     * Récupère un frais de port en fonction de OrderId.
-     *
-     * @param string $name Le nom du frais de port à récupérer.
-     * @return Shipping|null L'objet shipping trouvé ou null s'il n'existe pas.
-     */
-    public function findOneByOrderId(int $orderId): ?Shipping
-    {
-        $query = $this->db->prepare('SELECT * FROM shippings WHERE order_id = :order_id');
-        $parameters = [
-            "order_id" => $orderId
-        ];
-        $query->execute($parameters);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-
-        if ($result) {
-            $shipping = new Shipping($result["name"], $result["description"], $result["price"], $result["delivery_min"], $result["delivery_max"]);
-            $shipping->setId($result["id"]);
-            return $shipping;
-        }
-
-        return null;
-    }
 
     /**
      * Récupère un frais de port en fonction de son nom.

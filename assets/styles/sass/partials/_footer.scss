@@ -1,4 +1,4 @@
-body > footer {
+body > .footer {
   padding: 1rem 2rem;
   background-color: $green;
   color: $white;
@@ -42,7 +42,7 @@ body > footer {
 }
 
 @media screen and (min-width: 800px) {
-  body > footer {
+  body > .footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

@@ -1,38 +1,37 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    {{article.name}}
-    {{ parent() }}
+	{{article.name}}
+	{{ parent() }}
 {% endblock %}
 
-{% block head %}
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block main %}
-    <main id="content" class="comment">
-        <h1>Ajouter un Commentaire pour l'article {{article.name}}</h1>
-        <form action="/check-comment&articleId={{ article.id }}" method="post">
-            <fieldset>
-                <label for="grade">Choisir une note :</label>
+	<main id="content" class="comment">
+		<h1>Ajouter un Commentaire pour l'article
+			{{article.name}}</h1>
+		<form action="/check-comment/{{article.slug}}" method="post">
+			<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
+			<fieldset>
+				<label for="grade">Choisir une note :</label>
 
-                <select name="grade" id="grade">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                </select>
-            </fieldset>
-            <fieldset>
-                <label for="comment">Votre commentaire :</label>
-                <textarea id="comment" name="comment" rows="5" cols="33"></textarea>
-            </fieldset>
-            <fieldset>
-                <button type="submit" name="post">Poster</button>
-            </fieldset>
-        </form>
-    </main>
+				<select name="grade" id="grade">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<label for="comment">Votre commentaire :</label>
+				<textarea id="comment" name="comment" rows="5" cols="33"></textarea>
+			</fieldset>
+
+			<button type="submit" name="post">Poster</button>
+		</form>
+	</main>
 {% endblock %}
 
-{% block javascript %}
-{% endblock %}
+{% block javascript %}{% endblock %}

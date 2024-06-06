@@ -6,7 +6,8 @@
 
 {% block main %}
 	<!-- Begin Page Content -->
-	<div class="container-fluid">
+	<div
+		class="container-fluid">
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">Tous les frais de livraison</h1>
 		<!-- DataTales Example -->
@@ -32,13 +33,17 @@
 								</tr>
 							</tfoot>
 							<tbody>
-								{% for shipping in shippings %}								
-								<tr>
-									<td><a href="/admin/shippings/{{ shipping.id }}">{{ shipping.name }}</a></td>
-									<td>{{ shipping.deliveryMin }} J</td>
-									<td>{{ shipping.deliveryMax }} J</td>
-									<td>{{ shipping.price }}€</td>
-								</tr>
+								{% for shipping in shippings %}
+									<tr>
+										<td>
+											<a href="/admin/shippings/{{ shipping.id }}">{{ shipping.name }}</a>
+										</td>
+										<td>{{ shipping.deliveryMin }}
+											J</td>
+										<td>{{ shipping.deliveryMax }}
+											J</td>
+										<td>{{ shipping.price }}€</td>
+									</tr>
 								{% endfor %}
 							</tbody>
 						</table>
@@ -46,20 +51,9 @@
 				{% else %}
 					<p>Aucun article trouvé.</p>
 				{% endif %}
-   
+
 			</div>
 		</div>
-	{# </div> #}
-	<!-- /.container-fluid -->
-{% endblock %}
-{% block javascript %}
-    <!-- Page level plugins -->
-    <script src="./assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	<script>
-		// Call the dataTables jQuery plugin
-		$(document).ready(function() {
-			$('#orderTable').DataTable();
-		});
-	</script>
-{% endblock %}
+		<!-- /.container-fluid -->
+	{% endblock %}
+	{% block javascript %}{% endblock %}

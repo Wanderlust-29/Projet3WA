@@ -1,18 +1,50 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    {{article.name}}
-    {{ parent() }}
+	Conditions générale de vente
+	{{ parent() }}
 {% endblock %}
 
-{% block head %}
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block main %}
-    <main id="content" class="conditions">
-        <h1>Conditions générale de vente</h1>
-    </main>
+	<main id="content" class="conditions">
+		<h1>Conditions générale de vente</h1>
+		<section id="objet" aria-label="Objet des conditions générales de vente">
+			<h2>Objet</h2>
+			<p>Les présentes conditions générales de vente ont pour objet de définir les droits et obligations des parties dans le cadre de la vente des produits proposés par TimberWolf sur son site internet.</p>
+		</section>
+
+		<section id="produits" aria-label="Description des produits">
+			<h2>Produits</h2>
+			<p>Les produits sont décrits et présentés avec la plus grande exactitude possible. Toutefois, si des erreurs ou omissions devaient se produire dans cette présentation, la responsabilité de TimberWolf ne pourrait être engagée.</p>
+		</section>
+
+		<section id="prix" aria-label="Prix des produits">
+			<h2>Prix</h2>
+			<p>Les prix sont indiqués en euros, toutes taxes comprises, hors frais de livraison. TimberWolf se réserve le droit de modifier ses prix à tout moment, mais les produits seront facturés sur la base des tarifs en vigueur au moment de la validation de la commande.</p>
+		</section>
+
+		<section id="commande" aria-label="Passer une commande">
+			<h2>Commande</h2>
+			<p>Le client passe commande en remplissant le formulaire en ligne et en payant selon les modalités prévues. La validation de la commande vaut acceptation des CGV.</p>
+		</section>
+
+		<section id="livraison" aria-label="Conditions de livraison">
+			<h2>Livraison</h2>
+			<p>Les produits sont livrés à l'adresse indiquée lors de la commande dans les délais convenus. Les frais de livraison sont à la charge du client, sauf indication contraire.</p>
+		</section>
+
+		<section id="paiement" aria-label="Modalités de paiement">
+			<h2>Paiement</h2>
+			<p>Le paiement s'effectue en ligne par les moyens de paiement proposés sur le site sécurisé de TimberWolf. La commande sera traitée après validation du paiement.</p>
+		</section>
+
+		<section id="retours" aria-label="Retours et remboursements">
+			<h2>Retours et remboursements</h2>
+			<p>Les retours et remboursements sont possibles dans les conditions prévues par la loi et décrites dans la politique de retour de TimberWolf.</p>
+		</section>
+	</main>
 {% endblock %}
 
-{% block javascript %}
-{% endblock %}
+{% block javascript %}{% endblock %}

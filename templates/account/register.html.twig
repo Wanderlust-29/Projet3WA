@@ -1,82 +1,76 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    S'inscrire
-    {{ parent() }}
+	S'inscrire
+	{{ parent() }}
 {% endblock %}
 
-{% block head %}
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block main %}
-    <main id="content" class="register">
-        {# Formulaire d'inscription #}
-        <form action="/check-register" method="post">
-            <input type="hidden" name="csrf-token" id="csrf-token" value="{{csrf_token}}" />
-            <fieldset class="container">
-                <legend>S'inscrire</legend>
-                
-                <fieldset>
-                    <label for="firstName">Prénom</label>
-                    <input type="text" name="firstName" id="firstName" placeholder="Entrez votre prénom"/>
-                </fieldset>
-                
-                <fieldset>
-                    <label for="lastName">Nom</label>
-                    <input type="text" name="lastName" id="lastName" placeholder="Entrez votre nom"/>
-                </fieldset>
-                
-                <fieldset>
-                    <label for="email">E-mail</label>
-                    <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail"/>
-                </fieldset>
-                
-                <fieldset>
-                    <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe"/>
-                </fieldset>
-                
-                <fieldset>
-                    <label for="confirm-password">Confirmer le mot de passe</label>
-                    <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmez votre mot de passe"/>
-                        {% if error is defined %}
-                            <p class="error" id="error-msg">{{ error }}</p>
-                        {% endif %}
-                </fieldset>
-                
-                <fieldset>
-                    <label for="address">Adresse</label>
-                    <input type="text" name="address" id="address" placeholder="Entrez votre adresse"/>
-                </fieldset>
-                
-                <fieldset>
-                    <label for="city">Ville</label>
-                    <input type="text" name="city" id="city" placeholder="Entrez votre ville"/>
-                </fieldset>
-                
-                <fieldset>
-                    <label for="postalCode">Code postal</label>
-                    <input type="number" name="postalCode" id="postalCode" placeholder="Entrez votre code postal"/>
-                </fieldset>
-                
-                <fieldset>
-                    <label for="country">Pays</label>
-                    <input type="text" name="country" id="country" placeholder="Entrez votre pays"/>
-                </fieldset>
-                
-                <fieldset class="nav-buttons">
-                    <fieldset>
-                        <button type="submit" name="register">S'inscrire</button>
+	<main id="content" class="register">
+		<div class="register-section">
+			<img
+			src="assets/media/tara.jpg" alt="Tara la mascotte de TimberWolf"/>
+			{# Formulaire d'inscription #}
+			<section class="section-form">
+				<h1>Inscription</h1>
+				<form action="/check-register" method="post">
+					<input type="hidden" name="csrf-token" id="csrf-token" value="{{csrf_token}}"/>
+
+					<fieldset class="form-item">
+						<input type="text" name="firstName" id="firstName" placeholder="Prenom"/>
+						<label for="firstName">Prénom</label>
+					</fieldset>
+
+					<fieldset class="form-item">
+						<input type="text" name="lastName" id="lastName" placeholder="Nom"/>
+                        <label for="lastName">Nom</label>
                     </fieldset>
-                    <fieldset>
-                        <a class="btn-login" href="/login">Se connecter</a>
+
+					<fieldset class="form-item">
+						<input type="email" name="email" id="email" placeholder="Email"/>
+                        <label for="email">E-mail</label>
                     </fieldset>
-                </fieldset>
-            </fieldset>
-        </form>
-    </main>
+
+					<fieldset class="form-item">
+						<input type="password" name="password" id="password" placeholder="Mot de passe"/>
+                        <label for="password">Mot de passe</label>
+                    </fieldset>
+
+					<fieldset class="form-item">
+						<input type="password" name="confirm-password" id="confirm-password" placeholder="Confirmer le mot de passe"/>
+                        <label for="confirm-password">Confirmer le mot de passe</label>
+                    </fieldset>
+
+					<fieldset class="form-item">
+						<input type="text" name="address" id="address" placeholder="Adresse"/>
+                        <label for="address">Adresse</label>
+                    </fieldset>
+
+					<fieldset class="form-item">
+						<input type="text" name="city" id="city" placeholder="Ville"/>
+                        <label for="city">Ville</label>
+                    </fieldset>
+
+					<fieldset class="form-item">
+						<input type="number" name="postalCode" id="postalCode" placeholder="Code postal"/>
+						<label for="postalCode">Code postal</label>
+					</fieldset>
+
+					<fieldset class="form-item">
+						<input type="text" name="country" id="country" placeholder="Pays"/>
+						<label for="country">Pays</label>
+					</fieldset>
+
+					<button type="submit" name="register">S'inscrire</button>
+
+					<a class="btn-login" href="/login">Se connecter</a>
+				</form>
+			</section>
+		</div>
+	</main>
 {% endblock %}
 
 {% block javascript %}
-    <script src="assets/js/error-success.js" defer></script>
 {% endblock %}

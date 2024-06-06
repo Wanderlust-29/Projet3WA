@@ -8,25 +8,29 @@ class CartController extends AbstractController
         $totalPrice = 0;
         $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : null;
         $quantity = 0;
+        $notify = [];
 
-        $sm  = new ShippingManager();
+        $sm = new ShippingManager();
         $shipping_costs = $sm->findAll();
 
         if (!is_null($cart)) {
-            foreach ($cart as $article) {
+            foreach ($cart as &$article) {  // Utilisation de la référence pour modifier directement l'article dans le tableau
                 if (isset($article['price'], $article['quantity'], $article['stock'])) {
+                    $article['is_in_stock'] = $article['quantity'] < $article['stock'];
+                    if (!$article['is_in_stock']) {
+                    }
                     $quantity += $article['quantity']; // Incrémenter la quantité totale
                     $totalPrice += $article['price'] * $article['quantity'];
                 }
             }
         }
 
-
         $this->render("pay/cart.html.twig", [
             "cart" => $cart,
             "totalPrice" => $totalPrice,
             "quantity" => $quantity,
             "shipping_costs" => $shipping_costs,
+            "notify" => $notify
         ]);
     }
 
@@ -55,9 +59,24 @@ class CartController extends AbstractController
             $articleArray['quantity'] = 1;
             $_SESSION["cart"]["articles"][$id] = $articleArray;
         }
-
         // Renvoyer le contenu du panier au format JSON après l'ajout
         $this->renderJson($_SESSION["cart"]);
+    }
+
+    public function deleteFromCart(): void
+    {
+        $id = !empty($_POST['article_id']) ? intval($_POST['article_id']) : null;
+        $action = !empty($_POST['action']) ? $_POST['action'] : null;
+
+        if (!is_null($id) && isset($_SESSION["cart"]["articles"][$id])) {
+            if ($action === 'delete') {
+                unset($_SESSION["cart"]["articles"][$id]);
+            }
+        }
+
+        $this->renderJson([
+            'articles' => $_SESSION["cart"]["articles"],
+        ]);
     }
 
     public function updateQuantity(): void
@@ -131,11 +150,16 @@ class CartController extends AbstractController
             }
         }
         if (!is_null($shipping)) {
-            $price = (float) $shipping['price'];
-            $totalPrice += $price;
+            $sm = new ShippingManager();
+            $shippingId = $sm->findOne($shipping['id']);
+            if ($shippingId !== null) {
+                $totalPrice += $shipping['price'];
+            } else {
+                throw new Exception("L'objet Shipping n'a pas été trouvé.");
+            }
         }
 
-        $order = new Order($id_user, date('Y-m-d'), "success",  $shipping['id'], $totalPrice);
+        $order = new Order($id_user, date('Y-m-d'), "success",  $shippingId, $totalPrice);
 
         $om = new OrderManager();
         $om->createOrder($order);
