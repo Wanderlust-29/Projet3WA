@@ -27,7 +27,7 @@
 *::after,
 *:focus {
   box-sizing: border-box;
-  outline: none
+  outline: none;
 }
 
 html {
@@ -118,7 +118,6 @@ body.light {
 
   #content.cart {
     .form-checkout {
-
       .btn-cart-back,
       #checkout-button,
       .btn-login {
@@ -258,7 +257,6 @@ body.dark {
 
   #content.cart {
     .form-checkout {
-
       .btn-cart-back,
       #checkout-button,
       .btn-login {
@@ -360,20 +358,19 @@ body.dark {
       height: 55%;
       background: rgba(140, 50, 19, 0.06);
       padding: 1rem;
-      border-radius: .35rem;
+      border-radius: 0.35rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
 
       .card-title {
-        margin: 0.75rem 0;
+        font-size: 1.7rem;
       }
 
       .card-price {
         font-weight: 700;
       }
-
     }
   }
 

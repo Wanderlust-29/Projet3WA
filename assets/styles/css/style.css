@@ -1830,7 +1830,7 @@ body.dark footer {
   align-items: center;
 }
 .card a .card-body .card-title {
-  margin: 0.75rem 0;
+  font-size: 1.7rem;
 }
 .card a .card-body .card-price {
   font-weight: 700;
