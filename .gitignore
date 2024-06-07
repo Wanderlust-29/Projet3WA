@@ -3,5 +3,5 @@ vendor/
 composer.lock
 stripe/secret.php
 ryanroudaut_projet.sql
-assets/js/rescuegroups.js
+# assets/js/rescuegroups.js
 node_modules
