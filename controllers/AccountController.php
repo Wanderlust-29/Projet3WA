@@ -8,33 +8,96 @@ class AccountController extends AbstractController
     public function account(): void
     {
         $sessionId = null;
-        $orders = [];
-        $ordersArticles = [];
 
         // Vérifie si un utilisateur est connecté en session et s'il s'agit bien d'une instance de la classe User
         if (isset($_SESSION["user"]) && $_SESSION["user"] instanceof User) {
             $sessionId = $_SESSION["user"]->getId(); // Récupère l'identifiant de l'utilisateur connecté
             $om = new OrderManager();
             // Initialise le gestionnaire de commandes
-            $orders = $om->allOrdersByUserId($sessionId); // Récupère les commandes de l'utilisateur
+            $order = $om->findLastOrder($sessionId); // Récupère les commandes de l'utilisateur
+            $date = $order->getCreatedAt();
+            $created_at = AbstractController::niceDate($date);
+            $order->setNiceDate($created_at);
+            $ago = AbstractController::diffDate($date);
+            $order->setDiffDate($ago);
 
-            foreach ($orders as $order) {
-                $orderId = $order->getId();
-                $orderArticle = $om->orderArticle($orderId);
-                $ordersArticles[$orderId] = $orderArticle;
-            }
+            $this->render("account/account.html.twig", [
+                'order' => $order,
+            ]);
         }
+    }
 
-        $this->render("account/account.html.twig", [
-            'orders' => $orders,
-            'ordersArticles' => $ordersArticles,
+    // TOUTES LES COMMANDES
+    public function orders(): void
+    {
+        $sessionId = null;
+        $orders = [];
+
+        // Vérifie si un utilisateur est connecté en session et s'il s'agit bien d'une instance de la classe User
+        if (isset($_SESSION["user"]) && $_SESSION["user"] instanceof User) {
+            $sessionId = $_SESSION["user"]->getId(); // Récupère l'identifiant de l'utilisateur connecté
+            $om = new OrderManager();
+            // Initialise le gestionnaire de commandes
+            $allOrders = $om->allOrdersByUserId($sessionId); // Récupère les commandes de l'utilisateur
+
+            foreach ($allOrders as $order) {
+                $date = $order->getCreatedAt();
+                $created_at = AbstractController::niceDate($date);
+                $order->setNiceDate($created_at);
+                $ago = AbstractController::diffDate($date);
+                $order->setDiffDate($ago);
+                $orders[] = $order;
+            }
+
+            $this->render("account/orders.html.twig", [
+                'orders' => $orders,
+            ]);
+        }
+    }
+
+    // MODIFICATION INFORMATIONS
+    public function infos(): void
+    {
+        $this->render("account/infos.html.twig", [
         ]);
     }
 
+    // Récupération d'une commande passée pour un compte client
+    public function order(int $id): void
+    {
+        // Vérifie si un utilisateur est connecté en session et s'il s'agit bien d'une instance de la classe User
+        if (isset($_SESSION["user"]) && $_SESSION["user"] instanceof User) {
+            $sessionId = $_SESSION["user"]->getId(); // Récupère l'identifiant de l'utilisateur connecté
+            $om = new OrderManager();
+            // Initialise le gestionnaire de commandes
+            $order = $om->findOneForAccount($id,$sessionId);
+            if(!is_null($order)){
+                $date = $order->getCreatedAt();
+                $created_at = AbstractController::niceDate($date);
+                $order->setNiceDate($created_at);
+                $ago = AbstractController::diffDate($date);
+                $order->setDiffDate($ago);
+    
+                //Récupération des articles
+                $articles = $om->orderArticle($id);
+    
+                $this->render("account/order.html.twig", [
+                    'order' => $order,
+                    'articles' => $articles
+                ]);
+            }else{
+                $this->redirect(url('userOrders'));
+            }
+        }
+    }
+
+    // MISE A JOUR INFORMATION PROFIL
     public function updateUserProfile(): void
     {
         if (isset($_SESSION['user'])) {
             $currentUser = $_SESSION['user'];
+
+            $redirect = $currentUser->getRole() == "ADMIN" ? url('user', ['id' => $currentUser->getId()]) : url('infos');
 
             // Vérifie si le mot de passe actuel est différent du nouveau mot de passe
             if (password_verify($_POST["password"], $currentUser->getPassword())) {
@@ -64,22 +127,22 @@ class AccountController extends AbstractController
                         $_SESSION["user"] = $currentUser;
                         $type = 'success';
                         $text = "Profil mis à jour";
-                        $this->redirect("/");
+                        $this->redirect($redirect);
                     } elseif ($_POST["password"] !== null) {
                         $type = 'error';
                         $text = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
-                        $this->redirect("/admin");
+                        $this->redirect($redirect);
                     }
                 } else {
                     $type = 'error';
                     $text = "Les mots de passe ne correspondent pas";
-                    $this->redirect("/admin");
+                    $this->redirect($redirect);
                 }
             }
         } else {
             $type = 'error';
             $text = "L'utilisateur n'est pas connecté.";
-            $this->redirect("/account");
+            $this->redirect("/");
         }
         
         $this->notify($text, $type);
@@ -147,5 +210,4 @@ class AccountController extends AbstractController
         }
         $this->notify($text, $type);
     }
-    
 }

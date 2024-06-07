@@ -1,4 +1,6 @@
 <?php
+define("SITE_URL", "http://projet3wa.test/");
+
 // charge l'autoload de composer
 require "vendor/autoload.php";
 
@@ -11,8 +13,7 @@ $dotenv->load();
 // Utilise le Router
 // require_once 'services/Router.php';
 
-if(!isset($_SESSION["csrf-token"]))
-{
+if (!isset($_SESSION["csrf-token"])) {
     $tokenManager = new CSRFTokenManager();
     $token = $tokenManager->generateCSRFToken();
     $_SESSION["csrf-token"] = $token;
@@ -39,6 +40,7 @@ if(!isset($_SESSION["csrf-token"]))
 use Pecee\SimpleRouter\SimpleRouter;
 
 /* Load external routes file */
+
 require_once 'services/RouterHelpers.php';
 require_once 'services/RouterFront.php';
 require_once 'services/RouterAdmin.php';

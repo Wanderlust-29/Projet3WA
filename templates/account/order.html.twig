@@ -1,0 +1,54 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	Commande {{ order.id }} du {{ order.niceDate }}
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block main %}
+	<main id="content" class="account">
+		<div class="account-container">
+			{% include '/account/account-nav.html.twig' %}
+            <section class="account-content">
+                <h1>Commande n° {{ order.id }}</h1>
+                <small>{{ order.niceDate }} ({{ order.diffDate }})</small>
+                {% if articles is not empty %}
+                <br><br>
+                <h3>Articles de la commande</h3>
+                <ul class="articles">
+                {% for article in articles  %}
+                    <li class="article">
+                        <div class="article-link">
+                            <a class="product" href="/article/{{ article.slug }}" target="_blank"><span class="quantity">{{ article.quantity }}</span><img src="{{ article.image.url }}" alt="{{ article.name }}"> {{ article.name }}</a>
+                            <a class="comment" href="/new-comment/{{ article.slug}}">Laisser un commentaire ></a>
+                        </div>
+                        <span class="price">{{ article.price }} &euro;</span>
+                    </li>
+                {% endfor %}
+                </ul>
+                <h3>Frais de port / livraison</h3>
+                <ul class="articles">
+                    <li class="article shipping">
+                        <span>{{ order.shippingId.name }}</span>
+                        <span class="price">{{ order.shippingId.price }} &euro;</span>
+                    </li>
+                </ul>
+                <h3>Total de la commande</h3>
+                <ul class="articles">
+                    <li class="article shipping">
+                        <span>Total TTC</span>
+                        <span class="price">{{ order.totalPrice }} &euro;</span>
+                    </li>
+                </ul>
+                {% else %}
+                <p>Etrange.... Cette commande ne comporte aucun article 😱😱😱</p>
+                {% endif %}
+            </section>
+		</div>
+	</main>
+{% endblock %}
+{% block javascript %}
+	<script src="assets/js/account.js"></script>
+{% endblock %}

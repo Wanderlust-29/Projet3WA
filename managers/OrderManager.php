@@ -19,12 +19,66 @@ class OrderManager extends AbstractManager
     /**
      * Récupère une commande par son identifiant.
      *
-     * @param int $id L'identifiant de la commande à récupérer.
+     * @param int $id L'identifiant de l'utilisateur
      * @return Order|null L'objet commande trouvé ou null s'il n'existe pas.
      */
     public function findOne(int $id): ?Order
     {
         $query = $this->db->prepare('SELECT * FROM orders WHERE id=:id');
+        $parameters = ["id" => $id];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $sm = new ShippingManager();
+            $shipping = $sm->findOne($result["shipping_id"]);
+            $order = new Order($result["user_id"], $result["created_at"],  $result["status"], $shipping, $result["total_price"]);
+            $order->setId($id);
+            $user = $this->orderUser($result["user_id"]);
+            $order->setUser($user);
+            $articles = $this->orderArticle($id);
+            $order->setArticles($articles);
+            return $order;
+        }
+        return null;
+    }
+
+    /**
+     * Récupère une commande par son identifiant pour le compte client
+     *
+     * @param int $user_id L'identifiant de l'utilisateur
+     * @param int $id L'identifiant de la commande
+     * @return Order|null L'objet commande trouvé ou null s'il n'existe pas.
+     */
+    public function findOneForAccount(int $id, int $user_id): ?Order
+    {
+        $query = $this->db->prepare('SELECT * FROM orders WHERE id=:id AND user_id=:user_id');
+        $parameters = ["id" => $id,"user_id" => $user_id];
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $sm = new ShippingManager();
+            $shipping = $sm->findOne($result["shipping_id"]);
+            $order = new Order($result["user_id"], $result["created_at"],  $result["status"], $shipping, $result["total_price"]);
+            $order->setId($id);
+            $user = $this->orderUser($result["user_id"]);
+            $order->setUser($user);
+            $articles = $this->orderArticle($id);
+            $order->setArticles($articles);
+            return $order;
+        }
+        return null;
+    }
+
+
+    /**
+     * Récupère une commande par son identifiant.
+     *
+     * @param int $id L'identifiant de la commande à récupérer.
+     * @return Order|null L'objet commande trouvé ou null s'il n'existe pas.
+    */
+    public function findLastOrder(int $id): ?Order
+    {
+        $query = $this->db->prepare('SELECT * FROM orders WHERE user_id=:id ORDER BY created_at DESC LIMIT 0,1');
         $parameters = ["id" => $id];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);

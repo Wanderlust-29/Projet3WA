@@ -5,6 +5,8 @@ class Order
     private ?int $id = null;
     private ?array $user = [];
     private ?array $articles = [];
+    private ?string $nice_date = null;
+    private ?string $diff_date = null;
 
     public function __construct(private int $userId, private string $createdAt, private string $status, private Shipping $shippingId, private float $totalPrice)
     {
@@ -159,5 +161,40 @@ class Order
     public function setArticles(array $articles): void
     {
         $this->articles = $articles;
+    }
+
+
+    // Getter and Setter for nice date
+    /**
+     * @return string
+     */
+    public function getNiceDate(): string
+    {
+        return $this->nice_date;
+    }
+
+    /**
+     * @param string $date
+     */
+    public function setNiceDate(string $date): void
+    {
+        $this->nice_date = $date;
+    }
+
+    // Getter and Setter for diff date
+    /**
+     * @return $date
+     */
+    public function getDiffDate(): string
+    {
+        return $this->diff_date;
+    }
+
+    /**
+     * @param string $date
+     */
+    public function setDiffDate(string $date): void
+    {
+        $this->diff_date = $date;
     }
 }

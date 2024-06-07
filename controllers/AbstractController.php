@@ -1,6 +1,7 @@
 <?php
 use Cocur\Slugify\Slugify;
 use Twig\Extra\Intl\IntlExtension;
+use Carbon\Carbon;
 
 abstract class AbstractController
 {
@@ -65,6 +66,20 @@ abstract class AbstractController
         return $query;
     }
 
+    protected function niceDate($date) :string {
+        $carbon = new Carbon($date);
+        $carbon->locale('fr_FR');
+        $result = ucfirst($carbon->isoFormat('dddd DD MMMM YYYY'));
+        return $result;
+    }
+
+    protected function diffDate($date) :string {
+        $carbon = new Carbon($date);
+        $carbon->locale('fr_FR');
+        return $carbon->diffForHumans();
+    }
+
+
     protected function notify(string $text, string $type = 'success') : void
     {
         unset($_SESSION['notify']);
@@ -97,4 +112,7 @@ abstract class AbstractController
     {
         echo json_encode($data);
     }
+
+
+
 }

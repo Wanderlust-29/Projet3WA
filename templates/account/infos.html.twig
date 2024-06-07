@@ -1,0 +1,84 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	Mes commandes
+	{{ parent() }}
+{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block main %}
+	<main id="content" class="account">
+		<div class="account-container">
+			{% include '/account/account-nav.html.twig' %}
+            <section class="account-content form-account">
+				{# Formulaire pour modifier les données de l'utilisateur #}
+				<h2>Modifier mes coordonnées</h2>
+				<form action="/account/update" method="post" class="update">
+					<fieldset>
+						<label for="firstName">
+							Prénom
+						</label>
+						<input type="text" name="firstName" id="firstName" value="{{ session.firstName }}"/>
+					</fieldset>
+					<fieldset>
+						<label for="lastName">
+							Nom
+						</label>
+						<input type="text" name="lastName" id="lastName" value="{{ session.lastName }}"/>
+					</fieldset>
+					<fieldset>
+						<label for="email">
+							E-mail
+						</label>
+						<input type="email" name="email" id="email" value="{{ session.email }}"/>
+					</fieldset>
+					<fieldset>
+						<label for="password">
+							Mot de passe
+						</label>
+						<input type="password" name="password" id="password" placeholder="nouveau mot de passe"/>
+					</fieldset>
+					<fieldset>
+						<label for="confirm-password">
+							Confirmer le mot de passe
+						</label>
+						<input type="password" name="confirm-password" id="confirm-password" placeholder="confirmer le nouveau mot de passe"/>
+					</fieldset>
+					<fieldset>
+						<label for="address">
+							Adresse
+						</label>
+						<input type="text" name="address" id="address" value="{{ session.address }}"/>
+					</fieldset>
+					<fieldset>
+						<label for="city">
+							Ville
+						</label>
+						<input type="text" name="city" id="city" value="{{ session.city }}"/>
+					</fieldset>
+					<fieldset>
+						<label for="postalCode">
+							Code postal
+						</label>
+						<input type="number" name="postalCode" id="postalCode" value="{{ session.postalCode }}"/>
+					</fieldset>
+					<fieldset>
+						<label for="country">
+							Pays
+						</label>
+						<input type="text" name="country" id="country" value="{{ session.country }}"/>
+					</fieldset>
+					<button type="submit" class="form-btn" name="update">Modifier mes informations</button>
+				</form>
+                <form action="/delete" method="post" class="other-btns">
+					<input type="hidden" name="userId" value="{{ session.id }}"/>
+					<button type="submit" class="form-btn form-btn-danger" name="delete">Supprimer mon compte</button>
+				</form>
+			</section>
+		</div>
+	</main>
+{% endblock %}
+{% block javascript %}
+	<script src="assets/js/account.js"></script>
+{% endblock %}
