@@ -16,20 +16,20 @@
 				<h1>Connexion</h1>
 
 				<form action="/check-login" method="post">
-		
-						<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
-						<fieldset class="form-item">
-							<input type="email" name="email" autocomplete="off" id="email" placeholder="Email"/>
-							<label for="email">Email</label>
-						</fieldset>
 
-						<fieldset class="form-item">
-							<input type="password" name="password" autocomplete="off" id="password" placeholder="Mot de passe"/>
-							<label for="password">Mot de passe</label>
-						</fieldset>
+					<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
+					<fieldset class="form-item">
+						<input type="email" name="email" autocomplete="off" id="email" placeholder="Email"/>
+						<label for="email">Email</label>
+					</fieldset>
 
-						<button type="submit" name="login">Se connecter</button>
-						<a class="btn-register" href="/register">S'inscrire</a>
+					<fieldset class="form-item">
+						<input type="password" name="password" autocomplete="off" id="password" placeholder="Mot de passe"/>
+						<label for="password">Mot de passe</label>
+					</fieldset>
+
+					<button type="submit" name="login">Se connecter</button>
+					<a class="btn-register" href="/register">S'inscrire</a>
 
 				</form>
 			</section>
@@ -37,5 +37,4 @@
 	</main>
 {% endblock %}
 
-{% block javascript %}
-{% endblock %}
+{% block javascript %}{% endblock %}

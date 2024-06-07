@@ -2,12 +2,25 @@
 
 {% block title %}
 	{{Adoption}}
+
 	{{ parent() }}
 {% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+	<script src="assets/js/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/freewall.js"></script>
+{% endblock %}
+
 
 {% block main %}
+	<div class="loader">
+		<p>Merci de patienter, nous recupérons les données des refuges !</p>
+		<div class="loader-container">
+			<div class="spinner"></div>
+			<img src="assets/media/logo.svg" alt="Logo-TimberWolf">
+		</div>
+	</div>
+
 	<main id="content" class="adopt">
 		<section class="text-adopt">
 			<h1>Adopter</h1>
@@ -16,10 +29,11 @@
 		</section>
 		<section class="section-adopt">
 			<h2>Animaux disponibles à l'adoption</h2>
+			<ul id="container"></ul>
 		</section>
 	</main>
 {% endblock %}
 
 {% block javascript %}
-	<script src="assets/js/rescuegroups.js" defer></script>
+	<script src="assets/js/rescuegroups.js"></script>
 {% endblock %}

@@ -20,11 +20,43 @@
 }
 
 form.user {
-
+  padding: 2rem 0;
   .custom-checkbox.small {
     label {
       line-height: 1.5rem;
     }
+  }
+  .form-item {
+    padding: 1rem 0;
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+
+    .input-lgn {
+      display: block;
+      position: realtive;
+      transition: all 0.3s ease;
+    }
+
+    .label-lgn {
+      position: absolute;
+      top: 30px;
+      left: 18px;
+      transition: all 300ms ease-in-out;
+    }
+
+    .input-lgn::-webkit-input-placeholder {
+      color: transparent;
+    }
+    .input-lgn::-moz-placeholder {
+      color: transparent;
+    }
+  }
+
+  .input-lgn:focus ~ label,
+  .input-lgn:not(:placeholder-shown) ~ label {
+    font-size: 15px;
+    top: -18px;
   }
 
   .form-control-user {
@@ -38,7 +70,6 @@ form.user {
     border-radius: 10rem;
     padding: 0.75rem 1rem;
   }
-
 }
 
 .btn-google {

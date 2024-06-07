@@ -24,19 +24,17 @@
 
 		<!-- Custom styles for this template-->
 		<link href="./assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
+		<link href="./assets/admin/css/sb-admin-2.css" rel="stylesheet">
 
 	</head>
 
-	<body class="bg-gradient-primary">
+	<body class="bg">
 
 		<div
 			class="container">
-
 			<!-- Outer Row -->
 			<div class="row justify-content-center">
-
 				<div class="col-xl-10 col-lg-12 col-md-9">
-
 					<div class="card o-hidden border-0 shadow-lg my-5">
 						<div
 							class="card-body p-0">
@@ -50,27 +48,26 @@
 										</div>
 										<form class="user" action="/check-admin" method="post">
 											<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
-											<div class="form-group">
-												<input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Adresse mail">
-											</div>
-											<div class="form-group">
-												<input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Mot de passe">
-											</div>
+
+											<fieldset class="form-item form-group">
+												<input type="email" name="email" class="form-control form-control-user input-lgn" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email">
+												<label for="exampleInputEmail" class="label-lgn">Adresse mail</label>
+											</fieldset>
+
+											<fieldset class="form-item form-group">
+												<input type="password" name="password" class="form-control form-control-user input-lgn" id="exampleInputPassword" placeholder="password">
+												<label for="exampleInputPassword" class="label-lgn">Mot de passe</label>
+
+											</fieldset>
 											<button type="submit" class="btn btn-primary btn-user btn-block">Se connecter</button>
-											{% if error is defined %}
-												<p>{{ error }}</p>
-											{% endif %}
 										</form>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-
 		</div>
 
 		<!-- Bootstrap core JavaScript-->
