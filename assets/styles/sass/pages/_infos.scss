@@ -1,0 +1,20 @@
+#content.infos {
+  padding: 2rem 2rem;
+  a {
+    color: $green;
+  }
+  h1,
+  h2 {
+    color: $green;
+  }
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+  }
+  section:not(:last-child) {
+    border-bottom: 1px solid $lightGray;
+  }
+  section {
+    padding: 2rem 0;
+  }
+}

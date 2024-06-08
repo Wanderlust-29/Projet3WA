@@ -12,7 +12,7 @@
 
 
 {% block main %}
-	<main id="content" class="contact">
+	<main id="content" class="contact" role="main">
 		<h1>Contactez-nous</h1>
 
 		<section class="contact-form">
@@ -20,7 +20,7 @@
 			<h2>Envoyer nous un message</h2>
 
 			<form action="/contact-check" method="post">
-			<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
+				<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
 				<fieldset>
 					<label for="firstName">Entrez votre prénom</label>
 					<input type="text" name="firstName" id="firstName" placeholder="John"/>

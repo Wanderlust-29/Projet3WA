@@ -7,7 +7,7 @@
 		<meta name="description" content="Découvrez nos accessoires et nourritures pour chien. Achetez en ligne les meilleures croquettes, friandises et jouets pour votre animal. Livraison rapide.">
 		<title>
 			{% block title %}{% endblock %}| TimberWolf</title>
-			{% block head %}{% endblock %}
+		{% block head %}{% endblock %}
 		<link href="./assets/font/css/fontawesome.css" rel="stylesheet">
 		<link href="./assets/font/css/brands.css" rel="stylesheet">
 		<link href="./assets/font/css/solid.css" rel="stylesheet">
@@ -25,31 +25,32 @@
 		<meta name="theme-color" content="#ffffff">
 	</head>
 	<body>
-		<header class="header">
+		<header class="header" role="header">
 			<a href="/" class="logo">
 				<img src="assets/media/logo.svg" alt="logo de TimberWolf"/>
 				<p>TimberWolf</p>
 			</a>
 
-			<menu class="icons">
+			<menu class="icons" aria-label="Menu">
 				<li>
-					<a href="/cart/" class="cart-icon">
+					<a href="/cart/" class="cart-icon" aria-label="Panier">
 						<span class="fa-stack has-badge" data-count="{{count}}">
 							<i class="fa fa-shopping-cart fa-stack-1x white-cart"></i>
 						</span>
 					</a>
 				</li>
-				<li class="search-btn">
+				<li class="search-btn" aria-label="Rechercher">
 					<i class="fa-solid fa-magnifying-glass"></i>
 				</li>
-				<li id="hamburger-icon" title="menu-burger">
+
+				<li id="hamburger-icon" title="menu-burger" aria-label="Menu burger">
 					<span></span>
 					<span></span>
 					<span></span>
 				</li>
 			</menu>
 
-			<menu class="menu">
+			<menu class="menu" aria-label="Menu">
 				<li>
 					<a href="/">Accueil</a>
 				</li>
@@ -83,7 +84,7 @@
 				<li>
 					<a href="/contact">Contact</a>
 				</li>
-				<li class="search-btn menu-desktop">
+				<li class="search-btn menu-desktop" aria-label="Rechercher">
 					<i class="fa-solid fa-magnifying-glass"></i>
 				</li>
 			</menu>
@@ -105,7 +106,7 @@
 		<a class="dark-mode-btn" aria-label="modifier le contraste">
 			🌙
 		</a>
-		<footer class="footer">
+		<footer class="footer" role="footer">
 			<section>
 				<a href="/">
 					<h2 class='title'>TimberWolf</h2>
@@ -166,13 +167,13 @@
 		{% if notify is defined and notify is not empty %}
 			<script>
 				function decodeHtmlEntities(text) {
-					var textArea = document.createElement('textarea');
-					textArea.innerHTML = text;
-					return textArea.value;
-				}
-				let cleanedMessage = decodeHtmlEntities("{{ notify.text|e('js') }}");
-				console.log(cleanedMessage);
-				Toastify({text: cleanedMessage, duration: 3000}).showToast();
+var textArea = document.createElement('textarea');
+textArea.innerHTML = text;
+return textArea.value;
+}
+let cleanedMessage = decodeHtmlEntities("{{ notify.text|e('js') }}");
+console.log(cleanedMessage);
+Toastify({text: cleanedMessage, duration: 3000}).showToast();
 			</script>
 		{% endif %}
 	</body>

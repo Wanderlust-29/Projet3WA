@@ -30,7 +30,7 @@ class PageController extends AbstractController
             $this->redirect("/articles");
         }
 
-        $this->render("pages/sort-result-articles.html.twig", [
+        $this->render("pages/articles.html.twig", [
             "articles" => $articles,
         ]);
     }
@@ -56,7 +56,7 @@ class PageController extends AbstractController
                 $this->redirect("/categorie/$slug/");
             }
 
-            $this->render("pages/sort-result-category.html.twig", [
+            $this->render("pages/category.html.twig", [
                 "articles" => $articles,
                 "slug" => $_POST["slug"],
                 "category" => $categoryId
@@ -178,7 +178,7 @@ class PageController extends AbstractController
             // Vérifie si le jeton CSRF est valide
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-                
+
                 // Crée un nouvel utilisateur et le sauvegarde en base de données
                 $firstName = htmlspecialchars($_POST["firstName"]);
                 $lastName = htmlspecialchars($_POST["lastName"]);
@@ -194,8 +194,6 @@ class PageController extends AbstractController
                 $text = "Le message à bien été envoyé";
                 // Redirige vers la page d'accueil si le message est bien enregistré
                 $this->redirect("/contact");
-                    
-                
             } else {
                 $type = 'error';
                 $text = "Token CSRF invalide";

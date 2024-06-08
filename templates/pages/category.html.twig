@@ -8,53 +8,44 @@
 {% block head %}{% endblock %}
 
 {% block main %}
-	<main id="content" class="articles">
-		<header>
-			<h1>{{ category.name }}</h1>
+	<main id="content" class="articles" role="main">
 
+		<section class="header-search" aria-label="Formulaire pour trier les produits">
+			<h1>{{ category.name }}</h1>
 
 			<form action="sort-result-category" method="POST" class="form-sort">
 				<input type="hidden" name="slug" value="{{ category.slug }}">
-				<label for="sort">Filtrer les resultats</label>
+				<label for="sort">Filter results</label>
 				<select name="order-by" class="order-by" id="sort">
-					<option value="">Choisir une option</option>
-					<option value="price_asc">Trier par prix croissant</option>
-					<option value="price_desc">Trier par prix décroissant</option>
-					<option value="popularity">Trier par popularité</option>
+					<option value="">Choose an option</option>
+					<option value="price_asc">Sort by price ascending</option>
+					<option value="price_desc">Sort by price descending</option>
+					<option value="popularity">Sort by popularity</option>
 				</select>
-				<button class="btn-search-form" type="submit">Rechercher</button>
+				<button class="btn-search-form" type="submit">Search</button>
 			</form>
-		</header>
-		<main>
-			{% for article in articles %}
-				{% if article.stock != 0 %}
-					<article class="card">
-						<a href="/article/{{ article.slug }}">
-							<figure class="card-img">
-								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-							</figure>
+		</section>
 
-							<span class="card-body">
-								<h3 class="card-title">{{ article.name }}</h3>
-								<p class="card-price">{{ article.price }}€</p>
-							</span>
-						</a>
-					</article>
-				{% else %}
-					<article class="card">
+		<section class="main-articles" aria-label="Liste des articles de la catégorie {{ category.slug }}">
+			<h2>Produit dans la catégorie
+				{{ category.slug }}</h2>
+			{% for article in articles %}
+				<article class="card" aria-labelledby="title-{{ article.slug }}">
+					<a href="/article/{{ article.slug }}">
 						<figure class="card-img">
 							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 						</figure>
-
-						<span class="card-body">
-							<h3 class="card-title">{{ article.name }}</h3>
-							<p class="card-price">{{ article.price }}€</p>
-						</span>
-						<p class="out-of-stock">Rupture de stock</p>
-					</article>
-				{% endif %}
+						<h3 id="title-{{ article.slug }}" class="card-title">{{ article.name }}</h3>
+						<p class="card-price">{{ article.price }}€</p>
+					</a>
+					{% if article.stock == 0 %}
+						<p class="out-of-stock" aria-label="Out of stock">Rupture de stock</p>
+					{% endif %}
+				</article>
 			{% endfor %}
-		</main>
+		</section>
+
 	</main>
 {% endblock %}
+
 {% block javascript %}{% endblock %}

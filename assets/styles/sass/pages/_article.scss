@@ -9,16 +9,15 @@
     height: auto;
     padding-bottom: 2rem;
   }
-  h1 {
-    text-align: center;
-  }
+  
   .article-item {
     padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .short-desc {
+    .short-desc, h1 {
+      padding-bottom: 2rem;
       text-align: center;
     }
     .cart-button {
@@ -152,6 +151,9 @@
         opacity: 1;
       }
     }
+  }
+  .price{
+    padding-top: 2rem;
   }
   .description-ingredients {
     border: 1px solid $grey;

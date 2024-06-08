@@ -3,7 +3,7 @@
     color: $black;
   }
 
-  header {
+  .header-search {
     padding-top: 2rem;
     display: flex;
     flex-direction: column;
@@ -45,12 +45,21 @@
     }
   }
 
-  main {
+  .main-articles {
     width: 90%;
     margin: 2rem auto;
     display: grid;
     gap: 0.75rem;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    h1{
+      padding: 2rem;
+      color: $green;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    h2, h1{
+      grid-column: 1 / -1;
+    }
   }
 }
 
@@ -61,7 +70,7 @@
         flex-direction: row;
         width: inherit;
         align-items: center;
-        gap: 2rem
+        gap: 2rem;
       }
     }
   }

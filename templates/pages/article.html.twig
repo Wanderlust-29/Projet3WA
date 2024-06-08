@@ -11,39 +11,36 @@
 {% endblock %}
 
 {% block main %}
-	<main id="content" class="article">
+	<main id="content" class="article" role="main">
 
-		<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+		<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}" aria-hidden="true"/>
 
 		<section class="article-item">
-			<h1>{{article.name}}</h1>
-			<p class="short-desc">{{article.shortDescription}}</p>
+			<h1>{{ article.name }}</h1>
+			<p class="short-desc">{{ article.shortDescription }}</p>
 
 			{% if soldOut %}
-				<button class="cart-button disabled btn-add-to-cart" data-article="{{ article.id }}" disabled>
+				<button class="cart-button disabled btn-add-to-cart" data-article="{{ article.id }}" disabled aria-label="Rupture de stock">
 					<span class="add-to-cart">Rupture de stock</span>
 					<span class="added">ajouté</span>
 					<i class="fas fa-shopping-cart"></i>
 					<i class="fas fa-box"></i>
 				</button>
 			{% else %}
-				<button class="cart-button btn-add-to-cart" data-article="{{ article.id }}">
+				<button class="cart-button btn-add-to-cart" data-article="{{ article.id }}" aria-label="Ajouter au Panier">
 					<span class="add-to-cart" id='add'>Ajouter au Panier</span>
 					<span class="added">ajouté</span>
 					<i class="fas fa-shopping-cart"></i>
 					<i class="fas fa-box"></i>
 				</button>
 			{% endif %}
-			<p class="price">{{ article.price }}
-				€</p>
+			<p class="price">{{ article.price }}€</p>
 			{% if averageGrade is defined and averageGrade != 0 %}
-				<p class="average-grade">{{averageGrade}}</p>
+				<p class="average-grade">{{ averageGrade }}</p>
 			{% endif %}
-
-
 		</section>
 
-		<table class="description-ingredients">
+		<table class="description-ingredients" aria-label="Description et ingredients">
 			<thead>
 				<tr>
 					<td>
@@ -68,7 +65,7 @@
 		</table>
 
 		{% if comments is defined and comments != [] %}
-			<section class="comments">
+			<section class="comments" aria-label="commentaires">
 				<h2>Commentaires :</h2>
 				<div class="owl-carousel-comments">
 					{% for comment in comments %}

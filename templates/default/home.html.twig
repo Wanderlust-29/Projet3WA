@@ -12,80 +12,74 @@
 
 {% block main %}
 	<main id="content" class="home">
-		<section class="banner">
+		<section class="banner" aria-label="Bannière principale">
 			<h1>Accessoires et nourritures pour Chien</h1>
 			<a class="btn-articles" href="/articles" aria-label="Voir tous nos produits">
 				<span>Nos Produits</span>
 			</a>
 		</section>
 
-		<section class="home-nav">
+		<section class="home-nav" aria-label="Menu de navigation vers les catégories">
 			<h2>Acheter par catégories</h2>
 			<ul>
 				<li class="dog-food">
-					<a href="/categorie/croquettes/">Croquettes</a>
+					<a href="/categorie/croquettes/" aria-label="Catégorie Croquettes">Croquettes</a>
 				</li>
 				<li class="treats">
-					<a href="/categorie/mastications/">Friandises</a>
+					<a href="/categorie/mastications/" aria-label="Catégorie Friandises">Friandises</a>
 				</li>
 				<li class="toys">
-					<a href="/categorie/jouets/">Jouets</a>
+					<a href="/categorie/jouets/" aria-label="Catégorie Jouets">Jouets</a>
 				</li>
 			</ul>
 		</section>
 
 		<section class="top-sales" aria-label="Nos meilleures ventes">
 			<h2>Nos meilleures ventes</h2>
-			<div class="owl-carousel">
+			<div class="owl-carousel" aria-label="Carousel des meilleures ventes">
 				{% for article in articles %}
 					{% if article.stock != 0 %}
-						<article class="card">
+						<article class="card" aria-labelledby="title-{{ article.slug }}">
 							<a href="/article/{{ article.slug }}">
 								<figure class="card-img">
 									<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 								</figure>
-
-								<span class="card-body">
-									<h3 class="card-title">{{ article.name }}</h3>
-									<p class="card-price">{{ article.price }}€</p>
-								</span>
+								<h3 id="title-{{ article.slug }}" class="card-title">{{ article.name }}</h3>
+								<p class="card-price">{{ article.price }}€</p>
 							</a>
 						</article>
 					{% else %}
-						<article class="card">
+						<article class="card" aria-labelledby="title-{{ article.slug }}">
 							<figure class="card-img">
 								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 							</figure>
 
-							<span class="card-body">
-								<h3 class="card-title">{{ article.name }}</h3>
-								<p class="card-price">{{ article.price }}€</p>
-							</span>
-							<p class="out-of-stock">Rupture de stock</p>
+							<h3 id="title-{{ article.slug }}" class="card-title">{{ article.name }}</h3>
+							<p class="card-price">{{ article.price }}€</p>
+							<p class="out-of-stock" aria-label="Rupture de stock">Rupture de stock</p>
 						</article>
 					{% endif %}
 				{% endfor %}
 			</div>
 		</section>
 
-		<section class="why-choose-us">
+		<section class="why-choose-us" aria-label="Pourquoi nous choisir">
 			<h2>Pourquoi Nous Choisir ?</h2>
-			<article>
-				<img class="quality" src="assets/media/quality.svg" alt='qualité des produits'/>
-				<h3>Qualité et Éthique</h3>
+			<article aria-labelledby="quality">
+				<img class="quality" src="assets/media/quality.svg" alt='Qualité des produits'/>
+				<h3 id="quality">Qualité et Éthique</h3>
 				<p>Nous sélectionnons rigoureusement nos produits pour leur qualité et le respect des animaux.</p>
 			</article>
-			<article>
-				<img class="social" src="assets/media/adopt.svg" alt='engagement social'/>
-				<h3>Engagement Social</h3>
-				<p>
-					Une partie de nos profits est reversée aux refuges et aux associations partenaires.</p>
-				<a class="adopt-btn" href="/adopt">Voir les animaux disponibles à l'adoption</a>
+			<article aria-labelledby="social">
+				<img class="social" src="assets/media/adopt.svg" alt='Engagement social'/>
+				<h3 id="social">Engagement Social</h3>
+				<p>Une partie de nos profits est reversée aux refuges et aux associations partenaires.</p>
+				<a class="adopt-btn" href="/adopt" aria-label="Voir les animaux disponibles à l'adoption">Voir les animaux disponibles à l'adoption</a>
 			</article>
-			<article>
-				<img class="earth" src="assets/media/earth.svg" alt="environnement pour l'environnement"/>
-				<h3>Engagement environnemental</h3>
-				<p>nous minimisons l' utilisation de plastique et le suremballage, en privilégiant le papier kraft recyclé.</p>
+			<article aria-labelledby="environment">
+				<img class="earth" src="assets/media/earth.svg" alt="Engagement pour l'environnement"/>
+				<h3 id="environment">Engagement environnemental</h3>
+				<p>Nous minimisons l'utilisation de plastique et le suremballage, en privilégiant le papier kraft recyclé.</p>
 			</article>
 		</section>
 	</main>

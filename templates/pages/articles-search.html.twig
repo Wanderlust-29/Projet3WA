@@ -8,40 +8,24 @@
 {% block head %}{% endblock %}
 
 {% block main %}
-	<main id="content" class="articles">
-		<header>
+	<main id="content" class="articles" role="main">
+		<section class="main-articles" aria-label="Resultat de la recherche">
 			<h1>Résultats</h1>
-		</header>
-		<main>
 			{% for article in articles %}
-				{% if article.stock != 0 %}
-					<article class="card">
-						<a href="/article/{{ article.slug }}">
-							<figure class="card-img">
-								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-							</figure>
-
-							<span class="card-body">
-								<h3 class="card-title">{{ article.name }}</h3>
-								<p class="card-price">{{ article.price }}€</p>
-							</span>
-						</a>
-					</article>
-				{% else %}
-					<article class="card">
+				<article class="card" aria-labelledby="title-{{ article.slug }}">
+					<a href="/article/{{ article.slug }}">
 						<figure class="card-img">
 							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 						</figure>
-
-						<span class="card-body">
-							<h3 class="card-title">{{ article.name }}</h3>
-							<p class="card-price">{{ article.price }}€</p>
-						</span>
-						<p class="out-of-stock">Rupture de stock</p>
-					</article>
-				{% endif %}
+						<h3 id="title-{{ article.slug }}" class="card-title">{{ article.name }}</h3>
+						<p class="card-price">{{ article.price }}€</p>
+					</a>
+					{% if article.stock == 0 %}
+						<p class="out-of-stock" aria-label="Rupture de stock">Rupture de stock</p>
+					{% endif %}
+				</article>
 			{% endfor %}
-		</main>
+		</section>
 	</main>
 {% endblock %}
 

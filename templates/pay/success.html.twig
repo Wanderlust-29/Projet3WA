@@ -1,20 +1,20 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-    Merci pour votre commande
-    {{ parent() }}
+	Merci pour votre commande
+	{{ parent() }}
 {% endblock %}
 
-{% block head %}
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block main %}
-  <section>
-    <p>
-      Merci pour votre commande !
-    </p>
-  </section>
+	<main class="success-payment" role="main">
+		<section aria-label='Succès de la commande'>
+			<p>
+				Merci pour votre commande !
+			</p>
+		</section>
+	</main>
 {% endblock %}
 
-{% block javascript %}
-{% endblock %}
+{% block javascript %}{% endblock %}
