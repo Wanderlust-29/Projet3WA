@@ -51,13 +51,16 @@
     display: grid;
     gap: 0.75rem;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    h1{
+
+    h1 {
       padding: 2rem;
       color: $green;
       text-transform: uppercase;
       text-align: center;
     }
-    h2, h1{
+
+    h2,
+    h1 {
       grid-column: 1 / -1;
     }
   }
@@ -65,7 +68,7 @@
 
 @media screen and (min-width: 800px) {
   #content.articles {
-    header {
+    .header-search {
       .form-sort {
         flex-direction: row;
         width: inherit;

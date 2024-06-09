@@ -32,11 +32,14 @@
 }
 
 html {
+
   font-size: 62.5%;
   scroll-behavior: smooth;
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
   position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -67,8 +70,19 @@ body.light {
   }
 
   #content.articles {
-    h1 {
-      color: $green;
+    .header-search {
+      h1 {
+        color: $green;
+      }
+
+      .btn-search-form {
+        border: 2px solid $green;
+        color: $green;
+      }
+
+      .btn-search-form:hover {
+        background-color: $green;
+      }
     }
   }
 
@@ -119,6 +133,7 @@ body.light {
 
   #content.cart {
     .form-checkout {
+
       .btn-cart-back,
       #checkout-button,
       .btn-login {
@@ -148,7 +163,7 @@ body.light {
       }
 
       .btn-articles:after {
-        background: $darkMode;
+        background: $green;
       }
 
       .btn-articles:hover {
@@ -171,7 +186,7 @@ body.light {
   }
 
   footer {
-    background-color: $darkMode;
+    background-color: $green;
   }
 }
 
@@ -196,8 +211,19 @@ body.dark {
   }
 
   #content.articles {
-    h1 {
-      color: $darkMode;
+    .header-search {
+      h1 {
+        color: $darkMode;
+      }
+
+      .btn-search-form {
+        border: 2px solid $darkMode;
+        color: $darkMode;
+      }
+
+      .btn-search-form:hover {
+        background-color: $darkMode;
+      }
     }
   }
 
@@ -258,6 +284,7 @@ body.dark {
 
   #content.cart {
     .form-checkout {
+
       .btn-cart-back,
       #checkout-button,
       .btn-login {
@@ -331,6 +358,7 @@ body.dark {
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   margin: 0;
   transition: transform 0.3s ease-in-out;
+
   a {
     height: 100%;
     display: flex;
@@ -429,13 +457,16 @@ figcaption {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   p {
     padding: 2rem;
     text-align: center;
   }
+
   .loader-container {
     position: relative;
     width: 150px;
+
     .spinner {
       display: flex;
       flex-direction: column;
@@ -444,14 +475,11 @@ figcaption {
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      background: radial-gradient(farthest-side, #009a87 94%, #0000) top/9px 9px
-          no-repeat,
+      background: radial-gradient(farthest-side, #009a87 94%, #0000) top/9px 9px no-repeat,
         conic-gradient(#0000 30%, #009a87);
-      -webkit-mask: radial-gradient(
-        farthest-side,
-        #0000 calc(100% - 9px),
-        #000 0
-      );
+      -webkit-mask: radial-gradient(farthest-side,
+          #0000 calc(100% - 9px),
+          #000 0);
       animation: spinner-c7wet2 1s infinite linear;
     }
 
@@ -460,6 +488,7 @@ figcaption {
         transform: rotate(1turn);
       }
     }
+
     img {
       width: 75px;
       position: absolute;
@@ -469,6 +498,7 @@ figcaption {
     }
   }
 }
+
 .loader.fade-out {
   opacity: 0;
   visibility: hidden;

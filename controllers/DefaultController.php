@@ -2,16 +2,16 @@
 
 class DefaultController extends AbstractController
 {
-    public function home() : void
+    public function home(): void
     {
 
         $am = new ArticleManager();
         $articles = $am->TopNine();
-        
+
         $totalPrice = 0;
         $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : null;
-        
-        if(!is_null($cart)){
+
+        if (!is_null($cart)) {
             foreach ($cart as $article) {
                 if (isset($article['price'])) {
                     $totalPrice += $article['price'];
@@ -20,15 +20,19 @@ class DefaultController extends AbstractController
         }
 
         $this->render("default/home.html.twig", [
-            "articles"=>$articles,
+            "articles" => $articles,
             "cart" => $cart,
             "totalPrice" => $totalPrice,
         ]);
     }
 
-    public function notfound() : void
+    public function notfound(): void
     {
-        $this->render("default/404.html.twig", [
-        ]);
+        $this->render("default/404.html.twig", []);
+    }
+
+    public function forbidden(): void
+    {
+        $this->render("default/403.html.twig", []);
     }
 }

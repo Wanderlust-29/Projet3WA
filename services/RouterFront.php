@@ -1,6 +1,10 @@
 <?php
 
 use \Pecee\SimpleRouter\SimpleRouter;
+use Pecee\Http\Request;
+use Pecee\SimpleRouter\Exceptions\NotFoundHttpException;
+use Pecee\SimpleRouter\Exceptions\HttpException;
+
 
 SimpleRouter::get('/', [DefaultController::class, 'home'])->name('home');
 SimpleRouter::get('/articles', [PageController::class, 'articles'])->name('articles');
@@ -17,7 +21,7 @@ SimpleRouter::get('/register', [AuthController::class, 'register'])->name('regis
 SimpleRouter::post('/check-register', [AuthController::class, 'checkRegister'])->name('checkRegister');
 SimpleRouter::match(['get', 'post'], '/logout', [AuthController::class, 'logout'])->name('logout');
 
-SimpleRouter::group(['middleware' => Projet3wa\Middlewares\AuthUser::class,'prefix' => '/account'], function () {
+SimpleRouter::group(['middleware' => Projet3wa\Middlewares\AuthUser::class, 'prefix' => '/account'], function () {
     SimpleRouter::get('/', [AccountController::class, 'account'])->setSettings(['includeSlash' => false])->name('account');
     SimpleRouter::get('/infos', [AccountController::class, 'infos'])->setSettings(['includeSlash' => false])->name('infos');
     SimpleRouter::post('/update', [AccountController::class, 'updateUserProfile'])->name('updateUserProfile');
@@ -45,13 +49,18 @@ SimpleRouter::get('/new-comment/{slug}', [AccountController::class, 'newComment'
 SimpleRouter::post('/check-comment/{slug}', [AccountController::class, 'checkComment'])->setSettings(['includeSlash' => false])->name('checkComment');
 
 
-// SimpleRouter::error(function(Request $request, \Exception $exception) {
-//     switch($exception->getCode()) {
-//         // Page not found
-//         case 404:
-//             response()->redirect('/not-found');
-//         // Forbidden
-//         case 403:
-//             response()->redirect('/forbidden');
-//     }
-// });
+// Error handling for 404 and 403 errors
+SimpleRouter::error(function (Request $request, \Exception $exception) {
+    if ($exception instanceof NotFoundHttpException) {
+        $controller = new DefaultController();
+        $controller->notFound();
+        exit;
+    } elseif ($exception instanceof HttpException && $exception->getCode() === 403) {
+        $controller = new DefaultController();
+        $controller->forbidden();
+        exit;
+    } else {
+        // Gère les autres exceptions
+        echo 'Une erreur inattendue s\'est produite';
+    }
+});
