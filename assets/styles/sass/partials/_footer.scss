@@ -1,4 +1,4 @@
-body > .footer {
+body>.footer {
   padding: 1rem 2rem;
   background-color: $green;
   color: $white;
@@ -9,31 +9,39 @@ body > .footer {
   h2 {
     font-size: 2.2rem;
   }
+
   .title {
     font-family: "Dancing Script", cursive;
   }
+
   section {
     padding-bottom: 2rem;
+
     a {
       color: $white;
     }
+
     li {
       list-style: none;
 
       a {
         color: $white;
+
         i {
           padding: 0 0.5rem;
         }
       }
     }
   }
+
   .social-networks {
     justify-self: center;
     align-self: center;
+
     ul {
       display: flex;
       justify-content: center;
+
       li {
         padding: 0 0.5rem;
       }
@@ -42,10 +50,11 @@ body > .footer {
 }
 
 @media screen and (min-width: 800px) {
-  body > .footer {
+  body>.footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
     .social-networks {
       justify-self: normal;
       align-self: normal;

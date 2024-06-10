@@ -1,11 +1,13 @@
 #content.home {
   position: relative;
+
   h2 {
     text-align: center;
     text-transform: uppercase;
     color: $green;
     padding: 4.8rem;
   }
+
   section {
     padding-bottom: 3rem;
   }
@@ -23,12 +25,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     h1 {
       color: $black;
       text-align: center;
       max-width: 35rem;
       padding-bottom: 1rem;
     }
+
     .btn-articles {
       display: block;
       width: 20rem;
@@ -43,11 +47,13 @@
       text-align: center;
       position: relative;
       transition: all 0.35s;
+
       span {
         position: relative;
         z-index: 2;
       }
     }
+
     .btn-articles:after {
       position: absolute;
       content: "";
@@ -58,6 +64,7 @@
       background: $green;
       transition: all 0.35s;
     }
+
     .btn-articles:hover {
       color: #fff;
     }
@@ -75,11 +82,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
       li {
         width: 100%;
         height: 10rem;
         position: relative;
         margin-top: 1rem;
+
         a {
           width: 100%;
           height: 100%;
@@ -95,6 +104,7 @@
           border-radius: 2rem;
         }
       }
+
       li::before {
         content: "";
         background-image: url(../../media/nav-home.svg);
@@ -118,6 +128,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     a {
       color: $black;
     }
@@ -128,23 +139,28 @@
     max-width: 60%;
     overflow: hidden;
   }
+
   .owl-stage-outer {
-    overflow: visible;
+    padding: 30px 0;
   }
+
   .owl-carousel .owl-stage {
     display: flex;
   }
+
   .card {
     display: flex;
     flex: 1 0 auto;
     height: 100%;
   }
+
   .owl-item {
-    opacity: 0;
+    display: none;
     transition: opacity 500ms;
   }
+
   .owl-item.active {
-    opacity: 1;
+    display: inline-block;
   }
 
   .owl-nav {
@@ -155,23 +171,28 @@
 .why-choose-us {
   display: flex;
   flex-direction: column;
+
   article {
     padding: 2rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     h3 {
       padding: 0 1rem;
       text-align: center;
     }
+
     p {
       text-align: center;
       padding: 2rem;
     }
+
     img {
       margin-bottom: 1rem;
       width: 10rem;
     }
+
     .adopt-btn {
       line-height: 1.5;
       width: 50%;
@@ -183,6 +204,7 @@
       background: $white;
       text-align: center;
     }
+
     .adopt-btn:hover {
       background-color: $green;
       color: $white;
@@ -196,15 +218,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+
       ul {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         gap: 20px;
         width: 60vw;
+
         li {
           margin: 0;
         }
+
         .dog-food {
           grid-column: 1;
           grid-row: span 2;
@@ -216,6 +241,7 @@
     .owl-dots {
       text-align: center;
     }
+
     .owl-dots button.owl-dot.active span,
     .owl-dots button.owl-dot:hover span {
       background-color: $green;
@@ -226,6 +252,7 @@
       top: 1px;
       left: 1px;
     }
+
     .owl-dots button.owl-dot {
       border: 1px solid gray;
       background: white;
@@ -235,16 +262,20 @@
       position: relative;
     }
   }
+
   .why-choose-us {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+
     h2 {
       width: 100%;
     }
+
     article {
       width: 20%;
+
       img {
         width: auto;
         height: 10rem;

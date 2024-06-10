@@ -137,8 +137,8 @@ body > .header .menu {
   top: 0;
   left: 0;
   background-color: #fff;
-  width: 50vw;
-  height: 100vh;
+  width: 50%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -453,7 +453,7 @@ body > .footer .social-networks ul li {
   overflow: hidden;
 }
 #content.home .owl-stage-outer {
-  overflow: visible;
+  padding: 30px 0;
 }
 #content.home .owl-carousel .owl-stage {
   display: flex;
@@ -464,11 +464,11 @@ body > .footer .social-networks ul li {
   height: 100%;
 }
 #content.home .owl-item {
-  opacity: 0;
+  display: none;
   transition: opacity 500ms;
 }
 #content.home .owl-item.active {
-  opacity: 1;
+  display: inline-block;
 }
 #content.home .owl-nav {
   display: none;
@@ -1855,8 +1855,9 @@ html {
 }
 
 body {
-  width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -2044,7 +2045,7 @@ body.dark footer {
 }
 
 .card {
-  width: 100%;
+  width: auto;
   background: rgba(140, 50, 19, 0.06);
   border-radius: 0.35rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -2067,6 +2068,7 @@ body.dark footer {
 }
 .card a .card-img img {
   padding: 1rem 0;
+  max-width: 25rem;
   width: 100%;
   height: 100%;
   display: block;

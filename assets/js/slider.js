@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   $(".owl-carousel").owlCarousel({
     loop: true,
-    margin: 10,
+    center: true,
+    margin: 0,
     autoHeight: false,
     responsiveClass: true,
     navigation: true,
@@ -15,16 +16,16 @@ document.addEventListener("DOMContentLoaded", function () {
         nav: false,
       },
       600: {
-        items: 2,
+        items: 3,
         nav: false,
       },
       1000: {
-        items: 3,
+        items: 4,
         nav: true,
         loop: false,
       },
       1200: {
-        items: 4,
+        items: 5,
         nav: true,
         loop: false,
       },
