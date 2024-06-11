@@ -24,8 +24,8 @@ class AuthController extends AbstractController
                     if (password_verify($_POST["password"], $user->getPassword())) {
                         $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
                         $type = 'success';
-                        $text = "Bienvenue ". $user->getFirstName() . " !";
-                        
+                        $text = "Bienvenue " . $user->getFirstName() . " !";
+
                         $this->redirect("/");
                     } else { // Gestion des erreurs
                         $type = 'error';
@@ -88,12 +88,25 @@ class AuthController extends AbstractController
                             $country = htmlspecialchars($_POST["country"]);
                             $user = new User($firstName, $lastName, $email, $password, $address, $city, $postalCode, $country);
 
-                            $um->create($user);
+                            // Création de l'utilisateur dans la base de données et récupération de son ID
+                            $userId = $um->create($user);
 
-                            $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
-                            $type = 'success';
-                            $text = "Bienvenue !";
-                            $this->redirect("/");
+                            if ($userId !== null) {
+                                // Attribution de l'ID à l'objet utilisateur
+                                $user->setId($userId);
+
+                                // Stockage de l'utilisateur dans la session
+                                $_SESSION["user"] = $user;
+
+                                // Redirection vers la page d'accueil ou autre page appropriée
+                                $this->redirect("/");
+                            } else {
+                                // Gestion des erreurs en cas d'échec de la création de l'utilisateur
+                                $type = 'error';
+                                $text = "Erreur lors de la création de l'utilisateur.";
+                                $this->notify($text, $type);
+                                $this->redirect("/register");
+                            }
                         } else { // Gestion des erreurs
                             $text = "L'utilisateur existe déjà";
                             $this->redirect("/register");
@@ -121,6 +134,7 @@ class AuthController extends AbstractController
         $this->notify($text, $type);
     }
 
+
     public function loginAdmin(): void
     {
         $this->render('layout.admin-login.html.twig', [
@@ -145,7 +159,7 @@ class AuthController extends AbstractController
                         if ($user->getRole() === "ADMIN") {
                             $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
                             $type = "success";
-                            $text = "Bienvenue !";
+                            $text = "Bienvenue " . $user->getFirstName() . " !";
                             $this->redirect("/admin");
                         } else { // Gestion des erreurs
                             $type = "error";
@@ -179,6 +193,5 @@ class AuthController extends AbstractController
     {
         session_destroy();
         $this->redirect("/");
- 
     }
 }

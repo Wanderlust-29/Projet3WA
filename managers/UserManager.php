@@ -74,11 +74,11 @@ class UserManager extends AbstractManager
      * Crée un nouvel utilisateur dans la base de données.
      *
      * @param User $user L'utilisateur à créer.
-     * @return void
+     * @return null
      */
-    public function create(User $user): int
+    public function create(User $user): ?int
     {
-        $query = $this->db->prepare('INSERT INTO users (id, first_name, last_name, email, password, address, city, postal_code, country, role) VALUES (NULL, :first_name, :last_name, :email, :password, :address, :city, :postal_code, :country, :role)');
+        $query = $this->db->prepare('INSERT INTO users (first_name, last_name, email, password, address, city, postal_code, country, role) VALUES (:first_name, :last_name, :email, :password, :address, :city, :postal_code, :country, :role)');
         $parameters = [
             "first_name" => $user->getFirstName(),
             "last_name" => $user->getLastName(),
@@ -90,8 +90,8 @@ class UserManager extends AbstractManager
             "country" => $user->getCountry(),
             "role" => $user->getRole(),
         ];
-        $query->execute($parameters);
-        return $this->db->lastInsertId();
+        $success = $query->execute($parameters);
+        return $success ? (int)$this->db->lastInsertId() : null; // Retourne l'ID de l'utilisateur ou null en cas d'erreur
     }
 
     /**

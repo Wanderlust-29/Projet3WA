@@ -5,7 +5,6 @@ class User
 
     public function __construct(private string $firstName, private string $lastName, private string $email, private string $password, private string $address, private string $city, private int $postalCode, private string $country, private string $role = "USER")
     {
-
     }
 
     public function toArray(): array

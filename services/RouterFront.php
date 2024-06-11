@@ -25,6 +25,8 @@ SimpleRouter::group(['middleware' => Projet3wa\Middlewares\AuthUser::class, 'pre
     SimpleRouter::get('/', [AccountController::class, 'account'])->setSettings(['includeSlash' => false])->name('account');
     SimpleRouter::get('/infos', [AccountController::class, 'infos'])->setSettings(['includeSlash' => false])->name('infos');
     SimpleRouter::post('/update', [AccountController::class, 'updateUserProfile'])->name('updateUserProfile');
+    SimpleRouter::post('/update-password', [AccountController::class, 'updateUserPassword'])->name('updateUserPassword');
+    SimpleRouter::post('/delete', [AccountController::class, 'deleteUserProfile'])->name('deleteUserProfile');
     SimpleRouter::get('/orders', [AccountController::class, 'orders'])->setSettings(['includeSlash' => false])->name('userOrders');
     SimpleRouter::get('/orders/{id}', [AccountController::class, 'order'])->setSettings(['includeSlash' => false])->name('userOrder');
 });

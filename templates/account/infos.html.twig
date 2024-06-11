@@ -11,10 +11,12 @@
 	<main id="content" class="account">
 		<div class="account-container">
 			{% include '/account/account-nav.html.twig' %}
-            <section class="account-content form-account">
+			<section
+				class="account-content form-account">
 				{# Formulaire pour modifier les données de l'utilisateur #}
 				<h2>Modifier mes coordonnées</h2>
 				<form action="/account/update" method="post" class="update">
+					<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
 					<fieldset>
 						<label for="firstName">
 							Prénom
@@ -32,18 +34,6 @@
 							E-mail
 						</label>
 						<input type="email" name="email" id="email" value="{{ session.email }}"/>
-					</fieldset>
-					<fieldset>
-						<label for="password">
-							Mot de passe
-						</label>
-						<input type="password" name="password" id="password" placeholder="nouveau mot de passe"/>
-					</fieldset>
-					<fieldset>
-						<label for="confirm-password">
-							Confirmer le mot de passe
-						</label>
-						<input type="password" name="confirm-password" id="confirm-password" placeholder="confirmer le nouveau mot de passe"/>
 					</fieldset>
 					<fieldset>
 						<label for="address">
@@ -71,7 +61,24 @@
 					</fieldset>
 					<button type="submit" class="form-btn" name="update">Modifier mes informations</button>
 				</form>
-                <form action="/delete" method="post" class="other-btns">
+				<h2>Modifier mon mot de passe</h2>
+				<form action="/account/update-password" method="post" class="update">
+					<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
+					<fieldset>
+						<label for="password">
+							mot de passe
+						</label>
+						<input type="password" name="password" id="password" placeholder="nouveau mot de passe" require/>
+					</fieldset>
+					<fieldset>
+						<label for="confirm-password">
+							Confirmer le mot de passe
+						</label>
+						<input type="password" name="confirm-password" id="confirm-password" placeholder="confirmer le nouveau mot de passe" require/>
+					</fieldset>
+					<button type="submit" class="form-btn" name="update">Modifier le mot de passe</button>
+				</form>
+				<form action="/account/delete" method="post" class="other-btns">
 					<input type="hidden" name="userId" value="{{ session.id }}"/>
 					<button type="submit" class="form-btn form-btn-danger" name="delete">Supprimer mon compte</button>
 				</form>

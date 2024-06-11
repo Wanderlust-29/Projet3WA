@@ -16,14 +16,22 @@
 					{{ session.firstName }}
 					{{ session.lastName }}
 					!</h1>
-					<p>Vous êtes connecté·e à votre compte. Vous pouvez modifier vos coordonnées, votre mot de passe et consulter l'ensemble de vos commandes et de leur avancement.</p>
-					{% if order.articles is not empty %}
+				<p>Vous êtes connecté·e à votre compte. Vous pouvez modifier vos coordonnées, votre mot de passe et consulter l'ensemble de vos commandes et de leur avancement.</p>
+
+				{% if order and order.articles is not empty %}
 					<div class="orders">
 						<div class="order">
-							<a href="/account/orders/{{ order.id }}">Commande du <date>{{ order.niceDate }} ({{ order.diffDate }})</date></a><br><span>Total : {{ order.totalPrice }}&euro;</span>
+							<a href="/account/orders/{{ order.id }}">Commande du
+								<date>{{ order.niceDate }}
+									({{ order.diffDate }})</date>
+							</a><br>
+							<span>Total :
+								{{ order.totalPrice }}&euro;</span>
 						</div>
 					</div>
-					{% endif %}
+				{% else %}
+					<p>Vous n'avez pas encore passé de commande.</p>
+				{% endif %}
 			</section>
 		</div>
 	</main>
