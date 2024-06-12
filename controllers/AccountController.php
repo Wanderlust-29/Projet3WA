@@ -153,7 +153,7 @@ class AccountController extends AbstractController
                 $_SESSION["user"] = $currentUser;
                 $type = 'success';
                 $text = "Profil mis à jour";
-                $this->redirect("account/infos");
+                $this->redirect("infos");
             } else {
                 $type = "error";
                 $text = "Token CSRF invalide";
@@ -181,6 +181,7 @@ class AccountController extends AbstractController
                 if ($_POST["password"] !== $_POST["confirm-password"]) {
                     $type = "error";
                     $text = "Les mots de passe ne correspondent pas";
+                    $this->redirect("infos");
                 } else {
                     // Vérifie la complexité du mot de passe si le champ password n'est pas vide
                     if (!empty($_POST["password"])) {
@@ -202,13 +203,14 @@ class AccountController extends AbstractController
                                 $_SESSION["user"] = $currentUser;
                                 $type = 'success';
                                 $text = "Mot de passe mis à jour";
+                                $this->redirect("infos");
                             }
                         }
                     } else {
                         $type = "error";
                         $text = "Des champs sont vides";
                         // Si les champs du mot de passe sont vides, rediriger vers la page d'infos du compte
-                        $this->redirect("/account/infos");
+                        $this->redirect("infos");
                     }
                 }
             } else {
@@ -219,7 +221,7 @@ class AccountController extends AbstractController
             }
         } else {
             // Si les champs du mot de passe ne sont pas définis, rediriger vers la page d'infos du compte
-            $this->redirect("/account/infos");
+            $this->redirect("infos");
         }
 
         // Notifie l'utilisateur en fonction du résultat

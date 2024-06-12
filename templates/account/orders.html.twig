@@ -11,21 +11,25 @@
 	<main id="content" class="account">
 		<div class="account-container">
 			{% include '/account/account-nav.html.twig' %}
-            <section class="account-content">
-                <h1>Mes commandes</h1>
-                {% if orders is not empty %}
-                <p>Ci-dessous toutes les commandes que vous avez passées sur le site TimberWolf.</p>
-                <div class="orders">
-                    {% for order in orders %}
-                    <div class="order">
-                        <a href="/account/orders/{{ order.id }}">Commande du <date>{{ order.niceDate }} ({{ order.diffDate }})</date></a><br><span>Total : {{ order.totalPrice }}&euro;</span>
-                    </div>
-                    {% endfor %}
-                </div>
-            </section>
-            {% else %}
-            <p>Qu'attendez-bous pour acheter les meilleures croquettes, jouets ou mastication pour vos amis à 4 pattes ? 😭😭😭</p>
-            {% endif %}
+			<section class="account-content">
+				<h1>Mes commandes</h1>
+				{% if orders is not empty %}
+					<p>Ci-dessous toutes les commandes que vous avez passées sur le site TimberWolf.</p>
+					<div class="orders">
+						{% for order in orders %}
+							<div class="order">
+								<a href="/account/orders/{{ order.id }}">Commande du
+									<date>{{ order.niceDate }}
+										({{ order.diffDate }})</date>
+								</a><br><span>Total :
+									{{ order.totalPrice }}&euro;</span>
+							</div>
+						{% endfor %}
+					</div>
+				</section>
+			{% else %}
+				<p>Qu'attendez-vous pour acheter les meilleures croquettes, jouets ou mastication pour vos amis à 4 pattes ? 😭😭😭</p>
+			{% endif %}
 		</div>
 	</main>
 {% endblock %}
