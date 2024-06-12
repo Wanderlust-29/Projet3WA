@@ -8,11 +8,15 @@
 {% block head %}{% endblock %}
 
 {% block main %}
-	<main class="success-payment" role="main">
-		<section aria-label='Succès de la commande'>
+	<main id="content" class="success-payment" role="main">
+		<section class="container" aria-label='Succès de la commande'>
+			<div class="circle">
+				<i class="checkmark">✓</i>
+			</div>
 			<p>
 				Merci pour votre commande !
 			</p>
+			<a href="/">Retourner à l'accueil</a>
 		</section>
 	</main>
 {% endblock %}

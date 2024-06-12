@@ -131,16 +131,22 @@ class CartController extends AbstractController
         }
     }
 
-    //En cas de succes de stripe
     public function success()
     {
+        if (!isset($_SESSION["user"])) {
+            // Redirect to 403 error page or login page
+            return $this->render('default/403.html.twig', []);
+        }
+
         $user = $_SESSION["user"];
         $id_user = $user->getId();
 
         $totalPrice = 0;
 
-        $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : null;
-        $shipping = isset($_SESSION['cart']['shipping_costs']) ? $_SESSION['cart']['shipping_costs'] : null;
+        $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : [];
+        if (!is_array($cart)) {
+            $cart = [];
+        }
 
         foreach ($cart as $article) {
             if (isset($article['price'])) {
@@ -149,17 +155,30 @@ class CartController extends AbstractController
                 $totalPrice += $price * $quantity;
             }
         }
-        if (!is_null($shipping)) {
+
+        $shippingId = null;
+        $shippingCost = 0;
+
+        if (isset($_SESSION['cart']['shipping_costs']) && is_array($_SESSION['cart']['shipping_costs'])) {
+            $shipping = $_SESSION['cart']['shipping_costs'];
             $sm = new ShippingManager();
             $shippingId = $sm->findOne($shipping['id']);
             if ($shippingId !== null) {
-                $totalPrice += $shipping['price'];
+                $shippingCost = $shipping['price'];
+                $totalPrice += $shippingCost;
             } else {
-                throw new Exception("L'objet Shipping n'a pas été trouvé.");
+                error_log('Shipping object not found for ID: ' . $shipping['id']);
             }
+        } else {
+            error_log('Shipping information is missing or invalid in the session.');
         }
 
-        $order = new Order($id_user, date('Y-m-d'), "success",  $shippingId, $totalPrice);
+        if ($shippingId === null) {
+            // Redirect to 404 error page
+            return $this->render('default/404.html.twig', []);
+        }
+
+        $order = new Order($id_user, date('Y-m-d'), "success", $shippingId, $totalPrice);
 
         $om = new OrderManager();
         $om->createOrder($order);
@@ -167,6 +186,9 @@ class CartController extends AbstractController
 
         return $this->render('pay/success.html.twig', []);
     }
+
+
+
 
     //Quitter stripe
     public function cancel()

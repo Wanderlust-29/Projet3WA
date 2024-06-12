@@ -78,6 +78,8 @@
        HOME-NAV
   *******************/
   .home-nav {
+    padding: 0 2rem;
+
     ul {
       display: flex;
       flex-direction: column;
@@ -141,7 +143,7 @@
   }
 
   .owl-stage-outer {
-    padding: 30px 0;
+    overflow: visible;
   }
 
   .owl-carousel .owl-stage {
@@ -155,12 +157,12 @@
   }
 
   .owl-item {
-    display: none;
+    opacity: 0;
     transition: opacity 500ms;
   }
 
   .owl-item.active {
-    display: inline-block;
+    opacity: 1;
   }
 
   .owl-nav {
@@ -195,7 +197,6 @@
 
     .adopt-btn {
       line-height: 1.5;
-      width: 50%;
       padding: 10px;
       border: 2px solid $green;
       outline: none;

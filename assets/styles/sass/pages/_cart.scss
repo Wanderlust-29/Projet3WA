@@ -2,22 +2,24 @@
   display: flex;
   justify-content: center;
   padding: 2rem 0;
+  align-items: center;
 
   .cart-payement {
     padding: 1rem;
     width: 80%;
     border-radius: 0.35rem;
     background-color: $white;
-    grid-column: 2;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
       rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+
     h1 {
       text-align: center;
     }
+
     p {
       padding: 2rem;
     }
@@ -180,6 +182,7 @@
     .cart-payement {
       .list-articles {
         width: 100%;
+
         .article {
           a {
             width: 50%;

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* VARS */
 @import url("https://fonts.googleapis.com/css?family=Advent+Pro|Dancing+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
@@ -137,8 +138,8 @@ body > .header .menu {
   top: 0;
   left: 0;
   background-color: #fff;
-  width: 50%;
-  height: 100%;
+  width: 50vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -328,6 +329,145 @@ body > .footer .social-networks ul li {
     align-self: normal;
   }
 }
+body.dark .header {
+  background-color: #2c3e50;
+}
+body.dark .header .icons .fa-stack[data-count]:after {
+  color: #2c3e50;
+}
+body.dark .header .menu a::after {
+  background-color: #2c3e50;
+}
+body.dark #content.articles .header-search h1 {
+  color: #2c3e50;
+}
+body.dark #content.articles .header-search .btn-search-form {
+  border: 2px solid #2c3e50;
+  color: #2c3e50;
+}
+body.dark #content.articles .header-search .btn-search-form:hover {
+  background-color: #2c3e50;
+}
+body.dark #content.contact h1 {
+  color: #2c3e50;
+}
+body.dark #content.contact .contact-form button {
+  background-color: #2c3e50;
+}
+body.dark #content.contact .contact-form button:hover {
+  background-color: #26323d;
+}
+body.dark #content.contact #about h3 {
+  background-color: #2c3e50;
+}
+body.dark #content.article .cart-button {
+  background-color: #2c3e50;
+}
+body.dark #content.article .cart-button:hover {
+  background-color: #26323d;
+}
+body.dark #content.article .description-ingredients thead tr td {
+  background-color: #2c3e50;
+}
+body.dark #content.article .description-ingredients thead tr td h3 {
+  cursor: pointer;
+  color: #fff;
+}
+body.dark #content.article .description-ingredients thead tr td:hover {
+  background-color: #fff;
+}
+body.dark #content.article .description-ingredients thead tr td:hover h3 {
+  color: #2c3e50;
+}
+body.dark #content.cart .cart-payement .btn-decrement:disabled,
+body.dark #content.cart .cart-payement .btn-increment:disabled,
+body.dark #content.cart .cart-payement .btn-decrement,
+body.dark #content.cart .cart-payement .btn-increment {
+  background-color: #2c3e50 !important;
+}
+body.dark #content.cart .cart-payement .btn-decrement:hover,
+body.dark #content.cart .cart-payement .btn-increment:hover {
+  background-color: #26323d !important;
+}
+body.dark #content.cart .form-checkout .btn-cart-back,
+body.dark #content.cart .form-checkout #checkout-button,
+body.dark #content.cart .form-checkout .btn-login {
+  border: 2px solid #2c3e50;
+  color: #2c3e50;
+  background: #fff;
+}
+body.dark #content.cart .form-checkout #checkout-button:disabled {
+  background: #2c3e50;
+  color: #fff;
+}
+body.dark #content.cart .form-checkout .btn-cart-back:hover,
+body.dark #content.cart .form-checkout #checkout-button:hover,
+body.dark #content.cart .form-checkout .btn-login:hover {
+  color: #fff;
+  background: #2c3e50;
+}
+body.dark #content.home h2 {
+  color: #2c3e50;
+}
+body.dark #content.home .banner .btn-articles {
+  color: #2c3e50;
+  border: 2px solid #2c3e50;
+}
+body.dark #content.home .banner .btn-articles:after {
+  background: #2c3e50;
+}
+body.dark #content.home .banner .btn-articles:hover {
+  color: #fff;
+}
+body.dark #content.home .home-nav ul li::before {
+  background-image: url(../../media/nav-home-dark-mode.svg);
+  opacity: 1;
+}
+body.dark #content.home .owl-dots button.owl-dot.active span,
+body.dark #content.home .owl-dots button.owl-dot:hover span {
+  background-color: #2c3e50;
+}
+body.dark #content.home .why-choose-us .adopt-btn {
+  color: #2c3e50;
+  border: 2px solid #2c3e50;
+}
+body.dark #content.home .why-choose-us .adopt-btn:hover {
+  background-color: #2c3e50;
+  color: #fff;
+}
+body.dark #content.account .account-menu .title {
+  background-color: #2c3e50;
+}
+body.dark #content.account .account-content a {
+  color: #2c3e50;
+}
+body.dark #content.account .account-content .order {
+  border-left: 5px solid #2c3e50;
+}
+body.dark #content.account .account-content .form-btn {
+  background-color: #2c3e50;
+}
+body.dark #content.success-payment .container a {
+  border: 1px solid #2c3e50;
+  color: #2c3e50;
+  padding: 1rem 2rem;
+}
+body.dark #content.success-payment .container a:hover {
+  background-color: #2c3e50;
+  color: #fff;
+}
+body.dark footer {
+  background-color: #2c3e50;
+}
+
+.dark-mode-btn {
+  cursor: pointer;
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
+  font-size: 2rem;
+}
+
 /* PAGES */
 #content.home {
   position: relative;
@@ -402,6 +542,9 @@ body > .footer .social-networks ul li {
 #content.home .banner .btn-articles:hover:after {
   width: 100%;
 }
+#content.home .home-nav {
+  padding: 0 2rem;
+}
 #content.home .home-nav ul {
   display: flex;
   flex-direction: column;
@@ -453,7 +596,7 @@ body > .footer .social-networks ul li {
   overflow: hidden;
 }
 #content.home .owl-stage-outer {
-  padding: 30px 0;
+  overflow: visible;
 }
 #content.home .owl-carousel .owl-stage {
   display: flex;
@@ -464,11 +607,11 @@ body > .footer .social-networks ul li {
   height: 100%;
 }
 #content.home .owl-item {
-  display: none;
+  opacity: 0;
   transition: opacity 500ms;
 }
 #content.home .owl-item.active {
-  display: inline-block;
+  opacity: 1;
 }
 #content.home .owl-nav {
   display: none;
@@ -498,7 +641,6 @@ body > .footer .social-networks ul li {
 }
 .why-choose-us article .adopt-btn {
   line-height: 1.5;
-  width: 50%;
   padding: 10px;
   border: 2px solid #009a87;
   outline: none;
@@ -655,7 +797,8 @@ body > .footer .social-networks ul li {
   justify-content: center;
   align-items: center;
 }
-#content.article .article-item .short-desc, #content.article .article-item h1 {
+#content.article .article-item .short-desc,
+#content.article .article-item h1 {
   padding-bottom: 2rem;
   text-align: center;
 }
@@ -836,6 +979,7 @@ body > .footer .social-networks ul li {
   display: none;
 }
 #content.article .comments .comment {
+  width: 100%;
   padding: 0.5rem 1rem;
   border: 1px solid #6e707e;
 }
@@ -863,17 +1007,17 @@ body > .footer .social-networks ul li {
   display: flex;
   justify-content: center;
   padding: 2rem 0;
+  align-items: center;
 }
 #content.cart .cart-payement {
   padding: 1rem;
   width: 80%;
   border-radius: 0.35rem;
   background-color: #fff;
-  grid-column: 2;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 #content.cart .cart-payement h1 {
@@ -1017,6 +1161,7 @@ body > .footer .social-networks ul li {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
 }
 #content.contact h1,
 #content.contact h2,
@@ -1099,6 +1244,7 @@ body > .footer .social-networks ul li {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    align-items: flex-end;
   }
   #content.contact h1 {
     width: 100%;
@@ -1213,6 +1359,73 @@ body > .footer .social-networks ul li {
 }
 #content.infos section {
   padding: 2rem 0;
+}
+
+#content.notFound,
+#content.denied {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  background-color: #222;
+}
+#content.notFound h1,
+#content.denied h1 {
+  color: #fff;
+  font-size: 775%;
+  z-index: 2;
+  font-weight: 700;
+}
+#content.notFound p,
+#content.denied p {
+  color: #fff;
+  z-index: 2;
+  font-size: 125%;
+}
+
+#content.success-payment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#content.success-payment .container {
+  background: white;
+  height: 480px;
+  width: 90%;
+  box-shadow: 5px 5px 10px grey;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#content.success-payment .container .circle {
+  border-radius: 200px;
+  height: 200px;
+  width: 200px;
+  background: #F8FAF5;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+#content.success-payment .container .checkmark {
+  color: #9ABC66;
+  font-size: 100px;
+  line-height: 200px;
+}
+#content.success-payment .container a {
+  border: 1px solid #009a87;
+  color: #009a87;
+  padding: 1rem 2rem;
+}
+#content.success-payment .container a:hover {
+  background-color: #009a87;
+  color: #fff;
 }
 
 /* ACCOUNT */
@@ -1857,9 +2070,6 @@ html {
 }
 
 body {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
   position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -1869,189 +2079,17 @@ body {
   line-height: 1.8;
 }
 
-body.light .header {
-  background-color: #009a87;
-}
-body.light .header .icons .fa-stack[data-count]:after {
-  color: #009a87;
-}
-body.light .header .menu a::after {
-  background-color: #009a87;
-}
-body.light #content.articles .header-search h1 {
-  color: #009a87;
-}
-body.light #content.articles .header-search .btn-search-form {
-  border: 2px solid #009a87;
-  color: #009a87;
-}
-body.light #content.articles .header-search .btn-search-form:hover {
-  background-color: #009a87;
-}
-body.light #content.contact h1 {
-  color: #009a87;
-}
-body.light #content.contact .contact-form button {
-  background-color: #009a87;
-}
-body.light #content.contact .contact-form button:hover {
-  background-color: #0c6f63;
-}
-body.light #content.contact #about h3 {
-  background-color: #009a87;
-}
-body.light .description-ingredients thead tr td {
-  background-color: #009a87;
-}
-body.light .description-ingredients thead tr td h3 {
-  cursor: pointer;
-  color: #fff;
-}
-body.light .description-ingredients thead tr td:hover {
-  background-color: #fff;
-}
-body.light .description-ingredients thead tr td:hover h3 {
-  color: #009a87;
-}
-body.light #content.cart .form-checkout .btn-cart-back,
-body.light #content.cart .form-checkout #checkout-button,
-body.light #content.cart .form-checkout .btn-login {
-  border: 2px solid #009a87;
-  color: #009a87;
-  background: #fff;
-}
-body.light #content.cart .form-checkout .btn-cart-back:hover,
-body.light #content.cart .form-checkout #checkout-button:hover,
-body.light #content.cart .form-checkout .btn-login:hover {
-  color: #fff;
-  background: #009a87;
-}
-body.light #content.home h2 {
-  color: #009a87;
-}
-body.light #content.home .banner .btn-articles {
-  color: #009a87;
-  border: 2px solid #009a87;
-}
-body.light #content.home .banner .btn-articles:after {
-  background: #009a87;
-}
-body.light #content.home .banner .btn-articles:hover {
-  color: #fff;
-}
-body.light #content.home .home-nav ul li::before {
-  background-image: url(../../media/nav-home.svg);
-}
-body.light #content.home .owl-dots button.owl-dot.active span,
-body.light #content.home .owl-dots button.owl-dot:hover span {
-  background-color: #009a87;
-}
-body.light footer {
-  background-color: #009a87;
-}
-
-body.dark .header {
-  background-color: #2c3e50;
-}
-body.dark .header .icons .fa-stack[data-count]:after {
-  color: #2c3e50;
-}
-body.dark .header .menu a::after {
-  background-color: #2c3e50;
-}
-body.dark #content.articles .header-search h1 {
-  color: #2c3e50;
-}
-body.dark #content.articles .header-search .btn-search-form {
-  border: 2px solid #2c3e50;
-  color: #2c3e50;
-}
-body.dark #content.articles .header-search .btn-search-form:hover {
-  background-color: #2c3e50;
-}
-body.dark #content.contact h1 {
-  color: #2c3e50;
-}
-body.dark #content.contact .contact-form button {
-  background-color: #2c3e50;
-}
-body.dark #content.contact .contact-form button:hover {
-  background-color: #26323d;
-}
-body.dark #content.contact #about h3 {
-  background-color: #2c3e50;
-}
-body.dark #content.article .cart-button {
-  background-color: #2c3e50;
-}
-body.dark #content.article .cart-button:hover {
-  background-color: #26323d;
-}
-body.dark #content.article .description-ingredients thead tr td {
-  background-color: #2c3e50;
-}
-body.dark #content.article .description-ingredients thead tr td h3 {
-  cursor: pointer;
-  color: #fff;
-}
-body.dark #content.article .description-ingredients thead tr td:hover {
-  background-color: #fff;
-}
-body.dark #content.article .description-ingredients thead tr td:hover h3 {
-  color: #2c3e50;
-}
-body.dark #content.cart .form-checkout .btn-cart-back,
-body.dark #content.cart .form-checkout #checkout-button,
-body.dark #content.cart .form-checkout .btn-login {
-  border: 2px solid #2c3e50;
-  color: #2c3e50;
-  background: #fff;
-}
-body.dark #content.cart .form-checkout .btn-cart-back:hover,
-body.dark #content.cart .form-checkout #checkout-button:hover,
-body.dark #content.cart .form-checkout .btn-login:hover {
-  color: #fff;
-  background: #2c3e50;
-}
-body.dark #content.home h2 {
-  color: #2c3e50;
-}
-body.dark #content.home .banner .btn-articles {
-  color: #2c3e50;
-  border: 2px solid #2c3e50;
-}
-body.dark #content.home .banner .btn-articles:after {
-  background: #2c3e50;
-}
-body.dark #content.home .banner .btn-articles:hover {
-  color: #fff;
-}
-body.dark #content.home .home-nav ul li::before {
-  background-image: url(../../media/nav-home-dark-mode.svg);
-  opacity: 1;
-}
-body.dark #content.home .owl-dots button.owl-dot.active span,
-body.dark #content.home .owl-dots button.owl-dot:hover span {
-  background-color: #2c3e50;
-}
-body.dark footer {
-  background-color: #2c3e50;
-}
-
-.dark-mode-btn {
-  cursor: pointer;
-  position: fixed;
-  bottom: 2rem;
-  right: 1rem;
-  font-size: 2rem;
+main {
+  min-height: 100vh;
 }
 
 .card {
-  width: auto;
-  background: rgba(140, 50, 19, 0.06);
-  border-radius: 0.35rem;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   margin: 0;
+  padding: 1rem;
   transition: transform 0.3s ease-in-out;
 }
 .card a {
@@ -2062,29 +2100,36 @@ body.dark footer {
   align-items: center;
 }
 .card a .card-img {
-  background-color: #fff;
-  border-radius: 0.35rem 0.35rem 0 0;
-  padding-bottom: 1rem;
+  padding: 1rem 0;
   width: 100%;
   height: auto;
 }
 .card a .card-img img {
-  padding: 1rem 0;
-  max-width: 25rem;
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
   object-position: center;
 }
-.card a .card-title {
+.card a .card-body {
+  width: 100%;
+  height: 55%;
+  background: rgba(140, 50, 19, 0.06);
   padding: 1rem;
-  text-align: center;
-  font-size: 1.7rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
-.card a .card-price {
-  font-weight: 700;
-  padding-bottom: 1rem;
+.card a .card-body .card-title {
+  font-size: 1.7rem;
+  font-style: italic;
+  text-align: center;
+}
+.card a .card-body .card-price {
+  padding: 0.5rem 0.8rem;
+  font-weight: 900;
 }
 .card .out-of-stock {
   padding: 0 2rem;
@@ -2165,7 +2210,10 @@ figcaption {
   height: 150px;
   border-radius: 50%;
   background: radial-gradient(farthest-side, #009a87 94%, rgba(0, 0, 0, 0)) top/9px 9px no-repeat, conic-gradient(rgba(0, 0, 0, 0) 30%, #009a87);
+  /* Pour les navigateurs basés sur WebKit */
   -webkit-mask: radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(100% - 9px), #000 0);
+  /* Pour une meilleure compatibilité */
+  mask: radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(100% - 9px), #000 0);
   animation: spinner-c7wet2 1s infinite linear;
 }
 @keyframes spinner-c7wet2 {

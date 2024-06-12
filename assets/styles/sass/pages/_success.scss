@@ -1,0 +1,45 @@
+#content.success-payment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+        background: white;
+        height: 480px;
+        width: 90%;
+        box-shadow: 5px 5px 10px grey;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .circle {
+            border-radius: 200px;
+            height: 200px;
+            width: 200px;
+            background: #F8FAF5;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+
+        }
+
+        .checkmark {
+            color: #9ABC66;
+            font-size: 100px;
+            line-height: 200px;
+        }
+
+        a {
+            border: 1px solid $green;
+            color: $green;
+            padding: 1rem 2rem;
+        }
+
+        a:hover {
+            background-color: $green;
+            color: $white;
+        }
+    }
+}

@@ -12,7 +12,7 @@ class AccountController extends AbstractController
         // Vérifie si un utilisateur est connecté en session et s'il s'agit bien d'une instance de la classe User
         if (isset($_SESSION["user"]) && $_SESSION["user"] instanceof User) {
             $sessionId = $_SESSION["user"]->getId(); // Récupère l'identifiant de l'utilisateur connecté
-            dump($sessionId);
+            // dump($sessionId);
 
             if ($sessionId !== null) { // Ensure $sessionId is not null
                 $om = new OrderManager(); // Initialise le gestionnaire de commandes

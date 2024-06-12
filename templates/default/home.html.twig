@@ -35,32 +35,39 @@
 		</section>
 
 
-		<h2>Nos meilleures ventes</h2>
-		<div class="owl-carousel" aria-label="Carousel des meilleures ventes">
-			{% for article in articles %}
-				{% if article.stock != 0 %}
-					<article class="card" aria-labelledby="title-{{ article.slug }}">
-						<a href="/article/{{ article.slug }}">
+		<section class="top-sales" aria-label="Nos meilleures ventes">
+			<h2>Nos meilleures ventes</h2>
+			<div class="owl-carousel">
+				{% for article in articles %}
+					{% if article.stock != 0 %}
+						<article class="card">
+							<a href="/article/{{ article.slug }}">
+								<figure class="card-img">
+									<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+								</figure>
+
+								<div class="card-body">
+									<h3 class="card-title">{{ article.name }}</h3>
+									<p class="card-price">{{ article.price }}€</p>
+								</div>
+							</a>
+						</article>
+					{% else %}
+						<article class="card">
 							<figure class="card-img">
 								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 							</figure>
-							<h3 id="title-{{ article.slug }}" class="card-title">{{ article.name }}</h3>
-							<p class="card-price">{{ article.price }}€</p>
-						</a>
-					</article>
-				{% else %}
-					<article class="card" aria-labelledby="title-{{ article.slug }}">
-						<figure class="card-img">
-							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
-						</figure>
 
-						<h3 id="title-{{ article.slug }}" class="card-title">{{ article.name }}</h3>
-						<p class="card-price">{{ article.price }}€</p>
-						<p class="out-of-stock" aria-label="Rupture de stock">Rupture de stock</p>
-					</article>
-				{% endif %}
-			{% endfor %}
-		</div>
+							<div class="card-body">
+								<h3 class="card-title">{{ article.name }}</h3>
+								<p class="card-price">{{ article.price }}€</p>
+							</div>
+							<p class="out-of-stock">Rupture de stock</p>
+						</article>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</section>
 
 		<section class="why-choose-us" aria-label="Pourquoi nous choisir">
 			<h2>Pourquoi Nous Choisir ?</h2>

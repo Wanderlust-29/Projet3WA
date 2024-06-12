@@ -4,22 +4,26 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 0;
+
   img {
     width: 80%;
     height: auto;
     padding-bottom: 2rem;
   }
-  
+
   .article-item {
     padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .short-desc, h1 {
+
+    .short-desc,
+    h1 {
       padding-bottom: 2rem;
       text-align: center;
     }
+
     .cart-button {
       position: relative;
       padding: 10px;
@@ -97,8 +101,10 @@
         }
       }
     }
+
     .disabled {
       background-color: $grey;
+
       .add-to-cart {
         content: "Rupture de stock";
       }
@@ -108,24 +114,29 @@
       0% {
         left: -10%;
       }
+
       40%,
       60% {
         left: 50%;
       }
+
       100% {
         left: 110%;
       }
     }
 
     @keyframes box {
+
       0%,
       40% {
         top: -20%;
       }
+
       60% {
         top: 40%;
         left: 52%;
       }
+
       100% {
         top: 40%;
         left: 112%;
@@ -136,6 +147,7 @@
       0% {
         opacity: 1;
       }
+
       20%,
       100% {
         opacity: 0;
@@ -143,84 +155,105 @@
     }
 
     @keyframes txt2 {
+
       0%,
       80% {
         opacity: 0;
       }
+
       100% {
         opacity: 1;
       }
     }
   }
-  .price{
+
+  .price {
     padding-top: 2rem;
   }
+
   .description-ingredients {
     border: 1px solid $grey;
     width: 80%;
+
     thead {
       tr {
         display: flex;
         flex-direction: column;
         align-items: center;
+
         td {
           width: 100%;
           background-color: $green;
           text-align: center;
           border-bottom: 1px solid $white;
+
           h3 {
             cursor: pointer;
             text-transform: uppercase;
             color: $white;
           }
         }
+
         td:hover {
           background-color: $white;
+
           h3 {
             color: $green;
           }
         }
       }
     }
+
     tbody {
       display: flex;
       flex-direction: column;
+
       tr {
         padding: 1rem 3rem;
       }
+
       .ingredients {
         display: none;
       }
     }
   }
+
   .comments {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     .owl-carousel-comments {
       display: flex;
       width: 80%;
       max-width: 60%;
       overflow: hidden;
     }
+
     .owl-stage-outer {
       overflow: visible;
     }
+
     .owl-carousel-comments .owl-stage {
       display: flex;
     }
+
     .owl-item {
       opacity: 0;
       transition: opacity 500ms;
     }
+
     .owl-item.active {
       opacity: 1;
     }
+
     .owl-nav {
       display: none;
     }
+
     .comment {
+      width: 100%;
       padding: 0.5rem 1rem;
       border: 1px solid $grey;
     }
@@ -232,6 +265,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+
     img {
       width: 40%;
     }
@@ -239,9 +273,11 @@
     .article-item {
       width: 40%;
     }
+
     .description-ingredients {
       width: 80%;
     }
+
     .comments {
       width: 80%;
     }

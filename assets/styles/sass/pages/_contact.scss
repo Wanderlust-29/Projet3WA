@@ -1,4 +1,5 @@
 #content.contact {
+
   h1,
   h2,
   h3,
@@ -12,9 +13,13 @@
     color: $green;
     text-transform: uppercase;
   }
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
+
+
   .contact-form {
     width: 80%;
     display: flex;
@@ -25,14 +30,16 @@
     form {
       display: flex;
       flex-direction: column;
-      align-items: center; 
-      
+      align-items: center;
+
       fieldset {
         width: 100%;
+
         input {
           text-indent: 3px;
           width: 100%;
         }
+
         textarea {
           width: 100%;
         }
@@ -48,12 +55,14 @@
         outline: none;
         cursor: pointer;
         color: $white;
+
         &:hover {
           background-color: $darkGreen;
         }
       }
     }
   }
+
   #about {
     p {
       padding: 1rem 2rem;
@@ -69,15 +78,19 @@
     h3:first-of-type {
       border-bottom: 1px solid $white;
     }
+
     a {
       color: black;
     }
   }
+
   .leaflet-pane {
     z-index: 0 !important;
   }
+
   .container-map {
     width: 100%;
+
     #map {
       min-width: 300px;
       min-height: 200px;
@@ -92,24 +105,31 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    align-items: flex-end;
+
     h1 {
       width: 100%;
     }
+
     .contact-form {
       width: 40%;
     }
+
     #about {
       width: 40%;
+
       h3 {
         text-transform: capitalize;
         background-color: $green;
         width: inherit;
       }
+
       .about-schedules,
       .about-coordinates {
         padding-bottom: 2rem;
       }
     }
+
     .container-map {
       width: 100%;
     }

@@ -27,18 +27,32 @@
 		<section class="main-articles" aria-label="Liste de tous les articles">
 			<h2>Nos Produits</h2>
 			{% for article in articles %}
-				<article class="card" aria-labelledby="title-{{ article.slug }}">
-					<a href="/article/{{ article.slug }}">
+				{% if article.stock != 0 %}
+					<article class="card">
+						<a href="/article/{{ article.slug }}">
+							<figure class="card-img">
+								<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
+							</figure>
+
+							<div class="card-body">
+								<h3 class="card-title">{{ article.name }}</h3>
+								<p class="card-price">{{ article.price }}€</p>
+							</div>
+						</a>
+					</article>
+				{% else %}
+					<article class="card">
 						<figure class="card-img">
 							<img src="{{ article.image.getUrl() }}" alt="{{ article.image.getAlt() }}"/>
 						</figure>
-						<h3 id="title-{{ article.slug }}" class="card-title">{{ article.name }}</h3>
-						<p class="card-price">{{ article.price }}€</p>
-					</a>
-					{% if article.stock == 0 %}
-						<p class="out-of-stock" aria-label="Rupture de stock">Rupture de stock</p>
-					{% endif %}
-				</article>
+
+						<div class="card-body">
+							<h3 class="card-title">{{ article.name }}</h3>
+							<p class="card-price">{{ article.price }}€</p>
+						</div>
+						<p class="out-of-stock">Rupture de stock</p>
+					</article>
+				{% endif %}
 			{% endfor %}
 		</section>
 	</main>

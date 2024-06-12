@@ -5,6 +5,7 @@
 /* PARTIALS */
 @import "partials/header";
 @import "partials/footer";
+@import "partials/darkmode";
 
 /* PAGES */
 @import "pages/home";
@@ -14,6 +15,8 @@
 @import "pages/contact";
 @import "pages/adopt";
 @import "pages/infos";
+@import "pages/error";
+@import "pages/success";
 
 /* ACCOUNT */
 @import "account/account";
@@ -38,9 +41,6 @@ html {
 }
 
 body {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
   position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -50,314 +50,18 @@ body {
   line-height: 1.8;
 }
 
-//light-mode
-body.light {
-  .header {
-    background-color: $green;
-
-    .icons {
-      .fa-stack[data-count]:after {
-        color: $green;
-      }
-    }
-
-    .menu {
-      a {
-        &::after {
-          background-color: $green;
-        }
-      }
-    }
-  }
-
-  #content.articles {
-    .header-search {
-      h1 {
-        color: $green;
-      }
-
-      .btn-search-form {
-        border: 2px solid $green;
-        color: $green;
-      }
-
-      .btn-search-form:hover {
-        background-color: $green;
-      }
-    }
-  }
-
-  #content.contact {
-    h1 {
-      color: $green;
-    }
-
-    .contact-form {
-      button {
-        background-color: $green;
-
-        &:hover {
-          background-color: $darkGreen;
-        }
-      }
-    }
-
-    #about {
-      h3 {
-        background-color: $green;
-      }
-    }
-  }
-
-  .description-ingredients {
-    thead {
-      tr {
-        td {
-          background-color: $green;
-
-          h3 {
-            cursor: pointer;
-            color: $white;
-          }
-        }
-
-        td:hover {
-          background-color: $white;
-
-          h3 {
-            color: $green;
-          }
-        }
-      }
-    }
-  }
-
-  #content.cart {
-    .form-checkout {
-
-      .btn-cart-back,
-      #checkout-button,
-      .btn-login {
-        border: 2px solid $green;
-        color: $green;
-        background: $white;
-      }
-
-      .btn-cart-back:hover,
-      #checkout-button:hover,
-      .btn-login:hover {
-        color: $white;
-        background: $green;
-      }
-    }
-  }
-
-  #content.home {
-    h2 {
-      color: $green;
-    }
-
-    .banner {
-      .btn-articles {
-        color: $green;
-        border: 2px solid $green;
-      }
-
-      .btn-articles:after {
-        background: $green;
-      }
-
-      .btn-articles:hover {
-        color: #fff;
-      }
-    }
-
-    .home-nav {
-      ul {
-        li::before {
-          background-image: url(../../media/nav-home.svg);
-        }
-      }
-    }
-
-    .owl-dots button.owl-dot.active span,
-    .owl-dots button.owl-dot:hover span {
-      background-color: $green;
-    }
-  }
-
-  footer {
-    background-color: $green;
-  }
-}
-
-//dark-mode
-body.dark {
-  .header {
-    background-color: $darkMode;
-
-    .icons {
-      .fa-stack[data-count]:after {
-        color: $darkMode;
-      }
-    }
-
-    .menu {
-      a {
-        &::after {
-          background-color: $darkMode;
-        }
-      }
-    }
-  }
-
-  #content.articles {
-    .header-search {
-      h1 {
-        color: $darkMode;
-      }
-
-      .btn-search-form {
-        border: 2px solid $darkMode;
-        color: $darkMode;
-      }
-
-      .btn-search-form:hover {
-        background-color: $darkMode;
-      }
-    }
-  }
-
-  #content.contact {
-    h1 {
-      color: $darkMode;
-    }
-
-    .contact-form {
-      button {
-        background-color: $darkMode;
-
-        &:hover {
-          background-color: $darkModeHover;
-        }
-      }
-    }
-
-    #about {
-      h3 {
-        background-color: $darkMode;
-      }
-    }
-  }
-
-  #content.article {
-    .cart-button {
-      background-color: $darkMode;
-
-      &:hover {
-        background-color: $darkModeHover;
-      }
-    }
-
-    .description-ingredients {
-      thead {
-        tr {
-          td {
-            background-color: $darkMode;
-
-            h3 {
-              cursor: pointer;
-              color: $white;
-            }
-          }
-
-          td:hover {
-            background-color: $white;
-
-            h3 {
-              color: $darkMode;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  #content.cart {
-    .form-checkout {
-
-      .btn-cart-back,
-      #checkout-button,
-      .btn-login {
-        border: 2px solid $darkMode;
-        color: $darkMode;
-        background: $white;
-      }
-
-      .btn-cart-back:hover,
-      #checkout-button:hover,
-      .btn-login:hover {
-        color: $white;
-        background: $darkMode;
-      }
-    }
-  }
-
-  #content.home {
-    h2 {
-      color: $darkMode;
-    }
-
-    .banner {
-      .btn-articles {
-        color: $darkMode;
-        border: 2px solid $darkMode;
-      }
-
-      .btn-articles:after {
-        background: $darkMode;
-      }
-
-      .btn-articles:hover {
-        color: #fff;
-      }
-    }
-
-    .home-nav {
-      ul {
-        li::before {
-          background-image: url(../../media/nav-home-dark-mode.svg);
-          opacity: 1;
-        }
-      }
-    }
-
-    .owl-dots button.owl-dot.active span,
-    .owl-dots button.owl-dot:hover span {
-      background-color: $darkMode;
-    }
-  }
-
-  footer {
-    background-color: $darkMode;
-  }
-}
-
-.dark-mode-btn {
-  cursor: pointer;
-  position: fixed;
-  bottom: 2rem;
-  right: 1rem;
-  font-size: 2rem;
+main {
+  min-height: 100vh;
 }
 
 .card {
-  width: auto;
-  background: rgba(140, 50, 19, 0.06);
-  border-radius: 0.35rem;
+  width: 100%;
+  background-color: $white;
+  border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   margin: 0;
+  padding: 1rem;
   transition: transform 0.3s ease-in-out;
 
   a {
@@ -368,16 +72,12 @@ body.dark {
     align-items: center;
 
     .card-img {
-      background-color: $white;
-      border-radius: 0.35rem 0.35rem 0 0;
-      padding-bottom: 1rem;
+      padding: 1rem 0;
       width: 100%;
       height: auto;
     }
 
     .card-img img {
-      padding: 1rem 0;
-      max-width: 25rem;
       width: 100%;
       height: 100%;
       display: block;
@@ -385,17 +85,27 @@ body.dark {
       object-position: center;
     }
 
-    .card-body {}
-
-    .card-title {
+    .card-body {
+      width: 100%;
+      height: 55%;
+      background: rgba(140, 50, 19, 0.06);
       padding: 1rem;
-      text-align: center;
-      font-size: 1.7rem;
-    }
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
 
-    .card-price {
-      font-weight: 700;
-      padding-bottom: 1rem;
+      .card-title {
+        font-size: 1.7rem;
+        font-style: italic;
+        text-align: center;
+      }
+
+      .card-price {
+        padding: 0.5rem 0.8rem;
+        font-weight: 900;
+      }
     }
   }
 
@@ -412,6 +122,7 @@ body.dark {
     font-weight: 900;
   }
 }
+
 
 .card:hover {
   transform: translateY(-0.5rem);
@@ -481,7 +192,13 @@ figcaption {
       border-radius: 50%;
       background: radial-gradient(farthest-side, #009a87 94%, #0000) top/9px 9px no-repeat,
         conic-gradient(#0000 30%, #009a87);
+      /* Pour les navigateurs basés sur WebKit */
       -webkit-mask: radial-gradient(farthest-side,
+          #0000 calc(100% - 9px),
+          #000 0);
+
+      /* Pour une meilleure compatibilité */
+      mask: radial-gradient(farthest-side,
           #0000 calc(100% - 9px),
           #000 0);
       animation: spinner-c7wet2 1s infinite linear;

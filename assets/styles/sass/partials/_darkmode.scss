@@ -1,0 +1,230 @@
+//dark-mode
+body.dark {
+    .header {
+        background-color: $darkMode;
+
+        .icons {
+            .fa-stack[data-count]:after {
+                color: $darkMode;
+            }
+        }
+
+        .menu {
+            a {
+                &::after {
+                    background-color: $darkMode;
+                }
+            }
+        }
+    }
+
+    #content.articles {
+        .header-search {
+            h1 {
+                color: $darkMode;
+            }
+
+            .btn-search-form {
+                border: 2px solid $darkMode;
+                color: $darkMode;
+            }
+
+            .btn-search-form:hover {
+                background-color: $darkMode;
+            }
+        }
+    }
+
+    #content.contact {
+        h1 {
+            color: $darkMode;
+        }
+
+        .contact-form {
+            button {
+                background-color: $darkMode;
+
+                &:hover {
+                    background-color: $darkModeHover;
+                }
+            }
+        }
+
+        #about {
+            h3 {
+                background-color: $darkMode;
+            }
+        }
+    }
+
+    #content.article {
+        .cart-button {
+            background-color: $darkMode;
+
+            &:hover {
+                background-color: $darkModeHover;
+            }
+        }
+
+        .description-ingredients {
+            thead {
+                tr {
+                    td {
+                        background-color: $darkMode;
+
+                        h3 {
+                            cursor: pointer;
+                            color: $white;
+                        }
+                    }
+
+                    td:hover {
+                        background-color: $white;
+
+                        h3 {
+                            color: $darkMode;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #content.cart {
+        .cart-payement {
+
+            .btn-decrement:disabled,
+            .btn-increment:disabled,
+            .btn-decrement,
+            .btn-increment {
+                background-color: $darkMode !important;
+            }
+
+            .btn-decrement:hover,
+            .btn-increment:hover {
+                background-color: $darkModeHover !important;
+            }
+        }
+
+        .form-checkout {
+
+            .btn-cart-back,
+            #checkout-button,
+            .btn-login {
+                border: 2px solid $darkMode;
+                color: $darkMode;
+                background: $white;
+            }
+
+            #checkout-button:disabled {
+                background: $darkMode;
+                color: $white;
+
+            }
+
+            .btn-cart-back:hover,
+            #checkout-button:hover,
+            .btn-login:hover {
+                color: $white;
+                background: $darkMode;
+            }
+        }
+    }
+
+    #content.home {
+        h2 {
+            color: $darkMode;
+        }
+
+        .banner {
+            .btn-articles {
+                color: $darkMode;
+                border: 2px solid $darkMode;
+            }
+
+            .btn-articles:after {
+                background: $darkMode;
+            }
+
+            .btn-articles:hover {
+                color: #fff;
+            }
+        }
+
+        .home-nav {
+            ul {
+                li::before {
+                    background-image: url(../../media/nav-home-dark-mode.svg);
+                    opacity: 1;
+                }
+            }
+        }
+
+        .owl-dots button.owl-dot.active span,
+        .owl-dots button.owl-dot:hover span {
+            background-color: $darkMode;
+        }
+
+        .why-choose-us {
+            .adopt-btn {
+                color: $darkMode;
+                border: 2px solid $darkMode;
+            }
+
+            .adopt-btn:hover {
+                background-color: $darkMode;
+                color: $white;
+            }
+        }
+    }
+
+    #content.account {
+        .account-menu {
+            .title {
+                background-color: $darkMode;
+            }
+        }
+
+        .account-content {
+            a {
+                color: $darkMode;
+            }
+
+            .order {
+                border-left: 5px solid $darkMode;
+            }
+
+            .form-btn {
+                background-color: $darkMode;
+            }
+
+        }
+    }
+
+    #content.success-payment {
+        .container {
+            a {
+                border: 1px solid $darkMode;
+                color: $darkMode;
+                padding: 1rem 2rem;
+            }
+
+            a:hover {
+                background-color: $darkMode;
+                color: $white;
+            }
+        }
+    }
+
+    footer {
+        background-color: $darkMode;
+    }
+}
+
+.dark-mode-btn {
+    cursor: pointer;
+    position: fixed;
+    bottom: 2rem;
+    right: 1rem;
+    font-size: 2rem;
+}
