@@ -7,12 +7,12 @@ use Pecee\SimpleRouter\Exceptions\HttpException;
 
 
 SimpleRouter::get('/', [DefaultController::class, 'home'])->name('home');
-SimpleRouter::get('/articles', [PageController::class, 'articles'])->name('articles');
+SimpleRouter::get('/articles', [PageController::class, 'articles'])->name('products');
 SimpleRouter::get('/categorie/{slug}', [PageController::class, 'category'])->setSettings(['includeSlash' => false])->name('category');
-SimpleRouter::get('/article/{slug}', [PageController::class, 'article'])->setSettings(['includeSlash' => false])->name('article');
-SimpleRouter::post('/articles-search', [PageController::class, 'search'])->setSettings(['includeSlash' => false])->name('article');
-SimpleRouter::post('/sort-result-articles', [PageController::class, 'sort'])->setSettings(['includeSlash' => false])->name('article');
-SimpleRouter::post('/sort-result-category', [PageController::class, 'sortByCategory'])->setSettings(['includeSlash' => false])->name('article');
+SimpleRouter::get('/article/{slug}', [PageController::class, 'article'])->setSettings(['includeSlash' => false])->name('product');
+SimpleRouter::post('/articles-search', [PageController::class, 'search'])->setSettings(['includeSlash' => false])->name('productSearch');
+SimpleRouter::post('/sort-result-articles', [PageController::class, 'sort'])->setSettings(['includeSlash' => false])->name('productSort');
+SimpleRouter::post('/sort-result-category', [PageController::class, 'sortByCategory'])->setSettings(['includeSlash' => false])->name('categorySort');
 
 
 SimpleRouter::get('/login', [AuthController::class, 'login'])->name('login');

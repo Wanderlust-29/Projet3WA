@@ -2,7 +2,6 @@
 
 class AdminArticlesController extends AbstractController
 {
-
     // Tous les articles
     function articles()
     {
@@ -221,8 +220,6 @@ class AdminArticlesController extends AbstractController
                 $am = new ArticleManager();
                 $insert = $am->insert($article);
 
-                var_dump($insert);
-
                 $url = url('article', ['id' => $insert]);
                 $type = 'success';
                 $text = "L'article " . $_POST["name"] . " a bien été créé 😃";
@@ -244,13 +241,10 @@ class AdminArticlesController extends AbstractController
 
     public function deleteArticle()
     {
-        $error = isset($_SESSION["error-message"]) ? $_SESSION["error-message"] : null;
-
         $am = new ArticleManager();
         $articles = $am->findAll();
 
         $this->render("admin/admin-delete-article.html.twig", [
-            'error' => $error,
             'articles' => $articles,
         ]);
     }

@@ -153,7 +153,7 @@ class ArticleManager extends AbstractManager
      * Met à jour le stock d'un article.
      *
      * @param Article $article L'article à mettre à jour.
-     * @return void
+     * @return bool
      */
     public function update(Article $article): bool
     {
@@ -200,7 +200,7 @@ class ArticleManager extends AbstractManager
      * Met à jour le stock d'un article.
      *
      * @param Article $article L'article à mettre à jour.
-     * @return void
+     * @return bool
      */
     public function updateStock(Article $article): bool
     {
@@ -222,10 +222,11 @@ class ArticleManager extends AbstractManager
     }
 
     /**
-     * Met à jour le stock d'un article.
+     * Met à jour l'image'.
      *
      * @param Article $article L'article à mettre à jour.
-     * @return void
+     * @param Media $media L'image à mettre à jour.
+     * @return bool
      */
     public function updateImage(Article $article, Media $media): bool
     {
@@ -254,7 +255,7 @@ class ArticleManager extends AbstractManager
      * Insère un nouvel article dans la base de données.
      *
      * @param Article $article Le nouvel article à insérer.
-     * @return void
+     * @return int
      * 
      */
     public function insert(Article $article): int
