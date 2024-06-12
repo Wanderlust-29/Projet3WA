@@ -4,9 +4,9 @@ class ContactMessagesManager extends AbstractManager
 {
 
     /**
-     * Crée un nouveau commentaire dans la base de données.
+     * Creates a new contact message in the database.
      *
-     * @param Comment $comment Le commentaire à créer.
+     * @param ContactMessages $contactMessage The contact message to create.
      * @return void
      */
     public function create(ContactMessages $contactMessage): void
@@ -24,10 +24,9 @@ class ContactMessagesManager extends AbstractManager
     }
 
     /**
-     * Récupère tous les messages.
+     * Fetches all contact messages.
      *
-     * 
-     * @return ContactMessages Un tableau contenant les messages.
+     * @return ContactMessages[] An array containing the contact messages.
      */
     public function findAll(): array
     {
@@ -35,7 +34,7 @@ class ContactMessagesManager extends AbstractManager
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $messages = [];
-    
+
         foreach ($result as $item) {
             $message = new ContactMessages($item["first_name"], $item["last_name"], $item["email"], $item["message"]);
             $message->setId($item["id"]);
@@ -45,12 +44,12 @@ class ContactMessagesManager extends AbstractManager
     }
 
     /**
-     * Supprime un commentaire dans la base de données.
+     * Deletes a contact message from the database.
      *
-     * @param ContactMessages $ContactMessages Le commentaire à supprimer.
+     * @param int $id The ID of the contact message to delete.
      * @return bool
      */
-    public function delete(int $id) : bool
+    public function delete(int $id): bool
     {
         $query = $this->db->prepare('DELETE FROM contact_messages WHERE id=:id');
         $parameters = [

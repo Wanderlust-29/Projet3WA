@@ -4,10 +4,9 @@ class CommentManager extends AbstractManager
 {
 
     /**
-     * Récupère tous les commentaires.
+     * Fetches all comments.
      *
-     * 
-     * @return Comment[] Un tableau contenant les commentaires.
+     * @return Comment[] An array containing the comments.
      */
     public function findAll(): array
     {
@@ -15,7 +14,7 @@ class CommentManager extends AbstractManager
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $comments = [];
-    
+
         foreach ($result as $item) {
 
             $am = new ArticleManager();
@@ -32,10 +31,9 @@ class CommentManager extends AbstractManager
     }
 
     /**
-     * Récupère tous les commentaires en attente
+     * Fetches all pending comments.
      *
-     * 
-     * @return Comment[] Un tableau contenant les commentaires.
+     * @return Comment[] An array containing the comments.
      */
     public function findAllPending(): array
     {
@@ -43,7 +41,7 @@ class CommentManager extends AbstractManager
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         $comments = [];
-    
+
         foreach ($result as $item) {
 
             $am = new ArticleManager();
@@ -60,10 +58,10 @@ class CommentManager extends AbstractManager
     }
 
     /**
-     * Récupère les commentaires en fonction de l'ID de l'article.
+     * Fetches comments based on article ID.
      *
-     * @param int $articleId L'identifiant de l'article pour lequel récupérer les commentaires.
-     * @return Comment[] Un tableau contenant les commentaires.
+     * @param int $articleId The article ID for which to fetch comments.
+     * @return Comment[] An array containing the comments.
      */
     public function findAllById(int $articleId): array
     {
@@ -74,24 +72,24 @@ class CommentManager extends AbstractManager
 
         $am = new ArticleManager();
         $article = $am->findOne($articleId);
-    
+
         foreach ($result as $item) {
 
             $um = new UserManager();
             $user = $um->findOne($item["user_id"]);
-            $comment = new Comment($article, $user, $item["grade"], $item["comment"],$item["status"]);
+            $comment = new Comment($article, $user, $item["grade"], $item["comment"], $item["status"]);
             $comments[] = $comment;
         }
         return $comments;
     }
 
     /**
-     * Crée un nouveau commentaire dans la base de données.
+     * Creates a new comment in the database.
      *
-     * @param Comment $comment Le commentaire à créer.
+     * @param Comment $comment The comment to create.
      * @return void
      */
-    public function create(Comment $comment) : void
+    public function create(Comment $comment): void
     {
         $query = $this->db->prepare('INSERT INTO comments (article_id, user_id, grade, comment, status) VALUES (:article_id, :user_id, :grade, :comment, :status)');
         $parameters = [
@@ -108,12 +106,13 @@ class CommentManager extends AbstractManager
 
 
     /**
-     * Mets à jour un commentaire dans la base de données.
+     * Updates the status of a comment in the database.
      *
-     * @param int $comment Le commentaire à créer.
+     * @param int $id The ID of the comment to update.
+     * @param string $status The new status value.
      * @return bool
      */
-    public function updateStatus(int $id, string $status) : bool
+    public function updateStatus(int $id, string $status): bool
     {
         $query = $this->db->prepare('UPDATE comments SET status=:status WHERE id=:id');
         $parameters = [
@@ -126,12 +125,12 @@ class CommentManager extends AbstractManager
 
 
     /**
-     * Supprime un commentaire dans la base de données.
+     * Deletes a comment from the database.
      *
-     * @param Comment $comment Le commentaire à créer.
+     * @param int $id The ID of the comment to delete.
      * @return bool
      */
-    public function delete(int $id) : bool
+    public function delete(int $id): bool
     {
         $query = $this->db->prepare('DELETE FROM comments WHERE id=:id');
         $parameters = [
@@ -142,18 +141,18 @@ class CommentManager extends AbstractManager
     }
 
     /**
-     * Retourne le nombre de commentaires en attente
+     * Retrieves the total number of pending comments.
      *
-     * @return int total commentaires en attente
+     * @return int Total number of pending comments.
      */
-    public function getPendingCommentsTotal() : int
+    public function getPendingCommentsTotal(): int
     {
         $query = $this->db->prepare('SELECT SUM(id) AS total FROM comments WHERE status = "pending" GROUP BY id');
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        if($result){
+        if ($result) {
             return $result['total'];
-        }else{
+        } else {
             return 0;
         }
     }

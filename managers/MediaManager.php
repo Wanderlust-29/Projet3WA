@@ -3,10 +3,10 @@
 class MediaManager extends AbstractManager
 {
     /**
-     * Récupère un média en fonction de son identifiant.
+     * Fetches a media based on its identifier.
      *
-     * @param int $id L'identifiant du média à récupérer.
-     * @return Media|null L'objet média trouvé ou null s'il n'existe pas.
+     * @param int $id The identifier of the media to fetch.
+     * @return Media|null The found media object or null if it doesn't exist.
      */
     public function findOne(int $id): ?Media
     {
@@ -24,9 +24,9 @@ class MediaManager extends AbstractManager
     }
 
     /**
-     * Récupère tous les médias.
+     * Fetches all media.
      *
-     * @return array Liste des médias.
+     * @return array List of media objects.
      */
     public function findAll(): array
     {
@@ -44,10 +44,10 @@ class MediaManager extends AbstractManager
     }
 
     /**
-     * Insère un média dans la base de données.
+     * Inserts a media into the database.
      *
-     * @param Media $media Le média à insérer.
-     * @return Media $media
+     * @param Media $media The media object to insert.
+     * @return Media|null The inserted media object with updated ID.
      */
     public function insert(Media $media): ?Media
     {
@@ -63,10 +63,10 @@ class MediaManager extends AbstractManager
     }
 
     /**
-     * Supprime un média.
+     * Deletes a media from the database and optionally deletes the physical file.
      *
-     * @param Media $media Le média à insérer.
-     * @return void
+     * @param Media $media The media object to delete.
+     * @return bool True if deletion was successful, false otherwise.
      */
     public function delete(Media $media): bool
     {

@@ -3,10 +3,10 @@
 class ShippingManager extends AbstractManager
 {
     /**
-     * Récupère un frais de port  en fonction de son identifiant.
+     * Fetches a shipping method based on its identifier.
      *
-     * @param int $id L'identifiant du frais de port à récupérer.
-     * @return Shipping|null L'objet shipping trouvé ou null s'il n'existe pas.
+     * @param int $id The identifier of the shipping method to fetch.
+     * @return Shipping|null The found shipping method object or null if it doesn't exist.
      */
     public function findOne(int $id): ?Shipping
     {
@@ -26,10 +26,10 @@ class ShippingManager extends AbstractManager
 
 
     /**
-     * Récupère un frais de port en fonction de son nom.
+     * Fetches a shipping method based on its name.
      *
-     * @param string $name Le nom du frais de port à récupérer.
-     * @return Shipping|null L'objet shipping trouvé ou null s'il n'existe pas.
+     * @param string $name The name of the shipping method to fetch.
+     * @return Shipping|null The found shipping method object or null if it doesn't exist.
      */
     public function findByName(string $name): ?Shipping
     {
@@ -48,9 +48,9 @@ class ShippingManager extends AbstractManager
     }
 
     /**
-     * Récupère tous les frais de port.
+     * Fetches all shipping methods.
      *
-     * @return array Liste des frais de port.
+     * @return array List of shipping method objects.
      */
     public function findAll(): array
     {
@@ -68,11 +68,10 @@ class ShippingManager extends AbstractManager
     }
 
     /**
-     * Insère un nouvel frais de port dans la base de données.
+     * Inserts a new shipping method into the database.
      *
-     * @param Shipping $shipping Le nouveau frais de port à insérer.
-     * @return void
-     * 
+     * @param Shipping $shipping The new shipping method to insert.
+     * @return int The ID of the newly inserted shipping method.
      */
     public function insert(Shipping $shipping): int
     {
@@ -91,11 +90,11 @@ class ShippingManager extends AbstractManager
     }
 
     /**
-     * Metsà jour un frais de port.
+     * Updates a shipping method in the database.
      *
-     * @param Shipping $shipping Le frais de port à mettre à jour
-     * @return bool
-     * @throws Exception Si le frais de port n'existe pas.
+     * @param Shipping $shipping The shipping method to update.
+     * @return bool True if the update was successful, false otherwise.
+     * @throws Exception If the shipping method doesn't exist.
      */
     public function update(Shipping $shipping): bool
     {
@@ -115,11 +114,11 @@ class ShippingManager extends AbstractManager
     }
 
     /**
-     * Supprime un frais de port.
+     * Deletes a shipping method from the database.
      *
-     * @param Shipping $shipping Le frais de port à supprimer.
+     * @param Shipping $shipping The shipping method to delete.
      * @return void
-     * @throws Exception Si le frais de port n'existe pas.
+     * @throws Exception If the shipping method doesn't exist.
      */
     public function delete(Shipping $shipping): void
     {

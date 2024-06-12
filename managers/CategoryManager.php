@@ -3,12 +3,12 @@
 class CategoryManager extends AbstractManager
 {
     /**
-     * Récupère une catégorie en fonction de son identifiant.
+     * Fetches a category based on its identifier.
      *
-     * @param int $id L'identifiant de la catégorie à récupérer.
-     * @return Category|null L'objet catégorie trouvé ou null s'il n'existe pas.
+     * @param int $id The identifier of the category to fetch.
+     * @return Category|null The found category object or null if it doesn't exist.
      */
-    public function findOne(int $id) : Category
+    public function findOne(int $id): Category
     {
         $query = $this->db->prepare('SELECT * FROM categories WHERE id=:id');
         $parameters = [
@@ -17,8 +17,7 @@ class CategoryManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if($result)
-        {
+        if ($result) {
             $category = new Category($result["name"], $result["description"], $result["slug"]);
             $category->setId($result["id"]);
             return $category;
@@ -26,13 +25,13 @@ class CategoryManager extends AbstractManager
         return null;
     }
 
-        /**
-     * Récupère une catégorie en fonction de son identifiant.
+    /**
+     * Fetches a category based on its slug.
      *
-     * @param string $slug Le slug de la catégorie à récupérer.
-     * @return Category|null L'objet catégorie trouvé ou null s'il n'existe pas.
+     * @param string $slug The slug of the category to fetch.
+     * @return Category|null The found category object or null if it doesn't exist.
      */
-    public function findOneBySlug(string $slug) : ?Category
+    public function findOneBySlug(string $slug): ?Category
     {
         $query = $this->db->prepare('SELECT * FROM categories WHERE slug=:slug');
         $parameters = [
@@ -41,8 +40,7 @@ class CategoryManager extends AbstractManager
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if($result)
-        {
+        if ($result) {
             $category = new Category($result["name"], $result["description"], $result["slug"]);
             $category->setId($result["id"]);
             return $category;
@@ -51,21 +49,21 @@ class CategoryManager extends AbstractManager
     }
 
     /**
-     * Récupère toutes les catégories.
+     * Fetches all categories.
      *
-     * @return array Liste des catégories.
-    */
-    public function findAll() : array
+     * @return array List of categories.
+     */
+    public function findAll(): array
     {
         $query = $this->db->prepare('SELECT c.*, COUNT(a.id) AS total_products FROM categories as c LEFT JOIN articles AS a ON c.id = a.category_id GROUP BY c.id');
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        $categories=[];
+        $categories = [];
 
-        foreach($result as $item){
+        foreach ($result as $item) {
             $category = new Category($item["name"], $item["description"],  $item["slug"]);
             $category->setId($item["id"]);
-            $cat =$category->toArray();
+            $cat = $category->toArray();
             $cat['total_products'] = $item["total_products"];
             $categories[] = $cat;
         }
@@ -73,13 +71,13 @@ class CategoryManager extends AbstractManager
     }
 
     /**
-     * Mise à jour d'une catégorie.
+     * Updates a category.
      *
-     * @param Category $category l'objet catégorie
-     * @return bool résultat de la mise à jour en bdd
-    */
-    public function update(Category $category) : bool
-    {   
+     * @param Category $category The category object to update.
+     * @return bool Result of the database update operation.
+     */
+    public function update(Category $category): bool
+    {
         $query = $this->db->prepare(
             'UPDATE categories SET name=:name, description=:description WHERE id=:id'
         );
@@ -94,13 +92,13 @@ class CategoryManager extends AbstractManager
     }
 
     /**
-     * Création d'une catégorie.
+     * Creates a category.
      *
-     * @param Category $category l'objet catégorie
-     * @return bool résultat de la mise à jour en bdd
-    */
-    public function insert(Category $category) 
-    {   
+     * @param Category $category The category object to insert.
+     * @return int The ID of the newly inserted category.
+     */
+    public function insert(Category $category)
+    {
         $query = $this->db->prepare(
             'INSERT INTO categories (name, description, slug) VALUES (:name,:description,:slug)'
         );
@@ -111,6 +109,5 @@ class CategoryManager extends AbstractManager
         ];
         $query->execute($param);
         return $this->db->lastInsertId();
-
     }
 }

@@ -17,10 +17,10 @@ class OrderManager extends AbstractManager
     ];
 
     /**
-     * Récupère une commande par son identifiant.
+     * Fetches an order by its identifier.
      *
-     * @param int $id L'identifiant de l'utilisateur
-     * @return Order|null L'objet commande trouvé ou null s'il n'existe pas.
+     * @param int $id The identifier of the order.
+     * @return Order|null The found order object or null if it doesn't exist.
      */
     public function findOne(int $id): ?Order
     {
@@ -43,16 +43,16 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Récupère une commande par son identifiant pour le compte client
+     * Fetches an order by its identifier for the user's account.
      *
-     * @param int $user_id L'identifiant de l'utilisateur
-     * @param int $id L'identifiant de la commande
-     * @return Order|null L'objet commande trouvé ou null s'il n'existe pas.
+     * @param int $id The identifier of the order.
+     * @param int $user_id The identifier of the user.
+     * @return Order|null The found order object or null if it doesn't exist.
      */
     public function findOneForAccount(int $id, int $user_id): ?Order
     {
         $query = $this->db->prepare('SELECT * FROM orders WHERE id=:id AND user_id=:user_id');
-        $parameters = ["id" => $id,"user_id" => $user_id];
+        $parameters = ["id" => $id, "user_id" => $user_id];
         $query->execute($parameters);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         if ($result) {
@@ -71,11 +71,11 @@ class OrderManager extends AbstractManager
 
 
     /**
-     * Récupère une commande par son identifiant.
+     * Fetches the last order made by a user based on user ID.
      *
-     * @param int $id L'identifiant de la commande à récupérer.
-     * @return Order|null L'objet commande trouvé ou null s'il n'existe pas.
-    */
+     * @param int $id The identifier of the user.
+     * @return Order|null The found order object or null if it doesn't exist.
+     */
     public function findLastOrder(int $id): ?Order
     {
         $query = $this->db->prepare('SELECT * FROM orders WHERE user_id=:id ORDER BY created_at DESC LIMIT 0,1');
@@ -98,9 +98,9 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Récupère toutes les commandes.
+     * Fetches all orders.
      *
-     * @return array Liste des commandes.
+     * @return array List of order objects.
      */
     public function findAll(): array
     {
@@ -125,10 +125,10 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Récupère toutes les commandes associées à un utilisateur.
+     * Fetches all orders associated with a specific user.
      *
-     * @param mixed $userId L'identifiant de l'utilisateur.
-     * @return array Liste des commandes de l'utilisateur.
+     * @param int $userId The identifier of the user.
+     * @return array List of orders associated with the user.
      */
     public function allOrdersByUserId(int $userId): array
     {
@@ -151,9 +151,9 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Crée une nouvelle commande en utilisant la date actuelle.
+     * Creates a new order using the current date.
      *
-     * @param Order $order L'objet Order représentant la commande à créer.
+     * @param Order $order The Order object representing the order to create.
      * @return void
      */
     public function createOrder(Order $order): void
@@ -162,11 +162,11 @@ class OrderManager extends AbstractManager
         VALUES (:user_id, :created_at, :status, :shipping_id, :total_price)');
 
         $parameters = [
-            "user_id" => $order->getUserId(), // Récupérer l'ID de l'utilisateur
+            "user_id" => $order->getUserId(),
             "created_at" => $order->getCreatedAt(),
-            "status" => $order->getStatus(), // Récupérer le statut de la commande
-            "shipping_id" => $order->getShippingId()->getId(), // Récupérer le statut de la commande
-            "total_price" => $order->getTotalPrice() // Récupérer le prix total de la commande
+            "status" => $order->getStatus(),
+            "shipping_id" => $order->getShippingId()->getId(),
+            "total_price" => $order->getTotalPrice()
         ];
 
         $query->execute($parameters);
@@ -174,11 +174,11 @@ class OrderManager extends AbstractManager
         $this->insertArticles($orderId);
     }
 
-        /**
-     * Récupère le frais de port en fonction de l'ID de commande.
+    /**
+     * Fetches the shipping details for an order based on its order ID.
      *
-     * @param int $orderId L'ID de la commande.
-     * @return Shipping|null L'objet Shipping correspondant ou null s'il n'existe pas.
+     * @param int $orderId The ID of the order.
+     * @return Shipping|null The corresponding Shipping object or null if it doesn't exist.
      */
     public function findShippingByOrderId(int $orderId): ?Shipping
     {
@@ -190,7 +190,7 @@ class OrderManager extends AbstractManager
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         if ($result && isset($result['shipping_id'])) {
-            // Si shipping_id existe dans le résultat, utilisez ShippingManager pour récupérer le frais de port correspondant
+
             $shippingId = $result['shipping_id'];
             $shippingManager = new ShippingManager();
             return $shippingManager->findOne($shippingId);
@@ -200,9 +200,9 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Insère les articles associés à une commande donnée dans la table orders_articles.
+     * Inserts the articles associated with a given order into the orders_articles table.
      *
-     * @param int $orderId L'identifiant de la commande.
+     * @param int $orderId The identifier of the order.
      * @return void
      */
     public function insertArticles(int $orderId): void
@@ -223,16 +223,15 @@ class OrderManager extends AbstractManager
                 "item_quantity" => $quantity
             ]);
 
-            // Mettre à jour le stock de l'article
             $this->decrementArticleStock($articleId);
         }
         unset($_SESSION["cart"]);
     }
 
     /**
-     * Méthode pour décrémenter le stock d'un article.
+     * Decreases the stock of an article by 1.
      *
-     * @param int $articleId L'identifiant de l'article.
+     * @param int $articleId The identifier of the article.
      * @return void
      */
     private function decrementArticleStock(int $articleId): void
@@ -241,16 +240,15 @@ class OrderManager extends AbstractManager
         $article = $am->findOne($articleId);
 
         if ($article) {
-            // Décrémente le stock de 1
+            // stock -1
             $article->setStock($article->getStock() - 1);
 
-            // Met à jour le stock de l'article dans la base de données
             $am->update($article);
         }
     }
 
     /**
-     * Retrieves all articles for a specific order.
+     * Retrieves all articles associated with a specific order.
      *
      * @param int $orderId Order ID.
      * @return array List of articles for the order.
@@ -284,10 +282,10 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Récupère les informations de l'utilisateur
+     * Fetches user information associated with an order.
      *
-     * @param int $orderId Order ID.
-     * @return array Informations utilisateur.
+     * @param int $userId User ID.
+     * @return array User information.
      */
     public function orderUser(int $userId): array
     {
@@ -300,9 +298,11 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Méthode pour ajouter la quantité d'un article dans order_article.
+     * Updates the quantity of an article in the orders_articles table.
      *
-     * @param int $quantity.
+     * @param int $quantity The new quantity.
+     * @param int $orderId The order ID.
+     * @param int $articleId The article ID.
      * @return void
      */
     public function updateQuantity(int $quantity, int $orderId, int $articleId): void
@@ -321,9 +321,11 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Méthode pour ajouter le prix d'un item dans orders_articles.
+     * Updates the price of an item in the orders_articles table.
      *
-     * @param int $item_price L'identifiant de l'article.
+     * @param int $itemPrice The new price.
+     * @param int $orderId The order ID.
+     * @param int $articleId The article ID.
      * @return void
      */
     public function updatePrice(int $itemPrice, $orderId, int $articleId): void
@@ -343,12 +345,13 @@ class OrderManager extends AbstractManager
 
         $query->execute($parameters);
     }
+
     /**
-     * Retrieves all articles for a specific order.
+     * Updates the status of an order.
      *
-     * @param int $orderId Order ID.
-     * @param string $status Nouveau status de la commande
-     * @return bool update effectuée
+     * @param int $orderId The order ID.
+     * @param string $status The new status of the order.
+     * @return bool True if update was successful, false otherwise.
      */
     public function updateStatus(int $orderId, string $status): bool
     {
@@ -360,9 +363,9 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Retourne le chiffre d'affaires du mois en cours.
+     * Retrieves the total earnings for the current month.
      *
-     * @return float total chiffre d'affires
+     * @return float Total earnings.
      */
     function getMonthlyEarning(): float
     {
@@ -373,9 +376,9 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Retourne le chiffre d'affaires du mois en cours.
+     * Retrieves the total earnings for the current year.
      *
-     * @return float total chiffre d'affires
+     * @return float Total earnings.
      */
     function getYearlyEarning(): float
     {
@@ -386,9 +389,9 @@ class OrderManager extends AbstractManager
     }
 
     /**
-     * Retourne le nombre de commandes en cours
+     * Retrieves the total number of pending orders.
      *
-     * @return int total commandes en cours
+     * @return int Total number of pending orders.
      */
     function getPendingOrdersTotal(): int
     {

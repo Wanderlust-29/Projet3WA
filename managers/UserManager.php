@@ -3,10 +3,10 @@
 class UserManager extends AbstractManager
 {
     /**
-     * Trouve un utilisateur par son identifiant.
+     * Finds a user by their identifier.
      *
-     * @param int $id L'identifiant de l'utilisateur à trouver.
-     * @return User|null L'objet utilisateur trouvé ou null s'il n'existe pas.
+     * @param int $id The user's identifier to find.
+     * @return User|null The found user object or null if it doesn't exist.
      */
     public function findOne(int $id): ?User
     {
@@ -24,9 +24,9 @@ class UserManager extends AbstractManager
     }
 
     /**
-     * Récupère tous les utilisateurs de la base de données.
+     * Fetches all users from the database, including total orders and total value.
      *
-     * @return array Liste des utilisateurs.
+     * @return array List of users with additional aggregated data.
      */
     public function findAll(): array
     {
@@ -50,10 +50,10 @@ class UserManager extends AbstractManager
     }
 
     /**
-     * Trouve un utilisateur par son adresse e-mail.
+     * Finds a user by their email address.
      *
-     * @param string $email L'adresse e-mail de l'utilisateur à trouver.
-     * @return User|null L'objet utilisateur trouvé ou null s'il n'existe pas.
+     * @param string $email The email address of the user to find.
+     * @return User|null The found user object or null if it doesn't exist.
      */
     public function findByEmail(string $email): ?User
     {
@@ -71,10 +71,10 @@ class UserManager extends AbstractManager
     }
 
     /**
-     * Crée un nouvel utilisateur dans la base de données.
+     * Creates a new user in the database.
      *
-     * @param User $user L'utilisateur à créer.
-     * @return null
+     * @param User $user The user to create.
+     * @return int|null The ID of the newly created user or null if there was an error.
      */
     public function create(User $user): ?int
     {
@@ -95,9 +95,9 @@ class UserManager extends AbstractManager
     }
 
     /**
-     * Met à jour les informations d'un utilisateur dans la base de données.
+     * Updates a user's information in the database.
      *
-     * @param User $user L'utilisateur à mettre à jour.
+     * @param User $user The user to update.
      * @return void
      */
     public function update(User $user): void
@@ -130,10 +130,11 @@ class UserManager extends AbstractManager
     }
 
     /**
-     * Supprime un utilisateur par son id
+     * Deletes a user from the database, including related orders and comments.
      *
-     * @param int $id L'id de l'utilisateur à supprimer.
-     * @return bool Retourne true si la suppression a réussi, sinon false.
+     * @param int $id The ID of the user to delete.
+     * @return bool True if deletion was successful, false otherwise.
+     * @throws Exception If there was an error during deletion.
      */
     public function delete(int $id): bool
     {

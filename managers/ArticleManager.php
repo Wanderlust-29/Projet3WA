@@ -5,10 +5,10 @@ use Cocur\Slugify\Slugify;
 class ArticleManager extends AbstractManager
 {
     /**
-     * Récupère un article en fonction de son identifiant.
+     * Retrieves an article based on its ID.
      *
-     * @param int $id L'identifiant de l'article à récupérer.
-     * @return Article|null L'objet article trouvé ou null s'il n'existe pas.
+     * @param int $id The ID of the article to retrieve.
+     * @return Article|null The found article object or null if it doesn't exist.
      */
     public function findOne(int $id): ?Article
     {
@@ -33,10 +33,10 @@ class ArticleManager extends AbstractManager
     }
 
     /**
-     * Récupère un article en fonction de son slug.
+     * Retrieves an article based on its slug.
      *
-     * @param string $slug Le slug de l'article à récupérer.
-     * @return Article|null L'objet article trouvé ou null s'il n'existe pas.
+     * @param string $slug The slug of the article to retrieve.
+     * @return Article|null The found article object or null if it doesn't exist.
      */
     public function findBySlug(string $slug): ?Article
     {
@@ -61,9 +61,9 @@ class ArticleManager extends AbstractManager
     }
 
     /**
-     * Récupère tous les articles.
+     * Retrieves all articles.
      *
-     * @return array Liste des articles.
+     * @return array List of articles.
      */
     public function findAll(): array
     {
@@ -88,9 +88,9 @@ class ArticleManager extends AbstractManager
     }
 
     /**
-     * Récupère les 9 meilleurs articles basés sur le nombre de ventes.
+     * Retrieves the top 9 articles based on sales count.
      *
-     * @return array Liste des 9 meilleurs articles.
+     * @return array List of the top 9 articles.
      */
     public function TopNine(): array
     {
@@ -119,9 +119,10 @@ class ArticleManager extends AbstractManager
     }
 
     /**
-     * Récupère les articles de la categorie Croquettes.
+     * Retrieves articles of a specific category.
      *
-     * @return array Liste des articles de la categorie Croquettes.
+     * @param int $category_id The ID of the category.
+     * @return array List of articles in the specified category.
      */
     public function findByCat(int $category_id): array
     {
@@ -150,10 +151,10 @@ class ArticleManager extends AbstractManager
 
 
     /**
-     * Met à jour le stock d'un article.
+     * Updates the stock of an article.
      *
-     * @param Article $article L'article à mettre à jour.
-     * @return bool
+     * @param Article $article The article object whose stock to update.
+     * @return bool True if stock update successful, false otherwise.
      */
     public function update(Article $article): bool
     {
@@ -187,7 +188,7 @@ class ArticleManager extends AbstractManager
         ];
 
         $query->execute($parameters);
-        // Vérifier si l'article a été trouvé et mis à jour
+
         if ($query->rowCount() === 0) {
             // throw new Exception("Article with ID " . $article->getId() . " not found.");
             return false;
@@ -197,10 +198,10 @@ class ArticleManager extends AbstractManager
     }
 
     /**
-     * Met à jour le stock d'un article.
+     * Updates the stock of an article.
      *
-     * @param Article $article L'article à mettre à jour.
-     * @return bool
+     * @param Article $article The article object whose stock to update.
+     * @return bool True if stock update successful, false otherwise.
      */
     public function updateStock(Article $article): bool
     {
@@ -213,7 +214,7 @@ class ArticleManager extends AbstractManager
             "stock" => $article->getStock()
         ];
         $query->execute($parameters);
-        // Vérifier si l'article a été trouvé et mis à jour
+
         if ($query->rowCount() === 0) {
             return false;
         } else {
@@ -222,11 +223,11 @@ class ArticleManager extends AbstractManager
     }
 
     /**
-     * Met à jour l'image'.
+     * Updates the image of an article.
      *
-     * @param Article $article L'article à mettre à jour.
-     * @param Media $media L'image à mettre à jour.
-     * @return bool
+     * @param Article $article The article object to update.
+     * @param Media $media The new media object for the article's image.
+     * @return bool True if image update successful, false otherwise.
      */
     public function updateImage(Article $article, Media $media): bool
     {
@@ -241,7 +242,7 @@ class ArticleManager extends AbstractManager
             "image_id" => $media->getId()
         ];
         $query->execute($parameters);
-        // Vérifier si l'article a été trouvé et mis à jour
+
         if ($query->rowCount() === 0) {
             return false;
         } else {
@@ -252,16 +253,15 @@ class ArticleManager extends AbstractManager
     }
 
     /**
-     * Insère un nouvel article dans la base de données.
+     * Inserts a new article into the database.
      *
-     * @param Article $article Le nouvel article à insérer.
-     * @return int
-     * 
+     * @param Article $article The new article object to insert.
+     * @return int The ID of the inserted article.
      */
     public function insert(Article $article): int
     {
-        $sql =
-            $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age, short_description, slug) VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age, :short_description, :slug)');
+
+        $query = $this->db->prepare('INSERT INTO articles (name, price, stock, category_id, image_id, description, ingredients, age, short_description, slug) VALUES (:name, :price, :stock, :category_id, :image_id, :description, :ingredients, :age, :short_description, :slug)');
 
         $parameters = [
             "name" => $article->getName(),
@@ -281,6 +281,12 @@ class ArticleManager extends AbstractManager
         return $this->db->lastInsertId();
     }
 
+    /**
+     * Searches articles based on a search query.
+     *
+     * @param string $search The search query.
+     * @return array List of articles matching the search query.
+     */
     public function searchArticles($search): array
     {
         $query = $this->db->prepare('SELECT * FROM articles WHERE name LIKE :search OR description LIKE :search OR ingredients LIKE :search');
@@ -309,11 +315,11 @@ class ArticleManager extends AbstractManager
     }
 
     /**
-     * Supprime un article.
+     * Deletes an article from the database.
      *
-     * @param Article $article L'article à mettre à jour.
+     * @param Article $article The article object to delete.
      * @return void
-     * @throws Exception Si l'article n'existe pas.
+     * @throws Exception If the article doesn't exist.
      */
     public function delete(Article $article): void
     {
@@ -330,6 +336,11 @@ class ArticleManager extends AbstractManager
         }
     }
 
+    /**
+     * Sorts articles by popularity (total sales).
+     *
+     * @return array List of articles sorted by popularity.
+     */
     public function sortByPopularity(): array
     {
         $query = $this->db->prepare('SELECT articles.*, COUNT(orders_articles.article_id) AS total_sales
@@ -357,6 +368,11 @@ class ArticleManager extends AbstractManager
         return $articles;
     }
 
+    /**
+     * Sorts articles by price in ascending order.
+     *
+     * @return array List of articles sorted by price ascending.
+     */
     public function sortByAsc(): array
     {
         $query = $this->db->prepare('SELECT * FROM `articles` ORDER BY `articles`.`price` ASC');
@@ -379,6 +395,12 @@ class ArticleManager extends AbstractManager
         }
         return $articles;
     }
+
+    /**
+     * Sorts articles by price in descending order.
+     *
+     * @return array List of articles sorted by price descending.
+     */
     public function sortByDesc(): array
     {
         $query = $this->db->prepare('SELECT * FROM `articles` ORDER BY `articles`.`price` DESC');
@@ -402,6 +424,12 @@ class ArticleManager extends AbstractManager
         return $articles;
     }
 
+    /**
+     * Sorts articles of a specific category by popularity (total sales).
+     *
+     * @param Category $categoryId The category object.
+     * @return array List of articles in the category sorted by popularity.
+     */
     public function sortByPopularityCat(Category $categoryId): array
     {
         $query = $this->db->prepare('SELECT articles.*, COUNT(orders_articles.article_id) AS total_sales
@@ -430,6 +458,12 @@ class ArticleManager extends AbstractManager
         return $articles;
     }
 
+    /**
+     * Sorts articles of a specific category by price in ascending order.
+     *
+     * @param Category $categoryId The category object.
+     * @return array List of articles in the category sorted by price ascending.
+     */
     public function sortByAscCat(Category $categoryId): array
     {
         $query = $this->db->prepare('SELECT * FROM articles WHERE category_id = :category_id ORDER BY price ASC');
@@ -453,6 +487,12 @@ class ArticleManager extends AbstractManager
         return $articles;
     }
 
+    /**
+     * Sorts articles of a specific category by price in descending order.
+     *
+     * @param Category $categoryId The category object.
+     * @return array List of articles in the category sorted by price descending.
+     */
     public function sortByDescCat(Category $categoryId): array
     {
         $query = $this->db->prepare('SELECT * FROM articles WHERE category_id = :category_id ORDER BY price DESC');
