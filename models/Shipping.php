@@ -2,14 +2,13 @@
 
 class Shipping
 {
-    private ? int $id = null;
+    private ?int $id = null;
 
-    public function __construct(private string $name, private string $description, private float $price, private int $delivery_min = 1, private int $delivery_max =1)
+    public function __construct(private string $name, private string $description, private float $price, private int $delivery_min = 1, private int $delivery_max = 1)
     {
-
     }
 
-    // Transforme en tableau
+    // Transform object Shipping to array
     /**
      * @return array
      */
@@ -58,7 +57,7 @@ class Shipping
     {
         $this->name = $name;
     }
-    
+
     // Getter and Setter for description
     /**
      * @return string
@@ -75,7 +74,7 @@ class Shipping
     {
         $this->description = $description;
     }
-    
+
     // Getter and Setter for price
     /**
      * @return float
@@ -110,7 +109,7 @@ class Shipping
         $this->delivery_min = $delivery_min;
     }
 
-    
+
     // Getter and Setter for delivery max
     /**
      * @return int

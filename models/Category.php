@@ -2,11 +2,10 @@
 
 class Category
 {
-    private ? int $id = null;
-    
+    private ?int $id = null;
+
     public function __construct(private string $name, private string $description, private string $slug)
     {
-
     }
 
     // Transform object Category to array
@@ -57,7 +56,7 @@ class Category
     {
         $this->name = $name;
     }
-    
+
     // Getter and Setter for description
     /**
      * @return string
@@ -74,7 +73,7 @@ class Category
     {
         $this->description = $description;
     }
-    
+
     // Getter and Setter for slug
     /**
      * @return string

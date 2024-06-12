@@ -10,7 +10,7 @@ class Article
     {
     }
 
-    // Transforme en tableau
+    // Transform object Article to array
     /**
      * @return array
      */

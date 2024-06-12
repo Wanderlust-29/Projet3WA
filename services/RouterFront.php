@@ -5,7 +5,7 @@ use Pecee\Http\Request;
 use Pecee\SimpleRouter\Exceptions\NotFoundHttpException;
 use Pecee\SimpleRouter\Exceptions\HttpException;
 
-
+// Routes articles
 SimpleRouter::get('/', [DefaultController::class, 'home'])->name('home');
 SimpleRouter::get('/articles', [PageController::class, 'articles'])->name('products');
 SimpleRouter::get('/categorie/{slug}', [PageController::class, 'category'])->setSettings(['includeSlash' => false])->name('category');
@@ -14,13 +14,14 @@ SimpleRouter::post('/articles-search', [PageController::class, 'search'])->setSe
 SimpleRouter::post('/sort-result-articles', [PageController::class, 'sort'])->setSettings(['includeSlash' => false])->name('productSort');
 SimpleRouter::post('/sort-result-category', [PageController::class, 'sortByCategory'])->setSettings(['includeSlash' => false])->name('categorySort');
 
-
+// Routes authentification
 SimpleRouter::get('/login', [AuthController::class, 'login'])->name('login');
 SimpleRouter::post('/check-login', [AuthController::class, 'checkLogin'])->name('checkLogin');
 SimpleRouter::get('/register', [AuthController::class, 'register'])->name('register');
 SimpleRouter::post('/check-register', [AuthController::class, 'checkRegister'])->name('checkRegister');
 SimpleRouter::match(['get', 'post'], '/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Routes account
 SimpleRouter::group(['middleware' => Projet3wa\Middlewares\AuthUser::class, 'prefix' => '/account'], function () {
     SimpleRouter::get('/', [AccountController::class, 'account'])->setSettings(['includeSlash' => false])->name('account');
     SimpleRouter::get('/infos', [AccountController::class, 'infos'])->setSettings(['includeSlash' => false])->name('infos');
@@ -31,6 +32,7 @@ SimpleRouter::group(['middleware' => Projet3wa\Middlewares\AuthUser::class, 'pre
     SimpleRouter::get('/orders/{id}', [AccountController::class, 'order'])->setSettings(['includeSlash' => false])->name('userOrder');
 });
 
+// Routes various pages
 SimpleRouter::get('/contact', [PageController::class, 'contact'])->setSettings(['includeSlash' => false])->name('contact');
 SimpleRouter::get('/adopt', [PageController::class, 'adopt'])->setSettings(['includeSlash' => false])->name('adopt');
 SimpleRouter::post('/contact-check', [PageController::class, 'contactCheck'])->setSettings(['includeSlash' => false])->name('contactCheck');
@@ -39,6 +41,7 @@ SimpleRouter::get('/legal', [PageController::class, 'legal'])->setSettings(['inc
 SimpleRouter::get('/privacy', [PageController::class, 'privacy'])->setSettings(['includeSlash' => false])->name('privacy');
 SimpleRouter::get('/refund', [PageController::class, 'refund'])->setSettings(['includeSlash' => false])->name('refund');
 
+// Routes cart
 SimpleRouter::match(['get', 'post'], '/cart', [CartController::class, 'cart'])->setSettings(['includeSlash' => false])->name('cart');
 SimpleRouter::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
 SimpleRouter::post('/update-quantity', [CartController::class, 'updateQuantity'])->name('updateQuantity');
@@ -47,6 +50,7 @@ SimpleRouter::get('/success', [CartController::class, 'success'])->name('success
 SimpleRouter::post('/update-shipping-costs', [CartController::class, 'updateShippingCosts'])->name('updateShippingCosts');
 SimpleRouter::get('/stripe/checkout', [CartController::class, 'updateShippingCosts'])->name('updateShippingCosts');
 
+// Routes comments
 SimpleRouter::get('/new-comment/{slug}', [AccountController::class, 'newComment'])->setSettings(['includeSlash' => false])->name('newComment');
 SimpleRouter::post('/check-comment/{slug}', [AccountController::class, 'checkComment'])->setSettings(['includeSlash' => false])->name('checkComment');
 
@@ -62,7 +66,6 @@ SimpleRouter::error(function (Request $request, \Exception $exception) {
         $controller->forbidden();
         exit;
     } else {
-        // Gère les autres exceptions
         echo 'Une erreur inattendue s\'est produite';
     }
 });

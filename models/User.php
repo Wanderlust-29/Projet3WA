@@ -7,6 +7,10 @@ class User
     {
     }
 
+    // Transform object User to array
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return [

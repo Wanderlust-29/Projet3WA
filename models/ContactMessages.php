@@ -2,14 +2,13 @@
 
 class ContactMessages
 {
-    private ? int $id = null;
-    
+    private ?int $id = null;
+
     public function __construct(private string $firstName, private string $lastName, private string $email, private string $message)
     {
-
     }
 
- // Getter and Setter for ID
+    // Getter and Setter for ID
     /**
      * @return int|null
      */
@@ -92,5 +91,4 @@ class ContactMessages
     {
         $this->message = $message;
     }
-
 }
