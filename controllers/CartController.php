@@ -2,7 +2,9 @@
 
 class CartController extends AbstractController
 {
-
+    /**
+     * Renders the cart page with cart items, total price, quantity, shipping costs, and notifications.
+     */
     public function cart(): void
     {
         $totalPrice = 0;
@@ -14,12 +16,10 @@ class CartController extends AbstractController
         $shipping_costs = $sm->findAll();
 
         if (!is_null($cart)) {
-            foreach ($cart as &$article) {  // Utilisation de la référence pour modifier directement l'article dans le tableau
+            foreach ($cart as &$article) {
                 if (isset($article['price'], $article['quantity'], $article['stock'])) {
                     $article['is_in_stock'] = $article['quantity'] < $article['stock'];
-                    if (!$article['is_in_stock']) {
-                    }
-                    $quantity += $article['quantity']; // Incrémenter la quantité totale
+                    $quantity += $article['quantity'];
                     $totalPrice += $article['price'] * $article['quantity'];
                 }
             }
@@ -34,35 +34,35 @@ class CartController extends AbstractController
         ]);
     }
 
-
+    /**
+     * Adds an article to the shopping cart.
+     * Returns the updated cart in JSON format.
+     */
     public function addToCart(): void
     {
-        // Récupérer l'identifiant de l'article envoyé par la requête POST
         $id = intval($_POST['article_id']);
-
-        // Récupérer l'article correspondant à l'identifiant
         $am = new ArticleManager();
         $article = $am->findOne($id);
 
-        // Initialiser le panier s'il n'existe pas encore dans la session
         if (!isset($_SESSION["cart"])) {
             $_SESSION["cart"] = array("articles" => array());
         }
 
-        // Vérifier si l'article est déjà dans le panier
         if (isset($_SESSION["cart"]["articles"][$id])) {
-            // Incrémenter la quantité de l'article existant
             $_SESSION["cart"]["articles"][$id]['quantity'] += 1;
         } else {
-            // Ajouter l'article au panier avec une quantité de 1
             $articleArray = $article->toArray();
             $articleArray['quantity'] = 1;
             $_SESSION["cart"]["articles"][$id] = $articleArray;
         }
-        // Renvoyer le contenu du panier au format JSON après l'ajout
+
         $this->renderJson($_SESSION["cart"]);
     }
 
+    /**
+     * Deletes an article from the shopping cart.
+     * Returns the updated cart in JSON format.
+     */
     public function deleteFromCart(): void
     {
         $id = !empty($_POST['article_id']) ? intval($_POST['article_id']) : null;
@@ -79,6 +79,10 @@ class CartController extends AbstractController
         ]);
     }
 
+    /**
+     * Updates the quantity of an article in the shopping cart.
+     * Returns the updated cart in JSON format.
+     */
     public function updateQuantity(): void
     {
         $id = !empty($_POST['article_id']) ? intval($_POST['article_id']) : null;
@@ -101,36 +105,30 @@ class CartController extends AbstractController
         ]);
     }
 
-    // public function getShippingCosts($name)
-    // {
-    //     // Mettre à jour la session avec le coût de livraison sélectionné
-    //     unset($_SESSION['cart']['shipping_costs']);
-    //     $_SESSION['cart']['shipping_costs'] = $shippingCosts[$shippingMethod];
-
-    //     // Répondre avec le nouveau contenu du panier ou tout autre information pertinente
-    //     $this->renderJson($_SESSION["cart"]);
-    // }
-
+    /**
+     * Updates the shipping costs in the cart session based on selected shipping method.
+     * Returns the updated cart in JSON format.
+     */
     public function updateShippingCosts()
     {
         if (isset($_SESSION["cart"]) && isset($_POST['shipping-method'])) {
-            // Assume 'shippingMethod' est envoyé via POST
-            $shippingMethod = $_POST['shipping-method']; // valeur par défaut si non spécifié
-
+            $shippingMethod = $_POST['shipping-method'];
             $sm  = new ShippingManager();
             $shipping = $sm->findOne($shippingMethod);
 
-            // Mettre à jour la session avec le coût de livraison sélectionné
             unset($_SESSION['cart']['shipping_costs']);
             $_SESSION['cart']['shipping_costs'] = $shipping->toArray();
 
-            // Répondre avec le nouveau contenu du panier ou tout autre information pertinente
             $this->renderJson($_SESSION["cart"]);
         } else {
             return null;
         }
     }
 
+    /**
+     * Handles the success page after completing an order.
+     * Creates an order in the database and clears the cart session.
+     */
     public function success()
     {
         if (!isset($_SESSION["user"])) {
@@ -140,7 +138,6 @@ class CartController extends AbstractController
 
         $user = $_SESSION["user"];
         $id_user = $user->getId();
-
         $totalPrice = 0;
 
         $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : [];
@@ -187,10 +184,9 @@ class CartController extends AbstractController
         return $this->render('pay/success.html.twig', []);
     }
 
-
-
-
-    //Quitter stripe
+    /**
+     * Cancels the checkout process and returns to the cart page.
+     */
     public function cancel()
     {
         return $this->render('pay/cart.html.twig', []);

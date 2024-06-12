@@ -2,6 +2,9 @@
 
 class AuthController extends AbstractController
 {
+    /**
+     * Renders the login form.
+     */
     public function login(): void
     {
         $this->render('account/login.html.twig', [
@@ -9,25 +12,28 @@ class AuthController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles the login form submission and user authentication.
+     */
     public function checkLogin(): void
     {
         if (isset($_POST["email"]) && isset($_POST["password"])) {
             $tokenManager = new CSRFTokenManager();
 
-            // Vérifie si le jeton CSRF est valide
+            // Check if CSRF token is valid
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
                 $um = new UserManager();
                 $user = $um->findByEmail($_POST["email"]);
 
                 if ($user !== null) {
-                    // Vérifie si le mot de passe fourni correspond à celui stocké dans la base de données
+                    // Check if provided password matches the one stored in the database
                     if (password_verify($_POST["password"], $user->getPassword())) {
-                        $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
+                        $_SESSION["user"] = $user; // Log in the user by storing their session data
                         $type = 'success';
                         $text = "Bienvenue " . $user->getFirstName() . " !";
 
                         $this->redirect("/");
-                    } else { // Gestion des erreurs
+                    } else { // Error handling
                         $type = 'error';
                         $text = "Mot de passe ou adresse e-mail incorrect. Veuillez réessayer.";
                         $this->redirect("/login");
@@ -39,7 +45,7 @@ class AuthController extends AbstractController
                 }
             } else {
                 $type = 'error';
-                $text = "token CSRF invalide";
+                $text = "Token CSRF invalide";
                 $this->redirect("/login");
             }
         } else {
@@ -50,14 +56,19 @@ class AuthController extends AbstractController
         $this->notify($text, $type);
     }
 
+    /**
+     * Renders the registration form.
+     */
     public function register(): void
     {
         $this->render('account/register.html.twig', [
-
             'csrf_token' => $_SESSION["csrf-token"],
         ]);
     }
 
+    /**
+     * Handles the registration form submission and user creation.
+     */
     public function checkRegister(): void
     {
         if (
@@ -65,19 +76,19 @@ class AuthController extends AbstractController
             && isset($_POST["password"]) && isset($_POST["confirm-password"]) && isset($_POST["address"])
             && isset($_POST["city"]) && isset($_POST["postalCode"]) && isset($_POST["country"])
         ) {
-            // Vérifie si le jeton CSRF est valide
+            // Check if CSRF token is valid
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-                // Vérifie si les mots de passe correspondent
+                // Check if passwords match
                 if ($_POST["password"] === $_POST["confirm-password"]) {
-                    // Vérifie si le mot de passe respecte le motif requis
+                    // Check if password meets required pattern
                     $password_pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
                     if (preg_match($password_pattern, $_POST["password"])) {
                         $um = new UserManager();
                         $user = $um->findByEmail($_POST["email"]);
 
                         if ($user === null) {
-                            // Crée un nouvel utilisateur et le sauvegarde en base de données
+                            // Create a new user and save it to the database
                             $firstName = htmlspecialchars($_POST["firstName"]);
                             $lastName = htmlspecialchars($_POST["lastName"]);
                             $email = htmlspecialchars($_POST["email"]);
@@ -88,26 +99,26 @@ class AuthController extends AbstractController
                             $country = htmlspecialchars($_POST["country"]);
                             $user = new User($firstName, $lastName, $email, $password, $address, $city, $postalCode, $country);
 
-                            // Création de l'utilisateur dans la base de données et récupération de son ID
+                            // Create the user in the database and get their ID
                             $userId = $um->create($user);
 
                             if ($userId !== null) {
-                                // Attribution de l'ID à l'objet utilisateur
+                                // Assign the ID to the user object
                                 $user->setId($userId);
 
-                                // Stockage de l'utilisateur dans la session
+                                // Store the user in the session
                                 $_SESSION["user"] = $user;
 
-                                // Redirection vers la page d'accueil ou autre page appropriée
+                                // Redirect to homepage or appropriate page
                                 $this->redirect("/");
                             } else {
-                                // Gestion des erreurs en cas d'échec de la création de l'utilisateur
+                                // Error handling in case user creation fails
                                 $type = 'error';
                                 $text = "Erreur lors de la création de l'utilisateur.";
                                 $this->notify($text, $type);
                                 $this->redirect("/register");
                             }
-                        } else { // Gestion des erreurs
+                        } else { // Error handling
                             $text = "L'utilisateur existe déjà";
                             $this->redirect("/register");
                         }
@@ -134,7 +145,9 @@ class AuthController extends AbstractController
         $this->notify($text, $type);
     }
 
-
+    /**
+     * Renders the admin login form.
+     */
     public function loginAdmin(): void
     {
         $this->render('layout.admin-login.html.twig', [
@@ -142,26 +155,29 @@ class AuthController extends AbstractController
         ]);
     }
 
+    /**
+     * Handles the admin login form submission and authentication.
+     */
     public function checkAdmin(): void
     {
         if (isset($_POST["email"]) && isset($_POST["password"])) {
             $tokenManager = new CSRFTokenManager();
 
-            // Vérifie si le jeton CSRF est valide
+            // Check if CSRF token is valid
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
                 $um = new UserManager();
                 $user = $um->findByEmail($_POST["email"]);
 
                 if ($user !== null) {
-                    // Vérifie si le mot de passe fourni correspond à celui stocké dans la base de données
+                    // Check if provided password matches the one stored in the database
                     if (password_verify($_POST["password"], $user->getPassword())) {
-                        // Vérifie si l'utilisateur est un administrateur
+                        // Check if the user is an admin
                         if ($user->getRole() === "ADMIN") {
-                            $_SESSION["user"] = $user; // Connecte l'utilisateur en enregistrant ses données de session
+                            $_SESSION["user"] = $user; // Log in the user by storing their session data
                             $type = "success";
                             $text = "Bienvenue " . $user->getFirstName() . " !";
                             $this->redirect("/admin");
-                        } else { // Gestion des erreurs
+                        } else { // Error handling
                             $type = "error";
                             $text = "Vous n’êtes pas autorisé à accéder à cette page";
                             $this->redirect("/");
@@ -189,6 +205,9 @@ class AuthController extends AbstractController
         $this->notify($text, $type);
     }
 
+    /**
+     * Logs out the user by destroying the session.
+     */
     public function logout(): void
     {
         session_destroy();

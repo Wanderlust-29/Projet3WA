@@ -211,7 +211,9 @@ body>.header {
     transition-timing-function: ease;
     z-index: 1000;
 
-    //label input animation
+    /**************************
+      LABEL INPUT ANIMATION
+    **************************/
     .form-item {
       width: 60%;
       position: relative;
@@ -271,6 +273,7 @@ body>.header {
   }
 
   .button-searchbar {
+    border: solid 1px $green;
     position: relative;
     border-radius: 0 10rem 10rem 0;
     color: $white;
@@ -287,7 +290,9 @@ body>.header {
   }
 }
 
-
+/*******************
+      DESKTOP
+*******************/
 @media screen and (min-width: 900px) {
   body>.header {
     .icons {

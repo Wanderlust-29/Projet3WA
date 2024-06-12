@@ -24,7 +24,9 @@
       padding: 2rem;
     }
 
-    // items in cart
+    /*******************
+        ITEMS-IN-CART 
+    *******************/
     .list-articles {
 
       .article {
@@ -114,7 +116,9 @@
       }
     }
 
-    //Shipping costs
+    /*******************
+      SHIPPING-COSTS
+    *******************/
     .update-shipping-costs {
       padding: 2rem 0;
       border-bottom: 1px solid $lightGray;
@@ -132,7 +136,9 @@
       }
     }
 
-    // total cart
+    /*******************
+        TOTAL-CART
+    *******************/
     .form-checkout {
       display: flex;
       justify-content: space-around;
@@ -177,6 +183,9 @@
   }
 }
 
+/*******************
+      DESKTOP 
+*******************/
 @media screen and (min-width: 900px) {
   #content.cart {
     .cart-payement {

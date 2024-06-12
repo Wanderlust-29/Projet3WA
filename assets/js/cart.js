@@ -1,4 +1,4 @@
-// Fonction pour ajouter au panier
+// Function to add an item to the cart
 function addToCart(article_id) {
   let formData = new FormData();
   formData.append("article_id", article_id);
@@ -16,7 +16,7 @@ function addToCart(article_id) {
         updateCount(data.articles);
         updateTotal(data.articles, data.shipping_costs);
         disableButtonArticle(data.articles);
-        updateCartContent(data.articles); // Mise à jour du contenu de la page
+        updateCartContent(data.articles); // Update page content
         Toastify({
           text: "Article ajouté au panier avec succès !",
           duration: 3000,
@@ -34,7 +34,7 @@ function addToCart(article_id) {
     });
 }
 
-// Fonction pour supprimer du panier
+// Function to delete an item from the cart
 function deleteFromCart(article_id, action) {
   let url = "/delete-from-cart";
 
@@ -54,13 +54,13 @@ function deleteFromCart(article_id, action) {
         updateQuantity(data.articles);
         updateCount(data.articles);
         updateTotal(data.articles, data.shipping_costs);
-        // Suppression de l'article de l'interface utilisateur
+        // Remove the item from the UI
         const item = document.querySelector(`.article[data-article="${article_id}"]`);
         if (item) {
           item.remove();
         }
         updateCartContent(data.articles);
-        // Afficher la notification Toastify
+        // Show Toastify notification
         Toastify({
           text: "Article supprimé du panier avec succès !",
           duration: 3000,
@@ -78,7 +78,7 @@ function deleteFromCart(article_id, action) {
     });
 }
 
-// Fonction pour incrémenter/décrémenter
+// Function to increment/decrement the item quantity
 function incrementDecrement(article_id, action) {
   let url = "/update-quantity";
 
@@ -109,7 +109,7 @@ function incrementDecrement(article_id, action) {
     });
 }
 
-// Fonction pour changer les frais de port
+// Function to change the shipping method
 function changeShippingMethod(shippingMethod) {
   let formData = new FormData();
   formData.append("shipping-method", shippingMethod);
@@ -127,7 +127,7 @@ function changeShippingMethod(shippingMethod) {
     .then((data) => {
       updateTotal(data.articles, data.shipping_costs);
 
-      // Afficher une notification Toastify
+      // Show Toastify notification
       Toastify({
         text: "Méthode de livraison mise à jour.",
         duration: 3000,
@@ -140,7 +140,7 @@ function changeShippingMethod(shippingMethod) {
     .catch((error) => {
       console.error("Error changing shipping costs:", error);
 
-      // Afficher une notification d'erreur Toastify
+      // Show error Toastify notification
       Toastify({
         text: "Erreur lors du changement de la méthode de livraison.",
         duration: 3000,
@@ -152,7 +152,7 @@ function changeShippingMethod(shippingMethod) {
     });
 }
 
-// Mets à jour la quantité
+// Update the quantity of items
 function updateQuantity(articles) {
   let articlesArray = Object.values(articles);
   articlesArray.forEach((article) => {
@@ -169,7 +169,7 @@ function updateQuantity(articles) {
   });
 }
 
-// Mets à jour les compteurs
+// Update the item counts
 function updateCount(articles) {
   let articlesArray = Object.values(articles);
   let itemCount = 0;
@@ -184,7 +184,7 @@ function updateCount(articles) {
   }
 }
 
-// Mets à jour le compteur du total
+// Update the total price
 function updateTotal(articles, shipping_costs) {
   let totalPrice = 0;
 
@@ -220,14 +220,14 @@ function updateTotal(articles, shipping_costs) {
   }
 }
 
-// Désactive le bouton si l'article est en rupture de stock
+// Disable the button if the item is out of stock
 function disableButtonArticle(articles) {
   let articlesArray = Object.values(articles);
   articlesArray.forEach((article) => {
     const cartButton = document.querySelector(`.cart-button[data-article="${article.id}"]`);
     const spanCart = document.getElementById("add");
     if (cartButton) {
-      // Vérifie si la quantité dépasse le stock
+      // Check if quantity exceeds stock
       if (article.quantity >= article.stock) {
         cartButton.classList.add("disabled");
         cartButton.disabled = true;
@@ -247,7 +247,7 @@ function disableButtonArticle(articles) {
   });
 }
 
-// Désactive le bouton d'incrémentation si l'article est en rupture de stock
+// Disable the increment button if the item is out of stock
 function disableIncrement(articles) {
   let articlesArray = Object.values(articles);
   articlesArray.forEach((article) => {
@@ -255,7 +255,7 @@ function disableIncrement(articles) {
     const outOfStock = document.querySelector(`.cart .out-of-stock[data-article="${article.id}"]`);
 
     if (increment && outOfStock) {
-      // Vérifie si la quantité dépasse le stock dans le panier
+      // Check if quantity exceeds stock in the cart
       if (article.quantity >= article.stock) {
         increment.disabled = true;
         outOfStock.innerText = "Impossible d'ajouter un article (Rupture de stock)";
@@ -273,14 +273,14 @@ function disableIncrement(articles) {
 }
 
 
-// Fonction pour vérifier si le panier est vide
+// Function to check if the cart is empty
 function isCartEmpty(articles) {
   let articlesArray = Object.values(articles);
   let itemCount = articlesArray.reduce((total, article) => total + article.quantity, 0);
   return itemCount === 0;
 }
 
-// Fonction pour mettre à jour le contenu de la page
+// Function to update the page content
 function updateCartContent(articles) {
   const mainContent = document.getElementById('content');
   if (isCartEmpty(articles)) {
@@ -292,7 +292,7 @@ function updateCartContent(articles) {
       </section>
     `;
   } else {
-    // Recharger la page pour mettre à jour le contenu du panier
+    // Reload the page to update cart content
     location.reload();
   }
 }

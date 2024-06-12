@@ -1,8 +1,10 @@
 <?php
 class AdminOrdersController extends AbstractController
 {
-    // all orders
-    public function orders()
+    /**
+     * Renders the page with all orders.
+     */
+    public function orders(): void
     {
         $om = new OrderManager();
         $orders = $om->findAll();
@@ -12,14 +14,18 @@ class AdminOrdersController extends AbstractController
         ]);
     }
 
-    // Single order
-    public function order(int $id)
+    /**
+     * Renders the page for a specific order.
+     * 
+     * @param int $id The ID of the order to display
+     */
+    public function order(int $id): void
     {
         $om = new OrderManager();
         $order = $om->findOne($id);
         $status = $om->statusArray;
-        // Récupération du mode de livraison
 
+        // Fetches shipping details associated with the order
         $shipping = $om->findShippingByOrderId($id);
 
         $this->render("admin/admin-order.html.twig", [
@@ -29,12 +35,15 @@ class AdminOrdersController extends AbstractController
         ]);
     }
 
-    // Single order
-    public function updateStatus()
+    /**
+     * Updates the status of an order.
+     */
+    public function updateStatus(): void
     {
         $id = (int) $_POST['id'];
         $type = 'success';
         $text = '';
+
         if (isset($_POST) && isset($_POST['status'])) {
             $status = $_POST['status'];
             $om = new OrderManager();

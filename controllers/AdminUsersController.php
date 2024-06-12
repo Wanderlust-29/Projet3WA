@@ -2,11 +2,12 @@
 
 class AdminUsersController extends AbstractController
 {
-    // Tous les utilisateurs
-    public function users()
+    /**
+     * Renders the page with all users.
+     */
+    public function users(): void
     {
         $um = new UserManager();
-
         $users = $um->findAll();
 
         $this->render("admin/admin-users.html.twig", [
@@ -14,11 +15,13 @@ class AdminUsersController extends AbstractController
         ]);
     }
 
-
-    // Un seul utilisateur
-    public function user(int $id)
+    /**
+     * Renders the page for a specific user and their orders.
+     * 
+     * @param int $id The ID of the user to display
+     */
+    public function user(int $id): void
     {
-
         $um = new UserManager();
         $id = (int)$id;
         $user = $um->findOne($id);
@@ -32,12 +35,18 @@ class AdminUsersController extends AbstractController
         ]);
     }
 
-    function newUser()
+    /**
+     * Renders the form for creating a new user.
+     */
+    public function newUser()
     {
         $this->render("admin/admin-new-user.html.twig", []);
     }
 
-    public function addUser()
+    /**
+     * Handles the form submission for creating a new user.
+     */
+    public function addUser(): void
     {
         $id_user = null;
         if (isset($_POST)) {
@@ -65,20 +74,23 @@ class AdminUsersController extends AbstractController
         }
     }
 
-    public function updateUser()
+    /**
+     * Handles updating a user's profile information.
+     */
+    public function updateUser(): void
     {
         $id = $_POST['id'];
 
-        // Vérifie si les nouveaux mots de passe correspondent
+        // Checks if the new passwords match
         if ($_POST["password"] === $_POST["confirm-password"]) {
-            // Vérifie la complexité du mot de passe
+            // Checks password complexity
             $password_pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
             if (preg_match($password_pattern, $_POST["password"])) {
 
                 $user = new User($_POST["firstName"], $_POST["lastName"], $_POST["email"], password_hash($_POST["password"], PASSWORD_BCRYPT), $_POST["address"], $_POST["city"], $_POST["postalCode"], $_POST["country"]);
                 $user->setId($id);
 
-                // Initialise le gestionnaire d'utilisateurs et met à jour l'utilisateur dans la base de données
+                // Initializes the user manager and updates the user in the database
                 $um = new UserManager();
                 $um->update($user);
 
@@ -97,7 +109,10 @@ class AdminUsersController extends AbstractController
         $this->redirect("/admin/users/$id");
     }
 
-    public function deleteUser()
+    /**
+     * Handles deleting a user.
+     */
+    public function deleteUser(): void
     {
         if (isset($_SESSION["user"]) && isset($_POST['delete']) && isset($_POST['userId'])) {
 

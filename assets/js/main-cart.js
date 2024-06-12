@@ -41,9 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  //**********************************************************//
   // If the quantity is < 1 button disabled
-  //**********************************************************//
   const quantityElements = document.querySelectorAll('.quantity');
   quantityElements.forEach((quantityElement) => {
     const btnDecrement = document.querySelector(`.btn-decrement[data-article="${quantityElement.dataset.article}"]`);
@@ -77,19 +75,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
-  //**********************************************************//
+
   //If an option is not checked, it does not display the cart
-  //*********************************************************//
   const checkoutButton = document.getElementById("checkout-button")
   const radios = document.querySelectorAll("input[type=radio]")
 
-    radios.forEach(radio => {
-      radio.addEventListener("click", ()=>{
+  radios.forEach(radio => {
+    radio.addEventListener("click", () => {
       if (radio.checked) {
         checkoutButton.disabled = false
       } else {
         checkoutButton.disabled = true
       }
     })
-    })
   })
+})

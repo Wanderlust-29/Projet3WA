@@ -2,12 +2,12 @@
 
 class PageController extends AbstractController
 {
-
-    // Récupère tous les articles
+    /**
+     * Retrieves all articles and renders the articles page.
+     */
     public function articles(): void
     {
         $am = new ArticleManager();
-
         $articles = $am->findAll();
 
         $this->render("pages/articles.html.twig", [
@@ -15,6 +15,9 @@ class PageController extends AbstractController
         ]);
     }
 
+    /**
+     * Sorts articles based on the selected criteria and renders the articles page.
+     */
     public function sort()
     {
         $am = new ArticleManager();
@@ -35,11 +38,13 @@ class PageController extends AbstractController
         ]);
     }
 
+    /**
+     * Sorts articles by category based on the selected criteria and renders the category page.
+     */
     public function sortByCategory()
     {
         if ($_POST["slug"]) {
             $slug = $_POST["slug"];
-            // Récupération de l'ID de la catégorie
             $cm = new CategoryManager();
             $categoryId = $cm->findOneBySlug($slug);
 
@@ -64,8 +69,10 @@ class PageController extends AbstractController
         }
     }
 
-
-    // Récupère un article
+    /**
+     * Retrieves an article by its slug, calculates average grade from comments,
+     * checks stock availability against the cart, and renders the article page.
+     */
     public function article(string $slug): void
     {
         $cart = isset($_SESSION["cart"]["articles"]) ? $_SESSION["cart"]["articles"] : null;
@@ -81,7 +88,6 @@ class PageController extends AbstractController
 
         if (!is_null($cart)) {
             foreach ($cart as $cartItem) {
-                // Vérifier si l'article du panier correspond à l'article actuel
                 if ($cartItem['id'] === $article->getId()) {
                     if ($stock <= $cartItem["quantity"]) {
                         $soldOut = true;
@@ -91,9 +97,6 @@ class PageController extends AbstractController
             }
         }
 
-
-
-        // Calculer la moyenne des notes
         $totalGrade = 0;
         $numberOfComments = count($comments);
         foreach ($comments as $comment) {
@@ -103,7 +106,6 @@ class PageController extends AbstractController
         $averageGrade = $numberOfComments > 0 ? $totalGrade / $numberOfComments : 0;
         $averageGrade = ceil($averageGrade);
 
-
         $this->render("pages/article.html.twig", [
             "article" => $article,
             "comments" => $comments,
@@ -112,16 +114,16 @@ class PageController extends AbstractController
         ]);
     }
 
-    // Récupération des articles de la catégorie
+    /**
+     * Retrieves articles by category slug, and renders the category page.
+     */
     public function category(string $slug): void
     {
-        // Récupéation des informations de la catégorie
         $cm = new CategoryManager();
         $category = $cm->findOneBySlug($slug);
 
         $category_id = $category->getId();
 
-        // Récupération des articles
         $am = new ArticleManager();
         $articles = $am->findByCat($category_id);
 
@@ -131,12 +133,12 @@ class PageController extends AbstractController
         ]);
     }
 
-
-    // Récupération des articles suivant le résultat de la recherche
+    /**
+     * Retrieves articles based on search query and renders the search results page.
+     */
     public function search(): void
     {
         if (isset($_POST['search'])) {
-            // Vérifie si le jeton CSRF est valide
             $tokenManager = new CSRFTokenManager();
 
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
@@ -149,7 +151,6 @@ class PageController extends AbstractController
                     "articles" => $articles
                 ]);
             } else {
-                var_dump("error");
                 $this->redirect("/");
             }
         } else {
@@ -157,34 +158,40 @@ class PageController extends AbstractController
         }
     }
 
-
+    /**
+     * Renders the adopt page.
+     */
     public function adopt(): void
     {
         $this->render("pages/adopt.html.twig", []);
     }
 
+    /**
+     * Renders the contact page with CSRF token.
+     */
     public function contact(): void
     {
         $this->render("pages/contact.html.twig", [
             'csrf_token' => $_SESSION["csrf-token"],
         ]);
     }
+
+    /**
+     * Processes the contact form submission, validates CSRF token,
+     * creates a contact message, and notifies the user.
+     */
     public function contactCheck()
     {
         if (
             isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"])
             && isset($_POST["message"])
         ) {
-            // Vérifie si le jeton CSRF est valide
             $tokenManager = new CSRFTokenManager();
             if (isset($_POST["csrf-token"]) && $tokenManager->validateCSRFToken($_POST["csrf-token"])) {
-
-                // Crée un nouvel utilisateur et le sauvegarde en base de données
                 $firstName = htmlspecialchars($_POST["firstName"]);
                 $lastName = htmlspecialchars($_POST["lastName"]);
                 $email = htmlspecialchars($_POST["email"]);
                 $message = htmlspecialchars($_POST["message"]);
-                // $texte_echappe = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
 
                 $cmm = new ContactMessagesManager();
                 $contactMessage = new ContactMessages($firstName, $lastName, $email, $message);
@@ -192,33 +199,46 @@ class PageController extends AbstractController
                 $cmm->create($contactMessage);
                 $type = 'success';
                 $text = "Le message à bien été envoyé";
-                // Redirige vers la page d'accueil si le message est bien enregistré
-                $this->redirect("/contact");
             } else {
                 $type = 'error';
                 $text = "Token CSRF invalide";
-                $this->redirect("/");
             }
         } else {
             $type = 'error';
             $text = "Champs manquants";
-            $this->redirect("/contact");
         }
+
         $this->notify($text, $type);
+        $this->redirect("/contact");
     }
 
+    /**
+     * Renders the conditions page.
+     */
     public function conditions(): void
     {
         $this->render("pages/conditions.html.twig", []);
     }
+
+    /**
+     * Renders the legal page.
+     */
     public function legal(): void
     {
         $this->render("pages/legal.html.twig", []);
     }
+
+    /**
+     * Renders the privacy page.
+     */
     public function privacy(): void
     {
         $this->render("pages/privacy.html.twig", []);
     }
+
+    /**
+     * Renders the refund page.
+     */
     public function refund(): void
     {
         $this->render("pages/refund.html.twig", []);

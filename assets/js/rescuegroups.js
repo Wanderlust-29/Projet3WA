@@ -1,7 +1,8 @@
+// API key and RescueGroups API endpoint
 const apiKey = "bUke0SUO";
-const apiEndpoint =
-  "https://api.rescuegroups.org/v5/public/animals/search/available/?limit=100";
+const apiEndpoint = "https://api.rescuegroups.org/v5/public/animals/search/available/?limit=100";
 
+// Fetching data from RescueGroups API to retrieve available animals
 fetch(apiEndpoint, {
   method: "POST",
   headers: {
@@ -10,16 +11,19 @@ fetch(apiEndpoint, {
   },
 })
   .then((response) => {
+    // Log the response status from the API
     console.log("Response Status:", response.status);
     return response.json();
   })
   .then((data) => {
+    // Log the response data from the API
     console.log("Response Data:", data);
     const animals = data.data;
-    displayData(animals);
+    displayData(animals); // Call function to display retrieved data
   })
   .catch((err) => console.error("Fetch Error:", err));
 
+// Function to display animal data in the DOM
 function displayData(animals) {
   const container = document.querySelector("#container");
 
@@ -28,6 +32,7 @@ function displayData(animals) {
     const name = animal.attributes.name;
     const image = animal.attributes.pictureThumbnailUrl;
 
+    // Check if essential data is present before creating and appending the list item
     if (url && name && image) {
       const li = document.createElement("li");
       const a = document.createElement("a");
@@ -52,6 +57,7 @@ function displayData(animals) {
     }
   });
 
+  // Initializing grid layout using Freewall
   const wall = new Freewall("#container");
   wall.reset({
     selector: ".item",
@@ -64,7 +70,7 @@ function displayData(animals) {
   });
   wall.fitWidth();
 
-  // Adjusts the height of the grid once all images are loaded
+  // Adjusting grid height once all images are loaded
   const images = wall.container.find(".item img");
   let loadedImages = 0;
 
@@ -77,6 +83,7 @@ function displayData(animals) {
     }
   }
 
+  // Checking if each image has loaded, then adjusting the grid layout
   images.each(function () {
     const img = this;
     if (img.complete) {

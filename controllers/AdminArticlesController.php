@@ -2,8 +2,10 @@
 
 class AdminArticlesController extends AbstractController
 {
-    // Tous les articles
-    function articles()
+    /**
+     * Renders the page displaying all articles.
+     */
+    function articles(): void
     {
         $am = new ArticleManager();
         $articles = $am->findAll();
@@ -12,8 +14,12 @@ class AdminArticlesController extends AbstractController
         ]);
     }
 
-    // Un seul article
-    function article(int $id)
+    /**
+     * Renders the page displaying a single article based on ID.
+     * Retrieves associated comments and categories.
+     * @param int $id The ID of the article to display.
+     */
+    function article(int $id): void
     {
         $cm = new CommentManager();
         $comments = $cm->findAllById($id);
@@ -31,8 +37,11 @@ class AdminArticlesController extends AbstractController
         ]);
     }
 
-    //Page de création d'un article
-    function newArticle()
+    /**
+     * Renders the page for creating a new article.
+     * Retrieves all categories for category selection.
+     */
+    function newArticle(): void
     {
         $cm = new CategoryManager();
         $categories = $cm->findAll();
@@ -42,8 +51,12 @@ class AdminArticlesController extends AbstractController
         ]);
     }
 
-    // Mise à jour article
-    function updateArticle()
+    /**
+     * Handles the update of an existing article in the database.
+     * Retrieves article data from POST, including related media and categories.
+     * Redirects to the updated article page upon success.
+     */
+    function updateArticle(): void
     {
         $id = (int) $_POST['id'];
 
@@ -56,8 +69,19 @@ class AdminArticlesController extends AbstractController
             $cm = new CategoryManager();
             $category = $cm->findOne($_POST["category_id"]);
 
-            $article = new Article($_POST["name"], $_POST["price"], $_POST["stock"], $category, $media, $_POST["description"], $_POST["ingredients"], $_POST["age"], $_POST["short_description"], $_POST["slug"]);
-            $article->setId($_POST["id"]);
+            $article = new Article(
+                $_POST["name"],
+                $_POST["price"],
+                $_POST["stock"],
+                $category,
+                $media,
+                $_POST["description"],
+                $_POST["ingredients"],
+                $_POST["age"],
+                $_POST["short_description"],
+                $_POST["slug"]
+            );
+            $article->setId($id);
 
             $update = $am->update($article);
 
@@ -77,24 +101,29 @@ class AdminArticlesController extends AbstractController
         $this->redirect(url('article', ['id' => $id]));
     }
 
+    /**
+     * Handles the update of an article's stock quantity.
+     * Retrieves new stock quantity from POST and updates the article.
+     * Redirects to the article page upon success.
+     * @param int $id The ID of the article to update stock.
+     */
     public function updateArticleStock(int $id): void
     {
-
-        // Vérifie si les données nécessaires sont présentes dans la requête POST
+        // Check if the necessary data is present in the POST request
         if (isset($_POST["stock"])) {
-            // Récupération des données du formulaire et nettoyage des entrées
+            // Retrieve form data and sanitize inputs
             $newStock = (int) $_POST["stock"];
 
-            // Initialise un gestionnaire d'articles et récupère l'article à partir de son identifiant
+            // Initialize an article manager and retrieve the article by its ID
             $am = new ArticleManager();
             $article = $am->findOne($id);
 
-            // Vérifie si l'article existe
+            // Check if the article exists
             if ($article !== null) {
-                // Met à jour le stock de l'article avec la nouvelle valeur
+                // Update the article's stock with the new value
                 $article->setStock($newStock);
 
-                // Met à jour l'article dans la base de données
+                // Update the article in the database
                 $update = $am->updateStock($article);
 
                 if (!$update) {
@@ -116,6 +145,12 @@ class AdminArticlesController extends AbstractController
         $this->redirect(url('article', ['id' => $id]));
     }
 
+    /**
+     * Handles the update of an article's image.
+     * Retrieves article and image data from POST.
+     * Uploads image file, updates article's image in database.
+     * Redirects to the article page upon success.
+     */
     public function updateArticleImage(): void
     {
         if (isset($_POST["article_id"]) && isset($_POST["image_id"]) && isset($_FILES['image']) && isset($_POST["alt"])) {
@@ -123,11 +158,11 @@ class AdminArticlesController extends AbstractController
             $image_id = (int) $_POST["image_id"];
             $alt = $_POST["alt"];
             try {
-                // Chemin temporaire de l'image uploadée
+                // Temporary path of the uploaded image
                 $imageTmpPath = $_FILES["image"]["tmp_name"];
-                // Répertoire de téléchargement des images
+                // Image upload directory
                 $uploadDirectory = 'assets/media/';
-                // Chemin de téléchargement de l'image avec son nom de fichier
+                // Upload path of the image with its filename
                 $uploadPath = $uploadDirectory . basename($_FILES["image"]["name"]);
                 move_uploaded_file($imageTmpPath, $uploadPath);
             } catch (Exception $e) {
@@ -139,7 +174,7 @@ class AdminArticlesController extends AbstractController
             }
 
             try {
-                // Enregistrement de l'image dans la base de données
+                // Save the image in the database
                 $mm = new MediaManager();
                 $media = new Media($uploadPath, $alt);
                 $new_media = $mm->insert($media);
@@ -167,6 +202,11 @@ class AdminArticlesController extends AbstractController
         $this->redirect($url);
     }
 
+    /**
+     * Handles the insertion of a new article into the database.
+     * Retrieves article data from POST, including related media and categories.
+     * Redirects to the newly created article page upon success.
+     */
     public function addArticle(): void
     {
         if (
@@ -176,11 +216,11 @@ class AdminArticlesController extends AbstractController
             && isset($_POST["short_description"])
         ) {
             try {
-                // Chemin temporaire de l'image uploadée
+                // Temporary path of the uploaded image
                 $imageTmpPath = $_FILES["image"]["tmp_name"];
-                // Répertoire de téléchargement des images
+                // Image upload directory
                 $uploadDirectory = 'assets/media/';
-                // Chemin de téléchargement de l'image avec son nom de fichier
+                // Upload path of the image with its filename
                 $uploadPath = $uploadDirectory . basename($_FILES["image"]["name"]);
                 move_uploaded_file($imageTmpPath, $uploadPath);
             } catch (Exception $e) {
@@ -192,7 +232,7 @@ class AdminArticlesController extends AbstractController
             }
 
             try {
-                // Récupération des données du formulaire et nettoyage des entrées
+                // Retrieve form data and sanitize inputs
                 $name = htmlspecialchars($_POST["name"]);
                 $price = htmlspecialchars($_POST["price"]);
                 $stock = htmlspecialchars($_POST["stock"]);
@@ -204,19 +244,19 @@ class AdminArticlesController extends AbstractController
                 $short_description = htmlspecialchars($_POST["short_description"]);
                 $slug = $this->slugify($name);
 
-                // Récupération de la catégorie sélectionnée
+                // Retrieve the selected category
                 $cm = new CategoryManager();
                 $category = $cm->findOne($categoryId);
 
-                // Enregistrement de l'image dans la base de données
+                // Save the image in the database
                 $mm = new MediaManager();
                 $media = new Media($uploadPath, $alt);
                 $mm->insert($media);
 
-                // Création d'un nouvel article avec les données fournies
+                // Create a new article with the provided data
                 $article = new Article($name, $price, $stock, $category, $media, $description, $ingredients, $age, $short_description, $slug);
 
-                // Enregistrement de l'article dans la base de données
+                // Save the article in the database
                 $am = new ArticleManager();
                 $insert = $am->insert($article);
 
@@ -239,7 +279,10 @@ class AdminArticlesController extends AbstractController
         $this->redirect($url);
     }
 
-    public function deleteArticle()
+    /**
+     * Deletes an article based on the provided article ID.
+     */
+    public function deleteArticle(): void
     {
         $am = new ArticleManager();
         $articles = $am->findAll();

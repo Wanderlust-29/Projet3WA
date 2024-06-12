@@ -19,7 +19,9 @@
   align-items: center;
   justify-content: flex-end;
 
-
+  /*******************
+      CONTACT-FORM 
+  *******************/
   .contact-form {
     width: 80%;
     display: flex;
@@ -63,6 +65,9 @@
     }
   }
 
+  /*******************
+        ABOUT 
+  *******************/
   #about {
     p {
       padding: 1rem 2rem;
@@ -100,6 +105,9 @@
   }
 }
 
+/*******************
+      DESKTOP 
+*******************/
 @media screen and (min-width: 800px) {
   #content.contact {
     flex-direction: row;

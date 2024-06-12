@@ -1,4 +1,6 @@
-//dark-mode
+/*******************
+      DARK-MODE
+*******************/
 body.dark {
     .header {
         background-color: $darkMode;
@@ -213,6 +215,17 @@ body.dark {
                 background-color: $darkMode;
                 color: $white;
             }
+        }
+    }
+
+    #content.infos {
+        a {
+            color: $darkMode;
+        }
+
+        h1,
+        h2 {
+            color: $darkMode;
         }
     }
 

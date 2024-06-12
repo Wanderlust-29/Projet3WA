@@ -1,8 +1,11 @@
 <?php
+
 class AdminCategoriesController extends AbstractController
 {
-    // all categories
-    public function categories()
+    /**
+     * Renders the page displaying all categories.
+     */
+    public function categories(): void
     {
         $cm = new CategoryManager();
         $categories = $cm->findAll();
@@ -11,8 +14,12 @@ class AdminCategoriesController extends AbstractController
         ]);
     }
 
-    // Single category
-    public function category(int $id){
+    /**
+     * Renders the page displaying a single category based on ID.
+     * @param int $id The ID of the category to display.
+     */
+    public function category(int $id): void
+    {
         $cm = new CategoryManager();
         $category = $cm->findOne($id);
 
@@ -21,60 +28,69 @@ class AdminCategoriesController extends AbstractController
         ]);
     }
 
-    // New category
-    public function newCategory(){
-        $this->render("admin/admin-new-category.html.twig",[]);
+    /**
+     * Renders the page for creating a new category.
+     */
+    public function newCategory(): void
+    {
+        $this->render("admin/admin-new-category.html.twig", []);
     }
 
-
-    // Insert
-    public function addCategory(){
-        if(isset($_POST['name']) && isset($_POST['description'])){
+    /**
+     * Handles the insertion of a new category into the database.
+     * Redirects to the new category page upon success.
+     */
+    public function addCategory(): void
+    {
+        if (isset($_POST['name']) && isset($_POST['description'])) {
             $slug = $this->slugify($_POST['name']);
             $cm = new CategoryManager();
-            $categorie = new Category($_POST['name'], $_POST['description'], $slug);
-            $insert = $cm->insert($categorie);
-            if(!$insert){
+            $category = new Category($_POST['name'], $_POST['description'], $slug);
+            $insert = $cm->insert($category);
+            if (!$insert) {
                 $type = 'error';
                 $text = "Un problème est survenu lors de la mise à jour 😞";
                 $url = url('newCategory');
-            }else{
-                $type= "success";
+            } else {
+                $type = "success";
                 $text = "La mise à jour a bien été effectuée 😃";
-                $url = url('category',['id'=>$insert]);
+                $url = url('category', ['id' => $insert]);
             }
-        }else{
+        } else {
             $type = 'error';
             $text = "Il manque des champs 🙄";
             $url = url('newCategory');
         }
 
-        $this->notify($text,$type);
+        $this->notify($text, $type);
         $this->redirect($url);
     }
 
-    // Update
-    public function updateCategory(){
+    /**
+     * Handles the update of an existing category in the database.
+     * Redirects to the updated category page upon success.
+     */
+    public function updateCategory(): void
+    {
         $id = (int) $_POST['id'];
-        if(isset($_POST['id']) && isset($_POST['name']) && isset($_POST['description']) && isset($_POST['slug'])){
-            $cat = new Category($_POST['name'],$_POST['description'],$_POST['slug']);
-            $cat->setId($_POST['id']);
+        if (isset($_POST['id']) && isset($_POST['name']) && isset($_POST['description']) && isset($_POST['slug'])) {
+            $category = new Category($_POST['name'], $_POST['description'], $_POST['slug']);
+            $category->setId($_POST['id']);
             $cm = new CategoryManager();
-            $update = $cm->update($cat);
-            if(!$update){
+            $update = $cm->update($category);
+            if (!$update) {
                 $type = 'error';
                 $text = "Un problème est survenu lors de la mise à jour 😞";
-            }else{
-                $type= "success";
+            } else {
+                $type = "success";
                 $text = "La mise à jour a bien été effectuée 😃";
             }
-        }else{
+        } else {
             $type = 'error';
             $text = "Il manque des champs 🙄";
         }
 
-        $this->notify($text,$type);
-        $this->redirect(url('category',['id'=>$id]));
+        $this->notify($text, $type);
+        $this->redirect(url('category', ['id' => $id]));
     }
-
 }

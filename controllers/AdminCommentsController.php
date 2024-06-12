@@ -1,8 +1,11 @@
 <?php
+
 class AdminCommentsController extends AbstractController
 {
-    // all comments
-    public function comments()
+    /**
+     * Renders the page displaying all comments.
+     */
+    public function comments(): void
     {
         $cm = new CommentManager();
         $comments = $cm->findAll();
@@ -13,8 +16,10 @@ class AdminCommentsController extends AbstractController
         ]);
     }
 
-    // all pending comments
-    public function pendingComments()
+    /**
+     * Renders the page displaying all pending comments.
+     */
+    public function pendingComments(): void
     {
         $cm = new CommentManager();
         $comments = $cm->findAllpending();
@@ -25,51 +30,57 @@ class AdminCommentsController extends AbstractController
         ]);
     }
 
-
-    // approve comment
-    public function approveComment(){
+    /**
+     * Approves a comment based on the provided ID.
+     * Redirects to the pending comments page after approval.
+     */
+    public function approveComment(): void
+    {
         $type = 'success';
         $text = '';
-        if(isset($_POST) && isset($_POST['id'])){
+        if (isset($_POST) && isset($_POST['id'])) {
             $id = (int) $_POST['id'];
             $cm = new CommentManager();
             $update = $cm->updateStatus($id, "approved");
-            if(!$update){
+            if (!$update) {
                 $type = 'error';
                 $text = "Un problème est survenu lors de la mise à jour 😞";
-            }else{
+            } else {
                 $text = "La mise à jour a bien été effectuée 😃";
             }
-        }else{
+        } else {
             $type = 'error';
             $text = "Une erreur est survenue 🙄";
         }
 
-        $this->notify($text,$type);
+        $this->notify($text, $type);
         $this->redirect("/admin/comments/pending");
     }
 
-    // delete comment
-    public function deleteComment(){
+    /**
+     * Deletes a comment based on the provided ID.
+     * Redirects to the pending comments page after deletion.
+     */
+    public function deleteComment(): void
+    {
         $type = 'success';
         $text = '';
-        if(isset($_POST) && isset($_POST['id'])){
+        if (isset($_POST) && isset($_POST['id'])) {
             $id = (int) $_POST['id'];
             $cm = new CommentManager();
             $delete = $cm->delete($id);
-            if(!$delete){
+            if (!$delete) {
                 $type = 'error';
                 $text = "Un problème est survenu lors de la suppression 😞";
-            }else{
+            } else {
                 $text = "La suppression a bien été effectuée 😃";
             }
-        }else{
+        } else {
             $type = 'error';
             $text = "Une erreur est survenue 🙄";
         }
 
-        $this->notify($text,$type);
+        $this->notify($text, $type);
         $this->redirect("/admin/comments/pending");
     }
-
 }

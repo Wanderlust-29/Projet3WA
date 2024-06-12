@@ -11,6 +11,9 @@
     padding-bottom: 2rem;
   }
 
+  /*******************
+        ARTICLE
+  *******************/
   .article-item {
     padding: 2rem;
     display: flex;
@@ -171,6 +174,10 @@
     padding-top: 2rem;
   }
 
+  /********************************
+    TABLE DESCRIPTION/INGREDIENTS  
+  ********************************/
+
   .description-ingredients {
     border: 1px solid $grey;
     width: 80%;
@@ -218,6 +225,10 @@
     }
   }
 
+
+  /*******************
+        COMMENTS
+  *******************/
   .comments {
     width: 100%;
     display: flex;
@@ -260,6 +271,9 @@
   }
 }
 
+/*******************
+      DESKTOP 
+*******************/
 @media screen and (min-width: 800px) {
   #content.article {
     flex-direction: row;

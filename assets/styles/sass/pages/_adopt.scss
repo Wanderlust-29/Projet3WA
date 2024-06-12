@@ -7,39 +7,50 @@
 
   .text-adopt {
     width: 80%;
+
     h1 {
       text-align: center;
       text-transform: uppercase;
       color: $green;
       padding: 4.8rem;
     }
+
     p {
       padding: 1rem 0;
     }
   }
+
+  /*******************
+        ADOPT
+  *******************/
   .section-adopt {
     width: 80%;
     height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     h2 {
       text-align: center;
       padding: 3.5rem;
     }
+
     #container {
       width: 100%;
       position: relative;
       height: auto;
       margin-bottom: 5rem;
+
       .item {
         width: 230px;
         gap: 10px;
         float: left;
+
         a {
           color: $white;
           font-size: 2rem;
           font-weight: 800;
+
           figure {
             display: flex;
             flex-direction: column;
@@ -47,6 +58,7 @@
             // max-width: 300px;
             position: relative;
             width: 100%;
+
             img {
               width: 100%;
               height: auto;

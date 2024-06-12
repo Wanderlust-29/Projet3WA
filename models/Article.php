@@ -1,12 +1,13 @@
 <?php
+
 use Cocur\Slugify\Slugify;
+
 class Article
 {
     private ?int $id = null;
 
     public function __construct(private string $name, private float $price, private int $stock, private Category $category, private Media $image, private string $description, private string $ingredients, private string $age, private $shortDescription, private $slug)
     {
-
     }
 
     // Transforme en tableau
@@ -182,6 +183,7 @@ class Article
     {
         $this->age = $age;
     }
+
     // Getter and Setter for $shortDescription
     /**
      * @return string
