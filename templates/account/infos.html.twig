@@ -61,6 +61,7 @@
 					</fieldset>
 					<button type="submit" class="form-btn" name="update">Modifier mes informations</button>
 				</form>
+
 				<h2>Modifier mon mot de passe</h2>
 				<form action="/account/update-password" method="post" class="update">
 					<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
@@ -78,10 +79,17 @@
 					</fieldset>
 					<button type="submit" class="form-btn" name="update">Modifier le mot de passe</button>
 				</form>
-				<form action="/account/delete" method="post" class="other-btns">
-					<input type="hidden" name="userId" value="{{ session.id }}"/>
-					<button type="submit" class="form-btn form-btn-danger" name="delete">Supprimer mon compte</button>
-				</form>
+
+				<button class="form-btn form-btn-danger btn-modal">Supprimer mon compte</button>
+
+				<aside class="modal-delete">
+					<h2>Voulez-vous vraiment supprimer votre compte ?</h2>
+					<form action="/account/delete" method="post">
+						<input type="hidden" name="userId" value="{{ session.id }}"/>
+						<button type="submit" class="form-btn form-btn-danger" name="delete">Supprimer mon compte</button>
+						<a class="cancel">Annuler</a>
+					</form>
+				</aside>
 			</section>
 		</div>
 	</main>

@@ -186,6 +186,7 @@ class AccountController extends AbstractController
                         if (!preg_match($password_pattern, $_POST["password"])) {
                             $type = "error";
                             $text = "Le mot de passe doit contenir au moins 8 caractères, comprenant au moins une lettre majuscule, un chiffre et un caractère spécial.";
+                            $this->redirect("infos");
                         } else {
                             if ($_POST["password"] === $_POST["confirm-password"]) {
                                 $currentUser->setPassword(password_hash($_POST["password"], PASSWORD_BCRYPT));
