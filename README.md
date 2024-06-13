@@ -1,4 +1,8 @@
-# Installation
+# TimberWolf
+The link to an online version of the site: [Timberwolf](https://timberwolf.uni-mo.fr/).
+Test credentials: henry.baker@example.com test021@Azert7
+
+## Installation
 ### Cloning the GitHub repository:
 
 Copy the git clone code
@@ -36,7 +40,7 @@ Once Composer is installed, open a new terminal window and navigate to the proje
 Run the following command to install the project's PHP dependencies:
 
 ```bash 
-composer install
+composer update
 ```
 
 ### Installing npm (for JavaScript dependencies)
