@@ -33,7 +33,7 @@ var StarRating = (function () {
     maxStars: 10,
     prebuilt: false,
     stars: null,
-    tooltip: 'Select a Rating'
+    tooltip: 'Sélectionner une note'
   };
 
   var addRemoveClass = function addRemoveClass(el, bool, className) {
@@ -278,7 +278,7 @@ var StarRating = (function () {
 
         if ('add' === action && this.el.disabled) return;
         this.eventListener(this.el, action, ['keydown']);
-        this.eventListener(this.widgetEl, action, ['mousedown', 'mouseleave', 'mousemove', 'touchend', 'touchmove'],  false);
+        this.eventListener(this.widgetEl, action, ['mousedown', 'mouseleave', 'mousemove', 'touchend', 'touchmove'], false);
       }
     }, {
       key: "indexFromEvent",
