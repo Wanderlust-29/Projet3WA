@@ -95,6 +95,17 @@ body.dark {
     #content.cart {
         .cart-payement {
 
+            .btn-cart-back {
+                border: 2px solid $darkMode;
+                color: $darkMode;
+                background: $white;
+            }
+
+            .btn-cart-back:hover {
+                color: $white;
+                background: $darkMode;
+            }
+
             .btn-decrement:disabled,
             .btn-increment:disabled,
             .btn-decrement,
@@ -200,6 +211,68 @@ body.dark {
                 background-color: $darkMode;
             }
 
+            h3 {
+                border-left: 5px solid $darkMode;
+            }
+
+            .articles {
+
+                .quantity {
+                    background-color: $darkMode;
+                }
+
+                .comment {
+                    color: $darkMode;
+                }
+            }
+
+            .quantity {
+                background-color: $darkMode;
+            }
+
+            .comment {
+                color: $darkMode;
+            }
+        }
+    }
+
+    #content.comment {
+        button {
+            background-color: $darkMode;
+
+            &:hover {
+                background-color: $darkModeHover;
+            }
+        }
+    }
+
+    #content.register,
+    #content.login {
+
+        button,
+        .btn-login,
+        .btn-register {
+            border: 2px solid $darkMode !important;
+            color: $darkMode !important;
+        }
+
+        button:hover,
+        .btn-login:hover,
+        .btn-register:hover {
+            border: 2px solid $darkMode !important;
+            background-color: $darkMode !important;
+            color: $white !important;
+        }
+
+    }
+
+    #content.comment {
+        button {
+            background-color: $darkMode;
+
+            &:hover {
+                background-color: $darkModeHover;
+            }
         }
     }
 
@@ -228,6 +301,21 @@ body.dark {
             color: $darkMode;
         }
     }
+
+    #content.adopt {
+
+        h1 {
+            color: $darkMode;
+        }
+    }
+
+    .loader {
+        .spinner {
+            background: radial-gradient(farthest-side, $darkMode 94%, #0000) top/9px 9px no-repeat,
+                conic-gradient(#0000 30%, $darkMode);
+        }
+    }
+
 
     footer {
         background-color: $darkMode;
