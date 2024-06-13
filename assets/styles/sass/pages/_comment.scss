@@ -1,0 +1,50 @@
+#content.comment {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+
+    h1 {
+        text-align: center;
+        padding-bottom: 3rem;
+    }
+
+    .form-comment {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        background-color: $white;
+        border-radius: .35rem;
+        box-shadow: 0px 0px 20px 0px rgba(20, 47.00000000000007, 126, 0.13);
+        padding: 3rem 2rem;
+
+        .comment-text {
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+
+            textarea {
+                resize: none;
+            }
+
+
+        }
+
+        button {
+            align-self: center;
+            padding: 10px;
+            width: 200px;
+            height: 60px;
+            border: 0;
+            border-radius: 10px;
+            background-color: $green;
+            outline: none;
+            cursor: pointer;
+            color: $white;
+
+            &:hover {
+                background-color: $darkGreen;
+            }
+        }
+    }
+}

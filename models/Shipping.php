@@ -104,7 +104,7 @@ class Shipping
     /**
      * @param int $delivery min 
      */
-    public function setDeliveryMin(float $delivery_min): void
+    public function setDeliveryMin(int $delivery_min): void
     {
         $this->delivery_min = $delivery_min;
     }
@@ -122,7 +122,7 @@ class Shipping
     /**
      * @param int $delivery miax
      */
-    public function setDeliveryMax(float $delivery_max): void
+    public function setDeliveryMax(int $delivery_max): void
     {
         $this->delivery_max = $delivery_max;
     }

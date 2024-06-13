@@ -2,11 +2,10 @@
 
 class Comment
 {
-    private ? int $id = null;
-    
+    private ?int $id = null;
+
     public function __construct(private Article $articleId, private User $userId, private int $grade, private string $comment, private string $status = "pending")
     {
-
     }
 
     // Getter and Setter for id
@@ -71,7 +70,7 @@ class Comment
     /**
      * @param int|null $grade
      */
-    public function setGrade (?int $grade): void
+    public function setGrade(?int $grade): void
     {
         $this->grade = $grade;
     }
@@ -87,7 +86,7 @@ class Comment
     /**
      * @param string|null $comment
      */
-    public function setComment (?string $comment): void
+    public function setComment(?string $comment): void
     {
         $this->comment = $comment;
     }
@@ -103,7 +102,7 @@ class Comment
     /**
      * @param string|null $comment
      */
-    public function setStatus (?string $status): void
+    public function setStatus(?string $status): void
     {
         $this->status = $status;
     }

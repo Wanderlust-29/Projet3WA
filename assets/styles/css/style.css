@@ -1507,6 +1507,49 @@ body.dark footer {
   color: #fff;
 }
 
+#content.comment {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+}
+#content.comment h1 {
+  text-align: center;
+  padding-bottom: 3rem;
+}
+#content.comment .form-comment {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 0.35rem;
+  box-shadow: 0px 0px 20px 0px rgba(20, 47, 126, 0.13);
+  padding: 3rem 2rem;
+}
+#content.comment .form-comment .comment-text {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+}
+#content.comment .form-comment .comment-text textarea {
+  resize: none;
+}
+#content.comment .form-comment button {
+  align-self: center;
+  padding: 10px;
+  width: 200px;
+  height: 60px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #009a87;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+}
+#content.comment .form-comment button:hover {
+  background-color: #0c6f63;
+}
+
 /* ACCOUNT */
 #content.account {
   display: flex;

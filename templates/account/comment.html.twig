@@ -5,28 +5,33 @@
 	{{ parent() }}
 {% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+	<link href="assets/star-rating/dist/star-rating.css" rel="stylesheet">
+{% endblock %}
 
 {% block main %}
 	<main id="content" class="comment">
 		<h1>Ajouter un Commentaire pour l'article
 			{{article.name}}</h1>
-		<form action="/check-comment/{{article.slug}}" method="post">
+		<form action="/check-comment/{{article.slug}}" method="post" class="form-comment">
 			<input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token }}"/>
-			<fieldset>
+
+			<fieldset class="rate">
 				<label for="grade">Choisir une note :</label>
 
-				<select name="grade" id="grade">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
+				<select class="star-rating" name="grade" id="grade" require>
+					<option value="">Sélectionnez une note</option>
+					<option value="5">Excellent</option>
+					<option value="4">Très bien</option>
+					<option value="3">Moyen</option>
+					<option value="2">Médiocre</option>
+					<option value="1">Terrible</option>
 				</select>
 			</fieldset>
-			<fieldset>
+
+			<fieldset class="comment-text">
 				<label for="comment">Votre commentaire :</label>
-				<textarea id="comment" name="comment" rows="5" cols="33"></textarea>
+				<textarea id="comment" name="comment" rows="5" cols="33" maxlength="120"></textarea>
 			</fieldset>
 
 			<button type="submit" name="post">Poster</button>
@@ -34,4 +39,9 @@
 	</main>
 {% endblock %}
 
-{% block javascript %}{% endblock %}
+{% block javascript %}
+	<script src="assets/star-rating/dist/star-rating.js"></script>
+	<script>
+		const stars = new StarRating('.star-rating');
+	</script>
+{% endblock %}
