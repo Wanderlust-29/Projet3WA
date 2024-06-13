@@ -291,6 +291,7 @@ body > .footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex-wrap: wrap;
   /*******************
     SECTIONS
   *******************/
@@ -303,6 +304,10 @@ body > .footer h2 {
 }
 body > .footer .title {
   font-family: "Dancing Script", cursive;
+}
+body > .footer .copyright {
+  width: 100%;
+  text-align: center;
 }
 body > .footer section {
   padding-bottom: 2rem;
