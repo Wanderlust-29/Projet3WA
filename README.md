@@ -5,7 +5,7 @@ TimberWolf is a final year e-commerce project designed for selling products for 
 
 ## Online Version
 An online version of the site is available at: [Timberwolf](https://timberwolf.uni-mo.fr/).
-Test credentials: 
+### Test credentials: 
 - Email: henry.baker@example.com 
 - Password: test021@Azert7
 
