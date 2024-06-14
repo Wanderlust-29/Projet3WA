@@ -14,7 +14,7 @@ Before you begin, ensure you have the following software installed on your syste
 - Wamp
 - Composer
 - Node.js
-- 
+  
 ## Installation
 ### Cloning the GitHub repository:
 
