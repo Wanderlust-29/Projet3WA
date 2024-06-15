@@ -1,7 +1,20 @@
 # TimberWolf
-The link to an online version of the site: [Timberwolf](https://timberwolf.uni-mo.fr/).
-Test credentials: henry.baker@example.com test021@Azert7
 
+## Project Description
+TimberWolf is a final year e-commerce project designed for selling products for dogs. It also includes a section dedicated to dog adoption. This project is a training assignment and is not intended for commercial use. The images used in this project are not free to use and may be subject to copyright restrictions.
+
+## Online Version
+An online version of the site is available at: [Timberwolf](https://timberwolf.uni-mo.fr/).
+### Test credentials: 
+- Email: henry.baker@example.com 
+- Password: test021@Azert7
+
+## Prerequisites
+Before you begin, ensure you have the following software installed on your system:
+- Wamp
+- Composer
+- Node.js
+  
 ## Installation
 ### Cloning the GitHub repository:
 
@@ -15,7 +28,8 @@ Clone the GitHub repository into the `www` directory of your Wamp installation:
 
 Make sure Wamp is running and the Apache server is started.
 
-Here's an example of configuring environment variables in a `.env` file for your database:
+### Configuring Environment Variables
+Create a `.env` file in the project root and configure it with your database information:
 
 #### Database info
 ```
@@ -25,35 +39,46 @@ DB_PASSWORD="YourPassword"
 DB_CHARSET="utf8"
 DB_HOST="localhost"
 ```
-In this file, you can set the necessary information for connecting to your database. Make sure to replace the values of `DB_USER`, `DB_PASSWORD`, and `DB_NAME` with your own login information.
+Replace DB_USER, DB_PASSWORD, and DB_NAME with your own database credentials.
 
-Open the .env file and configure the values according to your needs, especially for connecting to the database.
-
-Import the project's database into your database management system (e.g., phpMyAdmin).
+### Database Setup
 
 ### Installing Composer (for PHP dependencies) 
+Import the project's database into your database management system (e.g., phpMyAdmin):
 
-Download and install Composer by following the instructions on the official website: [Composer Download](https://getcomposer.org/download/).
+- Open phpMyAdmin or your preferred database management tool.
+- Create a new database named project.
+- Import the provided SQL file into the newly created database.
 
-Once Composer is installed, open a new terminal window and navigate to the project directory.
+### Installing PHP Dependencies
 
-Run the following command to install the project's PHP dependencies:
+Navigate to the project directory and install PHP dependencies using Composer:
 
 ```bash 
+composer install
+```
+
+update dependencies
+```bash
 composer update
 ```
 
-### Installing npm (for JavaScript dependencies)
+### Installing JavaScript Dependencies
 
-Download and install Node.js from the official website: [Node.js Download](https://nodejs.org/).
-
-Once Node.js is installed, open a new terminal window and navigate to the project directory.
-
-Run the following command to install the project's JavaScript dependencies:
+Navigate to the project directory and install JavaScript dependencies using npm:
 ```bash
 npm install
 ```
 
-And that's it! You're ready to start working on the project!
+## Running the Project
 
-**Note:** This project is a training assignment and is not intended for commercial use. The images used in this project are not free to use and may be subject to copyright restrictions.
+Ensure that Wamp is running and the Apache server is started.
+Open your web browser and navigate to http://localhost/your-project-directory.
+
+## Troubleshooting
+Wamp Issues: Ensure that no other programs are using the same port as Apache (usually port 80).
+Composer Issues: Make sure you have the latest version of Composer installed.
+Node.js Issues: Ensure that Node.js and npm are correctly installed and their versions are up to date.
+
+## License
+This project is licensed under the MIT License.
