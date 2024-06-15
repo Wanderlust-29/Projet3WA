@@ -820,16 +820,17 @@ body.dark footer {
   color: black;
 }
 #content.articles .header-search {
-  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding-bottom: 3rem;
   /*******************
       FORM-SORT
   *******************/
 }
 #content.articles .header-search h1 {
+  padding: 3rem;
   color: #009a87;
   text-transform: uppercase;
 }
@@ -864,6 +865,7 @@ body.dark footer {
   display: grid;
   gap: 0.75rem;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  padding-bottom: 3rem;
 }
 #content.articles .main-articles h1 {
   padding: 2rem;
@@ -1272,6 +1274,7 @@ body.dark footer {
   color: #009a87;
   background: #fff;
   text-align: center;
+  margin-bottom: 1rem;
 }
 #content.cart .btn-cart-back:hover,
 #content.cart input[type=submit]:hover,
@@ -1311,6 +1314,7 @@ body.dark footer {
   text-align: center;
 }
 #content.contact h1 {
+  padding: 3rem 0;
   font-size: 2.8rem;
   color: #009a87;
   text-transform: uppercase;
@@ -1321,6 +1325,7 @@ body.dark footer {
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 1rem;
+  padding-bottom: 3rem;
 }
 #content.contact .contact-form form {
   display: flex;
@@ -1336,6 +1341,7 @@ body.dark footer {
 }
 #content.contact .contact-form form fieldset textarea {
   width: 100%;
+  resize: none;
 }
 #content.contact .contact-form form button {
   padding: 10px;
@@ -1350,6 +1356,9 @@ body.dark footer {
 }
 #content.contact .contact-form form button:hover {
   background-color: #0c6f63;
+}
+#content.contact #about {
+  padding-bottom: 3rem;
 }
 #content.contact #about p {
   padding: 1rem 2rem;
@@ -1387,7 +1396,7 @@ body.dark footer {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-items: flex-end;
+    align-items: flex-start;
   }
   #content.contact h1 {
     width: 100%;
